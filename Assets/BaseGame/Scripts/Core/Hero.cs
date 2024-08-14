@@ -29,10 +29,14 @@ public partial class Hero : ACachedMonoBehaviour
         Race2 = 2,
         Race3 = 3,
     }
-    [field: SerializeField] private HeroStatData HeroStatData {get; set;}
-    [field: SerializeField] private List<HeroSkillData> HeroSkillDataList {get; set;}
+    [field: SerializeField] public SpriteRenderer SpriteShape {get;  set;}
+    [field: SerializeField] public SpriteRenderer SpriteNumber {get; set;}
+    [field: SerializeField] public SpriteRenderer SpriteColor {get; set;}
+    [field: SerializeField] public HeroStatData HeroStatData {get; set;}
+    [field: SerializeField] public List<HeroSkillData> HeroSkillDataList {get; set;}
+    [field: SerializeField] public FieldSlot FieldSlot {get; private set;}
 
-    private void Awake()
+    public void FieldInit()
     {
         InitSkill();
     }
@@ -43,26 +47,36 @@ public partial class Hero : ACachedMonoBehaviour
             heroSkillData.InitSkill(this);
         }
     }
+    public void SetupFieldSlot(FieldSlot fieldSlot)
+    {
+        Debug.Log(1);
+        FieldSlot = fieldSlot;
+        Transform.SetParent(FieldSlot.Transform);
+        Transform.localPosition = Vector3.zero;
+    }
+    public void WaitSlotInit(WaitSlot waitSlot)
+    {
+        Transform.SetParent(waitSlot.Transform);
+        Transform.localPosition = Vector3.zero;
+    }
 }
 
 #if UNITY_EDITOR
 public partial class Hero
 {
-    [field: Title("Editor Only")]
-    [field: SerializeField] private SpriteRenderer SpriteShape {get;  set;}
-    [field: SerializeField] private SpriteRenderer SpriteNumber {get; set;}
-    [field: SerializeField] private SpriteRenderer SpriteColor {get; set;}
-    
-    [field: SerializeField] public Sprite[] ShapeArray {get; private set;}
-    [field: SerializeField] public Sprite[] NumberArray {get; private set;}
-    [field: SerializeField] public Color[] ColorArray {get; private set;}
-    
     [Button]
     private void InitHero()
     {
-        SpriteNumber.sprite = NumberArray[(int)HeroStatData.HeroRarity];
-        SpriteShape.sprite = ShapeArray[(int)HeroStatData.HeroTrait];
-        SpriteColor.color = ColorArray[(int)HeroStatData.HeroRace];
+        InitHero(BaseHeroGenerateGlobalConfig.Instance.NumberArray[(int)HeroStatData.HeroRarity], 
+            BaseHeroGenerateGlobalConfig.Instance.ShapeArray[(int)HeroStatData.HeroTrait], 
+            BaseHeroGenerateGlobalConfig.Instance.ColorArray[(int)HeroStatData.HeroRace]);
     }
+    private void InitHero(Sprite spriteNumber, Sprite spriteShape, Color spriteColor)
+    {
+        SpriteNumber.sprite = spriteNumber;
+        SpriteShape.sprite = spriteShape;
+        SpriteColor.color = spriteColor;
+    }
+
 }
 #endif

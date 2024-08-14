@@ -7,11 +7,12 @@ using Sirenix.Utilities;
 public class PrefabGlobalConfig : GlobalConfig<PrefabGlobalConfig>
 {
     [field: SerializeField] public List<PrefabConfig<Enemy>> EnemyPrefabConfigList {get; private set;}
-    
+
     public Enemy GetEnemyPrefab(int id)
     {
         return EnemyPrefabConfigList.Find(x => x.Id == id).Prefab;
     }
+    
 
 }
 [System.Serializable]

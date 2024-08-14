@@ -1,5 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
+using R3;
+using R3.Triggers;
 using Sirenix.OdinInspector;
 using TW.Utility.DesignPattern;
 using UnityEngine;
@@ -10,21 +12,49 @@ using UnityEditor;
 
 public partial class FieldManager : Singleton<FieldManager>
 {
+    public static class Events
+    {
+        public static Action OnFieldSlotChange { get; set; }
+        
+    }
+    [field: SerializeField] public MapData MapData {get; private set;}
     [field: SerializeField] public int Row {get; private set;}
     [field: SerializeField] public int Column {get; private set;}
-    [field: SerializeField] public FieldSlot[] FieldSlotArray {get; private set;}
     [field: SerializeField] public Transform FieldSlotContainer {get; private set;}
+    [field: SerializeField] public FieldSlot[] FieldSlotArray {get; private set;}
     [field: SerializeField] public Transform[] MovePoint {get; private set;}
-    [field: SerializeField] public MapData MapData {get; private set;}
+    [field: SerializeField] public WaitSlot[] WaitSlotArray {get; private set;}
+    
     private DateTime WaveStartTime { get; set; }
     private void Start()
     {
         StartMap().Forget();
+        RandomWaitSlot();
+
+        this.UpdateAsObservable()
+            .Where(_ => Input.GetKeyDown(KeyCode.C))
+            .Subscribe(_ => RandomWaitSlot());
+    }
+    [Button]
+    public void RandomWaitSlot()
+    {
+        foreach (var waitSlot in WaitSlotArray)
+        {
+            waitSlot.RandomOwnerHero();
+        }
     }
 
-    private void Update()
+    public bool TryAddHeroToFieldSlot(Hero hero)
     {
-        Debug.Log(DateTime.Now - WaveStartTime);
+        foreach (FieldSlot fieldSlot in FieldSlotArray)
+        {
+            if (fieldSlot.TryAddHeroFromWaitSlot(hero))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public async UniTask StartMap()

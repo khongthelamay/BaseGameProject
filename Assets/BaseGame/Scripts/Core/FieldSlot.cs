@@ -4,13 +4,27 @@ using DG.Tweening.Plugins.Options;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 
-public class FieldSlot : ACachedMonoBehaviour
+public class FieldSlot : ACachedMonoBehaviour , IInteractable
 {
     [field: SerializeField] public Vector2 DefaultSize {get; private set;}
 
     [field: SerializeField] public int RowId {get; private set;}
     [field: SerializeField] public int ColumnId {get; private set;}
-    
+    [field: SerializeField] public Hero Hero {get; private set;}
+
+    public bool TryAddHeroFromWaitSlot(Hero hero)
+    {
+        if (Hero != null) return false;
+        Hero = hero;
+        Hero.SetupFieldSlot(this);
+        return true;
+    }
+    public bool TryGetHero(out Hero hero)
+    {
+        hero = Hero;
+        return hero != null;
+    }
+
     public FieldSlot SetupCoordinate(int rowId, int columnId)
     {
         RowId = rowId;
@@ -33,4 +47,28 @@ public class FieldSlot : ACachedMonoBehaviour
         
         return this;
     }
+
+    #region Interact Functions
+
+    public void OnMouseDownCallback()
+    {
+        
+    }
+
+    public void OnMouseCallback()
+    {
+
+    }
+
+    public void OnMouseUpCallback()
+    {
+
+    }
+
+    public void OnMouseClickCallback()
+    {
+
+    }
+
+    #endregion
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc323b84b86e9f4b95343614b0c45eb, type: 3}
   m_Name: BaseHeroGenerateGlobalConfig
   m_EditorClassIdentifier: 
-  <LisHeroStatData>k__BackingField:
+  <HeroStatDataList>k__BackingField:
   - {fileID: 11400000, guid: ff5c2ea7130b57b438e411c14847a129, type: 2}
   - {fileID: 11400000, guid: c64a6510285517545ba4fa2a423199de, type: 2}
   - {fileID: 11400000, guid: c83ca1ce72f2ba44988449ff6c2faf12, type: 2}
@@ -93,6 +93,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1bf038a7a2fe7ac4d80c2c2b0e0f2bce, type: 2}
   - {fileID: 11400000, guid: 7f18d298f9b53fb49afd79418b77d074, type: 2}
   - {fileID: 11400000, guid: 18aec3d026fc74543b95fe289b8b62a3, type: 2}
+  <HeroPrefabList>k__BackingField: []
+  <BaseHero>k__BackingField: {fileID: 899073806387762782, guid: 0d4112a616dec1e40932d772c0c41f0a, type: 3}
   <ShapeArray>k__BackingField:
   - {fileID: 21300000, guid: 71821191d28734d4a826eff70192f611, type: 3}
   - {fileID: 21300000, guid: 574c0019c74e6c84fa89b40ec966f0c0, type: 3}
@@ -103,6 +105,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: eb3f84891f3c4a14eae4b922a413ea52, type: 3}
   - {fileID: 21300000, guid: 3d7281d312dbf884dbb148561418c94d, type: 3}
   - {fileID: 21300000, guid: 87db47ce8931fa74392fc081c183c098, type: 3}
+  - {fileID: 21300000, guid: af6417ead097d1b46b89bee8e3db97b8, type: 3}
   <ColorArray>k__BackingField:
   - {r: 1, g: 0.34509805, b: 0.34509805, a: 1}
   - {r: 1, g: 0.98678267, b: 0.34509802, a: 1}
