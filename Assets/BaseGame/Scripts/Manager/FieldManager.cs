@@ -16,7 +16,7 @@ public partial class FieldManager : Singleton<FieldManager>
     [field: SerializeField] public Transform FieldSlotContainer {get; private set;}
     [field: SerializeField] public Transform[] MovePoint {get; private set;}
     [field: SerializeField] public MapData MapData {get; private set;}
-private DateTime WaveStartTime { get; set; }
+    private DateTime WaveStartTime { get; set; }
     private void Start()
     {
         StartMap().Forget();

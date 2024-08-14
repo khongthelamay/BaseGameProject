@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 
-public class Hero : ACachedMonoBehaviour
+public partial class Hero : ACachedMonoBehaviour
 {
     public enum Rarity
     {
@@ -33,7 +34,7 @@ public class Hero : ACachedMonoBehaviour
 
     private void Awake()
     {
-        
+        InitSkill();
     }
     private void InitSkill()
     {
@@ -43,3 +44,25 @@ public class Hero : ACachedMonoBehaviour
         }
     }
 }
+
+#if UNITY_EDITOR
+public partial class Hero
+{
+    [field: Title("Editor Only")]
+    [field: SerializeField] private SpriteRenderer SpriteShape {get;  set;}
+    [field: SerializeField] private SpriteRenderer SpriteNumber {get; set;}
+    [field: SerializeField] private SpriteRenderer SpriteColor {get; set;}
+    
+    [field: SerializeField] public Sprite[] ShapeArray {get; private set;}
+    [field: SerializeField] public Sprite[] NumberArray {get; private set;}
+    [field: SerializeField] public Color[] ColorArray {get; private set;}
+    
+    [Button]
+    private void InitHero()
+    {
+        SpriteNumber.sprite = NumberArray[(int)HeroStatData.HeroRarity];
+        SpriteShape.sprite = ShapeArray[(int)HeroStatData.HeroTrait];
+        SpriteColor.color = ColorArray[(int)HeroStatData.HeroRace];
+    }
+}
+#endif
