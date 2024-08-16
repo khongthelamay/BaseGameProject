@@ -29,15 +29,21 @@ public partial class Hero : ACachedMonoBehaviour
         Race2 = 2,
         Race3 = 3,
     }
+    [field: SerializeField] public HeroStatData HeroStatData {get; set;}
+    [field: SerializeField] public HeroAttackRange HeroAttackRange {get; set;}
     [field: SerializeField] public SpriteRenderer SpriteShape {get;  set;}
     [field: SerializeField] public SpriteRenderer SpriteNumber {get; set;}
     [field: SerializeField] public SpriteRenderer SpriteColor {get; set;}
-    [field: SerializeField] public HeroStatData HeroStatData {get; set;}
     [field: SerializeField] public List<HeroSkillData> HeroSkillDataList {get; set;}
     [field: SerializeField] public FieldSlot FieldSlot {get; private set;}
 
+    private void Awake()
+    {
+        HeroAttackRange.InitAttackRange(HeroStatData.AttackRange);
+    }
     public void FieldInit()
     {
+
         InitSkill();
     }
     private void InitSkill()
@@ -49,7 +55,6 @@ public partial class Hero : ACachedMonoBehaviour
     }
     public void SetupFieldSlot(FieldSlot fieldSlot)
     {
-        Debug.Log(1);
         FieldSlot = fieldSlot;
         Transform.SetParent(FieldSlot.Transform);
         Transform.localPosition = Vector3.zero;

@@ -13,5 +13,5 @@ public class HeroStatData : ScriptableObject
     [field: SerializeField] public int HeroWeight {get; set;}
     [field: SerializeField] public int AttackDamage {get; set;}
     [field: SerializeField] public float AttackSpeed {get; set;}
-
+    [field: SerializeField] public float AttackRange {get; set;}
 }
