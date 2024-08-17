@@ -68,6 +68,11 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
     public void OnMouseClickCallback()
     {
 
+        if (Hero != null)
+        {
+            Debug.Log(123);
+            TempUIManager.Instance.ShowModalHeroInteract(Hero);
+        }
     }
 
     #endregion

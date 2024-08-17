@@ -43,7 +43,6 @@ public partial class Hero : ACachedMonoBehaviour
     }
     public void FieldInit()
     {
-
         InitSkill();
     }
     private void InitSkill()
@@ -63,6 +62,14 @@ public partial class Hero : ACachedMonoBehaviour
     {
         Transform.SetParent(waitSlot.Transform);
         Transform.localPosition = Vector3.zero;
+    }
+    public void ShowAttackRange()
+    {
+        HeroAttackRange.ShowAttackRange();
+    }
+    public void HideAttackRange()
+    {
+        HeroAttackRange.HideAttackRange();
     }
 }
 

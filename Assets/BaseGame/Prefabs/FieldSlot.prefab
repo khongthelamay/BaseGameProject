@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8349225498066054583}
   - component: {fileID: 6879146201645197379}
-  m_Layer: 0
+  - component: {fileID: 5677133074818422168}
+  m_Layer: 6
   m_Name: FieldSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,6 +53,27 @@ MonoBehaviour:
   <RowId>k__BackingField: 0
   <ColumnId>k__BackingField: 0
   <Hero>k__BackingField: {fileID: 0}
+--- !u!65 &5677133074818422168
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2385245032585588695}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.56, y: 0.56, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5098891785371189059
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 385363603616035381}
   - component: {fileID: 1138975981615733955}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 711178923338346796}
   - component: {fileID: 5604465092428035661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slot (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5071336715311545713}
   - component: {fileID: 310643994435657431}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1988999750294207251}
   - component: {fileID: 634460754812499354}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slot (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

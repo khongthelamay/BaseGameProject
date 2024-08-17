@@ -46,10 +46,13 @@ public class HeroPoolGlobalConfig : GlobalConfig<HeroPoolGlobalConfig>
     [Button]
     private void GetAllHeroPrefab()
     {
+        EditorUtility.SetDirty(this);
         HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] {"Assets/BaseGame/Prefabs/Hero"})
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Hero>)
             .ToList();
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 #endif
 }
