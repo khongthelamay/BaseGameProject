@@ -15,36 +15,35 @@ public partial class Hero : ACachedMonoBehaviour
         Legendary = 3,
         Mythic = 4
     }
-    public enum Trait
+
+    public enum Job
     {
-        Trait0 = 0,
-        Trait1 = 1,
-        Trait2 = 2,
-        Trait3 = 3,
+        Fighter = 0,
+        Ranger = 1,
+        Cleric = 2,
+        Magician = 3,
+        Assassin = 4,
+        Monk = 5,
+        Summoner = 6,
     }
-    public enum Race
-    {
-        Race0 = 0,
-        Race1 = 1,
-        Race2 = 2,
-        Race3 = 3,
-    }
-    [field: SerializeField] public HeroStatData HeroStatData {get; set;}
-    [field: SerializeField] public HeroAttackRange HeroAttackRange {get; set;}
-    [field: SerializeField] public SpriteRenderer SpriteShape {get;  set;}
-    [field: SerializeField] public SpriteRenderer SpriteNumber {get; set;}
-    [field: SerializeField] public SpriteRenderer SpriteColor {get; set;}
-    [field: SerializeField] public List<HeroSkillData> HeroSkillDataList {get; set;}
-    [field: SerializeField] public FieldSlot FieldSlot {get; private set;}
+
+    [field: SerializeField] public HeroStatData HeroStatData { get; set; }
+    [field: SerializeField] public HeroAttackRange HeroAttackRange { get; set; }
+    [field: SerializeField] public SpriteRenderer SpriteGraphic { get; set; }
+    [field: SerializeField] public SpriteRenderer SpriteRarity { get; set; }
+    [field: SerializeField] public List<HeroSkillData> HeroSkillDataList { get; set; }
+    [field: SerializeField] public FieldSlot FieldSlot { get; private set; }
 
     private void Awake()
     {
-        HeroAttackRange.InitAttackRange(HeroStatData.AttackRange);
+        HeroAttackRange.InitAttackRange(HeroStatData.BaseAttackRange);
     }
+
     public void FieldInit()
     {
         InitSkill();
     }
+
     private void InitSkill()
     {
         foreach (HeroSkillData heroSkillData in HeroSkillDataList)
@@ -52,21 +51,25 @@ public partial class Hero : ACachedMonoBehaviour
             heroSkillData.InitSkill(this);
         }
     }
+
     public void SetupFieldSlot(FieldSlot fieldSlot)
     {
         FieldSlot = fieldSlot;
         Transform.SetParent(FieldSlot.Transform);
         Transform.localPosition = Vector3.zero;
     }
+
     public void WaitSlotInit(WaitSlot waitSlot)
     {
         Transform.SetParent(waitSlot.Transform);
         Transform.localPosition = Vector3.zero;
     }
+
     public void ShowAttackRange()
     {
         HeroAttackRange.ShowAttackRange();
     }
+
     public void HideAttackRange()
     {
         HeroAttackRange.HideAttackRange();
@@ -77,18 +80,16 @@ public partial class Hero : ACachedMonoBehaviour
 public partial class Hero
 {
     [Button]
-    private void InitHero()
+    public void InitHero()
     {
-        InitHero(BaseHeroGenerateGlobalConfig.Instance.NumberArray[(int)HeroStatData.HeroRarity], 
-            BaseHeroGenerateGlobalConfig.Instance.ShapeArray[(int)HeroStatData.HeroTrait], 
-            BaseHeroGenerateGlobalConfig.Instance.ColorArray[(int)HeroStatData.HeroRace]);
-    }
-    private void InitHero(Sprite spriteNumber, Sprite spriteShape, Color spriteColor)
-    {
-        SpriteNumber.sprite = spriteNumber;
-        SpriteShape.sprite = spriteShape;
-        SpriteColor.color = spriteColor;
+        InitHero(HeroStatData.HeroSprite,
+            BaseHeroGenerateGlobalConfig.Instance.RarityArray[(int)HeroStatData.HeroRarity]);
     }
 
+    private void InitHero(Sprite spriteIcon, Sprite spriteRarity)
+    {
+        SpriteGraphic.sprite = spriteIcon;
+        SpriteRarity.sprite = spriteRarity;
+    }
 }
 #endif
