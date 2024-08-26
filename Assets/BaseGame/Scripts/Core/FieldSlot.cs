@@ -59,7 +59,7 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
         if (heroStatData.HeroRarity == Hero.Rarity.Mythic) return false;
         hero.SelfDespawn();
         
-        Hero heroPrefab = HeroPoolGlobalConfig.Instance.GetRandomHeroUpgradePrefab(heroStatData.HeroRarity + 1, heroStatData.HeroRace);
+        Hero heroPrefab = HeroPoolGlobalConfig.Instance.GetRandomHeroUpgradePrefab(heroStatData.HeroRarity + 1);
         Hero = Instantiate(heroPrefab);
         Hero.SetupFieldSlot(this);
 
@@ -89,10 +89,8 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
 
     public void OnMouseClickCallback()
     {
-
         if (Hero != null)
         {
-            Debug.Log(123);
             TempUIManager.Instance.ShowModalHeroInteract(this);
         }
     }

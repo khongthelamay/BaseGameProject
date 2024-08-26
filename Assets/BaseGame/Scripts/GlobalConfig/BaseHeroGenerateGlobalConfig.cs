@@ -17,9 +17,8 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
     [field: SerializeField] public List<Hero> HeroPrefabList {get; private set;}
     [field: SerializeField] public Hero BaseHero {get; private set;}
 
-    [field: SerializeField] public Sprite[] ShapeArray {get; private set;}
-    [field: SerializeField] public Sprite[] NumberArray {get; private set;}
-    [field: SerializeField] public Color[] ColorArray {get; private set;}
+    [field: SerializeField] public Sprite[] GraphicArray {get; private set;}
+    [field: SerializeField] public Sprite[] RarityArray {get; private set;}
     
     [Button]
     public void GenerateAllHeroStatData()
@@ -30,30 +29,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<HeroStatData>)
             .ToList();
-        Hero.Rarity[] rarities = (Hero.Rarity[])System.Enum.GetValues(typeof(Hero.Rarity));
-        Hero.Trait[] traits = (Hero.Trait[])System.Enum.GetValues(typeof(Hero.Trait));
-        Hero.Race[] races = (Hero.Race[])System.Enum.GetValues(typeof(Hero.Race));
-        rarities.ForEach(rarity =>
-        {
-            traits.ForEach(trait =>
-            {
-                races.ForEach(race =>
-                {
-                    if (HeroStatDataList.Any(d => d.HeroRarity == rarity && d.HeroTrait == trait && d.HeroRace == race)) return;
-                    HeroStatData heroStatData = CreateInstance<HeroStatData>();
-                    heroStatData.Name = $"{rarity}_{trait}_{race}";
-                    heroStatData.HeroRarity = rarity;
-                    heroStatData.HeroTrait = trait;
-                    heroStatData.HeroRace = race;
-                    
-                    
-                    HeroStatDataList.Add(heroStatData);
-                    AssetDatabase.CreateAsset(heroStatData, $"Assets/BaseGame/ScriptableObjects/HeroStatData/{heroStatData.Name}.asset");
-                    AssetDatabase.SaveAssets();
-                    
-                });
-            });
-        });
+        
         
         HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] {"Assets/BaseGame/Prefabs/Hero"})
             .Select(AssetDatabase.GUIDToAssetPath)
@@ -65,13 +41,13 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
             Hero hero = Instantiate(BaseHero);
             hero.HeroStatData = heroStatData;
             hero.name = hero.HeroStatData.Name;
-
+            hero.InitHero();
             PrefabUtility.SaveAsPrefabAsset(hero.gameObject, $"Assets/BaseGame/Prefabs/Hero/{hero.name}.prefab");
             AssetDatabase.SaveAssets();
             
             DestroyImmediate(hero.gameObject);
         });
-        // AssetDatabase.Refresh();
+
         HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] {"Assets/BaseGame/Prefabs/Hero"})
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Hero>)

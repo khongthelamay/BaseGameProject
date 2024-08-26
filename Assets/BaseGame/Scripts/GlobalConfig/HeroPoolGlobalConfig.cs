@@ -4,6 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TW.Utility.CustomType;
+using TW.Utility.Extension;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -14,46 +15,57 @@ using UnityEditor;
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
 public class HeroPoolGlobalConfig : GlobalConfig<HeroPoolGlobalConfig>
 {
-    [field: SerializeField] public List<Hero> HeroPrefabList {get; private set;}
-    [field: SerializeField] public HeroPoolLevelConfig HeroPoolLevelConfig {get; private set;}
+    [field: SerializeField] public List<Hero> HeroPrefabList { get; private set; }
+    [field: SerializeField] public HeroPoolLevelConfig HeroPoolLevelConfig { get; private set; }
 
-    private Hero[,,] _heroPrefabArray;
-    private Hero[,,] HeroPrefabArray => _heroPrefabArray ??= InitHeroArray();
-    public Hero GetHeroPrefab(Hero.Rarity rarity, Hero.Trait trait, Hero.Race race)
+    private Dictionary<Hero.Rarity, List<Hero>> m_HeroPrefabDictionary;
+    private Dictionary<Hero.Rarity, List<Hero>> HeroPrefabDictionary => m_HeroPrefabDictionary ??= InitHeroDictionary();
+
+    public Hero GetHeroPrefab(string heroName)
     {
-        return HeroPrefabArray[(int)rarity, (int)trait, (int)race];
+        foreach (Hero hero in HeroPrefabList)
+        {
+            if (hero.HeroStatData.Name == heroName)
+            {
+                return hero;
+            }
+        }
+
+        return null;
     }
+
     public Hero GetRandomHeroPrefab(int poolLevel)
     {
         Hero.Rarity rarity = HeroPoolLevelConfig.ProbabilityRarity.GetRandomItem();
-        Hero.Trait trait = (Hero.Trait)UnityEngine.Random.Range(0, 3);
-        Hero.Race race = (Hero.Race)UnityEngine.Random.Range(0, 3);
-
-        return HeroPrefabArray[(int)rarity, (int)trait, (int)race];
+        return HeroPrefabDictionary[rarity].GetRandomElement();
     }
 
-    public Hero GetRandomHeroUpgradePrefab(Hero.Rarity rarity, Hero.Race race)
+    private Dictionary<Hero.Rarity, List<Hero>> InitHeroDictionary()
     {
-        Hero.Trait trait = (Hero.Trait)UnityEngine.Random.Range(0, 4);
-        return HeroPrefabArray[(int)rarity, (int)trait, (int)race];
-    }
-
-    private Hero[,,] InitHeroArray()
-    {
-        Hero[,,] heroArray = new Hero[10, 10, 10];
-        foreach (var hero in HeroPrefabList)
+        Dictionary<Hero.Rarity, List<Hero>> heroDictionary = new Dictionary<Hero.Rarity, List<Hero>>();
+        foreach (Hero.Rarity rarity in Enum.GetValues(typeof(Hero.Rarity)))
         {
-            heroArray[(int)hero.HeroStatData.HeroRarity, (int)hero.HeroStatData.HeroTrait, (int)hero.HeroStatData.HeroRace] = hero;
+            heroDictionary.Add(rarity, new List<Hero>());
         }
-        return heroArray;
+
+        foreach (Hero hero in HeroPrefabList)
+        {
+            heroDictionary[hero.HeroStatData.HeroRarity].Add(hero);
+        }
+
+        return heroDictionary;
     }
-    
+    public Hero GetRandomHeroUpgradePrefab(Hero.Rarity heroRarity)
+    {
+        return m_HeroPrefabDictionary[heroRarity].GetRandomElement();
+    }
+
 #if UNITY_EDITOR
     [Button]
     private void GetAllHeroPrefab()
     {
         EditorUtility.SetDirty(this);
-        HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] {"Assets/BaseGame/Prefabs/Hero"})
+        HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/BaseGame/Prefabs/Hero" })
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Hero>)
             .ToList();
@@ -61,6 +73,7 @@ public class HeroPoolGlobalConfig : GlobalConfig<HeroPoolGlobalConfig>
         AssetDatabase.Refresh();
     }
 #endif
+
 }
 
 [Serializable]
@@ -69,4 +82,3 @@ public class HeroPoolLevelConfig
     [field: SerializeField] public int Level { get; set; }
     [field: SerializeField] public Probability<Hero.Rarity> ProbabilityRarity { get; set; }
 }
-

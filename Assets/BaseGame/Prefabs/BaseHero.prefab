@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9167881749687670751}
   - component: {fileID: 8736541253280640807}
   m_Layer: 0
-  m_Name: SpriteNumber
+  m_Name: SpriteRarity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 1646903217201992552}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: -0.15, z: 0}
-  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
+  m_LocalPosition: {x: 0.2, y: 0.2, z: 0}
+  m_LocalScale: {x: 0.049999997, y: 0.049999997, z: 0.049999997}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5033648688732336873}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -392905563
   m_SortingLayer: 1
   m_SortingOrder: 21
-  m_Sprite: {fileID: 21300000, guid: eee22bf4d8459a3409348515216d9ce3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59885b3bcedbe6548b4bbddcef185051, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7756779dd0dc4f1581a9642205084157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <AttackRange>k__BackingField: 0
 --- !u!1 &2929415237752332379
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,8 +159,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1420435178305317194}
   - {fileID: 9167881749687670751}
+  - {fileID: 1420435178305317194}
   m_Father: {fileID: 5790664334070574991}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4352110114911022467
@@ -173,7 +174,7 @@ GameObject:
   - component: {fileID: 1420435178305317194}
   - component: {fileID: 5135242135447940381}
   m_Layer: 0
-  m_Name: SpriteShape
+  m_Name: SpriteGraphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +190,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5033648688732336873}
@@ -235,8 +236,8 @@ SpriteRenderer:
   m_SortingLayerID: -392905563
   m_SortingLayer: 1
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: 71821191d28734d4a826eff70192f611, type: 3}
-  m_Color: {r: 1, g: 0.98678267, b: 0.34509802, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 8fc8f01907b480a4283269790f86accf, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -431,9 +432,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HeroStatData>k__BackingField: {fileID: 11400000, guid: c64a6510285517545ba4fa2a423199de, type: 2}
   <HeroAttackRange>k__BackingField: {fileID: 6057415387960866216}
-  <SpriteShape>k__BackingField: {fileID: 5135242135447940381}
-  <SpriteNumber>k__BackingField: {fileID: 8736541253280640807}
-  <SpriteColor>k__BackingField: {fileID: 5135242135447940381}
+  <SpriteGraphic>k__BackingField: {fileID: 5135242135447940381}
+  <SpriteRarity>k__BackingField: {fileID: 8736541253280640807}
   <HeroSkillDataList>k__BackingField: []
   <FieldSlot>k__BackingField: {fileID: 0}
 --- !u!1 &7968801095349760649
