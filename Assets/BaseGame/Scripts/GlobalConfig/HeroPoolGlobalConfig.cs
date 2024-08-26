@@ -26,15 +26,21 @@ public class HeroPoolGlobalConfig : GlobalConfig<HeroPoolGlobalConfig>
     public Hero GetRandomHeroPrefab(int poolLevel)
     {
         Hero.Rarity rarity = HeroPoolLevelConfig.ProbabilityRarity.GetRandomItem();
-        Hero.Trait trait = (Hero.Trait)UnityEngine.Random.Range(0, 4);
-        Hero.Race race = (Hero.Race)UnityEngine.Random.Range(0, 4);
+        Hero.Trait trait = (Hero.Trait)UnityEngine.Random.Range(0, 3);
+        Hero.Race race = (Hero.Race)UnityEngine.Random.Range(0, 3);
 
         return HeroPrefabArray[(int)rarity, (int)trait, (int)race];
     }
-    
+
+    public Hero GetRandomHeroUpgradePrefab(Hero.Rarity rarity, Hero.Race race)
+    {
+        Hero.Trait trait = (Hero.Trait)UnityEngine.Random.Range(0, 4);
+        return HeroPrefabArray[(int)rarity, (int)trait, (int)race];
+    }
+
     private Hero[,,] InitHeroArray()
     {
-        Hero[,,] heroArray = new Hero[5, 4, 4];
+        Hero[,,] heroArray = new Hero[10, 10, 10];
         foreach (var hero in HeroPrefabList)
         {
             heroArray[(int)hero.HeroStatData.HeroRarity, (int)hero.HeroStatData.HeroTrait, (int)hero.HeroStatData.HeroRace] = hero;

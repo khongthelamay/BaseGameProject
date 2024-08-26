@@ -20,14 +20,12 @@ public partial class Hero : ACachedMonoBehaviour
         Trait0 = 0,
         Trait1 = 1,
         Trait2 = 2,
-        Trait3 = 3,
     }
     public enum Race
     {
         Race0 = 0,
         Race1 = 1,
         Race2 = 2,
-        Race3 = 3,
     }
     [field: SerializeField] public HeroStatData HeroStatData {get; set;}
     [field: SerializeField] public HeroAttackRange HeroAttackRange {get; set;}
@@ -44,6 +42,10 @@ public partial class Hero : ACachedMonoBehaviour
     public void FieldInit()
     {
         InitSkill();
+    }
+    public void SelfDespawn()
+    {
+        gameObject.SetActive(false);
     }
     private void InitSkill()
     {

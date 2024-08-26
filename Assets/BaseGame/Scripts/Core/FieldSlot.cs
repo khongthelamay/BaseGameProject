@@ -1,6 +1,4 @@
 ﻿using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 
@@ -10,6 +8,7 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
 
     [field: SerializeField] public int RowId {get; private set;}
     [field: SerializeField] public int ColumnId {get; private set;}
+    [field: SerializeField] private GameObject UpgradeMark {get; set;}
     [field: SerializeField] public Hero Hero {get; private set;}
 
     public bool TryAddHeroFromWaitSlot(Hero hero)
@@ -47,6 +46,29 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
         
         return this;
     }
+    public void RemoveHero()
+    {
+        if (!TryGetHero(out Hero hero)) return;
+        hero.SelfDespawn();
+        Hero = null;
+    }
+    public bool TryUpgradeHero()
+    {
+        if (!TryGetHero(out Hero hero)) return false;
+        HeroStatData heroStatData = hero.HeroStatData;
+        if (heroStatData.HeroRarity == Hero.Rarity.Mythic) return false;
+        hero.SelfDespawn();
+        
+        Hero heroPrefab = HeroPoolGlobalConfig.Instance.GetRandomHeroUpgradePrefab(heroStatData.HeroRarity + 1, heroStatData.HeroRace);
+        Hero = Instantiate(heroPrefab);
+        Hero.SetupFieldSlot(this);
+
+        return true;
+    }
+    public void SetUpgradeMark(bool isShow)
+    {
+        UpgradeMark.SetActive(isShow);
+    }
 
     #region Interact Functions
 
@@ -71,9 +93,11 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
         if (Hero != null)
         {
             Debug.Log(123);
-            TempUIManager.Instance.ShowModalHeroInteract(Hero);
+            TempUIManager.Instance.ShowModalHeroInteract(this);
         }
     }
 
     #endregion
+
+
 }

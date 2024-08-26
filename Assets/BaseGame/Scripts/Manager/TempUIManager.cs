@@ -7,10 +7,10 @@ public class TempUIManager : Singleton<TempUIManager>
 {
     [field: SerializeField] public ModalHeroInteract ModalHeroInteract {get; private set;}
     
-    public void ShowModalHeroInteract(Hero hero)
+    public void ShowModalHeroInteract(FieldSlot fieldSlot)
     {
         ModalHeroInteract.gameObject.SetActive(true);
-        ModalHeroInteract.SetHero(hero);
+        ModalHeroInteract.SetFieldSlot(fieldSlot);
     }
     
 }

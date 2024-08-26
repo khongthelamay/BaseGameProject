@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using R3;
 using R3.Triggers;
@@ -26,6 +27,12 @@ public partial class FieldManager : Singleton<FieldManager>
     [field: SerializeField] public WaitSlot[] WaitSlotArray {get; private set;}
     
     private DateTime WaveStartTime { get; set; }
+    protected override void Awake()
+    {
+        base.Awake();
+        Events.OnFieldSlotChange += OnFieldSlotChange;
+    }
+
     private void Start()
     {
         StartMap().Forget();
@@ -35,6 +42,52 @@ public partial class FieldManager : Singleton<FieldManager>
             .Where(_ => Input.GetKeyDown(KeyCode.C))
             .Subscribe(_ => RandomWaitSlot());
     }
+    public bool TryFusionHeroInFieldSlot(FieldSlot fieldSlot)
+    {
+        if (!TryGetSameHeroInFieldSlot(fieldSlot, out List<FieldSlot> sameHeroFieldSlotList)) return false;
+        if (sameHeroFieldSlotList.Count < 2) return false;
+        foreach (var slot in sameHeroFieldSlotList)
+        {
+            slot.RemoveHero();
+        }
+
+        if (fieldSlot.TryUpgradeHero())
+        {
+            OnFieldSlotChange();
+        }
+        return false;
+    }
+
+    private bool TryGetSameHeroInFieldSlot(FieldSlot fieldSlot, out List<FieldSlot> sameHeroFieldSlotList)
+    {
+        sameHeroFieldSlotList = new List<FieldSlot>();
+        if (!fieldSlot.TryGetHero(out Hero hero)) return false;
+        foreach (FieldSlot slot in FieldSlotArray)
+        {
+            if (slot == fieldSlot) continue;
+            if (!IsFieldSlotHasSameHeroData(slot, hero))
+            {
+                continue;
+            }
+            sameHeroFieldSlotList.Add(slot);
+            if (sameHeroFieldSlotList.Count == 2) break;
+        }
+        return sameHeroFieldSlotList.Count == 2;
+    }
+
+    private bool IsFieldSlotHasSameHeroData(FieldSlot fieldSlot, Hero hero)
+    {
+        return fieldSlot.TryGetHero(out Hero otherHero) && otherHero.HeroStatData == hero.HeroStatData;
+    }
+
+    private void OnFieldSlotChange()
+    {
+        foreach (FieldSlot slot in FieldSlotArray)
+        {
+            slot.SetUpgradeMark(TryGetSameHeroInFieldSlot(slot, out List<FieldSlot> _));
+        }
+    }
+    
     [Button]
     public void RandomWaitSlot()
     {
@@ -50,11 +103,18 @@ public partial class FieldManager : Singleton<FieldManager>
         {
             if (fieldSlot.TryAddHeroFromWaitSlot(hero))
             {
+                OnFieldSlotChange();
                 return true;
             }
         }
 
         return false;
+    }
+    public bool TrySellHeroInFieldSlot(FieldSlot fieldSlot)
+    {
+        fieldSlot.RemoveHero();
+        OnFieldSlotChange();
+        return true;
     }
 
     public async UniTask StartMap()

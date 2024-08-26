@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using R3;
 using R3.Triggers;
 using TW.Utility.DesignPattern;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager : Singleton<InputManager>
 {
@@ -15,6 +13,7 @@ public class InputManager : Singleton<InputManager>
     private IInteractable StartInteractable { get; set; }
     private IInteractable CurrentInteractable { get; set; }
     private IInteractable EndInteractable { get; set; }
+    private bool IsTouchingUI { get; set; }
     private readonly RaycastHit[] _hitResults = new RaycastHit[1];
     private void Start()
     {
@@ -56,7 +55,8 @@ public class InputManager : Singleton<InputManager>
         if (!_hitResults[0].collider.TryGetComponent(out IInteractable interactable)) return;
         EndInteractable = interactable;
         EndInteractable.OnMouseUpCallback();
-
+        
+        if (IsPointerOverGameObject()) return;
         if (EndInteractable == StartInteractable && EndInteractable != null)
         {
             EndInteractable.OnMouseClickCallback();
@@ -65,6 +65,30 @@ public class InputManager : Singleton<InputManager>
         // EndInteractable = null;
         // StartInteractable = null;
         // CurrentInteractable = null;
+    }
+
+    private bool IsPointerOverGameObject()
+    {
+        //check mouse
+        if (EventSystem.current.IsPointerOverGameObject())
+            return true;
+
+        //check touch
+        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        {
+            if (EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
+            {
+                IsTouchingUI = true;
+                return true;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse0) && IsTouchingUI)
+        {
+            IsTouchingUI = false;
+            return true;
+        }
+
+        return IsTouchingUI;
     }
 }
 public interface IInteractable
