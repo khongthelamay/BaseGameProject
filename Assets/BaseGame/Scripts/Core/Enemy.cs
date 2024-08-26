@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Enemy : ACachedMonoBehaviour
 {
+    [field: SerializeField] public int CurrentHealthPoint {get; private set;}
     [field: SerializeField] private float MovementSpeed { get; set; }
     [field: SerializeField] public Transform[] MovePoint { get; private set; }
     [field: SerializeField] public int CurrentPoint { get; private set; }
@@ -47,7 +48,22 @@ public class Enemy : ACachedMonoBehaviour
     }
     private void OnPlaybackSpeedChanged(float speed)
     {
-        // if (!_movementMotionHandle.IsActive()) return;
+        if (!_movementMotionHandle.IsActive()) return;
         _movementMotionHandle.PlaybackSpeed = speed;
+    }
+    public void SelfDespawn()
+    {
+        _movementMotionHandle.TryCancel();
+        FieldManager.Instance.RemoveEnemy(this);
+        Destroy(gameObject);
+    }
+
+    public void TakeDamage(int attackDamage)
+    {
+        CurrentHealthPoint -= attackDamage;
+        if (CurrentHealthPoint <= 0)
+        {
+            SelfDespawn();
+        }
     }
 }

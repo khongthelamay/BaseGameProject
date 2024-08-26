@@ -317,6 +317,7 @@ MonoBehaviour:
   <HeroAttackRange>k__BackingField: {fileID: 7080185131382974689}
   <SpriteGraphic>k__BackingField: {fileID: 2144691509892193439}
   <SpriteRarity>k__BackingField: {fileID: 1129615238996475287}
+  <BaseProjectile>k__BackingField: {fileID: 8853763310275192392, guid: 89aea41ff06b3f04f95a389c4e1c4d61, type: 3}
   <HeroSkillDataList>k__BackingField: []
   <FieldSlot>k__BackingField: {fileID: 0}
 --- !u!1 &8241831393894343883

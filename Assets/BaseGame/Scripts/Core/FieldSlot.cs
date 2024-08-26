@@ -5,7 +5,6 @@ using UnityEngine;
 public class FieldSlot : ACachedMonoBehaviour , IInteractable
 {
     [field: SerializeField] public Vector2 DefaultSize {get; private set;}
-
     [field: SerializeField] public int RowId {get; private set;}
     [field: SerializeField] public int ColumnId {get; private set;}
     [field: SerializeField] private GameObject UpgradeMark {get; set;}
@@ -16,6 +15,7 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
         if (Hero != null) return false;
         Hero = hero;
         Hero.SetupFieldSlot(this);
+        Hero.FieldInit();
         return true;
     }
     public bool TryGetHero(out Hero hero)

@@ -26,7 +26,7 @@ public class MapData : ScriptableObject
                 EnemyId = 0,
                 EnemyCount = 20,
                 SpawnInterval = 0.5f,
-                WaveInterval = 20f
+                WaveInterval = 10f
             });
         }
 

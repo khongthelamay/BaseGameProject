@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
+using TW.Utility.DesignPattern;
 using UnityEngine;
 
 public partial class Hero : ACachedMonoBehaviour
@@ -31,28 +32,47 @@ public partial class Hero : ACachedMonoBehaviour
     [field: SerializeField] public HeroAttackRange HeroAttackRange { get; set; }
     [field: SerializeField] public SpriteRenderer SpriteGraphic { get; set; }
     [field: SerializeField] public SpriteRenderer SpriteRarity { get; set; }
+    [field: SerializeField] public Projectile BaseProjectile {get; private set;}
+
     [field: SerializeField] public List<HeroSkillData> HeroSkillDataList { get; set; }
     [field: SerializeField] public FieldSlot FieldSlot { get; private set; }
+    private UniTaskStateMachine<Hero> UniTaskStateMachine { get; set; }
 
     private void Awake()
     {
         HeroAttackRange.InitAttackRange(HeroStatData.BaseAttackRange);
     }
 
+    public void OnDestroy()
+    {
+        UniTaskStateMachine?.Stop();
+    }
+
     public void FieldInit()
     {
         InitSkill();
+        StartAttack();
     }
+
+
     public void SelfDespawn()
     {
         gameObject.SetActive(false);
     }
+
     private void InitSkill()
     {
         foreach (HeroSkillData heroSkillData in HeroSkillDataList)
         {
             heroSkillData.InitSkill(this);
         }
+    }
+
+    private void StartAttack()
+    {
+        UniTaskStateMachine = new UniTaskStateMachine<Hero>(this);
+        UniTaskStateMachine.RegisterState(HeroAttackState.Instance);
+        UniTaskStateMachine.Run();
     }
 
     public void SetupFieldSlot(FieldSlot fieldSlot)

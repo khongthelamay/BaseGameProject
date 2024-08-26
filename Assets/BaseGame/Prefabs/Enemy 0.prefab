@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90d9ce92d63432e8cf90435ba7c2b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CurrentHealthPoint>k__BackingField: 50
   <MovementSpeed>k__BackingField: 2
   <MovePoint>k__BackingField: []
   <CurrentPoint>k__BackingField: 0

@@ -25,7 +25,7 @@ public partial class FieldManager : Singleton<FieldManager>
     [field: SerializeField] public FieldSlot[] FieldSlotArray {get; private set;}
     [field: SerializeField] public Transform[] MovePoint {get; private set;}
     [field: SerializeField] public WaitSlot[] WaitSlotArray {get; private set;}
-    
+    public List<Enemy> EnemyList { get; private set; } = new List<Enemy>();
     private DateTime WaveStartTime { get; set; }
     protected override void Awake()
     {
@@ -132,10 +132,17 @@ public partial class FieldManager : Singleton<FieldManager>
                 enemy.transform.position = MovePoint[0].position;
                 enemy.SetupMovePoint(MovePoint);
                 enemy.StartMoveToNextPoint();
+                EnemyList.Add(enemy);
                 await UniTask.Delay(spawnInterval, cancellationToken: this.GetCancellationTokenOnDestroy());
             }
             await UniTask.Delay(waveInterval, cancellationToken: this.GetCancellationTokenOnDestroy());
         }
+    }
+    public void RemoveEnemy(Enemy enemy)
+    {
+        if (!EnemyList.Contains(enemy)) return;
+        EnemyList.Remove(enemy);
+        Destroy(enemy.gameObject);
     }
 }
 
