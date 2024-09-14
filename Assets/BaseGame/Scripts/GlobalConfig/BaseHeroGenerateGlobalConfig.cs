@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Core;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -55,6 +56,8 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+        
+        HeroPoolGlobalConfig.Instance.GetAllHeroPrefab();
 #endif
     }
     

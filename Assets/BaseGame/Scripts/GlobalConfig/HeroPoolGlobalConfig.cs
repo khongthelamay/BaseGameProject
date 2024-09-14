@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TW.Utility.CustomType;
@@ -62,7 +63,7 @@ public class HeroPoolGlobalConfig : GlobalConfig<HeroPoolGlobalConfig>
 
 #if UNITY_EDITOR
     [Button]
-    private void GetAllHeroPrefab()
+    public void GetAllHeroPrefab()
     {
         EditorUtility.SetDirty(this);
         HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/BaseGame/Prefabs/Hero" })

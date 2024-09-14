@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Core;
+using DG.Tweening;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 
