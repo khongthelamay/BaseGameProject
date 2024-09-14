@@ -1,17 +1,18 @@
 ﻿using Core;
-using DG.Tweening;
 using TW.Utility.CustomComponent;
 using UnityEngine;
+using Zenject;
 
 public class FieldSlot : ACachedMonoBehaviour , IInteractable
 {
+    [Inject] private Hero.Factory HeroFactory { get; set; }
     [field: SerializeField] public Vector2 DefaultSize {get; private set;}
     [field: SerializeField] public int RowId {get; private set;}
     [field: SerializeField] public int ColumnId {get; private set;}
     [field: SerializeField] private GameObject UpgradeMark {get; set;}
     [field: SerializeField] public Hero Hero {get; private set;}
 
-    public bool TryAddHeroFromWaitSlot(Hero hero)
+    public bool TryAddHero(Hero hero)
     {
         if (Hero != null) return false;
         Hero = hero;
@@ -24,7 +25,13 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
         hero = Hero;
         return hero != null;
     }
-
+    public bool TryRemoveHero()
+    {
+        if (!TryGetHero(out Hero hero)) return false;
+        hero.SelfDespawn();
+        Hero = null;
+        return true;
+    }
     public FieldSlot SetupCoordinate(int rowId, int columnId)
     {
         RowId = rowId;
@@ -34,16 +41,14 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
     }
     public FieldSlot SetupTransform(Transform parent)
     {
-        transform.SetParent(parent);
+        Transform.SetParent(parent);
         return this;
     }
     public FieldSlot SetupPosition(int maxRow, int maxColumn)
     {
         float x = (ColumnId - maxColumn / 2f + 0.5f) * DefaultSize.x;
-        float y = (RowId - maxRow / 2f + 0.5f) * DefaultSize.y;
+        float y = (- RowId + maxRow / 2f - 0.5f) * DefaultSize.y;
         transform.localPosition = new Vector3(x, y, 0);
-        Tween a = Transform.DOMove(Vector3.zero, 1);
-        a.timeScale = 0.5f;
         
         return this;
     }
@@ -61,7 +66,7 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
         hero.SelfDespawn();
         
         Hero heroPrefab = HeroPoolGlobalConfig.Instance.GetRandomHeroUpgradePrefab(heroStatData.HeroRarity + 1);
-        Hero = Instantiate(heroPrefab);
+        Hero = HeroFactory.Create(heroPrefab);
         Hero.SetupFieldSlot(this);
 
         return true;

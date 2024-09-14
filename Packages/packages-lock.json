@@ -55,7 +55,7 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "f301bc0f16be878cd3a8c79899f3342b0e96ceee"
+      "hash": "ef88de74b6a81e205f342878c9c7348355a56637"
     },
     "com.unity.2d.animation": {
       "version": "9.1.0",
@@ -75,8 +75,8 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.sprite": "1.0.0",
         "com.unity.2d.common": "6.0.6",
+        "com.unity.2d.sprite": "1.0.0",
         "com.unity.mathematics": "1.2.6",
         "com.unity.modules.animation": "1.0.0"
       },
@@ -87,11 +87,11 @@
       "depth": 2,
       "source": "registry",
       "dependencies": {
+        "com.unity.burst": "1.7.3",
         "com.unity.2d.sprite": "1.0.0",
         "com.unity.mathematics": "1.1.0",
-        "com.unity.modules.uielements": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
-        "com.unity.burst": "1.7.3"
+        "com.unity.modules.uielements": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -107,9 +107,9 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.animation": "9.1.0",
         "com.unity.2d.common": "8.0.2",
-        "com.unity.2d.sprite": "1.0.0"
+        "com.unity.2d.sprite": "1.0.0",
+        "com.unity.2d.animation": "9.1.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -124,8 +124,8 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.mathematics": "1.1.0",
         "com.unity.2d.common": "8.0.1",
+        "com.unity.mathematics": "1.1.0",
         "com.unity.modules.physics2d": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -144,9 +144,9 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.modules.tilemap": "1.0.0",
-        "com.unity.2d.tilemap": "1.0.0",
         "com.unity.ugui": "1.0.0",
+        "com.unity.2d.tilemap": "1.0.0",
+        "com.unity.modules.tilemap": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -174,8 +174,8 @@
       "source": "registry",
       "dependencies": {
         "com.unity.burst": "1.6.6",
-        "com.unity.nuget.mono-cecil": "1.11.4",
-        "com.unity.test-framework": "1.1.31"
+        "com.unity.test-framework": "1.1.31",
+        "com.unity.nuget.mono-cecil": "1.11.4"
       },
       "url": "https://packages.unity.com"
     },
@@ -265,9 +265,9 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.director": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
       },
       "url": "https://packages.unity.com"

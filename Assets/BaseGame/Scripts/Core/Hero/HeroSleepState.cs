@@ -13,7 +13,6 @@ namespace Core
         public UniTask OnStateEnter(HeroSleepState state, CancellationToken token)
         {
             return UniTask.CompletedTask;
-
         }
 
         public UniTask OnStateExecute(HeroSleepState state, CancellationToken token)

@@ -17,5 +17,10 @@ MonoBehaviour:
   <HeroRarity>k__BackingField: 4
   <HeroJob>k__BackingField: 
   <BaseAttackDamage>k__BackingField: 10
-  <BaseAttackSpeed>k__BackingField: 1
+  <BaseAttackSpeed>k__BackingField: 5
   <BaseAttackRange>k__BackingField: 2
+  <UpgradePercentage>k__BackingField: 0
+  <HeroAbilities>k__BackingField:
+  - {fileID: 11400000, guid: a85e945d11071954894f267315b5820e, type: 2}
+  - {fileID: 11400000, guid: e84e66c2e8de7e04d9d9d1d0ef6798aa, type: 2}
+  - {fileID: 11400000, guid: 9a97bb1aad91a7f40924cb574446bf0f, type: 2}

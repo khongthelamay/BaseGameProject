@@ -13,17 +13,17 @@ namespace Core
     {
         public UniTask OnStateEnter(HeroIdleInShopState state, CancellationToken token)
         {
-            throw new System.NotImplementedException();
+            return UniTask.CompletedTask;
         }
 
         public UniTask OnStateExecute(HeroIdleInShopState state, CancellationToken token)
         {
-            throw new System.NotImplementedException();
+            return UniTask.CompletedTask;
         }
 
         public UniTask OnStateExit(HeroIdleInShopState state, CancellationToken token)
         {
-            throw new System.NotImplementedException();
+            return UniTask.CompletedTask;
         }
     }
 }
