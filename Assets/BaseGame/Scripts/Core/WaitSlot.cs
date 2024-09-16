@@ -4,9 +4,10 @@ using Manager;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
-public class WaitSlot : ACachedMonoBehaviour, IInteractable
+public class WaitSlot : ACachedMonoBehaviour, IPointerClickHandler
 {
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private Hero.Factory HeroFactory { get; set; }
@@ -24,32 +25,12 @@ public class WaitSlot : ACachedMonoBehaviour, IInteractable
         OwnerHero.WaitSlotInit(this);
     }
 
-    #region Interact Functions
-
-    public void OnMouseDownCallback()
-    {
-        
-    }
-
-    public void OnMouseCallback()
-    {
-        
-    }
-
-    public void OnMouseUpCallback()
-    {
-        
-    }
-
-    public void OnMouseClickCallback()
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (OwnerHero == null) return;
         if (BattleManager.TryAddNewHero(OwnerHero))
         {
             OwnerHero = null;
         }
-
     }
-
-    #endregion
 }

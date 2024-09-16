@@ -1,9 +1,10 @@
 ﻿using Core;
 using TW.Utility.CustomComponent;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
-public class FieldSlot : ACachedMonoBehaviour , IInteractable
+public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler
 {
     [Inject] private Hero.Factory HeroFactory { get; set; }
     [field: SerializeField] public Vector2 DefaultSize {get; private set;}
@@ -76,32 +77,11 @@ public class FieldSlot : ACachedMonoBehaviour , IInteractable
         UpgradeMark.SetActive(isShow);
     }
 
-    #region Interact Functions
-
-    public void OnMouseDownCallback()
-    {
-        
-    }
-
-    public void OnMouseCallback()
-    {
-
-    }
-
-    public void OnMouseUpCallback()
-    {
-
-    }
-
-    public void OnMouseClickCallback()
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (Hero != null)
         {
             TempUIManager.Instance.ShowModalHeroInteract(this);
         }
     }
-
-    #endregion
-
-
 }
