@@ -48,6 +48,13 @@
       "dependencies": {},
       "hash": "f301bc0f16be878cd3a8c79899f3342b0e96ceee"
     },
+    "com.tw.ugui": {
+      "version": "https://github.com/thinhwar123/TW-CustomPackage.git?path=Packages/TW.UGUI",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c13d65850d8e598d8c900a9ffb539c853ce28b65"
+    },
     "com.tw.utility": {
       "version": "https://github.com/thinhwar123/TW-CustomPackage.git?path=Packages/TW.Utility",
       "depth": 0,
@@ -151,6 +158,20 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.addressables": {
+      "version": "1.21.21",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.assetbundle": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.scriptablebuildpipeline": "1.21.23",
+        "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.burst": {
       "version": "1.8.13",
       "depth": 1,
@@ -235,6 +256,13 @@
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.scriptablebuildpipeline": {
+      "version": "1.21.23",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
