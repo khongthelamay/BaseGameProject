@@ -1,10 +1,16 @@
 using System;
+using Core;
+using Manager;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Zenject;
 
-public class WaitSlot : ACachedMonoBehaviour, IInteractable
+public class WaitSlot : ACachedMonoBehaviour, IPointerClickHandler
 {
+    [Inject] private BattleManager BattleManager { get; set; }
+    [Inject] private Hero.Factory HeroFactory { get; set; }
     [field: SerializeField] public Hero OwnerHero {get; private set;}
     
     [Button]
@@ -15,36 +21,16 @@ public class WaitSlot : ACachedMonoBehaviour, IInteractable
             Destroy(OwnerHero.gameObject);
         }
         Hero heroPrefab = HeroPoolGlobalConfig.Instance.GetRandomHeroPrefab(1);
-        OwnerHero = Instantiate(heroPrefab);
+        OwnerHero = HeroFactory.Create(heroPrefab);
         OwnerHero.WaitSlotInit(this);
     }
 
-    #region Interact Functions
-
-    public void OnMouseDownCallback()
-    {
-        
-    }
-
-    public void OnMouseCallback()
-    {
-        
-    }
-
-    public void OnMouseUpCallback()
-    {
-        
-    }
-
-    public void OnMouseClickCallback()
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (OwnerHero == null) return;
-        if (FieldManager.Instance.TryAddHeroToFieldSlot(OwnerHero))
+        if (BattleManager.TryAddNewHero(OwnerHero))
         {
             OwnerHero = null;
         }
-
     }
-
-    #endregion
 }

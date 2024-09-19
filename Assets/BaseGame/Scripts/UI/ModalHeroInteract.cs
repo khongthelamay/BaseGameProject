@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core;
+using Manager;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,13 +40,13 @@ public class ModalHeroInteract : ACachedMonoBehaviour
     private void OnButtonMergeClick()
     {
         Debug.Log("Merge");
-        FieldManager.Instance.TryFusionHeroInFieldSlot(FieldSlot);
+        BattleManager.Instance.TryFusionHeroInFieldSlot(FieldSlot);
         OnClose();
     }
     private void OnButtonSellClick()
     {
         Debug.Log("Sell");
-        FieldManager.Instance.TrySellHeroInFieldSlot(FieldSlot);
+        BattleManager.Instance.TrySellHero(FieldSlot);
         OnClose();
     }
     private void OnButtonCloseClick()

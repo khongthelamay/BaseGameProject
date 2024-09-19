@@ -18,7 +18,7 @@ public class HeroAttackRange : ACachedMonoBehaviour
     public void ShowAttackRange()
     {
         UpdateAttackMotion.TryCancel();
-        UpdateAttackMotion = LMotion.Create(OriginalScale, 1 + AttackRange * 2, 0.2f)
+        UpdateAttackMotion = LMotion.Create(OriginalScale, AttackRange * 2, 0.2f)
             .WithEase(Ease.OutBack)
             .Bind(UpdateAttackRange);
     }

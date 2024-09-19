@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -23,6 +25,11 @@ public class HeroStatData : ScriptableObject
     [field: SerializeField] public float BaseAttackSpeed {get; set;}
     [field: VerticalGroup(nameof(HeroStatData)+"/Stats")]
     [field: SerializeField] public float BaseAttackRange {get; set;}
+    [field: VerticalGroup(nameof(HeroStatData)+"/Stats")]
+    [field: SerializeField] public float UpgradePercentage {get; set;}
+    
+    [field: SerializeField] public List<Ability> HeroAbilities {get; private set;}
+
     [Button]
     private void UpdateName()
     {

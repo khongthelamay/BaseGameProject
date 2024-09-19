@@ -1,3 +1,4 @@
+using Core;
 using UnityEngine;
 
 public abstract class HeroSkillData : ScriptableObject

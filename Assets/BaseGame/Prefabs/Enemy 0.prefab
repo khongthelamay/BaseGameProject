@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentHealthPoint>k__BackingField: 100
-  <MovementSpeed>k__BackingField: 2
+  <MovementSpeed>k__BackingField: 1.5
   <MovePoint>k__BackingField: []
   <CurrentPoint>k__BackingField: 0
   <PlaybackSpeed>k__BackingField:
