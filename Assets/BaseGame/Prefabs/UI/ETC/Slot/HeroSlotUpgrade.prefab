@@ -1275,6 +1275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8683970424811236861}
   - component: {fileID: 1237407685131854846}
+  - component: {fileID: 805242252038175600}
   m_Layer: 5
   m_Name: HeroSlotUpgrade
   m_TagString: Untagged
@@ -1311,6 +1312,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7777748445151776478}
   m_CullTransparentMesh: 1
+--- !u!114 &805242252038175600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7777748445151776478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d186e0f9a95a0f46a7fc73f3301e06d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8229618702059742501
 GameObject:
   m_ObjectHideFlags: 0

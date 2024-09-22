@@ -470,18 +470,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 413442548}
     m_Modifications:
-    - target: {fileID: 248405880663480461, guid: d279394e03565dd459b02b8babede8f1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 961775280721955145, guid: d279394e03565dd459b02b8babede8f1, type: 3}
       propertyPath: m_Name
       value: PanelClaimItem
       objectReference: {fileID: 0}
-    - target: {fileID: 961775280721955145, guid: d279394e03565dd459b02b8babede8f1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2258435434779646144, guid: d279394e03565dd459b02b8babede8f1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -529,14 +521,6 @@ PrefabInstance:
     - target: {fileID: 2629334811765724395, guid: d279394e03565dd459b02b8babede8f1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2911128894347779476, guid: d279394e03565dd459b02b8babede8f1, type: 3}
-      propertyPath: m_VerticalScrollbar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2911128894347779476, guid: d279394e03565dd459b02b8babede8f1, type: 3}
-      propertyPath: m_HorizontalScrollbar
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3709469735542326985, guid: d279394e03565dd459b02b8babede8f1, type: 3}
       propertyPath: m_SizeDelta.y
@@ -612,14 +596,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4954460852362571678, guid: d279394e03565dd459b02b8babede8f1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6450121124983049008, guid: d279394e03565dd459b02b8babede8f1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6472051593569177050, guid: d279394e03565dd459b02b8babede8f1, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6548530443920019179, guid: d279394e03565dd459b02b8babede8f1, type: 3}
@@ -702,21 +678,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6998776280798488415, guid: d279394e03565dd459b02b8babede8f1, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6998776280798488415, guid: d279394e03565dd459b02b8babede8f1, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6998776280798488415, guid: d279394e03565dd459b02b8babede8f1, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0.049987793
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6472051593569177050, guid: d279394e03565dd459b02b8babede8f1, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d279394e03565dd459b02b8babede8f1, type: 3}
