@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8534430212689872517}
   - component: {fileID: 6934691367424404721}
   m_Layer: 5
-  m_Name: txtPrice
+  m_Name: txtUpgradeRequire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,6 +330,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3466161927488535512}
   - component: {fileID: 2166687153923928913}
+  - component: {fileID: 1558489762248364625}
+  - component: {fileID: 1267205142437236741}
   m_Layer: 5
   m_Name: PanelArtifactInfor
   m_TagString: Untagged
@@ -366,6 +368,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2712814164342512994}
   m_CullTransparentMesh: 1
+--- !u!114 &1558489762248364625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2712814164342512994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52650b5b3a79d5a47961c4e5ad90b094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <UsePrefabNameAsIdentifier>k__BackingField: 1
+  <Identifier>k__BackingField: 
+  _animationContainer:
+    _enterAnimations: []
+    _exitAnimations: []
+  <UIPresenter>k__BackingField:
+    <Model>k__BackingField:
+      <SampleValue>k__BackingField:
+        m_Value: 0
+      currentArtifactDataConfig:
+        m_Value:
+          artifactType: 0
+          strName: 
+          strDes: 
+          strFunDes: 
+          priceUpgrade: []
+          piecesRequire: 
+    <View>k__BackingField:
+      <MainView>k__BackingField: {fileID: 1267205142437236741}
+      <txtName>k__BackingField: {fileID: 4780317686998103124}
+      <txtLevel>k__BackingField: {fileID: 2122043985905057853}
+      <txtFunDes>k__BackingField: {fileID: 599583424199131146}
+      <txtDes>k__BackingField: {fileID: 8772396875522551878}
+      <txtUpgradeRequire>k__BackingField: {fileID: 6934691367424404721}
+      <piecesProgress>k__BackingField: {fileID: 5104624882020235272}
+      <btnExit>k__BackingField: {fileID: 4462598668585677812}
+      <btnUpgrade>k__BackingField: {fileID: 8063298699443190921}
+--- !u!225 &1267205142437236741
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2712814164342512994}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3416096940377376749
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,7 +1010,7 @@ GameObject:
   - component: {fileID: 4035358553686761657}
   - component: {fileID: 599583424199131146}
   m_Layer: 5
-  m_Name: txtDes
+  m_Name: txtFunDes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1487,7 +1540,7 @@ GameObject:
   - component: {fileID: 3492833999600617893}
   - component: {fileID: 2122043985905057853}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txtLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1621,7 +1674,7 @@ GameObject:
   - component: {fileID: 6163658687912764964}
   - component: {fileID: 8772396875522551878}
   m_Layer: 5
-  m_Name: txtDesBuff
+  m_Name: txtDes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1953,27 +2006,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3359748357536908708, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3359748357536908708, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000026226
-      objectReference: {fileID: 0}
     - target: {fileID: 3868459421123791015, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
       propertyPath: m_Name
       value: progressBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 7173622374863679738, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+--- !u!114 &5104624882020235272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3280460442299403813, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+  m_PrefabInstance: {fileID: 7733186527317308973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ac3a70f49addf4a84ca107a223d2b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8740064392300316221 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1304705162166431760, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}

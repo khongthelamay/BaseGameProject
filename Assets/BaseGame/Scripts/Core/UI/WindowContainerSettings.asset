@@ -19,6 +19,12 @@ MonoBehaviour:
     sortingLayer:
       id: 0
     orderInLayer: 0
+  - name: 
+    containerType: 1
+    overrideSorting: 0
+    sortingLayer:
+      id: 0
+    orderInLayer: 0
   - name: Modals
     containerType: 0
     overrideSorting: 0
