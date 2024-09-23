@@ -41,16 +41,16 @@ MonoBehaviour:
       m_ProbabilityValueList:
       - m_Object: 0
         m_Chance: 1
-        m_Percentage: 20
+        m_Percentage: 25
       - m_Object: 1
         m_Chance: 1
-        m_Percentage: 20
+        m_Percentage: 25
       - m_Object: 2
         m_Chance: 1
-        m_Percentage: 20
+        m_Percentage: 25
       - m_Object: 3
         m_Chance: 1
-        m_Percentage: 20
+        m_Percentage: 25
       - m_Object: 4
-        m_Chance: 1
-        m_Percentage: 20
+        m_Chance: 0
+        m_Percentage: 0

@@ -1,0 +1,21 @@
+Knight.png
+size:1024,1024
+filter:Linear,Linear
+pma:true
+FX Slash
+bounds:628,818,140,197
+Knight_Body
+bounds:2,130,170,216
+Knight_Foot
+bounds:398,659,213,131
+Knight_Head
+bounds:2,582,394,433
+Knight_Left Hand
+bounds:174,165,115,181
+Knight_Right Hand
+bounds:2,2,126,136
+rotate:90
+Knight_Weapon
+bounds:398,792,228,223
+Rectangle 1
+bounds:2,348,314,232

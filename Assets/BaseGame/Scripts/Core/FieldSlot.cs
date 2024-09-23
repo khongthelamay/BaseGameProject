@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler
+public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler
 {
     [Inject] private Hero.Factory HeroFactory { get; set; }
     [field: SerializeField] public Vector2 DefaultSize {get; private set;}
@@ -21,6 +21,7 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler
         Hero.FieldInit();
         return true;
     }
+    
     public bool TryGetHero(out Hero hero)
     {
         hero = Hero;
@@ -76,7 +77,7 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler
     {
         UpgradeMark.SetActive(isShow);
     }
-
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Hero != null)
@@ -84,4 +85,27 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler
             TempUIManager.Instance.ShowModalHeroInteract(this);
         }
     }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (!TryGetHero(out _)) return;
+        InputManager.Instance.SetStartDragFieldSlot(this);
+        InputManager.Instance.SetEndDragFieldSlot(this);
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        InputManager.Instance.SetStartDragFieldSlot(null);
+        InputManager.Instance.SetEndDragFieldSlot(null);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (InputManager.Instance.StartDragFieldSlot == null) return;
+        InputManager.Instance.SetEndDragFieldSlot(this);
+    }
+
 }

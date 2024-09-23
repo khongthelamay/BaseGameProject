@@ -79,14 +79,6 @@ namespace Core
             gameObject.SetActive(false);
         }
 
-        // private void InitSkill()
-        // {
-        //     foreach (HeroSkillData heroSkillData in HeroAbilityList)
-        //     {
-        //         heroSkillData.InitSkill(this);
-        //     }
-        // }
-
         private void StartAttack()
         {
             UniTaskStateMachine.RequestTransition(HeroAttackState.Instance);
