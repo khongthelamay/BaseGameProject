@@ -11,8 +11,11 @@ public class MainContent<Data> : MonoBehaviour
     public SlotBase<Data> slotPref;
     public SlotBase<Data> slotTemp;
     public List<SlotBase<Data>> slots;
+
+    public int totalSlotUsing;
+
     public virtual void SetActionSlotCallBack(UnityAction<SlotBase<Data>> actionCallBack) { actionSlotCallBack = actionCallBack; }
-    int totalSlotUsing;
+    
     public virtual void InitData(List<Data> datas) {
         for (int i = 0; i < datas.Count; i++)
         {

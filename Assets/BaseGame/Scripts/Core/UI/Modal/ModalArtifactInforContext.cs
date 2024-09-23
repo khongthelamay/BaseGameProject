@@ -9,6 +9,7 @@ using UGUI.Core.Modals;
 using TMPro;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
+using System.Collections.Generic;
 
 [Serializable]
 public class ModalArtifactInforContext 
@@ -23,13 +24,16 @@ public class ModalArtifactInforContext
     public class UIModel : IAModel
     {
         [field: Title(nameof(UIModel))]
-        [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
-        public ReactiveValue<ArtifactDataConfig> currentArtifactDataConfig;
+        [field: SerializeField] public List<ReactiveValue<ArtifactInfo>> ArtifactInfos { get; set; }
         public UniTask Initialize(Memory<object> args)
         {
-            currentArtifactDataConfig = ArtifactManager.Instance.currentArtifactChoose;
+            ArtifactInfos = ArtifactManager.Instance.ArtifactInfos;
             
             return UniTask.CompletedTask;
+        }
+
+        public void ChangeData() { 
+        
         }
     }
     
@@ -54,6 +58,7 @@ public class ModalArtifactInforContext
         }
 
         public void InitData(ArtifactDataConfig artifactDataConfig) {
+            Debug.Log(artifactDataConfig);
             txtName.text = artifactDataConfig.strName;
             txtDes.text = artifactDataConfig.strDes;
             txtFunDes.text = artifactDataConfig.strFunDes;
@@ -71,11 +76,15 @@ public class ModalArtifactInforContext
         [Button]
         public async UniTask Initialize(Memory<object> args)
         {
-            Debug.Log("Init");
+            Debug.Log("Init Modal Artifact Infor");
             await Model.Initialize(args);
             await View.Initialize(args);
-
-            Model.currentArtifactDataConfig.ReactiveProperty.Subscribe(ChangeData);
+            for (int i = 0; i < Model.ArtifactInfos.Count; i++)
+            {
+                Model.ArtifactInfos[i].ReactiveProperty.Subscribe(ChangeData).AddTo(View.MainView);
+            }
+           
+          
 
             View.btnExit.onClick.AddListener(OnCloseModal);
             View.btnUpgrade.onClick.AddListener(UpgradeArtifact);
@@ -84,13 +93,19 @@ public class ModalArtifactInforContext
         void UpgradeArtifact() { }
 
         void OnCloseModal() {
-            Debug.Log("Close it");
+            Debug.Log("Close ModalArtifactInfor");
             ModalContainer.Find(ContainerKey.Modals).Pop(true);
         }
 
         private void ChangeData(ArtifactDataConfig artifactDataConfig)
         {
-            View.InitData(artifactDataConfig);
+            Debug.Log(artifactDataConfig);
+            if (artifactDataConfig != null)
+            {
+                View.InitData(artifactDataConfig);
+
+            }
+            
         }
 
         public UniTask Cleanup(Memory<object> args) {

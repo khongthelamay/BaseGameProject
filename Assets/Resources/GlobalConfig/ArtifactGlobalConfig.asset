@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artifactDataConfigs:
   - artifactType: 1
+    strName: Power Potion
     strDes: Power Potion? The term sample refers to a smaller, manageable version
       of a larger group. It is a subset containing the characteristics of a larger
       population. Samples are used in statistical testing when population sizes are
@@ -35,6 +36,7 @@ MonoBehaviour:
       m: 0
     piecesRequire: 
   - artifactType: 2
+    strName: Fairy Bow
     strDes: Fairy Bow? The term sample refers to a smaller, manageable version of
       a larger group. It is a subset containing the characteristics of a larger population.
       Samples are used in statistical testing when population sizes are too large
@@ -56,6 +58,7 @@ MonoBehaviour:
       m: 0
     piecesRequire: 
   - artifactType: 3
+    strName: Punching Glove
     strDes: Punching Glove? The term sample refers to a smaller, manageable version
       of a larger group. It is a subset containing the characteristics of a larger
       population. Samples are used in statistical testing when population sizes are
@@ -77,6 +80,7 @@ MonoBehaviour:
       m: 0
     piecesRequire: 0100000002000000030000000400000005000000
   - artifactType: 4
+    strName: Greatsword
     strDes: Greatsword? The term sample refers to a smaller, manageable version of
       a larger group. It is a subset containing the characteristics of a larger population.
       Samples are used in statistical testing when population sizes are too large
@@ -98,6 +102,7 @@ MonoBehaviour:
       m: 0
     piecesRequire: 
   - artifactType: 5
+    strName: Arcane Tome
     strDes: Arcane Tome? The term sample refers to a smaller, manageable version
       of a larger group. It is a subset containing the characteristics of a larger
       population. Samples are used in statistical testing when population sizes are
@@ -119,6 +124,7 @@ MonoBehaviour:
       m: 0
     piecesRequire: 0100000002000000030000000400000005000000
   - artifactType: 6
+    strName: Snail
     strDes: Snail? The term sample refers to a smaller, manageable version of a larger
       group. It is a subset containing the characteristics of a larger population.
       Samples are used in statistical testing when population sizes are too large
@@ -140,6 +146,7 @@ MonoBehaviour:
       m: 0
     piecesRequire: 0100000002000000030000000400000005000000
   - artifactType: 7
+    strName: Bat
     strDes: Bat? The term sample refers to a smaller, manageable version of a larger
       group. It is a subset containing the characteristics of a larger population.
       Samples are used in statistical testing when population sizes are too large
@@ -161,6 +168,7 @@ MonoBehaviour:
       m: 0
     piecesRequire: 0100000002000000030000000400000005000000
   - artifactType: 8
+    strName: Wizards Hat
     strDes: Wizards Hat? The term sample refers to a smaller, manageable version
       of a larger group. It is a subset containing the characteristics of a larger
       population. Samples are used in statistical testing when population sizes are
@@ -182,6 +190,7 @@ MonoBehaviour:
       m: 0
     piecesRequire: 0100000002000000030000000400000005000000
   - artifactType: 9
+    strName: Wallet
     strDes: Wallet? The term sample refers to a smaller, manageable version of a
       larger group. It is a subset containing the characteristics of a larger population.
       Samples are used in statistical testing when population sizes are too large
@@ -203,6 +212,7 @@ MonoBehaviour:
       m: 0
     piecesRequire: 0100000002000000030000000400000005000000
   - artifactType: 10
+    strName: Castle Wall
     strDes: Castle Wall? The term sample refers to a smaller, manageable version
       of a larger group. It is a subset containing the characteristics of a larger
       population. Samples are used in statistical testing when population sizes are

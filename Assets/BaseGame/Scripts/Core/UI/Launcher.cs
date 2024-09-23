@@ -12,7 +12,16 @@ public class Launcher : UnityScreenNavigatorLauncher
     {
         base.Start();
         // ShowLoadingScreen().Forget();
+        ShowPanelTest();
+
+
     }
+
+    async UniTaskVoid ShowPanelTest() {
+        ViewOptions options = new ViewOptions(nameof(ModalArtifact));
+        await ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
+    }
+
 
     // private async UniTaskVoid ShowLoadingScreen()
     // {

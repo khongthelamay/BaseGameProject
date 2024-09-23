@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainContentClaimItem : MainContent
+public class MainContentClaimItem : MonoBehaviour
 {
     
 }
