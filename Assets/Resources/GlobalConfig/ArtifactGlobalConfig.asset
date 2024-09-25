@@ -34,7 +34,7 @@ MonoBehaviour:
       m: 0
     - v: 25
       m: 0
-    piecesRequire: 
+    piecesRequire: 0100000002000000030000000400000005000000
   - artifactType: 2
     strName: Fairy Bow
     strDes: Fairy Bow? The term sample refers to a smaller, manageable version of
@@ -56,7 +56,7 @@ MonoBehaviour:
       m: 0
     - v: 25
       m: 0
-    piecesRequire: 
+    piecesRequire: 0100000002000000030000000400000005000000
   - artifactType: 3
     strName: Punching Glove
     strDes: Punching Glove? The term sample refers to a smaller, manageable version
@@ -100,7 +100,7 @@ MonoBehaviour:
       m: 0
     - v: 25
       m: 0
-    piecesRequire: 
+    piecesRequire: 0100000002000000030000000400000005000000
   - artifactType: 5
     strName: Arcane Tome
     strDes: Arcane Tome? The term sample refers to a smaller, manageable version

@@ -18,8 +18,8 @@ public class Launcher : UnityScreenNavigatorLauncher
     }
 
     async UniTaskVoid ShowPanelTest() {
-        ViewOptions options = new ViewOptions(nameof(ModalArtifact));
-        await ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
+        ViewOptions options = new ViewOptions(nameof(ScreensArtifact));
+        await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
     }
 
 

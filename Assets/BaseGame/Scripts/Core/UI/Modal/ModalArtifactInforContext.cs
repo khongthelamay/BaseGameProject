@@ -24,16 +24,12 @@ public class ModalArtifactInforContext
     public class UIModel : IAModel
     {
         [field: Title(nameof(UIModel))]
-        [field: SerializeField] public List<ReactiveValue<ArtifactInfo>> ArtifactInfos { get; set; }
+        [field: SerializeField] public ReactiveValue<int> sample { get; set; }
+        public ReactiveValue<ArtifactDataConfig> artifactConfig;
         public UniTask Initialize(Memory<object> args)
         {
-            ArtifactInfos = ArtifactManager.Instance.ArtifactInfos;
-            
+            artifactConfig = ArtifactManager.Instance.currentArtifactOnChoose;
             return UniTask.CompletedTask;
-        }
-
-        public void ChangeData() { 
-        
         }
     }
     
@@ -58,11 +54,9 @@ public class ModalArtifactInforContext
         }
 
         public void InitData(ArtifactDataConfig artifactDataConfig) {
-            Debug.Log(artifactDataConfig);
             txtName.text = artifactDataConfig.strName;
             txtDes.text = artifactDataConfig.strDes;
             txtFunDes.text = artifactDataConfig.strFunDes;
-            //txtLevel
             txtUpgradeRequire.text = artifactDataConfig.priceUpgrade[0].ToStringUI();
         }
     }
@@ -79,15 +73,9 @@ public class ModalArtifactInforContext
             Debug.Log("Init Modal Artifact Infor");
             await Model.Initialize(args);
             await View.Initialize(args);
-            for (int i = 0; i < Model.ArtifactInfos.Count; i++)
-            {
-                Model.ArtifactInfos[i].ReactiveProperty.Subscribe(ChangeData).AddTo(View.MainView);
-            }
-           
-          
-
             View.btnExit.onClick.AddListener(OnCloseModal);
             View.btnUpgrade.onClick.AddListener(UpgradeArtifact);
+            View.InitData(Model.artifactConfig);
         }
 
         void UpgradeArtifact() { }
@@ -97,16 +85,7 @@ public class ModalArtifactInforContext
             ModalContainer.Find(ContainerKey.Modals).Pop(true);
         }
 
-        private void ChangeData(ArtifactDataConfig artifactDataConfig)
-        {
-            Debug.Log(artifactDataConfig);
-            if (artifactDataConfig != null)
-            {
-                View.InitData(artifactDataConfig);
-
-            }
-            
-        }
+        
 
         public UniTask Cleanup(Memory<object> args) {
             Events.SampleEvent = null;

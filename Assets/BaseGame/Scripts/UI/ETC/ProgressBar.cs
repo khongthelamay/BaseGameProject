@@ -22,7 +22,9 @@ public class ProgressBar : MonoBehaviour
     }
 
     public void ChangeProgress(float value) {
-        vectorSizeDelta = rectBG.sizeDelta * value;
+        if (value > 1)
+            value = 1;
+        vectorSizeDelta = new Vector2(rectBG.rect.width * value, rectBG.rect.height);
         rectFill.sizeDelta = vectorSizeDelta;
     }
 }

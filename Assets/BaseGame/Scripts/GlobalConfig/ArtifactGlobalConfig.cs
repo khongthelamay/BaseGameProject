@@ -12,6 +12,7 @@ public class ArtifactGlobalConfig : GlobalConfig<ArtifactGlobalConfig>
 
     public ArtifactDataConfig GetArtifactDataConfig(ArtifactType artifactType)
     {
+        Debug.Log(artifactType);
         return artifactDataConfigs.Find(e => e.artifactType == artifactType);
     }
 }

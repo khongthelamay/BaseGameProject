@@ -1,14 +1,20 @@
+using R3;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using TW.Reactive.CustomComponent;
+using TW.UGUI.Core.Modals;
+using TW.UGUI.Core.Views;
 using TW.Utility.DesignPattern;
 using UnityEngine;
 
 public class ArtifactManager : Singleton<ArtifactManager>
 {
-    [field: SerializeField] public List<ReactiveValue<ArtifactInfo>> ArtifactInfos { get; set; }
-    ReactiveValue<ArtifactInfo> artifactInforTemp;
+    [field: SerializeField] public List<ReactiveValue<ArtifactInfor>> ArtifactInfos { get; set; } = new();
+
+    ReactiveValue<ArtifactInfor> artifactInforTemp;
+
+    public ReactiveValue<ArtifactDataConfig> currentArtifactOnChoose;
 
     private void Start()
     {
@@ -17,9 +23,17 @@ public class ArtifactManager : Singleton<ArtifactManager>
 
     void LoadData() {
         ArtifactInfos = InGameDataManager.Instance.InGameData.ArtifactData.ArtifactInfos;
+        currentArtifactOnChoose.ReactiveProperty.Subscribe(ChangeCurrentArtifactChoose).AddTo(this);
     }
 
-    ReactiveValue<ArtifactInfo> GetArtifactInfo(ArtifactType artifactType) {
+    void ChangeCurrentArtifactChoose(ArtifactDataConfig artifactDataConfig) {
+        if (artifactDataConfig == null || artifactDataConfig.artifactType == ArtifactType.None)
+            return;
+        ViewOptions options = new ViewOptions(nameof(ModalArtifactInfor));
+        ModalContainer.Find(ContainerKey.Modals).Push(options);
+    }
+
+    ReactiveValue<ArtifactInfor> GetArtifactInfo(ArtifactType artifactType) {
 
         for (int i = 0; i < ArtifactInfos.Count; i++)
         {
@@ -27,7 +41,7 @@ public class ArtifactManager : Singleton<ArtifactManager>
                 return ArtifactInfos[i];
         }
 
-        ReactiveValue<ArtifactInfo> newArtifactInfor = new ReactiveValue<ArtifactInfo>();
+        ReactiveValue<ArtifactInfor> newArtifactInfor = new ReactiveValue<ArtifactInfor>();
         newArtifactInfor.Value.Id = new((int)artifactType);
         newArtifactInfor.Value.Level = new(0);
         newArtifactInfor.Value.PiecesAmount = new(0);

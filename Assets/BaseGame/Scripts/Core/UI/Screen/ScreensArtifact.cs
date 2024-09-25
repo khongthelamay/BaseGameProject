@@ -2,12 +2,12 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TW.UGUI.Core.Modals;
+using Screen = TW.UGUI.Core.Screens.Screen;
 using UnityEngine;
 
-public class ModalArtifact : Modal
+public class ScreensArtifact : Screen
 {
-    [field: SerializeField] public ModalArtifactContext.UIPresenter UIPresenter { get; private set; }
+    [field: SerializeField] public ScreensArtifactContext.UIPresenter UIPresenter { get; private set; }
 
     protected override void Awake()
     {

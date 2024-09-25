@@ -9,8 +9,9 @@ public class MainContent<Data> : MonoBehaviour
     public UnityAction<SlotBase<Data>> actionSlotCallBack;
     public Transform trsContentParents;
     public SlotBase<Data> slotPref;
-    public SlotBase<Data> slotTemp;
+    [HideInInspector] public SlotBase<Data> slotTemp;
     public List<SlotBase<Data>> slots;
+    public SlotBase<Data> currentSlotOnChoose;
 
     public int totalSlotUsing;
 
@@ -22,6 +23,7 @@ public class MainContent<Data> : MonoBehaviour
             slotTemp = GetSlot();
             slotTemp.gameObject.SetActive(true);
             slotTemp.InitData(datas[i]);
+            slotTemp.SetActionChooseCallBack(ActionSlotCallBack);
             totalSlotUsing++;
         }
     }
@@ -39,5 +41,21 @@ public class MainContent<Data> : MonoBehaviour
                 return slots[i];
         }
         return Instantiate(slotPref, trsContentParents);
+    }
+
+    public virtual void ReloadData(int id)
+    {
+        
+    }
+
+    public virtual void ReloadData(Data data)
+    {
+
+    }
+
+    public virtual void ActionSlotCallBack(SlotBase<Data> slotBase) {
+        currentSlotOnChoose = slotBase;
+        if (actionSlotCallBack != null)
+            actionSlotCallBack(currentSlotOnChoose);
     }
 }
