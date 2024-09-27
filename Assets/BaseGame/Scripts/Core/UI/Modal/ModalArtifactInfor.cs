@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TW.UGUI.Core.Modals;
 using UnityEngine;
 using R3;
+using DG.Tweening;
 
 public class ModalArtifactInfor : Modal
 {
@@ -21,5 +22,10 @@ public class ModalArtifactInfor : Modal
     public override async UniTask Initialize(Memory<object> args)
     {
         await base.Initialize(args);
+    }
+
+    protected override void OnEnable()
+    {
+        UIPresenter.View.MainView.DOFade(1, .25f).From(0);
     }
 }

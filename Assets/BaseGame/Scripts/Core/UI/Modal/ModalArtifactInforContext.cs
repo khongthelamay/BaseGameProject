@@ -26,9 +26,11 @@ public class ModalArtifactInforContext
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> sample { get; set; }
         public ReactiveValue<ArtifactDataConfig> artifactConfig;
+        public ReactiveValue<ArtifactInfor> artifactInfor;
         public UniTask Initialize(Memory<object> args)
         {
             artifactConfig = ArtifactManager.Instance.currentArtifactOnChoose;
+            artifactInfor = ArtifactManager.Instance.currentArtifactTemp;
             return UniTask.CompletedTask;
         }
     }
@@ -53,10 +55,12 @@ public class ModalArtifactInforContext
             return UniTask.CompletedTask;
         }
 
-        public void InitData(ArtifactDataConfig artifactDataConfig) {
+        public void InitData(ArtifactDataConfig artifactDataConfig, ArtifactInfor artifactInfor) {
+            Debug.Log("Change Data");
             txtName.text = artifactDataConfig.strName;
             txtDes.text = artifactDataConfig.strDes;
             txtFunDes.text = artifactDataConfig.strFunDes;
+            txtLevel.text = $"Lv. {artifactInfor.Level.Value}";
             txtUpgradeRequire.text = artifactDataConfig.priceUpgrade[0].ToStringUI();
         }
     }
@@ -66,26 +70,30 @@ public class ModalArtifactInforContext
     public class UIPresenter : IAPresenter, IModalLifecycleEventSimple
     {
         [field: SerializeField] public UIModel Model {get; private set;} = new();
-        [field: SerializeField] public UIView View { get; set; } = new();        
+        [field: SerializeField] public UIView View { get; set; } = new();       
+
         [Button]
         public async UniTask Initialize(Memory<object> args)
         {
             Debug.Log("Init Modal Artifact Infor");
             await Model.Initialize(args);
             await View.Initialize(args);
+
+            Model.artifactInfor.ReactiveProperty.Subscribe(ChangeArtifactData);
+
             View.btnExit.onClick.AddListener(OnCloseModal);
             View.btnUpgrade.onClick.AddListener(UpgradeArtifact);
-            View.InitData(Model.artifactConfig);
+            View.InitData(Model.artifactConfig, Model.artifactInfor);
         }
 
-        void UpgradeArtifact() { }
+        void ChangeArtifactData(ArtifactInfor artifactInfor) { View.InitData(Model.artifactConfig, artifactInfor); }
+
+        void UpgradeArtifact() { ArtifactManager.Instance.UpgradeLevelArtifact(); }
 
         void OnCloseModal() {
             Debug.Log("Close ModalArtifactInfor");
             ModalContainer.Find(ContainerKey.Modals).Pop(true);
         }
-
-        
 
         public UniTask Cleanup(Memory<object> args) {
             Events.SampleEvent = null;

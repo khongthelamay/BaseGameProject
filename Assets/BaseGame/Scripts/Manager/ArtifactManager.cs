@@ -12,9 +12,9 @@ public class ArtifactManager : Singleton<ArtifactManager>
 {
     [field: SerializeField] public List<ReactiveValue<ArtifactInfor>> ArtifactInfos { get; set; } = new();
 
-    ReactiveValue<ArtifactInfor> artifactInforTemp;
+    public ReactiveValue<ArtifactInfor> currentArtifactTemp = new();
 
-    public ReactiveValue<ArtifactDataConfig> currentArtifactOnChoose;
+    public ReactiveValue<ArtifactDataConfig> currentArtifactOnChoose = new();
 
     private void Start()
     {
@@ -26,9 +26,11 @@ public class ArtifactManager : Singleton<ArtifactManager>
         currentArtifactOnChoose.ReactiveProperty.Subscribe(ChangeCurrentArtifactChoose).AddTo(this);
     }
 
-    void ChangeCurrentArtifactChoose(ArtifactDataConfig artifactDataConfig) {
+    void ChangeCurrentArtifactChoose(ArtifactDataConfig artifactDataConfig)
+    {
         if (artifactDataConfig == null || artifactDataConfig.artifactType == ArtifactType.None)
             return;
+        currentArtifactTemp = GetArtifactInfo(currentArtifactOnChoose.Value.artifactType);
         ViewOptions options = new ViewOptions(nameof(ModalArtifactInfor));
         ModalContainer.Find(ContainerKey.Modals).Push(options);
     }
@@ -52,9 +54,9 @@ public class ArtifactManager : Singleton<ArtifactManager>
 
     }
 
-    public void UpgradeLevelArtifact(ArtifactType artifactType) {
-        artifactInforTemp = GetArtifactInfo(artifactType);
-        artifactInforTemp.Value.Level.Value++;
+    public void UpgradeLevelArtifact() {
+        currentArtifactTemp = GetArtifactInfo(currentArtifactOnChoose.Value.artifactType);
+        currentArtifactTemp.Value.Level.Value++;
         //consume coin
         //consume pieces
         //save data
@@ -62,8 +64,8 @@ public class ArtifactManager : Singleton<ArtifactManager>
     }
 
     public void AddPieceArtifact(ArtifactType artifactType, int amount) {
-        artifactInforTemp = GetArtifactInfo(artifactType);
-        artifactInforTemp.Value.PiecesAmount.Value += amount;
+        currentArtifactTemp = GetArtifactInfo(artifactType);
+        currentArtifactTemp.Value.PiecesAmount.Value += amount;
         InGameDataManager.Instance.SaveData();
     }
 
@@ -71,4 +73,6 @@ public class ArtifactManager : Singleton<ArtifactManager>
     public ArtifactDataConfig GetArtifactDataConfig(ArtifactType artifactType) {
         return ArtifactGlobalConfig.Instance.GetArtifactDataConfig(artifactType);
     }
+
+    public void IsCanUpgradeArtifact() { }
 }
