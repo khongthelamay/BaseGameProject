@@ -7,6 +7,7 @@ using TMPro;
 
 public class ArtifactSlot : SlotBase <ArtifactDataConfig>
 {
+    [Header(" ======ArtifactSlot====== ")]
     [SerializeField] Image imgBG;
     [SerializeField] TextMeshProUGUI txtName;
     [SerializeField] TextMeshProUGUI txtLevel;
@@ -32,12 +33,17 @@ public class ArtifactSlot : SlotBase <ArtifactDataConfig>
         if (artifactInfor.Level.Value < data.piecesRequire.Count)
         {
             progressBar.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}/{data.piecesRequire[artifactInfor.Level]}");
-            progressBar.ChangeProgress(artifactInfor.PiecesAmount.Value / data.piecesRequire[artifactInfor.Level]);
+            progressBar.ChangeProgress((float)artifactInfor.PiecesAmount.Value / (float)data.piecesRequire[artifactInfor.Level]);
         }
         else {
             progressBar.ChangeTextProgress("MAX");
             progressBar.ChangeProgress(1f);
         }
        
+    }
+
+    public override void ReloadData()
+    {
+        InitData(slotData);
     }
 }

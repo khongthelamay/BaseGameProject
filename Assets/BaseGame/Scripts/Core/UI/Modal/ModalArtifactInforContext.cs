@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
 using System.Collections.Generic;
+using DG.Tweening;
 
 [Serializable]
 public class ModalArtifactInforContext 
@@ -41,6 +42,7 @@ public class ModalArtifactInforContext
     {
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView {get; private set;}  
+        [field: SerializeField] public Transform mainContent {get; private set;}  
         [field: SerializeField] public TextMeshProUGUI txtName {get; private set;}  
         [field: SerializeField] public TextMeshProUGUI txtLevel {get; private set;}  
         [field: SerializeField] public TextMeshProUGUI txtFunDes {get; private set;}  
@@ -48,20 +50,44 @@ public class ModalArtifactInforContext
         [field: SerializeField] public TextMeshProUGUI txtUpgradeRequire {get; private set;}  
         [field: SerializeField] public ProgressBar piecesProgress {get; private set;}  
         [field: SerializeField] public Button btnExit {get; private set;}  
-        [field: SerializeField] public Button btnUpgrade {get; private set;}  
-        
+        [field: SerializeField] public Button btnUpgrade {get; private set;}
+
+        UIAnimData animOpenData;
+        UIAnimData animCloseData;
+
         public UniTask Initialize(Memory<object> args)
         {
+            animOpenData = UIAnimGlobalConfig.Instance.GetAnimData(UIAnimType.OpenPopup);
+            animCloseData = UIAnimGlobalConfig.Instance.GetAnimData(UIAnimType.ClosePopup);
             return UniTask.CompletedTask;
         }
 
         public void InitData(ArtifactDataConfig artifactDataConfig, ArtifactInfor artifactInfor) {
-            Debug.Log("Change Data");
+
             txtName.text = artifactDataConfig.strName;
             txtDes.text = artifactDataConfig.strDes;
             txtFunDes.text = artifactDataConfig.strFunDes;
             txtLevel.text = $"Lv. {artifactInfor.Level.Value}";
             txtUpgradeRequire.text = artifactDataConfig.priceUpgrade[0].ToStringUI();
+
+            piecesProgress.ChangeProgress((float)artifactInfor.PiecesAmount.Value / (float)artifactDataConfig.piecesRequire[artifactInfor.Level.Value]);
+            piecesProgress.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}/{artifactDataConfig.piecesRequire[artifactInfor.Level.Value]}");
+
+            btnUpgrade.interactable = artifactInfor.PiecesAmount.Value >= artifactDataConfig.piecesRequire[artifactInfor.Level.Value];
+        }
+
+        public void AnimOpen() {
+            MainView.DOFade(1, animOpenData.duration).From(0);
+            mainContent.DOScale(Vector3.one, animOpenData.duration).From(0).SetEase(animOpenData.easeCurve);
+
+        }
+
+        public void AnimClose()
+        {
+            mainContent.DOScale(Vector3.one, animCloseData.duration).From(0).SetEase(animCloseData.easeCurve);
+            MainView.DOFade(0, animCloseData.duration).From(1).OnComplete(() => {
+                ModalContainer.Find(ContainerKey.Modals).Pop(true);
+            });
         }
     }
 
@@ -76,23 +102,35 @@ public class ModalArtifactInforContext
         public async UniTask Initialize(Memory<object> args)
         {
             Debug.Log("Init Modal Artifact Infor");
+
+
             await Model.Initialize(args);
             await View.Initialize(args);
 
-            Model.artifactInfor.ReactiveProperty.Subscribe(ChangeArtifactData);
+
+            View.AnimOpen();
+
+            Model.artifactInfor.ReactiveProperty
+                   .CombineLatest(Model.artifactInfor.Value.Level.ReactiveProperty, (artifactInfo, artifactLevel) => (artifactInfo, artifactLevel))
+                   .CombineLatest(Model.artifactInfor.Value.PiecesAmount.ReactiveProperty, (artifact, artifactAmount) => (artifact.artifactInfo, artifact.artifactLevel, artifactAmount))
+                   .Subscribe(ChangeData)
+                   .AddTo(View.MainView);
 
             View.btnExit.onClick.AddListener(OnCloseModal);
             View.btnUpgrade.onClick.AddListener(UpgradeArtifact);
-            View.InitData(Model.artifactConfig, Model.artifactInfor);
         }
 
-        void ChangeArtifactData(ArtifactInfor artifactInfor) { View.InitData(Model.artifactConfig, artifactInfor); }
+        void ChangeData((ArtifactInfor artifactInfo, int artifactLevel, int artifactAmount) obj)
+        {
+            View.InitData(Model.artifactConfig, obj.artifactInfo);
+        }
 
         void UpgradeArtifact() { ArtifactManager.Instance.UpgradeLevelArtifact(); }
 
         void OnCloseModal() {
-            Debug.Log("Close ModalArtifactInfor");
-            ModalContainer.Find(ContainerKey.Modals).Pop(true);
+            View.AnimClose();
+          
+            
         }
 
         public UniTask Cleanup(Memory<object> args) {

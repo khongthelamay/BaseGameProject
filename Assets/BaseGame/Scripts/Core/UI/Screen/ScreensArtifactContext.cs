@@ -30,7 +30,6 @@ public class ScreensArtifactContext
         public UniTask Initialize(Memory<object> args)
         {
             ArtifactInfos = ArtifactManager.Instance.ArtifactInfos;
-            Debug.Log(ArtifactInfos == null);
             return UniTask.CompletedTask;
         }
     }
@@ -86,12 +85,11 @@ public class ScreensArtifactContext
 
         private void ChangeData((ArtifactInfor artifactinfor, int level, int pieceAmount) value)
         {
-            Debug.Log(value);
             View.ReloadData(value.artifactinfor.Id);
         }
 
         void ActionCallBackArtifactSlot(SlotBase<ArtifactDataConfig> slotArtifact) {
-            ArtifactManager.Instance.currentArtifactOnChoose.Value = slotArtifact.slotData;
+            ArtifactManager.Instance.ChangeCurrentArtifactInfor(slotArtifact.slotData);
         }
     }
 }

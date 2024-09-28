@@ -40,7 +40,8 @@ public class MainContent<Data> : MonoBehaviour
             if (!slots[i].gameObject.activeSelf)
                 return slots[i];
         }
-        return Instantiate(slotPref, trsContentParents);
+        slots.Add(Instantiate(slotPref, trsContentParents));
+        return slots[slots.Count - 1];
     }
 
     public virtual void ReloadData(int id)

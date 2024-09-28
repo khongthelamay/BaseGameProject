@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Core;
 using UnityEngine;
 using Sirenix.Utilities;
+using System;
 
 [CreateAssetMenu(fileName = "PrefabGlobalConfig", menuName = "GlobalConfigs/PrefabGlobalConfig")]
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
@@ -13,8 +14,6 @@ public class PrefabGlobalConfig : GlobalConfig<PrefabGlobalConfig>
     {
         return EnemyPrefabConfigList.Find(x => x.Id == id).Prefab;
     }
-    
-
 }
 [System.Serializable]
 public class PrefabConfig<T>

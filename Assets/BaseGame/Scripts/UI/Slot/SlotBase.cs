@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class SlotBase<Data> : MonoBehaviour
     public Data slotData;
     public Image imgIcon;
     public Button btnChoose;
+    public Transform trsContent;
+    Sequence sequence;
 
     public UnityAction<SlotBase<Data>> actionChooseCallBack;
 
@@ -27,6 +30,13 @@ public class SlotBase<Data> : MonoBehaviour
     }
 
     public virtual void OnChoose() {
+        if (sequence != null)
+            sequence.Kill();
+        sequence = DOTween.Sequence();
+        sequence.Append(trsContent.DOScale(Vector3.one * .85f, .05f));
+        sequence.Append(trsContent.DOScale(Vector3.one * 1.05f, .05f));
+        sequence.Append(trsContent.DOScale(Vector3.one, .05f));
+        sequence.Play();
         if (actionChooseCallBack != null)
             actionChooseCallBack(this);
     }

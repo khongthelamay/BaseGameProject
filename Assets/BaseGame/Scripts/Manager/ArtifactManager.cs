@@ -42,11 +42,12 @@ public class ArtifactManager : Singleton<ArtifactManager>
             if (ArtifactInfos[i].Value.Id == (int)artifactType)
                 return ArtifactInfos[i];
         }
+        ArtifactInfor artifactInfor = new();
+        artifactInfor.Id.Value = (int) artifactType;
+        artifactInfor.Level.Value = 0;
+        artifactInfor.PiecesAmount.Value = 0;
 
-        ReactiveValue<ArtifactInfor> newArtifactInfor = new ReactiveValue<ArtifactInfor>();
-        newArtifactInfor.Value.Id = new((int)artifactType);
-        newArtifactInfor.Value.Level = new(0);
-        newArtifactInfor.Value.PiecesAmount = new(0);
+        ReactiveValue<ArtifactInfor> newArtifactInfor = new ReactiveValue<ArtifactInfor>(artifactInfor);
 
         ArtifactInfos.Add(newArtifactInfor);
 
@@ -56,15 +57,21 @@ public class ArtifactManager : Singleton<ArtifactManager>
 
     public void UpgradeLevelArtifact() {
         currentArtifactTemp = GetArtifactInfo(currentArtifactOnChoose.Value.artifactType);
+
+        currentArtifactTemp.Value.PiecesAmount.Value -= currentArtifactOnChoose.Value.piecesRequire[currentArtifactTemp.Value.Level.Value];
         currentArtifactTemp.Value.Level.Value++;
+
         //consume coin
         //consume pieces
         //save data
         InGameDataManager.Instance.SaveData();
     }
 
+    [Button]
     public void AddPieceArtifact(ArtifactType artifactType, int amount) {
         currentArtifactTemp = GetArtifactInfo(artifactType);
+        if (currentArtifactTemp.Value.Level.Value == 0)
+            currentArtifactTemp.Value.Level.Value = 1;
         currentArtifactTemp.Value.PiecesAmount.Value += amount;
         InGameDataManager.Instance.SaveData();
     }
@@ -75,4 +82,9 @@ public class ArtifactManager : Singleton<ArtifactManager>
     }
 
     public void IsCanUpgradeArtifact() { }
+
+    public void ChangeCurrentArtifactInfor(ArtifactDataConfig artifactDataConfig) {
+        currentArtifactOnChoose.Value = null;
+        currentArtifactOnChoose.Value = artifactDataConfig;
+    }
 }

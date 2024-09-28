@@ -41,7 +41,7 @@ public partial class InGameData
 [MemoryPackable]
 public partial class ArtifactInfor
 {
-    [field: SerializeField] public ReactiveValue<int> Id { get; set; }
-    [field: SerializeField] public ReactiveValue<int> Level { get; set; }
-    [field: SerializeField] public ReactiveValue<int> PiecesAmount { get; set; }
+    [field: SerializeField] public ReactiveValue<int> Id { get; set; } = new(0);
+    [field: SerializeField] public ReactiveValue<int> Level { get; set; } = new(0);
+    [field: SerializeField] public ReactiveValue<int> PiecesAmount { get; set; } = new(0);
 }

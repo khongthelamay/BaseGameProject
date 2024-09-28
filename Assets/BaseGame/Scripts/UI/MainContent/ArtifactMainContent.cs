@@ -23,10 +23,6 @@ public class ArtifactMainContent : MainContent<ArtifactDataConfig>
                 slotTemp.transform.SetParent(trsContentParents);
             else 
                 slotTemp.transform.SetParent(trsDeactiveContentParent);
-            //
-
-            //haven't this artfact
-            //slotTemp.transform.SetParent(trsDeactiveContentParent);
 
             slotTemp.gameObject.SetActive(true);
             totalSlotUsing++;
