@@ -8,6 +8,9 @@ using TW.Reactive.CustomComponent;
 using UGUI.Core.Modals;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
+using System.Collections.Generic;
+using UnityEngine.Events;
+using TW.UGUI.Core.Views;
 
 [Serializable]
 public class ModalQuestContext 
@@ -36,6 +39,9 @@ public class ModalQuestContext
     {
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView {get; private set;}
+        [field: SerializeField] public MainContentQuest mainContentQuest {get; private set;}
+        [field: SerializeField] public MainContentAchivement mainContentAchivement {get; private set;}
+
         [field: SerializeField] public Transform mainContent { get; private set; }
 
         [field: SerializeField] public Button btnClose { get; private set; }
@@ -51,7 +57,17 @@ public class ModalQuestContext
             return UniTask.CompletedTask;
         }
 
+        public void LoadQuestData(List<QuestDataConfig> questDataConfigs) {
+            mainContentQuest.DeActiveSlotOut(0);
+            mainContentQuest.InitData(questDataConfigs);
+        }
+
+        public void LoadAchivementData() {
+            
+        }
+
         public void OnOpen() { UIAnimation.ModalOpen(MainView, mainContent); }
+
         public void OnClose() {
             UIAnimation.BasicButton(btnClose.transform);
             UIAnimation.ModalClose(MainView, mainContent, () => {
@@ -62,12 +78,18 @@ public class ModalQuestContext
         public void OnDailyQuestShow() {
             objDailyQuest.SetActive(true);
             objAchivement.SetActive(false);
+            LoadQuestData(QuestGlobalConfig.Instance.questDataConfigs);
         }
 
         public void OnAchivementShow()
         {
             objDailyQuest.SetActive(false);
             objAchivement.SetActive(true);
+            LoadAchivementData();
+        }
+
+        public void SetActionCallBackOnQuestSlot(UnityAction<SlotBase<QuestDataConfig>> actionCallBack) {
+            mainContentQuest.SetActionSlotCallBack(actionCallBack);
         }
     }
 
@@ -84,9 +106,14 @@ public class ModalQuestContext
             await View.Initialize(args);
 
             View.OnOpen();
+            View.SetActionCallBackOnQuestSlot(ActionQuestSlotCallBack);
             View.btnClose.onClick.AddListener(View.OnClose);
             View.btnDailyQuest.onClick.AddListener(View.OnDailyQuestShow);
             View.btnAchivement.onClick.AddListener(View.OnAchivementShow);
-        }      
+        }
+
+        void ActionQuestSlotCallBack(SlotBase<QuestDataConfig> slotBase) {
+            (slotBase as QuestSlot).AnimDone();
+        }
     }
 }

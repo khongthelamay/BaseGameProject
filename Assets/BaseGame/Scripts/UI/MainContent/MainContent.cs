@@ -26,10 +26,11 @@ public class MainContent<Data> : MonoBehaviour
             slotTemp.SetActionChooseCallBack(ActionSlotCallBack);
             totalSlotUsing++;
         }
+        DeActiveSlotOut(totalSlotUsing);
     }
 
-    public virtual void DeActiveSlotOut() {
-        for (int i = totalSlotUsing; i < slots.Count; i++) {
+    public virtual void DeActiveSlotOut(int totalSlotusing) {
+        for (int i = totalSlotusing; i < slots.Count; i++) {
             if (slots[i].gameObject.activeSelf)
                 slots[i].gameObject.SetActive(false);
         }

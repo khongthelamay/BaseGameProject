@@ -1,9 +1,11 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TW.UGUI.Core.Modals;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public static class UIAnimation
 {
@@ -50,6 +52,49 @@ public static class UIAnimation
         sequence.Append(trsContent.DOScale(Vector3.one, animData.duration).From(0).SetEase(animData.easeCurve));
 
         sequence.Append(MainView.DOFade(0, animData.duration).From(1));
+
+        if (actionCallBack != null)
+            sequence.OnComplete(() => {
+                actionCallBack();
+            });
+
+        sequence.Play();
+
+        return sequence;
+    }
+
+    public static Sequence AnimSlotVerticalOpen(LayoutElement myLayout, float heighDefault, UnityAction actionCallBack = null)
+    {
+        Sequence sequence = DOTween.Sequence();
+
+        myLayout.preferredHeight = 0;
+
+        sequence.Append(DOVirtual.Float(0, heighDefault, .15f, (value) =>
+            {
+                myLayout.preferredHeight = value;
+            }).SetDelay(.2f * myLayout.transform.GetSiblingIndex())
+        );
+
+        if (actionCallBack != null)
+            sequence.OnComplete(() => {
+                actionCallBack();
+            });
+
+        sequence.Play();
+
+        return sequence;
+    }
+
+    public static Sequence AnimSlotVerticalClose(LayoutElement myLayout, float heighDefault, UnityAction actionCallBack = null)
+    {
+        Sequence sequence = DOTween.Sequence();
+
+        myLayout.preferredHeight = 0;
+
+        sequence.Append(DOVirtual.Float(heighDefault, 0, .15f, (value) => {
+            myLayout.preferredHeight = value;
+        })
+        );
 
         if (actionCallBack != null)
             sequence.OnComplete(() => {

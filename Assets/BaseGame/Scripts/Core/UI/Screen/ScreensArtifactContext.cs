@@ -40,7 +40,7 @@ public class ScreensArtifactContext
     {
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView {get; private set;}  
-        [field: SerializeField] public ArtifactMainContent artifactMainContent {get; private set;}  
+        [field: SerializeField] public MainContentArtifact artifactMainContent {get; private set;}  
 
         public UniTask Initialize(Memory<object> args)
         {

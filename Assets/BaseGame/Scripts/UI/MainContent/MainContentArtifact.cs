@@ -5,7 +5,7 @@ using TW.Reactive.CustomComponent;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ArtifactMainContent : MainContent<ArtifactDataConfig>
+public class MainContentArtifact : MainContent<ArtifactDataConfig>
 {
     [Header(" ======= ARTIFACT MAIN CONTENT ======= ")]
     public Transform trsDeactiveContentParent;
