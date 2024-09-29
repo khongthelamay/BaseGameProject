@@ -1,25 +1,27 @@
 using Cysharp.Threading.Tasks;
+using System;
 using TW.UGUI.Core.Modals;
 using TW.UGUI.Core.Screens;
 using TW.UGUI.Core.Views;
 using TW.UGUI.Core.Windows;
-
+using UnityEngine;
 using ZBase.UnityScreenNavigator.Core;
 
 public class Launcher : UnityScreenNavigatorLauncher
 {
+    public GameObject objModalDefault;
     protected override void Start()
     {
         base.Start();
         // ShowLoadingScreen().Forget();
-        ShowPanelTest();
-
+        //ShowPanelTest();
+        objModalDefault.SetActive(true);
 
     }
 
     async UniTaskVoid ShowPanelTest() {
-        //ViewOptions options = new ViewOptions(nameof(ScreensArtifact));
-        //await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+        ViewOptions options = new ViewOptions(nameof(ScreensArtifact));
+        await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
     }
 
 

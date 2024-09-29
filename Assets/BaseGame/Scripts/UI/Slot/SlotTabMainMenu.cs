@@ -38,6 +38,7 @@ public class SlotTabMainMenu : MonoBehaviour
     public Vector3 offset;
 
     float widthDefeault;
+
     [ReadOnly][SerializeField]Vector3 positionDefault;
 
     private void Awake()

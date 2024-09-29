@@ -7,9 +7,12 @@ using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
 using System.Collections.Generic;
+using TW.UGUI.Core.Views;
+using UnityEngine.UI;
+using TW.UGUI.Core.Modals;
 
 [Serializable]
-public class ScreensMenuContext 
+public class ScreensBattleContext 
 {
     public static class Events
     {
@@ -22,46 +25,34 @@ public class ScreensMenuContext
     {
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
-        
+
         public UniTask Initialize(Memory<object> args)
         {
-           
-            
             return UniTask.CompletedTask;
         }
     }
-    
+
     [HideLabel]
     [Serializable]
     public class UIView : IAView
     {
         [field: Title(nameof(UIView))]
-        [field: SerializeField] public CanvasGroup MainView {get; private set;}
-        [SerializeField] List<SlotTabMainMenu> tabs = new();
-        SlotTabMainMenu currentTab;
+        [field: SerializeField] public CanvasGroup MainView { get; private set; }
+
+        [field: SerializeField] public ButtonNotice btnQuest;
+        [field: SerializeField] public Button btnRecruit;
+        [field: SerializeField] public Button btnSpecialShop;
+
         public UniTask Initialize(Memory<object> args)
         {
-            Debug.Log("Init screen");
-            for (int i = 0; i < tabs.Count; i++)
-            {
-                tabs[i].InitData((TabType)i, OnChooseTab);
-            }
-            OnChooseTab(tabs[2]);
+            btnQuest.SetButtonOnClick(ShowModalQuest);
             return UniTask.CompletedTask;
         }
 
-        void OnChooseTab(SlotTabMainMenu tabChoose) {
-            if (currentTab != tabChoose)
-            {
-                currentTab = tabChoose;
-                currentTab.AnimOnSelect();
-                for (int i = 0; i < tabs.Count; i++)
-                {
-                    if (currentTab != tabs[i])
-                        tabs[i].OnDeSelect();
-                }
-            }
-           
+        void ShowModalQuest()
+        {
+            ViewOptions options = new ViewOptions(nameof(ModalQuest));
+            ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
         }
     }
 

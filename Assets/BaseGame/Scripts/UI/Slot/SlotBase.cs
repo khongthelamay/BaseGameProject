@@ -30,13 +30,12 @@ public class SlotBase<Data> : MonoBehaviour
     }
 
     public virtual void OnChoose() {
+        
         if (sequence != null)
             sequence.Kill();
-        sequence = DOTween.Sequence();
-        sequence.Append(trsContent.DOScale(Vector3.one * .85f, .05f));
-        sequence.Append(trsContent.DOScale(Vector3.one * 1.05f, .05f));
-        sequence.Append(trsContent.DOScale(Vector3.one, .05f));
-        sequence.Play();
+
+        sequence = UIAnimation.BasicButton(trsContent);
+        
         if (actionChooseCallBack != null)
             actionChooseCallBack(this);
     }

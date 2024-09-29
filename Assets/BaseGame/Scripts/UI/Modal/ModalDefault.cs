@@ -1,13 +1,14 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Screen = TW.UGUI.Core.Screens.Screen;
+using TW.UGUI.Core.Modals;
 using UnityEngine;
-using System;
 
-public class ScreensMenu : Screen
+public class ModalDefault : Modal
 {
-    [field: SerializeField] public ScreensMenuContext.UIPresenter UIPresenter { get; private set; }
+
+    [field: SerializeField] public ModalDefaultContext.UIPresenter UIPresenter { get; private set; }
 
     protected override void Awake()
     {
@@ -17,13 +18,13 @@ public class ScreensMenu : Screen
         AddLifecycleEvent(UIPresenter, 1);
     }
 
-    protected override void OnEnable()
-    {
-        UIPresenter.Initialize(null);
-    }
-
     public override async UniTask Initialize(Memory<object> args)
     {
         await base.Initialize(args);
+    }
+
+    protected override void Start()
+    {
+        UIPresenter.Initialize(null);
     }
 }

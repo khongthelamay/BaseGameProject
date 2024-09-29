@@ -68,24 +68,34 @@ public class ModalArtifactInforContext
             txtDes.text = artifactDataConfig.strDes;
             txtFunDes.text = artifactDataConfig.strFunDes;
             txtLevel.text = $"Lv. {artifactInfor.Level.Value}";
-            txtUpgradeRequire.text = artifactDataConfig.priceUpgrade[0].ToStringUI();
+            
 
-            piecesProgress.ChangeProgress((float)artifactInfor.PiecesAmount.Value / (float)artifactDataConfig.piecesRequire[artifactInfor.Level.Value]);
-            piecesProgress.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}/{artifactDataConfig.piecesRequire[artifactInfor.Level.Value]}");
+            if (artifactInfor.Level.Value >= artifactDataConfig.piecesRequire.Count)
+            {
+                piecesProgress.ChangeProgress(1);
+                piecesProgress.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}");
+                btnUpgrade.interactable = false;
+                txtUpgradeRequire.text = "";
+            }
+            else
+            {
+                piecesProgress.ChangeProgress((float)artifactInfor.PiecesAmount.Value / (float)artifactDataConfig.piecesRequire[artifactInfor.Level.Value]);
+                piecesProgress.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}/{artifactDataConfig.piecesRequire[artifactInfor.Level.Value]}");
+                btnUpgrade.interactable = artifactInfor.PiecesAmount.Value >= artifactDataConfig.piecesRequire[artifactInfor.Level.Value];
+                txtUpgradeRequire.text = artifactDataConfig.priceUpgrade[artifactInfor.Level.Value].ToStringUI();
+            }
 
-            btnUpgrade.interactable = artifactInfor.PiecesAmount.Value >= artifactDataConfig.piecesRequire[artifactInfor.Level.Value];
+            
         }
 
         public void AnimOpen() {
-            MainView.DOFade(1, animOpenData.duration).From(0);
-            mainContent.DOScale(Vector3.one, animOpenData.duration).From(0).SetEase(animOpenData.easeCurve);
-
+            UIAnimation.ModalOpen(MainView, mainContent);
         }
 
         public void AnimClose()
         {
-            mainContent.DOScale(Vector3.one, animCloseData.duration).From(0).SetEase(animCloseData.easeCurve);
-            MainView.DOFade(0, animCloseData.duration).From(1).OnComplete(() => {
+            UIAnimation.BasicButton(btnExit.transform);
+            UIAnimation.ModalClose(MainView, mainContent, () => {
                 ModalContainer.Find(ContainerKey.Modals).Pop(true);
             });
         }
