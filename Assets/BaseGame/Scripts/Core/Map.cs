@@ -7,7 +7,6 @@ using TW.Utility.CustomComponent;
 using TW.Utility.Extension;
 using UnityEngine;
 using Zenject;
-using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,6 +16,8 @@ public class Map : ACachedMonoBehaviour
 {
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private Enemy.Factory EnemyFactory { get; set; }
+    [field: SerializeField] public MapDrawer MapDrawer {get; private set;}
+
     [field: SerializeField] private MapData MapData {get; set;}
     [field: SerializeField] private Transform[] MovePoints {get; set;}
     [field: SerializeField] public FieldSlot[] FieldSlotArray {get; private set;}
