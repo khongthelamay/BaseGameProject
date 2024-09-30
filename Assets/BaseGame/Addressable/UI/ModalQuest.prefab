@@ -2289,9 +2289,9 @@ MonoBehaviour:
       <mainContent>k__BackingField: {fileID: 1847853541025306544}
       <btnClose>k__BackingField: {fileID: 1694198691296936254}
       <btnDailyQuest>k__BackingField: {fileID: 1177945861583663500}
-      <btnAchivement>k__BackingField: {fileID: 3018342245283371307}
+      <btnAchievement>k__BackingField: {fileID: 3018342245283371307}
       <objDailyQuest>k__BackingField: {fileID: 8719653130855697626}
-      <objAchivement>k__BackingField: {fileID: 2716627159941188191}
+      <objAchievement>k__BackingField: {fileID: 2716627159941188191}
 --- !u!1001 &665141268266374616
 PrefabInstance:
   m_ObjectHideFlags: 0

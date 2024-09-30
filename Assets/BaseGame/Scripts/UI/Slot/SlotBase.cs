@@ -39,4 +39,7 @@ public class SlotBase<Data> : MonoBehaviour
         if (actionChooseCallBack != null)
             actionChooseCallBack(this);
     }
+
+    public virtual void AnimOpen() { }
+    public virtual void AnimDone() { }
 }

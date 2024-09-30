@@ -60,4 +60,7 @@ public class MainContent<Data> : MonoBehaviour
         if (actionSlotCallBack != null)
             actionSlotCallBack(currentSlotOnChoose);
     }
+
+    public virtual void SortSlot() { }
+    public virtual void AnimOpen() { }
 }

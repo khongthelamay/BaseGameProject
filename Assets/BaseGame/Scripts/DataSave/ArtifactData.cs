@@ -25,7 +25,7 @@ public partial class ArtifactData
     public bool IsHaveThatArtiFact(ArtifactType artifactType) {
         for (int i = 0; i < ArtifactInfos.Count; i++)
         {
-            if (ArtifactInfos[i].Value.Id.Value == (int)artifactType)
+            if (ArtifactInfos[i].Value.Id.Value == (int)artifactType && ArtifactInfos[i].Value.Level.Value > 0)
                 return true;
         }
         return false;

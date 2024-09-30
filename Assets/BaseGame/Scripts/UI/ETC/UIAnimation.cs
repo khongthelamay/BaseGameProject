@@ -89,7 +89,7 @@ public static class UIAnimation
     {
         Sequence sequence = DOTween.Sequence();
 
-        myLayout.preferredHeight = 0;
+        myLayout.preferredHeight = heighDefault;
 
         sequence.Append(DOVirtual.Float(heighDefault, 0, .15f, (value) => {
             myLayout.preferredHeight = value;
@@ -101,7 +101,7 @@ public static class UIAnimation
                 actionCallBack();
             });
 
-        sequence.Play();
+        //sequence.Play();
 
         return sequence;
     }

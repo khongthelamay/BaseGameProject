@@ -26,9 +26,11 @@ public class ModalQuestContext
     {
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
+        [field: SerializeField] public List<ReactiveValue<QuestSave>> questSaves { get; set; } = new();
 
         public UniTask Initialize(Memory<object> args)
-        {   
+        {
+            questSaves = QuestManager.Instance.questSaves;
             return UniTask.CompletedTask;
         }
     }
@@ -47,10 +49,10 @@ public class ModalQuestContext
         [field: SerializeField] public Button btnClose { get; private set; }
 
         [field: SerializeField] public Button btnDailyQuest { get; private set; }
-        [field: SerializeField] public Button btnAchivement { get; private set; }
+        [field: SerializeField] public Button btnAchievement { get; private set; }
 
         [field: SerializeField] public GameObject objDailyQuest { get; private set; }
-        [field: SerializeField] public GameObject objAchivement { get; private set; }
+        [field: SerializeField] public GameObject objAchievement { get; private set; }
 
         public UniTask Initialize(Memory<object> args)
         {
@@ -60,15 +62,18 @@ public class ModalQuestContext
         public void LoadQuestData(List<QuestDataConfig> questDataConfigs) {
             mainContentQuest.DeActiveSlotOut(0);
             mainContentQuest.InitData(questDataConfigs);
+            mainContentQuest.SortSlot();
+            mainContentQuest.AnimOpen();
         }
 
-        public void LoadAchivementData() {
+        public void LoadAchievementData() {
             
         }
 
         public void OnOpen() { UIAnimation.ModalOpen(MainView, mainContent); }
 
         public void OnClose() {
+            mainContentQuest.ClearAnim();
             UIAnimation.BasicButton(btnClose.transform);
             UIAnimation.ModalClose(MainView, mainContent, () => {
                 ModalContainer.Find(ContainerKey.Modals).Pop(true);
@@ -77,19 +82,24 @@ public class ModalQuestContext
 
         public void OnDailyQuestShow() {
             objDailyQuest.SetActive(true);
-            objAchivement.SetActive(false);
+            objAchievement.SetActive(false);
             LoadQuestData(QuestGlobalConfig.Instance.questDataConfigs);
         }
 
-        public void OnAchivementShow()
+        public void OnAchievementShow()
         {
             objDailyQuest.SetActive(false);
-            objAchivement.SetActive(true);
-            LoadAchivementData();
+            objAchievement.SetActive(true);
+            LoadAchievementData();
         }
 
         public void SetActionCallBackOnQuestSlot(UnityAction<SlotBase<QuestDataConfig>> actionCallBack) {
             mainContentQuest.SetActionSlotCallBack(actionCallBack);
+        }
+
+        public void ChangeData(ReactiveValue<int> id)
+        {
+            mainContentQuest.ReloadData(id);
         }
     }
 
@@ -109,11 +119,25 @@ public class ModalQuestContext
             View.SetActionCallBackOnQuestSlot(ActionQuestSlotCallBack);
             View.btnClose.onClick.AddListener(View.OnClose);
             View.btnDailyQuest.onClick.AddListener(View.OnDailyQuestShow);
-            View.btnAchivement.onClick.AddListener(View.OnAchivementShow);
+            View.btnAchievement.onClick.AddListener(View.OnAchievementShow);
+
+            for (int i = 0; i < Model.questSaves.Count; i++)
+            {
+                Model.questSaves[i].ReactiveProperty
+                    .CombineLatest(Model.questSaves[i].Value.progress.ReactiveProperty, (questSave, progress) => (questSave, progress))
+                    .Subscribe(ChangeData)
+                    .AddTo(View.MainView);
+            }
+
+            View.OnDailyQuestShow();
         }
 
         void ActionQuestSlotCallBack(SlotBase<QuestDataConfig> slotBase) {
             (slotBase as QuestSlot).AnimDone();
+        }
+
+        void ChangeData((QuestSave questSave, int progress) value) {
+            View.ChangeData(value.questSave.id);
         }
     }
 }

@@ -109,6 +109,22 @@ public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
         }
     }
 #endif
+
+    public bool IsDoneProgress(QuestSave questSave)
+    {
+        for (int i = 0; i < questDataConfigs.Count; i++)
+        {
+            if (questDataConfigs[i].questID == questSave.id.Value)
+            {
+                if (questDataConfigs[i].questRequire <= questSave.progress.Value)
+                    return true;
+                else
+                    return false;
+
+            }
+        }
+        return false;
+    }
 }
 
 [System.Serializable]
