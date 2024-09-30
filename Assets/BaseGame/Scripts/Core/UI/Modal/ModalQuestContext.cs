@@ -54,6 +54,8 @@ public class ModalQuestContext
         [field: SerializeField] public GameObject objDailyQuest { get; private set; }
         [field: SerializeField] public GameObject objAchievement { get; private set; }
 
+        GameObject currentGameObjShow;
+
         public UniTask Initialize(Memory<object> args)
         {
             return UniTask.CompletedTask;
@@ -81,6 +83,9 @@ public class ModalQuestContext
         }
 
         public void OnDailyQuestShow() {
+            if (objDailyQuest == currentGameObjShow)
+                return;
+            currentGameObjShow = objDailyQuest;
             objDailyQuest.SetActive(true);
             objAchievement.SetActive(false);
             LoadQuestData(QuestGlobalConfig.Instance.questDataConfigs);
@@ -88,6 +93,9 @@ public class ModalQuestContext
 
         public void OnAchievementShow()
         {
+            if (objAchievement == currentGameObjShow)
+                return;
+            currentGameObjShow = objAchievement;
             objDailyQuest.SetActive(false);
             objAchievement.SetActive(true);
             LoadAchievementData();

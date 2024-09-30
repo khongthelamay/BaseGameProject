@@ -24,6 +24,35 @@ public static class UIAnimation
         return sequence;
     }
 
+    public static Sequence AnimSlotUp(Transform trsSlot, UnityAction actionCallBack = null)
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(trsSlot.DOScale(Vector3.one *1.1f, .15f));
+        sequence.Append(trsSlot.DOScale(Vector3.one, .15f));
+
+        if (actionCallBack != null)
+            sequence.OnComplete(() => {
+                actionCallBack();
+            });
+        sequence.Play();
+
+        return sequence;
+    }
+
+    public static Sequence AnimSlotDown(Transform trsSlot, UnityAction actionCallBack = null)
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(trsSlot.DOScale(Vector3.one * .95f, .15f));
+
+        if (actionCallBack != null)
+            sequence.OnComplete(() => {
+                actionCallBack();
+            });
+        sequence.Play();
+
+        return sequence;
+    }
+
     public static Sequence ModalOpen(CanvasGroup MainView, Transform trsContent, UnityAction actionCallBack = null) {
 
         animData = UIAnimGlobalConfig.Instance.GetAnimData(UIAnimType.OpenPopup);

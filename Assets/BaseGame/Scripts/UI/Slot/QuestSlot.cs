@@ -12,6 +12,7 @@ using TW.Utility.CustomType;
 public class QuestSlot : SlotBase<QuestDataConfig>
 {
     [Header("======= QuestSlot =======")]
+    [SerializeField] RectMask2D myMask;
     [SerializeField] TextMeshProUGUI txtDes;
     [SerializeField] TextMeshProUGUI txtProgress;
     [SerializeField] TextMeshProUGUI txtReward;
@@ -20,6 +21,7 @@ public class QuestSlot : SlotBase<QuestDataConfig>
     [SerializeField] LayoutElement myLayout;
 
     [SerializeField] GameObject objProgressDone;
+    [SerializeField] GameObject objNotice;
 
     [SerializeField] Transform trsProgressDone;
     [SerializeField] Transform trsIconProgressDone;
@@ -46,7 +48,9 @@ public class QuestSlot : SlotBase<QuestDataConfig>
         txtProgress.text = $"{(BigNumber)questSave.Value.progress.Value} / {(BigNumber)data.questRequire}";
         progressBar.ChangeProgress((float)questSave.Value.progress.Value / (float)data.questRequire);
         btnChoose.interactable = QuestManager.Instance.IsCanClaim(questSave.Value.id.Value);
-        
+        if (animOnSlot != null)
+            animOnSlot.enabled = !btnChoose.interactable;
+        objNotice.SetActive(btnChoose.interactable);
         if (questSave.Value.claimed.Value) ActionCallBackClaimed();
     }
 
@@ -54,7 +58,8 @@ public class QuestSlot : SlotBase<QuestDataConfig>
         if (mySequence != null) mySequence.Kill();
         mySequence = DOTween.Sequence();
         trsContent.localScale = Vector3.one;
-        mySequence.Append(UIAnimation.AnimSlotVerticalOpen(myLayout, heightDefault));
+        myMask.enabled = true;
+        mySequence.Append(UIAnimation.AnimSlotVerticalOpen(myLayout, heightDefault,()=> { myMask.enabled = false; }));
     }
 
     public override void AnimDone()
@@ -62,11 +67,14 @@ public class QuestSlot : SlotBase<QuestDataConfig>
         if (mySequence != null) mySequence.Kill();
         QuestManager.Instance.ClaimQuest(slotData.questID);
         objProgressDone.SetActive(true);
+        objNotice.SetActive(false);
+        myMask.enabled = true;
         mySequence = DOTween.Sequence();
         mySequence.Append(trsProgressDone.DOScale(Vector3.one, .15f).From(2f));
         mySequence.Append(trsIconProgressDone.DORotate(Vector3.zero, .15f).From(vectorRotate));
         mySequence.Append(UIAnimation.AnimSlotVerticalClose(myLayout, heightDefault, () =>
         {
+            myMask.enabled = false;
             ActionCallBackClaimed();
         }).SetDelay(.25f));
         mySequence.Play();
@@ -89,4 +97,10 @@ public class QuestSlot : SlotBase<QuestDataConfig>
     }
 
     public bool IsClaimed() { return objProgressDone.activeSelf; }
+
+    public override void OnChoose()
+    {
+        if (actionChooseCallBack != null)
+            actionChooseCallBack(this);
+    }
 }

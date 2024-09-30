@@ -11,6 +11,7 @@ public class SlotBase<Data> : MonoBehaviour
     public Image imgIcon;
     public Button btnChoose;
     public Transform trsContent;
+    public AnimOnSlot animOnSlot;
     Sequence sequence;
 
     public UnityAction<SlotBase<Data>> actionChooseCallBack;
