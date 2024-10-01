@@ -47,6 +47,7 @@ public class QuestSlot : SlotBase<QuestDataConfig>
     public override void InitData(QuestDataConfig data)
     {
         base.InitData(data);
+        animOnSlot.enabled = true;
         questSave = QuestManager.Instance.GetQuestSaveData(slotData.questID);
         
         txtReward.text = data.starReward.ToString();
@@ -82,11 +83,13 @@ public class QuestSlot : SlotBase<QuestDataConfig>
 
         QuestManager.Instance.ClaimQuest(slotData.questID);
 
-       
+        btnChoose.interactable = false;
+
         objLight.SetActive(true);
         objNotice.SetActive(false);
 
         myMask.enabled = true;
+        animOnSlot.enabled = false;
 
         mySequence = DOTween.Sequence();
         mySequence.Append(trsLight.DOLocalMove(pointLightEnd.localPosition, .5f).From(pointLightStart.localPosition).OnComplete(() =>

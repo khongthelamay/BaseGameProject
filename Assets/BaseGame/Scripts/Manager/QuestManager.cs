@@ -20,13 +20,18 @@ public class QuestManager : Singleton<QuestManager>
 
 
     public ReactiveValue<string> strTimeDailyRemaining;
+    public ReactiveValue<string> strTimeWeeklyRemaining;
 
     float timeDailyRemaining;
+    float timeWeeklyRemaining;
 
     DateTime lastDailyDay;
+    DateTime lastWeeklyDay;
     DateTime timeDailyEnd;
+    DateTime timeWeelyEnd;
 
-    bool canCountDown;
+    bool canCountDailyDown;
+    bool canCountWeeklyDown;
     private void Start()
     {
         LoadData();
@@ -44,27 +49,40 @@ public class QuestManager : Singleton<QuestManager>
         currentDailyStreak = InGameDataManager.Instance.InGameData.QuestData.currentDailyStreak;
         currentWeeklyStreak = InGameDataManager.Instance.InGameData.QuestData.currentWeeklyStreak;
 
-        CheckDay();
+        CheckDailyDay();
+        CheckWeeklyDay();
 
     }
 
     private void Update()
     {
-        if (canCountDown)
+        if (canCountDailyDown)
         {
             timeDailyRemaining = (float)timeDailyEnd.Subtract(DateTime.Now).TotalSeconds;
 
             if (timeDailyRemaining <= 0)
             {
                 strTimeDailyRemaining.Value = "0";
-                canCountDown = false;
+                canCountDailyDown = false;
                 ChangeDayOnGame();
             }
             else strTimeDailyRemaining.Value = TimeUtil.TimeToString(timeDailyRemaining, TimeFommat.Keyword);
         }
+
+        if (canCountWeeklyDown)
+        {
+            timeWeeklyRemaining = (float)timeWeelyEnd.Subtract(DateTime.Now).TotalSeconds;
+            if (timeWeeklyRemaining <= 0)
+            {
+                strTimeWeeklyRemaining.Value = "0";
+                canCountWeeklyDown = false;
+                ChangeDayOnGame();
+            }
+            else strTimeWeeklyRemaining.Value = TimeUtil.TimeToString(timeWeeklyRemaining, TimeFommat.Keyword);
+        }
     }
 
-    void CheckDay() {
+    void CheckDailyDay() {
         if (string.IsNullOrEmpty(strLastDay))
         {
             InGameDataManager.Instance.InGameData.QuestData.SaveDailyDay();
@@ -75,12 +93,28 @@ public class QuestManager : Singleton<QuestManager>
         TimeSpan timeSpan = DateTime.Now.Subtract(lastDailyDay);
         if (timeSpan.TotalHours >= 24)
             InGameDataManager.Instance.InGameData.QuestData.SaveDailyDay();
-        canCountDown = true;
+
+        canCountDailyDown = true;
+    }
+
+    void CheckWeeklyDay() {
+        if (string.IsNullOrEmpty(strLastWeek))
+        {
+            InGameDataManager.Instance.InGameData.QuestData.SaveWeeklyDay();
+        }
+
+        lastWeeklyDay = DateTime.Parse(strLastWeek, TimeUtil.cultureInfor);
+        timeWeelyEnd = lastWeeklyDay.AddDays(7);
+        TimeSpan timeSpan = DateTime.Now.Subtract(lastWeeklyDay);
+        if (timeSpan.TotalDays >= 7)
+            InGameDataManager.Instance.InGameData.QuestData.SaveWeeklyDay();
+        
+        canCountWeeklyDown = true;
     }
 
     void ChangeDayOnGame() {
         InGameDataManager.Instance.InGameData.QuestData.SaveDailyDay();
-        CheckDay();
+        CheckDailyDay();
     }
 
     public ReactiveValue<QuestSave> GetQuestSaveData(int questID) {
