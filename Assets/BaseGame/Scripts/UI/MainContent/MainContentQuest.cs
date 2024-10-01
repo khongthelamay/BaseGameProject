@@ -34,6 +34,8 @@ public class MainContentQuest : MainContent<QuestDataConfig>
         {
             if ((slots[i] as QuestSlot).IsClaimed())
                 slots[i].transform.SetAsLastSibling();
+            if ((slots[i] as QuestSlot).IsCanClaim())
+                slots[i].transform.SetAsFirstSibling();
         }
     }
 

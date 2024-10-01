@@ -231,6 +231,75 @@ MonoBehaviour:
   <InGameData>k__BackingField:
     <ArtifactData>k__BackingField:
       <ArtifactInfos>k__BackingField: []
+    <QuestData>k__BackingField:
+      <questSaves>k__BackingField: []
+      <streakDailySaves>k__BackingField: []
+      <streakWeeklySaves>k__BackingField: []
+      <strLastDay>k__BackingField:
+        m_Value: 
+      <strLastWeek>k__BackingField:
+        m_Value: 
+      <currentDailyStreak>k__BackingField:
+        m_Value: 0
+      <currentWeeklyStreak>k__BackingField:
+        m_Value: 0
+--- !u!1 &397312555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 397312556}
+  - component: {fileID: 397312557}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &397312556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397312555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1976557632}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &397312557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397312555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9080d89458799c74fb996907c194c65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <questSaves>k__BackingField: []
+  <streakDailySaves>k__BackingField: []
+  <streakWeeklySaves>k__BackingField: []
+  <strLastDay>k__BackingField:
+    m_Value: 
+  <strLastWeek>k__BackingField:
+    m_Value: 
+  <currentDailyStreak>k__BackingField:
+    m_Value: 0
+  <currentWeeklyStreak>k__BackingField:
+    m_Value: 0
+  strTimeDailyRemaining:
+    m_Value: 
 --- !u!1001 &607071754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -453,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5969063523229354381, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 93.40541
+      value: 93.40552
       objectReference: {fileID: 0}
     - target: {fileID: 5969063523229354381, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -752,6 +821,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 61211075}
+  - {fileID: 397312556}
   - {fileID: 72696959}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -11,6 +11,7 @@ using TW.UGUI.Core.Modals;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using TW.UGUI.Core.Views;
+using TMPro;
 
 [Serializable]
 public class ModalQuestContext 
@@ -27,10 +28,14 @@ public class ModalQuestContext
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public List<ReactiveValue<QuestSave>> questSaves { get; set; } = new();
+        [field: SerializeField] public List<ReactiveValue<QuestSave>> dailyStreakSaves { get; set; } = new();
+        [field: SerializeField] public List<ReactiveValue<QuestSave>> weeklyStreakSaves { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<string> strTimeRemaining { get; set; } = new();
 
         public UniTask Initialize(Memory<object> args)
         {
             questSaves = QuestManager.Instance.questSaves;
+            strTimeRemaining = QuestManager.Instance.strTimeDailyRemaining;
             return UniTask.CompletedTask;
         }
     }
@@ -41,6 +46,7 @@ public class ModalQuestContext
     {
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView {get; private set;}
+
         [field: SerializeField] public MainContentQuest mainContentQuest {get; private set;}
         [field: SerializeField] public MainContentAchivement mainContentAchivement {get; private set;}
 
@@ -50,6 +56,8 @@ public class ModalQuestContext
 
         [field: SerializeField] public Button btnDailyQuest { get; private set; }
         [field: SerializeField] public Button btnAchievement { get; private set; }
+
+        [field: SerializeField] public TextMeshProUGUI txtTimeRemaining { get; private set; }
 
         [field: SerializeField] public GameObject objDailyQuest { get; private set; }
         [field: SerializeField] public GameObject objAchievement { get; private set; }
@@ -109,6 +117,11 @@ public class ModalQuestContext
         {
             mainContentQuest.ReloadData(id);
         }
+
+        public void ChangeTextTimeRemaining(string strChange)
+        {
+            txtTimeRemaining.text = strChange;
+        }
     }
 
     [HideLabel]
@@ -136,6 +149,8 @@ public class ModalQuestContext
                     .Subscribe(ChangeData)
                     .AddTo(View.MainView);
             }
+
+            Model.strTimeRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
 
             View.OnDailyQuestShow();
         }

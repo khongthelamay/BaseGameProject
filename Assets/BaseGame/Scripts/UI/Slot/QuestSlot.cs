@@ -22,9 +22,15 @@ public class QuestSlot : SlotBase<QuestDataConfig>
 
     [SerializeField] GameObject objProgressDone;
     [SerializeField] GameObject objNotice;
+    [SerializeField] GameObject objTextNotice;
+    [SerializeField] GameObject objBGCanClaim;
+    [SerializeField] GameObject objLight;
 
     [SerializeField] Transform trsProgressDone;
     [SerializeField] Transform trsIconProgressDone;
+    [SerializeField] Transform trsLight;
+    [SerializeField] Transform pointLightStart;
+    [SerializeField] Transform pointLightEnd;
     [SerializeField] Vector3 vectorRotate;
 
     ReactiveValue<QuestSave> questSave = new(null);
@@ -46,37 +52,61 @@ public class QuestSlot : SlotBase<QuestDataConfig>
         txtReward.text = data.starReward.ToString();
         txtDes.text = string.Format(data.questDes, data.questRequire);
         txtProgress.text = $"{(BigNumber)questSave.Value.progress.Value} / {(BigNumber)data.questRequire}";
+
         progressBar.ChangeProgress((float)questSave.Value.progress.Value / (float)data.questRequire);
+
         btnChoose.interactable = QuestManager.Instance.IsCanClaim(questSave.Value.id.Value);
-        if (animOnSlot != null)
-            animOnSlot.enabled = !btnChoose.interactable;
+
+        objBGCanClaim.SetActive(btnChoose.interactable);
         objNotice.SetActive(btnChoose.interactable);
+        objTextNotice.SetActive(btnChoose.interactable);
+
         if (questSave.Value.claimed.Value) ActionCallBackClaimed();
     }
 
     public override void AnimOpen() {
         if (mySequence != null) mySequence.Kill();
+
         mySequence = DOTween.Sequence();
+
         trsContent.localScale = Vector3.one;
+
         myMask.enabled = true;
+
         mySequence.Append(UIAnimation.AnimSlotVerticalOpen(myLayout, heightDefault,()=> { myMask.enabled = false; }));
     }
 
     public override void AnimDone()
     {
         if (mySequence != null) mySequence.Kill();
+
         QuestManager.Instance.ClaimQuest(slotData.questID);
-        objProgressDone.SetActive(true);
+
+       
+        objLight.SetActive(true);
         objNotice.SetActive(false);
+
         myMask.enabled = true;
+
         mySequence = DOTween.Sequence();
-        mySequence.Append(trsProgressDone.DOScale(Vector3.one, .15f).From(2f));
+        mySequence.Append(trsLight.DOLocalMove(pointLightEnd.localPosition, .5f).From(pointLightStart.localPosition).OnComplete(() =>
+        {
+            objProgressDone.SetActive(true);
+            objTextNotice.SetActive(false);
+            objLight.SetActive(false);
+            objBGCanClaim.SetActive(false);
+        }));
+
+        mySequence.Append(trsProgressDone.DOScale(Vector3.one * 2f, .15f));
+        mySequence.Append(trsProgressDone.DOScale(Vector3.one, .15f));
         mySequence.Append(trsIconProgressDone.DORotate(Vector3.zero, .15f).From(vectorRotate));
         mySequence.Append(UIAnimation.AnimSlotVerticalClose(myLayout, heightDefault, () =>
         {
             myMask.enabled = false;
             ActionCallBackClaimed();
         }).SetDelay(.25f));
+
+        mySequence.SetDelay(.45f);
         mySequence.Play();
     }
 
@@ -97,6 +127,7 @@ public class QuestSlot : SlotBase<QuestDataConfig>
     }
 
     public bool IsClaimed() { return objProgressDone.activeSelf; }
+    public bool IsCanClaim() { return btnChoose.interactable; }
 
     public override void OnChoose()
     {

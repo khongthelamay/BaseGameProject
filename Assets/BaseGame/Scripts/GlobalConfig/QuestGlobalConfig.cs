@@ -62,14 +62,14 @@ public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
         {
             if (!string.IsNullOrEmpty(data[i]["Daily_Streak"]))
             {
-                int streak = int.Parse(data[i]["Daily_Streak"]);
+                float streak = float.Parse(data[i]["Daily_Streak"]);
                 int gold = int.Parse(data[i]["Daily_Gold"]);
-                int rewardAmout = int.Parse(data[i]["Daily_Amount"]);
+                int rewardAmount = int.Parse(data[i]["Daily_Amount"]);
                 ResourceType resourceType = (ResourceType)Enum.Parse(typeof(ResourceType), data[i]["Daily_RewardType"]);
 
                 Resource reward = new();
                 reward.type = resourceType;
-                reward.Add(rewardAmout);
+                reward.Add(rewardAmount);
 
                 QuestStreak newStreak = new();
                 newStreak.streak = streak;
@@ -137,7 +137,7 @@ public class QuestDataConfig {
 
 [System.Serializable]
 public class QuestStreak {
-    public int streak;
+    public float streak;
     public int gold;
     public Resource reward;
 }

@@ -2283,6 +2283,8 @@ MonoBehaviour:
       <SampleValue>k__BackingField:
         m_Value: 0
       <questSaves>k__BackingField: []
+      <strTimeRemaining>k__BackingField:
+        m_Value: 
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 4017781500254217553}
       <mainContentQuest>k__BackingField: {fileID: 6755556679573753871}
@@ -2291,6 +2293,7 @@ MonoBehaviour:
       <btnClose>k__BackingField: {fileID: 1694198691296936254}
       <btnDailyQuest>k__BackingField: {fileID: 1177945861583663500}
       <btnAchievement>k__BackingField: {fileID: 3018342245283371307}
+      <txtTimeRemaining>k__BackingField: {fileID: 3249939628956983137}
       <objDailyQuest>k__BackingField: {fileID: 8719653130855697626}
       <objAchievement>k__BackingField: {fileID: 2716627159941188191}
 --- !u!1001 &665141268266374616
@@ -2486,7 +2489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5230071188637664570, guid: aeb6eb01d1c2b31469da69c95a5e8c35, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -72.5
+      value: -97.5
       objectReference: {fileID: 0}
     - target: {fileID: 5230071188637664570, guid: aeb6eb01d1c2b31469da69c95a5e8c35, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
