@@ -14,8 +14,8 @@ public partial class QuestData
     [field: SerializeField] public List<ReactiveValue<StreakSave>> streakDailySaves { get; set; } = new();
     [field: SerializeField] public List<ReactiveValue<StreakSave>> streakWeeklySaves { get; set; } = new();
 
-    [field: SerializeField] public ReactiveValue<string> strLastDay { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<string> strLastWeek { get; set; } = new();
+    [field: SerializeField] public ReactiveValue<string> strLastDay { get; set; } = new("");
+    [field: SerializeField] public ReactiveValue<string> strLastWeek { get; set; } = new("");
 
     [field: SerializeField] public ReactiveValue<float> currentDailyStreak { get; set; } = new();
     [field: SerializeField] public ReactiveValue<float> currentWeeklyStreak { get; set; } = new();

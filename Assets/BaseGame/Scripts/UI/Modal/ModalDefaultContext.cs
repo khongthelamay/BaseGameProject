@@ -46,6 +46,7 @@ public class ModalDefaultContext
             {
                 currentTab = tabChoose;
                 currentTab.AnimOnSelect();
+                ScreenContainer.Find(ContainerKey.Screens).Pop(true);
                 for (int i = 0; i < tabs.Count; i++)
                 {
                     if (currentTab != tabs[i])
@@ -79,7 +80,7 @@ public class ModalDefaultContext
         }
         void TabHeroes()
         {
-            ViewOptions options = new ViewOptions(nameof(ScreensArtifact));
+            ViewOptions options = new ViewOptions(nameof(ScreensHeroes));
             ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
         }
         void TabBattle()
