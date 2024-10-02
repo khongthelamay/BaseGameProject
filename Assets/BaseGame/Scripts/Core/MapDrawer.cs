@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Sirenix.Utilities;
 
@@ -21,7 +22,76 @@ public class MapDrawer : MonoBehaviour
 
     [field: SerializeField] public List<MapDrawRule> TileList { get; private set; }
     [field: SerializeField] public List<MapDrawRule> GroundList { get; private set; }
-    
+    [Button]
+    public void GenerateMap()
+    {
+        Debug.Log(MapPositionDraw.Row);
+        Debug.Log(MapPositionDraw.Column);
+        for (int i = 0; i < MapPositionDraw.Row; i++)
+        {
+            for (int j = 0; j < MapPositionDraw.Column; j++)
+            {
+                int[,] rule = GetMapObjectRule(i, j);
+
+                if (i == 0 && j == 0)
+                {
+                    Debug.Log(ShowRule(rule));
+                }
+                
+                GameObject mapObject = GetMapObject(TileList, rule);
+                if (mapObject != null)
+                {
+                    Instantiate(mapObject, new Vector3(j * DefaultSize.x, -i * DefaultSize.y, 0), Quaternion.identity,
+                        transform);
+                }
+            }
+        }
+    }
+    public string ShowRule(int[,] rule)
+    {
+        string s = "";
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                s += $"{rule[i, j]} - ";
+            }
+            s += "\n";
+        }
+
+        return s;
+    }
+    public int[,] GetMapObjectRule(int row, int column)
+    {
+        int[,] rule = new int[3, 3];
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (row + i -1 < 0 || row + i - 1 >= MapPositionDraw.Row || column + j - 1 < 0 || column + j -1 >= MapPositionDraw.Column)
+                {
+                    rule[i, j] = 2;
+                }
+                else
+                {
+                    rule[i, j] = MapPositionDraw.GetPosition(row + i - 1, column + j - 1);
+                }
+            }
+        }
+        return rule;
+    }
+    public GameObject GetMapObject(List<MapDrawRule> mapDrawRules, int[,] rule)
+    {
+        foreach (MapDrawRule mapDrawRule in mapDrawRules)
+        {
+            Debug.Log(ShowRule(mapDrawRule.GetBaseRulePosition()));
+            if (mapDrawRule.CompareArray(rule))
+            {
+                return mapDrawRule.MapObject;
+            }
+        }
+        return null;
+    }
     
 }
 [System.Serializable]
@@ -31,6 +101,11 @@ public class MapPositionDraw
     [field: SerializeField] public int Row { get; set; }
     [field: SerializeField] public int Column { get; set; }
     [field: SerializeField] public List<int> MapPosition {get; set;}
+    
+    public int GetPosition(int row, int col)
+    {
+        return MapPosition[row * Column + col];
+    }
 }
 [System.AttributeUsage(System.AttributeTargets.All, AllowMultiple = true, Inherited = true)]
 public sealed class MapPositionDrawEditor : System.Attribute
@@ -42,14 +117,18 @@ public sealed class MapPositionDrawEditorAttributeDrawer : OdinAttributeDrawer<M
 {
     private enum Tile
     {
-        HasTile = 0,
-        HasGround = 1,
+        HasOrNotHasBlock = 0,
+        NeedHasBlock = 1,
+        DontHasBlock = 2,
+        Middle = 3,
     }
 
-    private Color[] TileColors { get; } = new Color[2]
+    private Color[] TileColors { get; } = new Color[4]
     {
+        new Color(0.3f, 0.3f, 0.3f), // 0
         new Color(0.3f, 1.0f, 0.3f), // 1
-        new Color(1.0f, 1.0f, 0.0f), // 2
+        new Color(1.0f, 0.3f, 0.3f), // 2
+        new Color(1.0f, 1.0f, 0.0f), // 3
     };
 
     private int TileSize { get; set; } 
@@ -63,7 +142,6 @@ public sealed class MapPositionDrawEditorAttributeDrawer : OdinAttributeDrawer<M
     private List<int> MapPosition { get; set; } 
     private bool IsMouseDown { get; set; }
     private Vector2Int LastTilePosition { get; set; }
-    private int MouseIndex { get; set; }
     protected override void Initialize()
     {
         TileSize = 40;
@@ -160,17 +238,16 @@ public sealed class MapPositionDrawEditorAttributeDrawer : OdinAttributeDrawer<M
         rect = rect.AlignMiddle(TileSize * Row);
         if (Event.current.type == EventType.MouseDown)
         {
-            MouseIndex = Event.current.button;
             IsMouseDown = true;
             LastTilePosition = new Vector2Int(-1,-1);
         }
 
         if (Event.current.type == EventType.MouseUp)
         {
-            MouseIndex = Event.current.button;
             IsMouseDown = false;
             LastTilePosition = new Vector2Int(-1,-1);;
         }
+        
         
         for (int i = 0; i < Row; i++)
         {
@@ -188,21 +265,37 @@ public sealed class MapPositionDrawEditorAttributeDrawer : OdinAttributeDrawer<M
                     SirenixEditorGUI.DrawSolidRect(
                         new Rect(tileRect.x + 1, tileRect.y + 1, tileRect.width - 1, tileRect.height - 1),
                         new Color(0f, 1f, 1f, 0.3f));
-
+                    
                     if (IsMouseDown && LastTilePosition != new Vector2Int(i, j))
                     {
-                        if (Tiles[i, j] == Tile.HasTile && MouseIndex == 0)
+                        if (Event.current.keyCode == KeyCode.Alpha1)
                         {
-                            Tiles[i, j] = Tile.HasGround;
+                            Tiles[i, j] = Tile.HasOrNotHasBlock;
                             MapPosition[i * Col + j] = (int)Tiles[i, j];
+                            LastTilePosition = new Vector2Int(i, j);
                         }
                         
-                        if (Tiles[i, j] == Tile.HasGround && MouseIndex == 1)
+                        if (Event.current.keyCode == KeyCode.Alpha2)
                         {
-                            Tiles[i, j] = Tile.HasTile;
+                            Tiles[i, j] = Tile.NeedHasBlock;
                             MapPosition[i * Col + j] = (int)Tiles[i, j];
+                            LastTilePosition = new Vector2Int(i, j);
                         }
-                        LastTilePosition = new Vector2Int(i, j);
+                        
+                        if (Event.current.keyCode == KeyCode.Alpha3)
+                        {
+                            Tiles[i, j] = Tile.DontHasBlock;
+                            MapPosition[i * Col + j] = (int)Tiles[i, j];
+                            LastTilePosition = new Vector2Int(i, j);
+                        }
+                        
+                        if (Event.current.keyCode == KeyCode.Alpha4)
+                        {
+                            Tiles[i, j] = Tile.Middle;
+                            MapPosition[i * Col + j] = (int)Tiles[i, j];
+                            LastTilePosition = new Vector2Int(i, j);
+                        }
+                        
                     }
                 }
             }
@@ -217,14 +310,8 @@ public sealed class MapPositionDrawEditorAttributeDrawer : OdinAttributeDrawer<M
 [MapDrawRuleEditor]
 public class MapDrawRule
 {
-    [field: SerializeField] public List<int> BaseRulePosition { get; set; }
-    [field: SerializeField] public GameObject MapObject { get; set; }
-
-    public MapDrawRule()
-    {
-        BaseRulePosition = new List<int>();
-        MapObject = null;
-    }
+    [field: SerializeField] public List<int> BaseRulePosition { get; set; } = new();
+    [field: SerializeField] public GameObject MapObject { get; set; } = null;
 
     public int[,] GetBaseRulePosition()
     {
@@ -238,6 +325,19 @@ public class MapDrawRule
         }
 
         return res;
+    }
+    public bool CompareArray(int[,] rule)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (i == 1 && j == 1) continue;
+                if (BaseRulePosition[i * 3 + j] == 0) continue;
+                if (rule[i, j] != BaseRulePosition[i * 3 + j]) return false;
+            }
+        }
+        return true;
     }
 }
 
