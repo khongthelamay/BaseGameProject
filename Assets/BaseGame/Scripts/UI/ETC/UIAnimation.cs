@@ -1,4 +1,4 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public static class UIAnimation
 {
     static UIAnimData animData;
-    public static Sequence BasicButton(Transform trsAanim, UnityAction actionCallBack = null) { 
+    public static Sequence BasicButton(Transform trsAanim, UnityAction actionCallBack = null) {
         animData = UIAnimGlobalConfig.Instance.GetAnimData(UIAnimType.ButtonBasic);
         Sequence sequence = DOTween.Sequence();
         sequence.Append(trsAanim.DOScale(Vector3.one * .95f, .1f));
@@ -27,7 +27,7 @@ public static class UIAnimation
     public static Sequence AnimSlotUp(Transform trsSlot, UnityAction actionCallBack = null)
     {
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(trsSlot.DOScale(Vector3.one *1.1f, .15f));
+        sequence.Append(trsSlot.DOScale(Vector3.one * 1.1f, .15f));
         sequence.Append(trsSlot.DOScale(Vector3.one, .15f));
 
         if (actionCallBack != null)
@@ -131,6 +131,21 @@ public static class UIAnimation
             });
 
         //sequence.Play();
+
+        return sequence;
+    }
+
+    public static Sequence SlotZoomLoop(Transform trsZoom, UnityAction actionCallBack = null) {
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(trsZoom.DOScale(Vector3.one * 1.1f, .25f).SetLoops(-1, LoopType.Yoyo));
+
+        if (actionCallBack != null)
+            sequence.OnComplete(() => {
+                actionCallBack();
+            });
+
+        sequence.Play();
 
         return sequence;
     }

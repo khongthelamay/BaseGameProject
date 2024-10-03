@@ -11,8 +11,8 @@ using UnityEngine;
 public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
 {
     public List<QuestDataConfig> questDataConfigs = new();
-    public List<QuestStreak> questStreaks = new();
-    public List<QuestStreak> weeklyStreaks = new();
+    public List<StreakDataConfig> dailyStreaks = new();
+    public List<StreakDataConfig> weeklyStreaks = new();
 
 
 #if UNITY_EDITOR
@@ -53,7 +53,7 @@ public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
     }
 
     async void FetchDailyStreak() {
-        questStreaks.Clear();
+        dailyStreaks.Clear();
         requestedData = await ABakingSheet.GetCsv(linkSheetId, "Quest");
 
         List<Dictionary<string, string>> data = ACsvReader.ReadDataFromString(requestedData);
@@ -71,12 +71,12 @@ public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
                 reward.type = resourceType;
                 reward.Add(rewardAmount);
 
-                QuestStreak newStreak = new();
+                StreakDataConfig newStreak = new();
                 newStreak.streak = streak;
                 newStreak.gold = gold;
                 newStreak.reward = reward;
 
-                questStreaks.Add(newStreak);
+                dailyStreaks.Add(newStreak);
             }
         }
     }
@@ -100,7 +100,7 @@ public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
                 reward.type = resourceType;
                 reward.Add(rewardAmout);
 
-                QuestStreak newStreak = new();
+                StreakDataConfig newStreak = new();
                 newStreak.streak = streak;
                 newStreak.reward = reward;
 
@@ -125,6 +125,21 @@ public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
         }
         return false;
     }
+
+    public float GetStarAmount(int questID)
+    {
+        for (int i = 0; i < questDataConfigs.Count; i++)
+        {
+            if (questDataConfigs[i].questID == questID)
+                return questDataConfigs[i].starReward;
+        }
+        return 0;
+    }
+
+    public float GetMaxValueDailyStreak()
+    {
+        return dailyStreaks[dailyStreaks.Count - 1].streak;
+    }
 }
 
 [System.Serializable]
@@ -136,7 +151,7 @@ public class QuestDataConfig {
 }
 
 [System.Serializable]
-public class QuestStreak {
+public class StreakDataConfig {
     public float streak;
     public int gold;
     public Resource reward;

@@ -61,7 +61,7 @@ MonoBehaviour:
     questDes: Buy Daily Shop {0} times
     starReward: 20
     questRequire: 3
-  questStreaks:
+  dailyStreaks:
   - streak: 10
     gold: 2000
     reward:

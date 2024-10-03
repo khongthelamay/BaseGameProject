@@ -12,7 +12,7 @@ public class SlotBase<Data> : MonoBehaviour
     public Button btnChoose;
     public Transform trsContent;
     public AnimOnSlot animOnSlot;
-    Sequence sequence;
+    public Sequence sequence;
 
     public UnityAction<SlotBase<Data>> actionChooseCallBack;
 

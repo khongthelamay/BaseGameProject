@@ -30,12 +30,19 @@ public class ModalQuestContext
         [field: SerializeField] public List<ReactiveValue<QuestSave>> questSaves { get; set; } = new();
         [field: SerializeField] public List<ReactiveValue<QuestSave>> dailyStreakSaves { get; set; } = new();
         [field: SerializeField] public List<ReactiveValue<QuestSave>> weeklyStreakSaves { get; set; } = new();
-        [field: SerializeField] public ReactiveValue<string> strTimeRemaining { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<string> strTimeDailyRemaining { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<string> strTimeWeeklyRemaining { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<float> currentDailyStreak { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<float> currentWeeklyStreak { get; set; } = new();
+
 
         public UniTask Initialize(Memory<object> args)
         {
             questSaves = QuestManager.Instance.questSaves;
-            strTimeRemaining = QuestManager.Instance.strTimeDailyRemaining;
+            strTimeDailyRemaining = QuestManager.Instance.strTimeDailyRemaining;
+            strTimeWeeklyRemaining = QuestManager.Instance.strTimeWeeklyRemaining;
+            currentDailyStreak = QuestManager.Instance.currentDailyStreak;
+            currentWeeklyStreak = QuestManager.Instance.currentWeeklyStreak;
             return UniTask.CompletedTask;
         }
     }
@@ -48,7 +55,8 @@ public class ModalQuestContext
         [field: SerializeField] public CanvasGroup MainView {get; private set;}
 
         [field: SerializeField] public MainContentQuest mainContentQuest {get; private set;}
-        [field: SerializeField] public MainContentAchivement mainContentAchivement {get; private set;}
+        [field: SerializeField] public MainContentAchievement mainContentAchievement {get; private set;}
+        [field: SerializeField] public MainContentStreak mainContentDailyStreak {get; private set;}
 
         [field: SerializeField] public Transform mainContent { get; private set; }
 
@@ -57,7 +65,8 @@ public class ModalQuestContext
         [field: SerializeField] public Button btnDailyQuest { get; private set; }
         [field: SerializeField] public Button btnAchievement { get; private set; }
 
-        [field: SerializeField] public TextMeshProUGUI txtTimeRemaining { get; private set; }
+        [field: SerializeField] public TextMeshProUGUI txtTimeDailyRemaining { get; private set; }
+        [field: SerializeField] public TextMeshProUGUI txtTimeWeeklyRemaining { get; private set; }
 
         [field: SerializeField] public GameObject objDailyQuest { get; private set; }
         [field: SerializeField] public GameObject objAchievement { get; private set; }
@@ -80,6 +89,13 @@ public class ModalQuestContext
             
         }
 
+        public void LoadStreakData(List<StreakDataConfig> streakDataConfigs) {
+            mainContentDailyStreak.DeActiveSlotOut(0);
+            mainContentDailyStreak.InitData(streakDataConfigs);
+            mainContentDailyStreak.SetPositionStreak();
+            mainContentDailyStreak.AnimOpen();
+        }
+
         public void OnOpen() { UIAnimation.ModalOpen(MainView, mainContent); }
 
         public void OnClose() {
@@ -97,6 +113,7 @@ public class ModalQuestContext
             objDailyQuest.SetActive(true);
             objAchievement.SetActive(false);
             LoadQuestData(QuestGlobalConfig.Instance.questDataConfigs);
+            LoadStreakData(QuestGlobalConfig.Instance.dailyStreaks);
         }
 
         public void OnAchievementShow()
@@ -120,7 +137,12 @@ public class ModalQuestContext
 
         public void ChangeTextTimeRemaining(string strChange)
         {
-            txtTimeRemaining.text = strChange;
+            txtTimeDailyRemaining.text = strChange;
+        }
+
+        public void ChangeDailyProgress(float value)
+        {
+            mainContentDailyStreak.ChangeCurrentProgress(value / QuestGlobalConfig.Instance.GetMaxValueDailyStreak());
         }
     }
 
@@ -150,7 +172,10 @@ public class ModalQuestContext
                     .AddTo(View.MainView);
             }
 
-            Model.strTimeRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
+            Model.strTimeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
+            //Model.strTimeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
+            Model.currentDailyStreak.ReactiveProperty.Subscribe(View.ChangeDailyProgress).AddTo(View.MainView);
+            //Model.strTimeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
 
             View.OnDailyQuestShow();
         }

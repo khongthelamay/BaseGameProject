@@ -53,7 +53,7 @@ public class QuestManager : Singleton<QuestManager>
         CheckWeeklyDay();
 
     }
-
+    
     private void Update()
     {
         if (canCountDailyDown)
@@ -63,7 +63,7 @@ public class QuestManager : Singleton<QuestManager>
             if (timeDailyRemaining <= 0)
             {
                 strTimeDailyRemaining.Value = "0";
-                canCountDailyDown = false;
+                canCountDailyDown = false; 
                 ChangeDayOnGame();
             }
             else strTimeDailyRemaining.Value = TimeUtil.TimeToString(timeDailyRemaining, TimeFommat.Keyword);
@@ -76,7 +76,7 @@ public class QuestManager : Singleton<QuestManager>
             {
                 strTimeWeeklyRemaining.Value = "0";
                 canCountWeeklyDown = false;
-                ChangeDayOnGame();
+                ChangeWeekOnGame();
             }
             else strTimeWeeklyRemaining.Value = TimeUtil.TimeToString(timeWeeklyRemaining, TimeFommat.Keyword);
         }
@@ -110,6 +110,11 @@ public class QuestManager : Singleton<QuestManager>
             InGameDataManager.Instance.InGameData.QuestData.SaveWeeklyDay();
         
         canCountWeeklyDown = true;
+    }
+
+    void ChangeWeekOnGame() {
+        InGameDataManager.Instance.InGameData.QuestData.SaveWeeklyDay();
+        CheckWeeklyDay();
     }
 
     void ChangeDayOnGame() {
@@ -155,6 +160,9 @@ public class QuestManager : Singleton<QuestManager>
             if (questSaves[i].Value.id == questID)
                 questSaves[i].Value.claimed.Value = true;
         }
+        float starReward = QuestGlobalConfig.Instance.GetStarAmount(questID);
+        AddDailyStreak(starReward);
+        AddWeeklyStreak(starReward);
         InGameDataManager.Instance.SaveData();
     }
 
@@ -168,11 +176,33 @@ public class QuestManager : Singleton<QuestManager>
         InGameDataManager.Instance.SaveData();
     }
 
-    void CheckStreakDone()
+    public bool CheckStreakDone(float streak)
     {
         for (int i = 0; i < streakDailySaves.Count; i++)
         {
-            
+            if (streakDailySaves[i].Value.streak == streak)
+                return true;
         }
+        return false;
+    }
+
+    public ReactiveValue<StreakSave> GetStreakSave(float streak)
+    {
+        for (int i = 0; i < streakDailySaves.Count; i++)
+        {
+            if (streakDailySaves[i].Value.streak == streak)
+                return streakDailySaves[i];
+        }
+
+        StreakSave newStreak = new();
+        newStreak.streak = streak;
+        newStreak.canClaim.Value = false;
+        newStreak.claimed.Value = false;
+
+        ReactiveValue<StreakSave> newStreakSave = new(newStreak);
+
+        streakDailySaves.Add(newStreakSave);
+
+        return newStreakSave;
     }
 }

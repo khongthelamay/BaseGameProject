@@ -33,7 +33,7 @@ public partial class QuestData
         {
             streakDailySaves[i].Value.ResetStreak();
         }
-
+        currentDailyStreak.Value = 0;
         InGameDataManager.Instance.SaveData();    
     }
 
@@ -44,6 +44,8 @@ public partial class QuestData
         {
             streakWeeklySaves[i].Value.ResetStreak();
         }
+        currentWeeklyStreak.Value = 0;
+        InGameDataManager.Instance.SaveData();
     }
 }
 public partial class InGameData
@@ -70,6 +72,7 @@ public partial class QuestSave
 [MemoryPackable]
 public partial class StreakSave
 {
+    [field: SerializeField] public float streak { get; set; }
     [field: SerializeField] public ReactiveValue<bool> canClaim { get; set; } = new(false);
     [field: SerializeField] public ReactiveValue<bool> claimed { get; set; } = new(false);
 
