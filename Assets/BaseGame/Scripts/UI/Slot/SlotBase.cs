@@ -31,12 +31,13 @@ public class SlotBase<Data> : MonoBehaviour
     }
 
     public virtual void OnChoose() {
-        
-        if (sequence != null)
-            sequence.Kill();
+        if (animOnSlot == null)
+        {
+            if (sequence != null)
+                sequence.Kill();
+            sequence = UIAnimation.BasicButton(trsContent);
+        }
 
-        sequence = UIAnimation.BasicButton(trsContent);
-        
         if (actionChooseCallBack != null)
             actionChooseCallBack(this);
     }
