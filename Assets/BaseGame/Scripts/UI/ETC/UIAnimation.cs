@@ -114,13 +114,13 @@ public static class UIAnimation
         return sequence;
     }
 
-    public static Sequence AnimSlotVerticalClose(LayoutElement myLayout, float heighDefault, UnityAction actionCallBack = null)
+    public static Sequence AnimSlotVerticalClose(LayoutElement myLayout, float heightDefault, UnityAction actionCallBack = null)
     {
         Sequence sequence = DOTween.Sequence();
 
-        myLayout.preferredHeight = heighDefault;
+        myLayout.preferredHeight = heightDefault;
 
-        sequence.Append(DOVirtual.Float(heighDefault, 0, .15f, (value) => {
+        sequence.Append(DOVirtual.Float(heightDefault, 0, .15f, (value) => {
             myLayout.preferredHeight = value;
         })
         );
@@ -139,6 +139,22 @@ public static class UIAnimation
         Sequence sequence = DOTween.Sequence();
 
         sequence.Append(trsZoom.DOScale(Vector3.one * 1.1f, .25f).SetLoops(-1, LoopType.Yoyo));
+
+        if (actionCallBack != null)
+            sequence.OnComplete(() => {
+                actionCallBack();
+            });
+
+        sequence.Play();
+
+        return sequence;
+    }
+
+    public static Sequence AnimSlotPopUp(Transform trsContent, UnityAction actionCallBack = null)
+    {
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(trsContent.DOScale(Vector3.one, .25f).From(0f).SetEase(Ease.OutBack).SetDelay(trsContent.GetSiblingIndex() * .05f));
 
         if (actionCallBack != null)
             sequence.OnComplete(() => {

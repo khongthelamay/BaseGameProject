@@ -44,9 +44,13 @@ public class ModalDefaultContext
         {
             if (currentTab != tabChoose)
             {
+                if (currentTab != null)
+                    if (currentTab.tabType != TabType.TabCommingsoon)
+                        ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+
                 currentTab = tabChoose;
                 currentTab.AnimOnSelect();
-                ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+                
                 for (int i = 0; i < tabs.Count; i++)
                 {
                     if (currentTab != tabs[i])
