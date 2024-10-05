@@ -17,16 +17,27 @@ public class SlotHeroesUpgrade : SlotBase<HeroStatData>
     public GameObject objPurchase;
     public GameObject objRequire;
 
+    HeroSave heroSave;
+    private void Start()
+    {
+        AnimOpen();
+    }
     public override void InitData(HeroStatData data)
     {
         base.InitData(data);
-        AnimOpen();
+        
         imgIcon.sprite = data.HeroSprite;
         txtName.text = data.Name;
 
         objUnLock.SetActive(true);
         objPurchase.SetActive(false);
         objRequire.SetActive(false);
+        pieceProgress.ChangeProgress(0);
+
+        heroSave = HeroManager.Instance.GetHeroSaveData(data.Name);
+        txtLevel.text = $"Lv. {heroSave.level.Value}";
+        pieceProgress.ChangeProgress(0);
+        pieceProgress.ChangeTextProgress("0/0");
     }
 
     public override void AnimOpen()

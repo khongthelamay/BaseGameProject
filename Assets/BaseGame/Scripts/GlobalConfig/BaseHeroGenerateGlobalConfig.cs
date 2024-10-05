@@ -5,6 +5,7 @@ using Core;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -19,6 +20,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
     [field: SerializeField] public Hero BaseHero {get; private set;}
 
     [field: SerializeField] public Sprite[] GraphicArray {get; private set;}
+
     [field: SerializeField] public Sprite[] RarityArray {get; private set;}
     
     [Button]
@@ -60,5 +62,15 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         HeroPoolGlobalConfig.Instance.GetAllHeroPrefab();
 #endif
     }
-    
+
+
+    public HeroStatData GetHeroStatDataConfig(string heroName, float amount)
+    {
+        for (int i = 0; i < HeroStatDataList.Count; i++)
+        {
+            if (HeroStatDataList[i].name == heroName)
+                return HeroStatDataList[i];
+        }
+        return null;
+    }
 }

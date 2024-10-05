@@ -7,9 +7,9 @@ using UnityEngine;
 
 [System.Serializable]
 [MemoryPackable]
-public partial class ArtifactData
+public partial class ArtifactDataSave
 {
-    public static ArtifactData Instance => InGameDataManager.Instance.InGameData.ArtifactData;
+    public static ArtifactDataSave Instance => InGameDataManager.Instance.InGameData.ArtifactData;
     [field: SerializeField] public List<ReactiveValue<ArtifactInfor>> ArtifactInfos { get; set; } = new();
 
     public ArtifactInfor GetArtifactInfor(ArtifactType artifactType)
@@ -34,7 +34,7 @@ public partial class ArtifactData
 
 public partial class InGameData
 {
-    [field: SerializeField] public ArtifactData ArtifactData { get; set; } = new();
+    [field: SerializeField] public ArtifactDataSave ArtifactData { get; set; } = new();
 }
 
 [System.Serializable]

@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
 
 [Serializable]
-public class ModalHeroesContext 
+public class ModalHeroInforContext 
 {
     public static class Events
     {

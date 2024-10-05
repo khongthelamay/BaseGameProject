@@ -1,0 +1,2426 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c8f18c32b55744994b0869705aea6b, type: 3}
+  m_Name: AchievementGlobalConfig
+  m_EditorClassIdentifier: 
+  achievementDataConfigs: []
+  achievementKillEnemyDataConfigs:
+  - achievementType: 0
+    strDes: Kill 100 enemies.
+    require: 100
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 500 enemies.
+    require: 500
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 1000 enemies.
+    require: 1000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 2000 enemies.
+    require: 2000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 3000 enemies.
+    require: 3000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 4000 enemies.
+    require: 4000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 5000 enemies.
+    require: 5000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 6000 enemies.
+    require: 6000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 7000 enemies.
+    require: 7000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 8000 enemies.
+    require: 8000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 9000 enemies.
+    require: 9000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 10000 enemies.
+    require: 10000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 11000 enemies.
+    require: 11000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 12000 enemies.
+    require: 12000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 13000 enemies.
+    require: 13000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 14000 enemies.
+    require: 14000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 15000 enemies.
+    require: 15000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 16000 enemies.
+    require: 16000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 17000 enemies.
+    require: 17000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 18000 enemies.
+    require: 18000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 19000 enemies.
+    require: 19000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 20000 enemies.
+    require: 20000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 21000 enemies.
+    require: 21000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 22000 enemies.
+    require: 22000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 23000 enemies.
+    require: 23000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 24000 enemies.
+    require: 24000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 25000 enemies.
+    require: 25000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 26000 enemies.
+    require: 26000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 27000 enemies.
+    require: 27000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 0
+    strDes: Kill 28000 enemies.
+    require: 28000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementKillBossDataConfigs:
+  - achievementType: 1
+    strDes: Kill 10 boss.
+    require: 10
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 20 boss.
+    require: 20
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 30 boss.
+    require: 30
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 40 boss.
+    require: 40
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 50 boss.
+    require: 50
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 60 boss.
+    require: 60
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 70 boss.
+    require: 70
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 80 boss.
+    require: 80
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 90 boss.
+    require: 90
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 100 boss.
+    require: 100
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 110 boss.
+    require: 110
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 120 boss.
+    require: 120
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 130 boss.
+    require: 130
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 140 boss.
+    require: 140
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 150 boss.
+    require: 150
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 160 boss.
+    require: 160
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 170 boss.
+    require: 170
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 180 boss.
+    require: 180
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 190 boss.
+    require: 190
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 200 boss.
+    require: 200
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 210 boss.
+    require: 210
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 220 boss.
+    require: 220
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 230 boss.
+    require: 230
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 240 boss.
+    require: 240
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 250 boss.
+    require: 250
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 260 boss.
+    require: 260
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 270 boss.
+    require: 270
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 280 boss.
+    require: 280
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 290 boss.
+    require: 290
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 1
+    strDes: Kill 300 boss.
+    require: 300
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementClearQuestDataConfigs:
+  - achievementType: 2
+    strDes: Clear 10 quests.
+    require: 10
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 20 quests.
+    require: 20
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 30 quests.
+    require: 30
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 40 quests.
+    require: 40
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 60 quests.
+    require: 60
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 80 quests.
+    require: 80
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 100 quests.
+    require: 100
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 120 quests.
+    require: 120
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 140 quests.
+    require: 140
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 160 quests.
+    require: 160
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 180 quests.
+    require: 180
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 200 quests.
+    require: 200
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 220 quests.
+    require: 220
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 240 quests.
+    require: 240
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 260 quests.
+    require: 260
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 280 quests.
+    require: 280
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 300 quests.
+    require: 300
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 320 quests.
+    require: 320
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 340 quests.
+    require: 340
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 360 quests.
+    require: 360
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 380 quests.
+    require: 380
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 400 quests.
+    require: 400
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 420 quests.
+    require: 420
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 440 quests.
+    require: 440
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 460 quests.
+    require: 460
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 480 quests.
+    require: 480
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 500 quests.
+    require: 500
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 520 quests.
+    require: 520
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 540 quests.
+    require: 540
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 2
+    strDes: Clear 560 quests.
+    require: 560
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementClearWaveNormalDataConfigs:
+  - achievementType: 3
+    strDes: Clear 5 normal waves.
+    require: 5
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 10 normal waves.
+    require: 10
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 15 normal waves.
+    require: 15
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 20 normal waves.
+    require: 20
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 25 normal waves.
+    require: 25
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 30 normal waves.
+    require: 30
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 35 normal waves.
+    require: 35
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 40 normal waves.
+    require: 40
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 45 normal waves.
+    require: 45
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 50 normal waves.
+    require: 50
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 55 normal waves.
+    require: 55
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 60 normal waves.
+    require: 60
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 65 normal waves.
+    require: 65
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 70 normal waves.
+    require: 70
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 75 normal waves.
+    require: 75
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 80 normal waves.
+    require: 80
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 85 normal waves.
+    require: 85
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 90 normal waves.
+    require: 90
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 95 normal waves.
+    require: 95
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 3
+    strDes: Clear 100 normal waves.
+    require: 100
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementClearWaveHardDataConfigs:
+  - achievementType: 4
+    strDes: Clear 5 hard waves.
+    require: 5
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 10 hard waves.
+    require: 10
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 15 hard waves.
+    require: 15
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 20 hard waves.
+    require: 20
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 25 hard waves.
+    require: 25
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 30 hard waves.
+    require: 30
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 35 hard waves.
+    require: 35
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 40 hard waves.
+    require: 40
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 45 hard waves.
+    require: 45
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 50 hard waves.
+    require: 50
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 55 hard waves.
+    require: 55
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 60 hard waves.
+    require: 60
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 65 hard waves.
+    require: 65
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 70 hard waves.
+    require: 70
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 75 hard waves.
+    require: 75
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 80 hard waves.
+    require: 80
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 85 hard waves.
+    require: 85
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 90 hard waves.
+    require: 90
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 95 hard waves.
+    require: 95
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 4
+    strDes: Clear 100 hard waves.
+    require: 100
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementClearWaveHellDataConfigs:
+  - achievementType: 5
+    strDes: Clear 5 hell waves.
+    require: 5
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 10 hell waves.
+    require: 10
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 15 hell waves.
+    require: 15
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 20 hell waves.
+    require: 20
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 25 hell waves.
+    require: 25
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 30 hell waves.
+    require: 30
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 35 hell waves.
+    require: 35
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 40 hell waves.
+    require: 40
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 45 hell waves.
+    require: 45
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 50 hell waves.
+    require: 50
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 55 hell waves.
+    require: 55
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 60 hell waves.
+    require: 60
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 65 hell waves.
+    require: 65
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 70 hell waves.
+    require: 70
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 75 hell waves.
+    require: 75
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 80 hell waves.
+    require: 80
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 85 hell waves.
+    require: 85
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 90 hell waves.
+    require: 90
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 95 hell waves.
+    require: 95
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 5
+    strDes: Clear 100 hell waves.
+    require: 100
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementRecruitDataConfigs:
+  - achievementType: 6
+    strDes: Recruit 10 times.
+    require: 10
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 20 times.
+    require: 20
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 30 times.
+    require: 30
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 40 times.
+    require: 40
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 60 times.
+    require: 60
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 80 times.
+    require: 80
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 100 times.
+    require: 100
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 120 times.
+    require: 120
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 140 times.
+    require: 140
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 160 times.
+    require: 160
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 180 times.
+    require: 180
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 200 times.
+    require: 200
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 220 times.
+    require: 220
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 240 times.
+    require: 240
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 260 times.
+    require: 260
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 280 times.
+    require: 280
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 300 times.
+    require: 300
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 320 times.
+    require: 320
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 340 times.
+    require: 340
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 360 times.
+    require: 360
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 380 times.
+    require: 380
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 400 times.
+    require: 400
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 420 times.
+    require: 420
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 440 times.
+    require: 440
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 460 times.
+    require: 460
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 480 times.
+    require: 480
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 500 times.
+    require: 500
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 520 times.
+    require: 520
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 540 times.
+    require: 540
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 6
+    strDes: Recruit 560 times.
+    require: 560
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementUpgradeUnitDataConfigs:
+  - achievementType: 7
+    strDes: Upgrade unit 2 times.
+    require: 2
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 19 times.
+    require: 19
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 36 times.
+    require: 36
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 54 times.
+    require: 54
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 71 times.
+    require: 71
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 88 times.
+    require: 88
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 105 times.
+    require: 105
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 122 times.
+    require: 122
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 139 times.
+    require: 139
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 157 times.
+    require: 157
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 174 times.
+    require: 174
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 191 times.
+    require: 191
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 208 times.
+    require: 208
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 225 times.
+    require: 225
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 242 times.
+    require: 242
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 260 times.
+    require: 260
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 277 times.
+    require: 277
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 294 times.
+    require: 294
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 311 times.
+    require: 311
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 328 times.
+    require: 328
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 345 times.
+    require: 345
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 363 times.
+    require: 363
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 380 times.
+    require: 380
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 397 times.
+    require: 397
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 414 times.
+    require: 414
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 431 times.
+    require: 431
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 448 times.
+    require: 448
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 466 times.
+    require: 466
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 483 times.
+    require: 483
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 7
+    strDes: Upgrade unit 500 times.
+    require: 500
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementSummonTier3DataConfigs:
+  - achievementType: 8
+    strDes: Summon unit tier 3 150 times.
+    require: 150
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 330 times.
+    require: 330
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 480 times.
+    require: 480
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 660 times.
+    require: 660
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 840 times.
+    require: 840
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 1020 times.
+    require: 1020
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 1230 times.
+    require: 1230
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 1410 times.
+    require: 1410
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 1620 times.
+    require: 1620
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 1800 times.
+    require: 1800
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 2010 times.
+    require: 2010
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 2190 times.
+    require: 2190
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 2400 times.
+    require: 2400
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 2610 times.
+    require: 2610
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 2820 times.
+    require: 2820
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 3030 times.
+    require: 3030
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 3210 times.
+    require: 3210
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 3420 times.
+    require: 3420
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 3630 times.
+    require: 3630
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 3840 times.
+    require: 3840
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 4050 times.
+    require: 4050
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 4290 times.
+    require: 4290
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 4500 times.
+    require: 4500
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 4710 times.
+    require: 4710
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 4920 times.
+    require: 4920
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 5130 times.
+    require: 5130
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 5370 times.
+    require: 5370
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 5580 times.
+    require: 5580
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 5790 times.
+    require: 5790
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 8
+    strDes: Summon unit tier 3 6000 times.
+    require: 6000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementSummonTier4DataConfigs:
+  - achievementType: 9
+    strDes: Summon unit tier 4 75 times.
+    require: 75
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 165 times.
+    require: 165
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 240 times.
+    require: 240
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 330 times.
+    require: 330
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 420 times.
+    require: 420
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 510 times.
+    require: 510
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 615 times.
+    require: 615
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 705 times.
+    require: 705
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 810 times.
+    require: 810
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 900 times.
+    require: 900
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1005 times.
+    require: 1005
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1095 times.
+    require: 1095
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1200 times.
+    require: 1200
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1305 times.
+    require: 1305
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1410 times.
+    require: 1410
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1515 times.
+    require: 1515
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1605 times.
+    require: 1605
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1710 times.
+    require: 1710
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1815 times.
+    require: 1815
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 1920 times.
+    require: 1920
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 2025 times.
+    require: 2025
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 2145 times.
+    require: 2145
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 2250 times.
+    require: 2250
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 2355 times.
+    require: 2355
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 2460 times.
+    require: 2460
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 2565 times.
+    require: 2565
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 2685 times.
+    require: 2685
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 2790 times.
+    require: 2790
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 2895 times.
+    require: 2895
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 9
+    strDes: Summon unit tier 4 3000 times.
+    require: 3000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  achievementSummonTier5DataConfigs:
+  - achievementType: 10
+    strDes: Summon unit tier 5 25 times.
+    require: 25
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 55 times.
+    require: 55
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 80 times.
+    require: 80
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 110 times.
+    require: 110
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 140 times.
+    require: 140
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 170 times.
+    require: 170
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 205 times.
+    require: 205
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 235 times.
+    require: 235
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 270 times.
+    require: 270
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 300 times.
+    require: 300
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 335 times.
+    require: 335
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 365 times.
+    require: 365
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 400 times.
+    require: 400
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 435 times.
+    require: 435
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 470 times.
+    require: 470
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 505 times.
+    require: 505
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 535 times.
+    require: 535
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 570 times.
+    require: 570
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 605 times.
+    require: 605
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 640 times.
+    require: 640
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 675 times.
+    require: 675
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 715 times.
+    require: 715
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 750 times.
+    require: 750
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 785 times.
+    require: 785
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 820 times.
+    require: 820
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 855 times.
+    require: 855
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 895 times.
+    require: 895
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 930 times.
+    require: 930
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 965 times.
+    require: 965
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0
+  - achievementType: 10
+    strDes: Summon unit tier 5 1000 times.
+    require: 1000
+    reward:
+      type: 0
+      value:
+        v: 0
+        m: 0

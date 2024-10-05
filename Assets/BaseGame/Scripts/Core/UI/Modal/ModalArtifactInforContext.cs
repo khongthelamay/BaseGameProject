@@ -139,8 +139,6 @@ public class ModalArtifactInforContext
 
         void OnCloseModal() {
             View.AnimClose();
-          
-            
         }
 
         public UniTask Cleanup(Memory<object> args) {

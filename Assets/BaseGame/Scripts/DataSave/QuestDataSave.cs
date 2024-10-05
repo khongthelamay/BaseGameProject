@@ -7,9 +7,9 @@ using UnityEngine;
 
 [System.Serializable]
 [MemoryPackable]
-public partial class QuestData
+public partial class QuestDataSave
 {
-    public static QuestData Instance => InGameDataManager.Instance.InGameData.QuestData;
+    public static QuestDataSave Instance => InGameDataManager.Instance.InGameData.QuestData;
     [field: SerializeField] public List<ReactiveValue<QuestSave>> questSaves { get; set; } = new();
     [field: SerializeField] public List<ReactiveValue<StreakSave>> streakDailySaves { get; set; } = new();
     [field: SerializeField] public List<ReactiveValue<StreakSave>> streakWeeklySaves { get; set; } = new();
@@ -50,7 +50,7 @@ public partial class QuestData
 }
 public partial class InGameData
 {
-    [field: SerializeField] public QuestData QuestData { get; set; } = new();
+    [field: SerializeField] public QuestDataSave QuestData { get; set; } = new();
 }
 
 [System.Serializable]
