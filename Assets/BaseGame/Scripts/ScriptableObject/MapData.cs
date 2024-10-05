@@ -24,9 +24,9 @@ public class MapData : ScriptableObject
             {
                 WaveId = i + 1,
                 EnemyId = 0,
-                EnemyCount = 20,
+                EnemyCount = 40,
                 SpawnInterval = 0.5f,
-                WaveInterval = 10f
+                WaveInterval = 5f
             });
         }
 

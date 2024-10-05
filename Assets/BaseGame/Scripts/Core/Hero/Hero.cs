@@ -13,15 +13,6 @@ namespace Core
 {
     public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble
     {
-        public enum Rarity
-        {
-            Common = 0,
-            Rare = 1,
-            Epic = 2,
-            Legendary = 3,
-            Mythic = 4
-        }
-
         public enum Job
         {
             Fighter = 0,
@@ -46,42 +37,84 @@ namespace Core
         [field: SerializeField] public SpriteRenderer SpriteGraphic { get; set; }
         [field: SerializeField] public SpriteRenderer SpriteShadow { get; set; }
         [field: SerializeField] public SpriteRenderer SpriteRarity { get; set; }
-        [field: SerializeField] public Projectile Projectile { get; private set; }
+        [field: SerializeField] public MoveProjectile MoveProjectile { get; private set; }
+        [field: SerializeField] public GameObject VisibleGroup {get; private set;}
         [field: SerializeField] public FieldSlot FieldSlot { get; private set; }
-        private UniTaskStateMachine<Hero> UniTaskStateMachine { get; set; }
+        [field: SerializeField] public HeroAnim HeroAnim {get; private set;}
+
+        private UniTaskStateMachine<Hero> StateMachine { get; set; }
         public float AttackRange => HeroStatData.BaseAttackRange;
+        private Vector3 MoveFromPosition { get; set; }
+        private Vector3 MoveToPosition { get; set; }
+        private Action OnMoveComplete { get; set; }
         private void Awake()
         {
             InitStateMachine();
             HeroAttackRange.InitAttackRange(HeroStatData.BaseAttackRange);
         }
-
         public void OnDestroy()
         {
-            UniTaskStateMachine?.Stop();
+            StateMachine?.Stop();
         }
         private void InitStateMachine()
         {
-            UniTaskStateMachine = new UniTaskStateMachine<Hero>(this);
-            UniTaskStateMachine.RegisterState(HeroSleepState.Instance);
-            UniTaskStateMachine.Run();
+            StateMachine = new UniTaskStateMachine<Hero>(this);
+            StateMachine.RegisterState(HeroSleepState.Instance);
+            StateMachine.Run();
         }
 
-        public void FieldInit()
+        public bool IsCurrentState(UniTaskState<Hero> state)
         {
-            // InitSkill();
-            StartAttack();
+            return StateMachine.IsCurrentState(state);
         }
-
+        public void ChangeToSleepState()
+        {
+            StateMachine.RequestTransition(HeroSleepState.Instance);
+        }
+        public void MoveToFieldSlot(FieldSlot fieldSlot)
+        {
+            SetVisible(false);
+            MoveFromPosition = Transform.position;
+            MoveToPosition = fieldSlot.Transform.position;
+            OnMoveComplete = MoveComplete;
+            
+            FieldSlot = fieldSlot;
+            Transform.SetParent(FieldSlot.Transform);
+            Transform.localPosition = Vector3.zero;
+            
+            StateMachine.RequestTransition(HeroMoveState.Instance);
+            return;
+            void MoveComplete()
+            {
+                SetVisible(true);
+                FieldSlot.FieldSlotChangedCallback?.Invoke();
+                StateMachine.RequestTransition(HeroAttackState.Instance);
+            }
+        }
+        public void MoveToPositionAndSelfDespawn(Vector3 toPosition)
+        {
+            SetVisible(false);
+            MoveFromPosition = Transform.position;
+            MoveToPosition = toPosition;
+            OnMoveComplete = MoveComplete;
+            
+            Transform.localPosition = Vector3.zero;
+            
+            StateMachine.RequestTransition(HeroMoveState.Instance);
+            return;
+            void MoveComplete()
+            {
+                SelfDespawn();
+            }
+        }
+        public void SetVisible(bool isVisible)
+        {
+            VisibleGroup.SetActive(isVisible);
+        }
 
         public void SelfDespawn()
         {
-            gameObject.SetActive(false);
-        }
-
-        private void StartAttack()
-        {
-            UniTaskStateMachine.RequestTransition(HeroAttackState.Instance);
+            Destroy(gameObject);
         }
 
         public void SetupFieldSlot(FieldSlot fieldSlot)
@@ -95,6 +128,7 @@ namespace Core
         {
             Transform.SetParent(waitSlot.Transform);
             Transform.localPosition = Vector3.zero;
+            StateMachine.RequestTransition(HeroIdleInShopState.Instance);
         }
 
         public void ShowAttackRange()

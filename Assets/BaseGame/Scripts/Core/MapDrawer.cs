@@ -16,16 +16,16 @@ public class MapDrawer : MonoBehaviour
 {
     [field: SerializeField] public Vector2 DefaultSize { get; private set; }
     [field: SerializeField] public MapPositionDraw MapPositionDraw { get; private set; }
-    [field: SerializeField] public Transform GroundContainer {get; private set;}
-    [field: SerializeField] public Transform TileContainer {get; private set;}
-    [field: SerializeField] public Transform FieldSlotContainer {get; private set;}
-    [field: SerializeField] public Transform MovePointContainer {get; private set;}
+    [field: SerializeField] public Transform GroundContainer { get; private set; }
+    [field: SerializeField] public Transform TileContainer { get; private set; }
+    [field: SerializeField] public Transform FieldSlotContainer { get; private set; }
+    [field: SerializeField] public Transform MovePointContainer { get; private set; }
     [field: SerializeField] public List<MapDrawRule> TileList { get; private set; }
     [field: SerializeField] public List<MapDrawRule> GroundList { get; private set; }
     [field: SerializeField] public List<GameObject> TileGenerate { get; private set; }
     [field: SerializeField] public List<FieldSlot> FieldSlotGenerate { get; private set; }
     [field: SerializeField] public List<GameObject> GroundGenerate { get; private set; }
-    
+
     private int[,] NewMapPositionDraw { get; set; }
 
     [Button]
@@ -70,6 +70,7 @@ public class MapDrawer : MonoBehaviour
                     fieldSlot.transform.localPosition = position;
                     FieldSlotGenerate.Add(fieldSlot.GetComponent<FieldSlot>());
                 }
+
                 int[,] rule = GetMapTileRule(i, j);
                 GameObject mapObject = GetMapObject(TileList, rule);
                 if (mapObject == null) continue;
@@ -90,21 +91,10 @@ public class MapDrawer : MonoBehaviour
                 NewMapPositionDraw[i, j] = MapPositionDraw.GetPosition(i / 3, j / 3);
             }
         }
-        Vector3 offset2 = new Vector2(
-            DefaultSize.x/3f * (MapPositionDraw.Column * 3 + (MapPositionDraw.Column % 2 == 1 ? -1 : -0.5f)) / 2,
-            -DefaultSize.y/3f * (MapPositionDraw.Row * 3 + (MapPositionDraw.Row % 2 == 1 ? -1 : -0.5f)) / 2);
 
-        // string temp = "";
-        // for (int i = 0; i < MapPositionDraw.Row * 3; i++)
-        // {
-        //     
-        //     for (int j = 0; j < MapPositionDraw.Column * 3; j++)
-        //     {
-        //         temp += $"{NewMapPositionDraw[i, j]} ";
-        //     }
-        //     temp += "\n";
-        // }
-        // Debug.Log(temp);
+        Vector3 offset2 = new Vector2(
+            DefaultSize.x / 3f * (MapPositionDraw.Column * 3 + (MapPositionDraw.Column % 2 == 1 ? -1 : -0.5f)) / 2,
+            -DefaultSize.y / 3f * (MapPositionDraw.Row * 3 + (MapPositionDraw.Row % 2 == 1 ? -1 : -0.5f)) / 2);
 
         GroundGenerate.Clear();
         GroundContainer = transform.FindChildOrCreate(nameof(GroundContainer));
@@ -149,8 +139,8 @@ public class MapDrawer : MonoBehaviour
         {
             for (int j = 0; j < 3; j++)
             {
-                if (row + i - 1 < 0 || 
-                    row + i - 1 >= MapPositionDraw.Row * 3 || 
+                if (row + i - 1 < 0 ||
+                    row + i - 1 >= MapPositionDraw.Row * 3 ||
                     column + j - 1 < 0 ||
                     column + j - 1 >= MapPositionDraw.Column * 3)
                 {
@@ -162,6 +152,7 @@ public class MapDrawer : MonoBehaviour
                     {
                         rule[i, j] = 2;
                     }
+
                     if (NewMapPositionDraw[row + i - 1, column + j - 1] == 1)
                     {
                         rule[i, j] = 1;
@@ -199,7 +190,6 @@ public class MapDrawer : MonoBehaviour
     {
         foreach (MapDrawRule mapDrawRule in mapDrawRules)
         {
-            // Debug.Log(ShowRule(mapDrawRule.GetBaseRulePosition()));
             if (mapDrawRule.CompareArray(rule))
             {
                 return mapDrawRule.MapObject;
@@ -453,8 +443,7 @@ public class MapDrawRule
         {
             for (int j = 0; j < 3; j++)
             {
-                if (i == 1 && j == 1) continue;
-                if (BaseRulePosition[i * 3 + j] == 0) continue;
+                if ((i == 1 && j == 1) || BaseRulePosition[i * 3 + j] == 0) continue;
                 if (rule[i, j] != BaseRulePosition[i * 3 + j]) return false;
             }
         }

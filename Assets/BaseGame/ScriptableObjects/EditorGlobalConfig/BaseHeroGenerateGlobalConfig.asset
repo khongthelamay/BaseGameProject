@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc323b84b86e9f4b95343614b0c45eb, type: 3}
   m_Name: BaseHeroGenerateGlobalConfig
   m_EditorClassIdentifier: 
+  <SheetHeroStatDataList>k__BackingField: []
   <HeroStatDataList>k__BackingField:
   - {fileID: 11400000, guid: be5287abb67df804981bdc11e5e63470, type: 2}
   - {fileID: 11400000, guid: 1430e151993d1834b9f8c3cb90784bde, type: 2}

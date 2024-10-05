@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Core;
 using Cysharp.Threading.Tasks;
 using Manager;
@@ -48,27 +49,7 @@ public class Map : ACachedMonoBehaviour
     [Button]
     public void InitFieldSlot(int row, int column)
     {
-        foreach (var fieldSlot in FieldSlotArray)
-        {
-            if (fieldSlot == null) continue;
-            DestroyImmediate(fieldSlot.gameObject);
-        }
-
-        string path = AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("t: Prefab FieldSlot")[0]);
-        FieldSlot prefab = AssetDatabase.LoadAssetAtPath<FieldSlot>(path);
-        
-        FieldSlotArray = new FieldSlot[row * column];
-        for (int i = 0; i < row; i++)
-        {
-            for (int j = 0; j < column; j++)
-            {
-                FieldSlotArray[i * column + j] = PrefabUtility.InstantiatePrefab(prefab) as FieldSlot;
-                FieldSlotArray[i * column + j]
-                    .SetupTransform(Transform.FindChildOrCreate("FieldSlotContainer"))
-                    .SetupCoordinate(i, j)
-                    .SetupPosition(row, column);
-            }
-        }
+        FieldSlotArray = Transform.GetComponentsInChildren<FieldSlot>().OrderBy(g => g.gameObject.name).ToArray();
     }
 #endif
 }

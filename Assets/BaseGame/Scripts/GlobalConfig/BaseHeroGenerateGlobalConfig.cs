@@ -14,6 +14,7 @@ using UnityEditor;
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
 public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalConfig>
 {
+    [field: SerializeField] public List<HeroStatData> SheetHeroStatDataList {get; private set;}
     [field: SerializeField] public List<HeroStatData> HeroStatDataList {get; private set;}
     [field: SerializeField] public List<Hero> HeroPrefabList {get; private set;}
     [field: SerializeField] public Hero BaseHero {get; private set;}
@@ -21,6 +22,15 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
     [field: SerializeField] public Sprite[] GraphicArray {get; private set;}
     [field: SerializeField] public Sprite[] RarityArray {get; private set;}
     
+    [Button]
+    public void GenerateHeroStatData()
+    {
+        SheetHeroStatDataList = AssetDatabase.FindAssets("t:HeroStatData")
+            .Select(AssetDatabase.GUIDToAssetPath)
+            .Select(AssetDatabase.LoadAssetAtPath<HeroStatData>)
+            .ToList();
+    }
+
     [Button]
     public void GenerateAllHeroStatData()
     {
