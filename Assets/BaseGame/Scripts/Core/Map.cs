@@ -17,7 +17,6 @@ public class Map : ACachedMonoBehaviour
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private Enemy.Factory EnemyFactory { get; set; }
     [field: SerializeField] public MapDrawer MapDrawer {get; private set;}
-
     [field: SerializeField] private MapData MapData {get; set;}
     [field: SerializeField] private Transform[] MovePoints {get; set;}
     [field: SerializeField] public FieldSlot[] FieldSlotArray {get; private set;}
@@ -25,7 +24,7 @@ public class Map : ACachedMonoBehaviour
     public async UniTask StartMap()
     {
         await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
-        foreach (var waveData in MapData.WaveDataList)
+        foreach (WaveData waveData in MapData.WaveDataList)
         {
             WaveStartTime = DateTime.Now;
             int spawnInterval = (int)(waveData.SpawnInterval * 1000);
