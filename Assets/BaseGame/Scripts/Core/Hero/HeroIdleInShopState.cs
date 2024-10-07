@@ -13,6 +13,7 @@ namespace Core
     {
         public UniTask OnStateEnter(HeroIdleInShopState state, CancellationToken token)
         {
+            HeroAnim.PlayIdleAnimation(1);
             return UniTask.CompletedTask;
         }
 

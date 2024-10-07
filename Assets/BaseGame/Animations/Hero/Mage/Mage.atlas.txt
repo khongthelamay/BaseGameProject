@@ -1,0 +1,22 @@
+Mage.png
+size:1024,512
+filter:Linear,Linear
+pma:true
+'
+bounds:2,13,182,284
+rotate:90
+Layer 266
+bounds:2,197,406,310
+offsets:1,1,408,312
+Layer 268
+bounds:410,57,310,329
+rotate:90
+Layer 269
+bounds:741,142,225,186
+rotate:90
+Layer 270
+bounds:741,2,154,138
+offsets:1,1,156,140
+Layer 273
+bounds:410,369,138,508
+rotate:90

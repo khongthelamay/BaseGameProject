@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using TW.Utility.DesignPattern;
+using UnityEngine;
 
 namespace Core
 {
@@ -13,6 +14,10 @@ namespace Core
     {
         public UniTask OnStateEnter(HeroMoveState state, CancellationToken token)
         {
+            HeroAnim.PlayIdleAnimation(1);
+            Instantiate(MoveProjectile, Transform.position, Quaternion.identity)
+                .Init(MoveFromPosition, MoveToPosition, OnMoveComplete);
+            
             return UniTask.CompletedTask;
         }
 
@@ -25,5 +30,10 @@ namespace Core
         {
             return UniTask.CompletedTask;
         }
+        // private void OnMoveComplete()
+        // {
+        //     SetVisible(true);
+        //     StateMachine.RequestTransition(HeroAttackState.Instance);
+        // }
     }
 }

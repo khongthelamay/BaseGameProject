@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Core;
-using Cysharp.Threading.Tasks;
-using Manager;
 using R3;
 using R3.Triggers;
 using Sirenix.OdinInspector;

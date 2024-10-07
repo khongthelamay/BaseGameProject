@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Core;
 using Cysharp.Threading.Tasks;
 using Manager;
@@ -7,7 +8,6 @@ using TW.Utility.CustomComponent;
 using TW.Utility.Extension;
 using UnityEngine;
 using Zenject;
-using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,6 +17,7 @@ public class Map : ACachedMonoBehaviour
 {
     [Inject] private BattleManager BattleManager { get; set; }
     [Inject] private Enemy.Factory EnemyFactory { get; set; }
+    [field: SerializeField] public MapDrawer MapDrawer {get; private set;}
     [field: SerializeField] private MapData MapData {get; set;}
     [field: SerializeField] private Transform[] MovePoints {get; set;}
     [field: SerializeField] public FieldSlot[] FieldSlotArray {get; private set;}
@@ -24,7 +25,7 @@ public class Map : ACachedMonoBehaviour
     public async UniTask StartMap()
     {
         await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
-        foreach (var waveData in MapData.WaveDataList)
+        foreach (WaveData waveData in MapData.WaveDataList)
         {
             WaveStartTime = DateTime.Now;
             int spawnInterval = (int)(waveData.SpawnInterval * 1000);
@@ -48,27 +49,7 @@ public class Map : ACachedMonoBehaviour
     [Button]
     public void InitFieldSlot(int row, int column)
     {
-        foreach (var fieldSlot in FieldSlotArray)
-        {
-            if (fieldSlot == null) continue;
-            DestroyImmediate(fieldSlot.gameObject);
-        }
-
-        string path = AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("t: Prefab FieldSlot")[0]);
-        FieldSlot prefab = AssetDatabase.LoadAssetAtPath<FieldSlot>(path);
-        
-        FieldSlotArray = new FieldSlot[row * column];
-        for (int i = 0; i < row; i++)
-        {
-            for (int j = 0; j < column; j++)
-            {
-                FieldSlotArray[i * column + j] = PrefabUtility.InstantiatePrefab(prefab) as FieldSlot;
-                FieldSlotArray[i * column + j]
-                    .SetupTransform(Transform.FindChildOrCreate("FieldSlotContainer"))
-                    .SetupCoordinate(i, j)
-                    .SetupPosition(row, column);
-            }
-        }
+        FieldSlotArray = Transform.GetComponentsInChildren<FieldSlot>().OrderBy(g => g.gameObject.name).ToArray();
     }
 #endif
 }

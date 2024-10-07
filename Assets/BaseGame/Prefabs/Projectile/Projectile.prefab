@@ -50,7 +50,6 @@ MonoBehaviour:
   <Graphic>k__BackingField: {fileID: 3015630929580733689}
   <Shadow>k__BackingField: {fileID: 1877391094353633620}
   <ShadowTransform>k__BackingField: {fileID: 1683359727183045636}
-  <StartPosition>k__BackingField: {x: 0, y: 0, z: 0}
   <CurrentPosition>k__BackingField: {x: 0, y: 0, z: 0}
   <TargetEnemy>k__BackingField: {fileID: 0}
   <AttackDamage>k__BackingField: 0
@@ -450,7 +449,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fb7e7549576349b439b450f8bf49e450, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
