@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,10 @@ public class SlotBase<Data> : MonoBehaviour
     public Data slotData;
     public Image imgIcon;
     public Button btnChoose;
+
     public Transform trsContent;
     public AnimOnSlot animOnSlot;
-    public Sequence sequence;
+    public Sequence mySequence;
 
     public UnityAction<SlotBase<Data>> actionChooseCallBack;
 
@@ -33,9 +35,9 @@ public class SlotBase<Data> : MonoBehaviour
     public virtual void OnChoose() {
         if (animOnSlot == null)
         {
-            if (sequence != null)
-                sequence.Kill();
-            sequence = UIAnimation.BasicButton(trsContent);
+            if (mySequence != null)
+                mySequence.Kill();
+            mySequence = UIAnimation.BasicButton(trsContent);
         }
 
         if (actionChooseCallBack != null)
@@ -44,4 +46,10 @@ public class SlotBase<Data> : MonoBehaviour
 
     public virtual void AnimOpen() { }
     public virtual void AnimDone() { }
+    public virtual void ClearAnim()
+    {
+        if (mySequence != null)
+            mySequence.Kill();
+        mySequence = UIAnimation.BasicButton(trsContent);
+    }
 }

@@ -11,7 +11,6 @@ using UnityEngine;
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
 public class AchievementGlobalConfig : GlobalConfig<AchievementGlobalConfig>
 {
-    public List<AchievementDataConfig> achievementDataConfigs = new();
     public List<AchievementDataConfig> achievementKillEnemyDataConfigs = new();
     public List<AchievementDataConfig> achievementKillBossDataConfigs = new();
     public List<AchievementDataConfig> achievementClearQuestDataConfigs = new();
@@ -66,8 +65,54 @@ public class AchievementGlobalConfig : GlobalConfig<AchievementGlobalConfig>
         }
     }
 
+
+    public AchievementDataConfig GetCurrentAchievement(AchievementType achievementType, int currentLevel)
+    {
+        switch (achievementType)
+        {
+            case AchievementType.KillEnemy:
+                return achievementKillEnemyDataConfigs[currentLevel];
+
+            case AchievementType.KillBoss:
+                return achievementKillBossDataConfigs[currentLevel];
+
+            case AchievementType.ClearQuest:
+                return achievementClearQuestDataConfigs[currentLevel];
+
+            case AchievementType.ClearWaveNormal:
+                return achievementClearWaveNormalDataConfigs[currentLevel];
+
+            case AchievementType.ClearWaveHard:
+                return achievementClearWaveHardDataConfigs[currentLevel];
+
+            case AchievementType.ClearWaveHell:
+                return achievementClearWaveHellDataConfigs[currentLevel];
+
+            case AchievementType.Recruit:
+                return achievementRecruitDataConfigs[currentLevel];
+
+            case AchievementType.UpgradeUnit:
+                return achievementUpgradeUnitDataConfigs[currentLevel];
+
+            case AchievementType.SummonTier3:
+                return achievementSummonTier3DataConfigs[currentLevel];
+
+            case AchievementType.SummonTier4:
+                return achievementSummonTier4DataConfigs[currentLevel];
+
+            case AchievementType.SummonTier5:
+                return achievementSummonTier5DataConfigs[currentLevel];
+
+            default:
+                return null;
+        }
+    }
+
+
+
 #if UNITY_EDITOR
     string linkSheetId = "1-HkinUwSW4A4SkuiLGtl0Tm8771jFPVZB5ZpLs5pxz4";
+
     string requestedData;
 
     [Button]
@@ -79,8 +124,6 @@ public class AchievementGlobalConfig : GlobalConfig<AchievementGlobalConfig>
 
     async void FetchAchievement()
     {
-        achievementDataConfigs.Clear();
-
         requestedData = await ABakingSheet.GetCsv(linkSheetId, "Achievement");
 
         List<Dictionary<string, string>> data = ACsvReader.ReadDataFromString(requestedData);

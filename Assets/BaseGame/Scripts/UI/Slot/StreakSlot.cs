@@ -27,15 +27,15 @@ public class StreakSlot : SlotBase<StreakDataConfig>
 
     [Button]
     void OnNormalMode() {
-        if (sequence != null)
-            sequence.Kill();
+        if (mySequence != null)
+            mySequence.Kill();
     }
 
     [Button]
     void CanClaimMode() {
-        if (sequence != null)
-            sequence.Kill();
-        sequence = DOTween.Sequence();
-        sequence.Append(UIAnimation.SlotZoomLoop(trsContent));
+        if (mySequence != null)
+            mySequence.Kill();
+        mySequence = DOTween.Sequence();
+        mySequence.Append(UIAnimation.SlotZoomLoop(trsContent));
     }
 }

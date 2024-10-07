@@ -5,14 +5,6 @@ using UnityEngine;
 
 public class MainContentQuest : MainContent<QuestDataConfig>
 {
-    public void ClearAnim()
-    {
-        for (int i = 0; i < slots.Count; i++)
-        {
-            (slots[i] as QuestSlot).ClearAnim();
-        }
-    }
-
     public override void ReloadData(int id)
     {
         for (int i = 0; i < slots.Count; i++)

@@ -151,10 +151,6 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         HeroPoolGlobalConfig.Instance.GetAllHeroPrefab();
         
     }
-
-    [field: SerializeField] public Sprite[] GraphicArray {get; private set;}
-
-    [field: SerializeField] public Sprite[] RarityArray {get; private set;}
     
     [Button]
     public void GenerateAllHeroStatData()

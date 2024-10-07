@@ -67,7 +67,6 @@ public class ArtifactManager : Singleton<ArtifactManager>
         InGameDataManager.Instance.SaveData();
     }
 
-    [Button]
     public void AddPieceArtifact(ArtifactType artifactType, int amount) {
         currentArtifactTemp = GetArtifactInfo(artifactType);
         if (currentArtifactTemp.Value.Level.Value == 0)
