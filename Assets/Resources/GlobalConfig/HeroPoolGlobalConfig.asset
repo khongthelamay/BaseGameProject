@@ -13,28 +13,10 @@ MonoBehaviour:
   m_Name: HeroPoolGlobalConfig
   m_EditorClassIdentifier: 
   <HeroPrefabList>k__BackingField:
-  - {fileID: 1611595740033320075, guid: f7105501a95c4a24281da6b99334b778, type: 3}
-  - {fileID: 2202033473617160950, guid: bb0403795c7797c4dbc578fe17b4a393, type: 3}
-  - {fileID: 8204215067190643647, guid: 5c1bf445b63596c469951a903c81cbee, type: 3}
-  - {fileID: 575356656520398131, guid: 5eda025bba00e924fa2219178e16a7d2, type: 3}
-  - {fileID: 7894539314021673709, guid: 5002471d3cea7084a9208ffaa13901d4, type: 3}
-  - {fileID: 3705663689834979400, guid: 65b499790e7dbed4fb0cfe14524eced6, type: 3}
-  - {fileID: 2255200881233954570, guid: 6fe7c060171a0a5458c8fe9c89986de5, type: 3}
-  - {fileID: 439992074864885466, guid: 3c2d17f9179dce04caa9b691eebfb0de, type: 3}
-  - {fileID: 5409092884248109561, guid: a7ae28396e8dd424bbe63074160a4692, type: 3}
-  - {fileID: 8004449500915859182, guid: 5d1714626314da1409c486e3bd92c877, type: 3}
-  - {fileID: 1546456945151416765, guid: 31e0cec2da6610e43b8aff301b609c07, type: 3}
-  - {fileID: 5557217720120033899, guid: 933785e83a51c4f4599ec42363829cc9, type: 3}
-  - {fileID: 8564299029542808322, guid: cd92eae8bf210d8429fe7c8790e5c002, type: 3}
-  - {fileID: 6033863105536569278, guid: 4e2568e8a0ccd4d448f8ec95a5aee858, type: 3}
-  - {fileID: 3363927969689767779, guid: 9dba12584488903488ff84483074716b, type: 3}
-  - {fileID: 3899345287036367832, guid: 1c9ab4e9a811c0e4db3c4177c45f6fa2, type: 3}
-  - {fileID: 8928425138619065913, guid: 6c853b71790d06944833bed015405702, type: 3}
-  - {fileID: 7828824248934310747, guid: 3679065240c9a5f4db680fd194e46fd2, type: 3}
-  - {fileID: 7003613112147942778, guid: c59d57e405ee72a468a9d2a23560c339, type: 3}
-  - {fileID: 3049018999533128501, guid: 8cbc763881995e44085a85e182eda998, type: 3}
-  - {fileID: 5924944510220417253, guid: d640ea4fa14c7ae44bdb6ee21a2e0010, type: 3}
-  - {fileID: 8776465695309756271, guid: 6698f8661bfbbbd44a7dfce9abcc8343, type: 3}
+  - {fileID: 6792108791387911584, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
+  - {fileID: 5289782157480354100, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
+  - {fileID: 1353056294452694483, guid: e8211c91701e23541a87916deb2bb9fd, type: 3}
+  - {fileID: 7465919830268259058, guid: ca586a35bc5bd444f9dac5a4885df0be, type: 3}
   <HeroPoolLevelConfig>k__BackingField:
     <Level>k__BackingField: 1
     <ProbabilityRarity>k__BackingField:

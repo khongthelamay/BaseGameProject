@@ -37,8 +37,9 @@ public class HeroPoolGlobalConfig : GlobalConfig<HeroPoolGlobalConfig>
 
     public Hero GetRandomHeroPrefab(int poolLevel)
     {
-        Hero.Rarity rarity = HeroPoolLevelConfig.ProbabilityRarity.GetRandomItem();
-        return HeroPrefabDictionary[rarity].GetRandomElement();
+        // Hero.Rarity rarity = HeroPoolLevelConfig.ProbabilityRarity.GetRandomItem();
+        // return HeroPrefabDictionary[rarity].GetRandomElement();
+        return HeroPrefabList.GetRandomElement();
     }
 
     private Dictionary<Hero.Rarity, List<Hero>> InitHeroDictionary()

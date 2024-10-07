@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Epic_Knight
   m_EditorClassIdentifier: 
   <HeroSprite>k__BackingField: {fileID: 21300000, guid: 8fc8f01907b480a4283269790f86accf, type: 3}
+  <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Knight
-  <HeroRarity>k__BackingField: 2
-  <HeroJob>k__BackingField: 
-  <BaseAttackDamage>k__BackingField: 10
-  <BaseAttackSpeed>k__BackingField: 5
+  <HeroRarity>k__BackingField: 3
+  <HeroClass>k__BackingField: 101
+  <HeroJob>k__BackingField: 0000000003000000
+  <BaseAttackDamage>k__BackingField: 2000
+  <BaseAttackSpeed>k__BackingField: 2.2
   <BaseAttackRange>k__BackingField: 2
-  <UpgradePercentage>k__BackingField: 0
+  <UpgradePercentage>k__BackingField: 5
   <HeroAbilities>k__BackingField:
   - {fileID: 11400000, guid: a85e945d11071954894f267315b5820e, type: 2}
   - {fileID: 11400000, guid: e84e66c2e8de7e04d9d9d1d0ef6798aa, type: 2}

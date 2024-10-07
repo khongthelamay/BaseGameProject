@@ -52,12 +52,14 @@ namespace Core
 
             _movementMotionHandle.PlaybackSpeed = PlaybackSpeed.Value;
             PlaybackSpeed.ReactiveProperty.Subscribe(OnPlaybackSpeedChanged).AddTo(this);
+            return;
+            void OnUpdate(Vector3 position)
+            {
+                Transform.position = position;
+            }
         }
 
-        private void OnUpdate(Vector3 aa)
-        {
-            Transform.position = aa;
-        }
+
 
         private void OnPlaybackSpeedChanged(float speed)
         {
@@ -74,6 +76,8 @@ namespace Core
 
         public void TakeDamage(int attackDamage)
         {
+            attackDamage = (int)(attackDamage * Random.Range(0.2f, 1.8f));
+            FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage);
             CurrentHealthPoint -= attackDamage;
             if (CurrentHealthPoint <= 0)
             {

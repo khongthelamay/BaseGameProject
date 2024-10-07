@@ -15,13 +15,20 @@ namespace Core
     {
         public enum Job
         {
-            Fighter = 0,
-            Ranger = 1,
-            Cleric = 2,
-            Magician = 3,
-            Assassin = 4,
-            Monk = 5,
-            Summoner = 6,
+            Human = 0,
+            Beast = 1,
+            Undead = 2,
+            Chess = 3,
+            Insect = 4,
+            Fish = 5,
+
+            Legendary = 100,
+
+        }
+        public enum Class
+        {
+            Melee = 101,
+            Range = 102,
         }
         public class Factory : PlaceholderFactory<Object, Hero>
         {
@@ -153,15 +160,13 @@ namespace Core
         [Button]
         public void InitHero()
         {
-            InitHero(HeroStatData.HeroSprite,
-                BaseHeroGenerateGlobalConfig.Instance.RarityArray[(int)HeroStatData.HeroRarity]);
-        }
-
-        private void InitHero(Sprite spriteIcon, Sprite spriteRarity)
-        {
-            SpriteGraphic.sprite = spriteIcon;
-            SpriteShadow.sprite = spriteIcon;
-            SpriteRarity.sprite = spriteRarity;
+            if (HeroStatData.HeroSkeletonDataAsset != null)
+            {
+                HeroAnim.SkeletonAnimation.skeletonDataAsset = HeroStatData.HeroSkeletonDataAsset;
+                HeroAnim.SkeletonAnimation.Initialize(true);
+            }
+            SpriteRarity.color = BaseHeroGenerateGlobalConfig.Instance.RarityColorArray[(int)HeroStatData.HeroRarity];
+            
         }
     }
 #endif

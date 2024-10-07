@@ -30,7 +30,6 @@ namespace Core
 
         public HeroAnim PlayAttackAnimation(float speed)
         {
-            Debug.Log(123);
             if (CurrentState == State.Attack) return this;
             CurrentState = State.Attack;
             PlayAnimation(Attack, speed, false).Forget();
