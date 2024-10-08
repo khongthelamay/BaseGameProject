@@ -46,8 +46,8 @@ public class SlotHeroesUpgrade : SlotBase<HeroStatData>
 
     public override void AnimOpen()
     {
-        if (sequence != null) sequence.Kill();
-        sequence = DOTween.Sequence();
-        sequence = UIAnimation.AnimSlotPopUp(trsContent);
+        if (mySequence != null) mySequence.Kill();
+        mySequence = DOTween.Sequence();
+        mySequence = UIAnimation.AnimSlotPopUp(trsContent);
     }
 }

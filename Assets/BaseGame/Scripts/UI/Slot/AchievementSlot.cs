@@ -1,6 +1,8 @@
 using DG.Tweening;
+using Spine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Claims;
 using TMPro;
 using TW.Utility.CustomType;
 using UnityEngine;
@@ -32,6 +34,8 @@ public class AchievementSlot : SlotBase<AchievementDataConfig>
     [SerializeField] Transform pointLightEnd;
     [SerializeField] Vector3 vectorRotate;
 
+    bool onClaim;
+
     float heightDefault;
     public override void Awake()
     {
@@ -44,6 +48,7 @@ public class AchievementSlot : SlotBase<AchievementDataConfig>
 
     public override void InitData(AchievementDataConfig data)
     {
+        if (onClaim) return;
         base.InitData(data);
         animOnSlot.enabled = true;
 
@@ -60,6 +65,7 @@ public class AchievementSlot : SlotBase<AchievementDataConfig>
         objBGCanClaim.SetActive(btnChoose.interactable);
         objNotice.SetActive(btnChoose.interactable);
         objTextNotice.SetActive(btnChoose.interactable);
+        objProgressDone.SetActive(false);
 
         if (!AchievementManager.Instance.IsCanUpdateLevelAchievement(
             (AchievementType)achievementSave.achievementType.Value, 
@@ -90,8 +96,7 @@ public class AchievementSlot : SlotBase<AchievementDataConfig>
     public override void AnimDone()
     {
         if (mySequence != null) mySequence.Kill();
-
-        AchievementManager.Instance.ClaimAchievement(slotData.achievementType);
+        onClaim = true;
 
         btnChoose.interactable = false;
 
@@ -116,12 +121,14 @@ public class AchievementSlot : SlotBase<AchievementDataConfig>
         mySequence.Append(UIAnimation.AnimSlotVerticalClose(myLayout, heightDefault, () =>
         {
             myMask.enabled = false;
+            onClaim = false;
             ReloadData();
             AnimOpen();
         }).SetDelay(.25f));
 
         mySequence.SetDelay(.45f);
         mySequence.Play();
+        slotData = AchievementManager.Instance.GetAchievementDataConfig(slotData.achievementType);
     }
 
     public override void ReloadData()

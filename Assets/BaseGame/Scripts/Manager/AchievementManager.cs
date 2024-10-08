@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TW.Reactive.CustomComponent;
@@ -16,6 +17,11 @@ public class AchievementManager : Singleton<AchievementManager>
     private void Start()
     {
         LoadData();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) AddProgressAchievement(AchievementType.KillEnemy, 10);
     }
 
     void LoadData() {
@@ -71,11 +77,15 @@ public class AchievementManager : Singleton<AchievementManager>
         {
             if (achievements[i].Value.achievementType == (int)achievementType)
             {
-                if(IsCanUpdateLevelAchievement(achievementType, achievements[i].Value.achievementLevel.Value))
+                if (IsCanUpdateLevelAchievement(achievementType, achievements[i].Value.achievementLevel.Value))
+                {
                     achievements[i].Value.achievementLevel.Value += 1;
+                    UpdateDataConfig(achievementType);
+                }
                 return;
             }
         }
+        InGameDataManager.Instance.SaveData();
     }
 
     public bool IsCanUpdateLevelAchievement(AchievementType achievementType, int currentLevel) {
@@ -94,5 +104,31 @@ public class AchievementManager : Singleton<AchievementManager>
             );
         }
         return achievementDataConfigs;
+    }
+
+    public void UpdateDataConfig(AchievementType achievementType)
+    {
+        for (int i = 0; i < achievementDataConfigs.Count; i++)
+        {
+            if (achievementDataConfigs[i].achievementType == achievementType)
+            {
+                achievementDataConfigs[i] = AchievementGlobalConfig.Instance.GetCurrentAchievement(
+                     achievementDataConfigs[i].achievementType,
+                    InGameDataManager.Instance.InGameData.achievementDataSave.GetArchievementLevel(achievementDataConfigs[i].achievementType)
+                );
+                return;
+            }
+        }
+    }
+
+    public AchievementDataConfig GetAchievementDataConfig(AchievementType achievementType)
+    {
+
+        for (int i = 0; i < achievementDataConfigs.Count; i++)
+        {
+            if (achievementDataConfigs[i].achievementType == achievementType)
+                return achievementDataConfigs[i];
+        }
+        return null;
     }
 }

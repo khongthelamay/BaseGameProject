@@ -229,8 +229,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InGameData>k__BackingField:
+    <achievementDataSave>k__BackingField:
+      achievements: []
     <ArtifactData>k__BackingField:
       <ArtifactInfos>k__BackingField: []
+    <heroDataSave>k__BackingField:
+      <heroSaves>k__BackingField: []
+      <totalUpgradePieces>k__BackingField:
+        m_Value: 0
     <QuestData>k__BackingField:
       <questSaves>k__BackingField: []
       <streakDailySaves>k__BackingField: []
@@ -243,6 +249,52 @@ MonoBehaviour:
         m_Value: 0
       <currentWeeklyStreak>k__BackingField:
         m_Value: 0
+--- !u!1 &252065394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 252065395}
+  - component: {fileID: 252065396}
+  m_Layer: 0
+  m_Name: AchievementManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &252065395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252065394}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1976557632}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &252065396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252065394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc55d0a3b023c847951f6eee527c349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievements: []
+  achievementDataConfigs: []
 --- !u!1 &397312555
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,6 +878,7 @@ Transform:
   - {fileID: 61211075}
   - {fileID: 397312556}
   - {fileID: 72696959}
+  - {fileID: 252065395}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2056214802
@@ -1014,22 +1067,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4752257227012021747, guid: 3007617901366a44ebe54edbada33b79, type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8813934338631455273, guid: 3007617901366a44ebe54edbada33b79, type: 3}
-      propertyPath: m_Color.a
-      value: 0.98039216
-      objectReference: {fileID: 0}
-    - target: {fileID: 8813934338631455273, guid: 3007617901366a44ebe54edbada33b79, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8813934338631455273, guid: 3007617901366a44ebe54edbada33b79, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8813934338631455273, guid: 3007617901366a44ebe54edbada33b79, type: 3}
-      propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

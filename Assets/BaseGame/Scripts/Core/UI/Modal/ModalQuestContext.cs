@@ -104,7 +104,7 @@ public class ModalQuestContext
         public void OnOpen() { UIAnimation.ModalOpen(MainView, mainContent); }
 
         public void OnClose() {
-            mainContentQuest.ClearAnim();
+            mainContentQuest.CleanAnimation();
             UIAnimation.BasicButton(btnClose.transform);
             UIAnimation.ModalClose(MainView, mainContent, () => {
                 ModalContainer.Find(ContainerKey.Modals).Pop(true);
@@ -214,11 +214,20 @@ public class ModalQuestContext
         }
         
         void ActionAchievementSlotCallBack(SlotBase<AchievementDataConfig> slotBase) {
+            AchievementManager.Instance.ClaimAchievement(slotBase.slotData.achievementType);
             slotBase.AnimDone();
         }
 
         void ChangeQuestData((QuestSave questSave, int progress) value) {
             View.ChangeQuestData(value.questSave.id);
+        }
+
+        UniTask IModalLifecycleEvent.Cleanup(Memory<object> args)
+        {
+            View.mainContentAchievement.CleanAnimation();
+            View.mainContentQuest.CleanAnimation();
+            View.mainContentDailyStreak.CleanAnimation();
+            return UniTask.CompletedTask;
         }
     }
 }
