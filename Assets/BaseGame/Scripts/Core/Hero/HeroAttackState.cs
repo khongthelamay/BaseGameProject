@@ -31,16 +31,19 @@ namespace Core
                 CurrentAttackProbability = Random.Range(0f, 100f);
                 if (TryTriggerAbility(Ability.Trigger.ProbabilityAttack))
                 {
+                    HeroAnim.PlayAttackAnimation(HeroStatData.BaseAttackSpeed);
                     CurrentAttackTimeCounter -= CurrentAttackTimer;
                     CurrentAttackCount = AIntExtension.Repeat(CurrentAttackCount + 1, 720720);
                 }
                 else if (TryTriggerAbility(Ability.Trigger.SpecialAttack))
                 {
+                    HeroAnim.PlayAttackAnimation(HeroStatData.BaseAttackSpeed);
                     CurrentAttackTimeCounter -= CurrentAttackTimer;
                     CurrentAttackCount = AIntExtension.Repeat(CurrentAttackCount + 1, 720720);
                 }
                 else if (TryTriggerAbility(Ability.Trigger.NormalAttack))
                 {
+                    HeroAnim.PlayAttackAnimation(HeroStatData.BaseAttackSpeed);
                     CurrentAttackTimeCounter -= CurrentAttackTimer;
                     CurrentAttackCount = AIntExtension.Repeat(CurrentAttackCount + 1, 720720);
                 }
@@ -65,7 +68,7 @@ namespace Core
             {
                 if (ability.AbilityTrigger != trigger) continue;
                 if (!ability.CanUseAbility(this)) continue;
-                ability.TryUseAbility(this);
+                if (!ability.TryUseAbility(this)) continue;
                 return true;
             }
 

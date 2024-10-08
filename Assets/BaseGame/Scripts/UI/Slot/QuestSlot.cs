@@ -36,7 +36,6 @@ public class QuestSlot : SlotBase<QuestDataConfig>
     ReactiveValue<QuestSave> questSave = new(null);
 
     float heightDefault;
-    Sequence mySequence;
 
     public override void Awake()
     {
@@ -117,11 +116,6 @@ public class QuestSlot : SlotBase<QuestDataConfig>
         objProgressDone.SetActive(true);
         myLayout.preferredHeight = heightDefault;
         transform.SetAsLastSibling();
-    }
-
-    public void ClearAnim() {
-        if (mySequence != null)
-            mySequence.Kill();
     }
 
     public override void ReloadData()

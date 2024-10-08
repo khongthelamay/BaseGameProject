@@ -1,4 +1,5 @@
-﻿using LitMotion;
+﻿using System;
+using LitMotion;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using UnityEngine;
@@ -14,6 +15,12 @@ public class HeroAttackRange : ACachedMonoBehaviour
         OriginalScale = 0;
         Transform.localScale = Vector3.zero;
     }
+
+    private void OnDestroy()
+    {
+        UpdateAttackMotion.TryCancel();
+    }
+
     [Button]
     public void ShowAttackRange()
     {

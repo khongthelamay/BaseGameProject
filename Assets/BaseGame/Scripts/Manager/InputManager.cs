@@ -1,49 +1,81 @@
+using System;
+using Core;
 using R3;
 using R3.Triggers;
 using TW.Utility.DesignPattern;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class InputManager : Singleton<InputManager>
 {
-    [field: SerializeField] public Camera MainCamera {get; private set;}
+    [field: SerializeField] public Camera MainCamera { get; private set; }
+    [field: SerializeField] public FieldSlot StartDragFieldSlot { get; private set; }
+    [field: SerializeField] public FieldSlot EndDragFieldSlot { get; private set; }
+    [field: SerializeField] public Transform StartSelect {get; private set;}
+    [field: SerializeField] public Transform EndSelect {get; private set;}
+    [field: SerializeField] public LineRenderer LineRenderer {get; private set;}
 
-    [field: SerializeField] public LayerMask WhatIsInteractable {get; private set;}
-    
-    private bool IsTouchingUI { get; set; }
-    private IInteractable CurrentSelectedInteractable { get; set; }
-
-    public void Select(IInteractable interactable)
+#if UNITY_EDITOR
+    private void Start()
     {
-        
+        this.UpdateAsObservable().Where(_ =>Input.GetKey(KeyCode.Space)).Subscribe(_ =>
+        {
+            Debug.Break();
+        });
     }
-    private bool IsPointerOverGameObject()
+#endif
+
+    public void SetStartDragFieldSlot(FieldSlot fieldSlot)
     {
-        //check mouse
-        if (EventSystem.current.IsPointerOverGameObject())
-            return true;
-
-        //check touch
-        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        StartDragFieldSlot = fieldSlot;
+        if (fieldSlot == null)
         {
-            if (EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
-            {
-                IsTouchingUI = true;
-                return true;
-            }
+            StartSelect.gameObject.SetActive(false);
+            DrawLine();
+            return;
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0) && IsTouchingUI)
+        StartSelect.position = StartDragFieldSlot.Transform.position;
+        StartSelect.gameObject.SetActive(true);
+    }
+    public void SetEndDragFieldSlot(FieldSlot fieldSlot)
+    {
+        EndDragFieldSlot = fieldSlot;
+        if (fieldSlot == null)
         {
-            IsTouchingUI = false;
-            return true;
+            EndSelect.gameObject.SetActive(false);
+            DrawLine();
+            return;
         }
+        EndSelect.position = EndDragFieldSlot.Transform.position;
+        EndSelect.gameObject.SetActive(true);
+        DrawLine();
+    }
+    private void DrawLine()
+    {
+        if (StartDragFieldSlot == null || EndDragFieldSlot == null)
+        {
+            LineRenderer.positionCount = 0;
+            return;
+        }
+        LineRenderer.positionCount = 2;
+        LineRenderer.SetPosition(0, StartDragFieldSlot.Transform.position);
+        LineRenderer.SetPosition(1, EndDragFieldSlot.Transform.position);
+    }
 
-        return IsTouchingUI;
+    public void TrySwapHeroInFieldSlot()
+    {
+        if (StartDragFieldSlot == null || EndDragFieldSlot == null) return;
+        if (StartDragFieldSlot == EndDragFieldSlot) return;
+
+        StartDragFieldSlot.TryRemoveHero(out Hero startHero);
+        EndDragFieldSlot.TryRemoveHero(out Hero endHero);
+
+        if (startHero != null && startHero.IsCurrentState(HeroAttackState.Instance))
+        {
+            EndDragFieldSlot.TryAddHero(startHero);
+        }
+        if (endHero != null && endHero.IsCurrentState(HeroAttackState.Instance))
+        {
+            StartDragFieldSlot.TryAddHero(endHero);
+        }
     }
 }
-
-public interface IInteractable : IPointerClickHandler
-{
-
-}
-

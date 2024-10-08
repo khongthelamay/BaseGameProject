@@ -1,63 +1,51 @@
-﻿using Core;
+﻿using System;
+using Core;
+using Manager;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler
+[SelectionBase]
+public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler
 {
+    public static Action FieldSlotChangedCallback { get; private set; }
     [Inject] private Hero.Factory HeroFactory { get; set; }
+    [Inject] private BattleManager BattleManager { get; set; }
     [field: SerializeField] public Vector2 DefaultSize {get; private set;}
     [field: SerializeField] public int RowId {get; private set;}
     [field: SerializeField] public int ColumnId {get; private set;}
     [field: SerializeField] private GameObject UpgradeMark {get; set;}
     [field: SerializeField] public Hero Hero {get; private set;}
 
+    private void Awake()
+    {
+        FieldSlotChangedCallback += OnFieldSlotChanged;
+    }
+
+    private void OnDestroy()
+    {
+        FieldSlotChangedCallback -= OnFieldSlotChanged;
+    }
+
     public bool TryAddHero(Hero hero)
     {
         if (Hero != null) return false;
         Hero = hero;
-        Hero.SetupFieldSlot(this);
-        Hero.FieldInit();
+        Hero.MoveToFieldSlot(this);
         return true;
     }
+    
     public bool TryGetHero(out Hero hero)
     {
         hero = Hero;
         return hero != null;
     }
-    public bool TryRemoveHero()
+    public bool TryRemoveHero(out Hero hero)
     {
-        if (!TryGetHero(out Hero hero)) return false;
-        hero.SelfDespawn();
+        if (!TryGetHero(out hero)) return false;
         Hero = null;
         return true;
-    }
-    public FieldSlot SetupCoordinate(int rowId, int columnId)
-    {
-        RowId = rowId;
-        ColumnId = columnId;
-
-        return this;
-    }
-    public FieldSlot SetupTransform(Transform parent)
-    {
-        Transform.SetParent(parent);
-        return this;
-    }
-    public FieldSlot SetupPosition(int maxRow, int maxColumn)
-    {
-        float x = (ColumnId - maxColumn / 2f + 0.5f) * DefaultSize.x;
-        float y = (- RowId + maxRow / 2f - 0.5f) * DefaultSize.y;
-        transform.localPosition = new Vector3(x, y, 0);
-        
-        return this;
-    }
-    public void RemoveHero()
-    {
-        if (!TryGetHero(out Hero hero)) return;
-        hero.SelfDespawn();
-        Hero = null;
     }
     public bool TryUpgradeHero()
     {
@@ -68,7 +56,7 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler
         
         Hero heroPrefab = HeroPoolGlobalConfig.Instance.GetRandomHeroUpgradePrefab(heroStatData.HeroRarity + 1);
         Hero = HeroFactory.Create(heroPrefab);
-        Hero.SetupFieldSlot(this);
+        Hero.MoveToFieldSlot(this);
 
         return true;
     }
@@ -76,12 +64,49 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler
     {
         UpgradeMark.SetActive(isShow);
     }
+    private void OnFieldSlotChanged()
+    {
+        if (TryGetHero(out Hero hero) && hero.HeroStatData.HeroRarity.IsMaxRarity())
+        {
+            SetUpgradeMark(false);
+            return;
+        }
+        SetUpgradeMark(BattleManager.HasSame2HeroInOtherFieldSlot(this));
+    }
+
+    #region Interactable Functions
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (Hero != null)
-        {
-            TempUIManager.Instance.ShowModalHeroInteract(this);
-        }
+        if (!TryGetHero(out Hero hero)) return;
+        if (!hero.IsCurrentState(HeroAttackState.Instance)) return;
+        TempUIManager.Instance.ShowModalHeroInteract(this);
     }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (!TryGetHero(out Hero hero)) return;
+        if (!hero.IsCurrentState(HeroAttackState.Instance)) return;
+        InputManager.Instance.SetStartDragFieldSlot(this);
+        InputManager.Instance.SetEndDragFieldSlot(this);
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        InputManager.Instance.TrySwapHeroInFieldSlot();
+        InputManager.Instance.SetStartDragFieldSlot(null);
+        InputManager.Instance.SetEndDragFieldSlot(null);
+        
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (InputManager.Instance.StartDragFieldSlot == null) return;
+        InputManager.Instance.SetEndDragFieldSlot(this);
+    }
+    
+
+    #endregion
 }

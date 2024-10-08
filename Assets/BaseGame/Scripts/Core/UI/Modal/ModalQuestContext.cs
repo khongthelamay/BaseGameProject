@@ -28,6 +28,7 @@ public class ModalQuestContext
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public List<ReactiveValue<QuestSave>> questSaves { get; set; } = new();
+        [field: SerializeField] public List<ReactiveValue<AchievementSave>> achievementSaves { get; set; } = new();
         [field: SerializeField] public List<ReactiveValue<QuestSave>> dailyStreakSaves { get; set; } = new();
         [field: SerializeField] public List<ReactiveValue<QuestSave>> weeklyStreakSaves { get; set; } = new();
         [field: SerializeField] public ReactiveValue<string> strTimeDailyRemaining { get; set; } = new();
@@ -39,6 +40,7 @@ public class ModalQuestContext
         public UniTask Initialize(Memory<object> args)
         {
             questSaves = QuestManager.Instance.questSaves;
+            achievementSaves = AchievementManager.Instance.achievements;
             strTimeDailyRemaining = QuestManager.Instance.strTimeDailyRemaining;
             strTimeWeeklyRemaining = QuestManager.Instance.strTimeWeeklyRemaining;
             currentDailyStreak = QuestManager.Instance.currentDailyStreak;
@@ -85,8 +87,11 @@ public class ModalQuestContext
             mainContentQuest.AnimOpen();
         }
 
-        public void LoadAchievementData() {
-            
+        public void LoadAchievementData(List<AchievementDataConfig> achievementDataConfigs) {
+            mainContentAchievement.DeActiveSlotOut(0);
+            mainContentAchievement.InitData(achievementDataConfigs);
+            mainContentAchievement.SortSlot();
+            mainContentAchievement.AnimOpen();
         }
 
         public void LoadStreakData(List<StreakDataConfig> streakDataConfigs) {
@@ -123,16 +128,21 @@ public class ModalQuestContext
             currentGameObjShow = objAchievement;
             objDailyQuest.SetActive(false);
             objAchievement.SetActive(true);
-            LoadAchievementData();
+            LoadAchievementData(AchievementManager.Instance.GetAchievements());
         }
 
         public void SetActionCallBackOnQuestSlot(UnityAction<SlotBase<QuestDataConfig>> actionCallBack) {
             mainContentQuest.SetActionSlotCallBack(actionCallBack);
         }
 
-        public void ChangeData(ReactiveValue<int> id)
+        public void SetActionCallBackOnAchievementSlot(UnityAction<SlotBase<AchievementDataConfig>> actionCallBack)
         {
-            mainContentQuest.ReloadData(id);
+            mainContentAchievement.SetActionSlotCallBack(actionCallBack);
+        }
+
+        public void ChangeQuestData(ReactiveValue<int> id)
+        {
+            mainContentQuest.ReloadData(id.Value);
         }
 
         public void ChangeTextTimeRemaining(string strChange)
@@ -143,6 +153,11 @@ public class ModalQuestContext
         public void ChangeDailyProgress(float value)
         {
             mainContentDailyStreak.ChangeCurrentProgress(value / QuestGlobalConfig.Instance.GetMaxValueDailyStreak());
+        }
+
+        public void ChangeAchievementData(ReactiveValue<int> achievementType)
+        {
+            mainContentAchievement.ReloadData(achievementType.Value);
         }
     }
 
@@ -160,6 +175,7 @@ public class ModalQuestContext
 
             View.OnOpen();
             View.SetActionCallBackOnQuestSlot(ActionQuestSlotCallBack);
+            View.SetActionCallBackOnAchievementSlot(ActionAchievementSlotCallBack);
             View.btnClose.onClick.AddListener(View.OnClose);
             View.btnDailyQuest.onClick.AddListener(View.OnDailyQuestShow);
             View.btnAchievement.onClick.AddListener(View.OnAchievementShow);
@@ -168,7 +184,15 @@ public class ModalQuestContext
             {
                 Model.questSaves[i].ReactiveProperty
                     .CombineLatest(Model.questSaves[i].Value.progress.ReactiveProperty, (questSave, progress) => (questSave, progress))
-                    .Subscribe(ChangeData)
+                    .Subscribe(ChangeQuestData)
+                    .AddTo(View.MainView);
+            }
+
+            for (int i = 0; i < Model.achievementSaves.Count; i++)
+            {
+                Model.achievementSaves[i].ReactiveProperty
+                    .CombineLatest(Model.achievementSaves[i].Value.currentProgress.ReactiveProperty, (achievement, currentProgress) => (achievement, currentProgress))
+                    .Subscribe(ChangeAchievementData)
                     .AddTo(View.MainView);
             }
 
@@ -180,12 +204,21 @@ public class ModalQuestContext
             View.OnDailyQuestShow();
         }
 
-        void ActionQuestSlotCallBack(SlotBase<QuestDataConfig> slotBase) {
-            (slotBase as QuestSlot).AnimDone();
+        private void ChangeAchievementData((AchievementSave achievement, float currentProgress) value)
+        {
+            View.ChangeAchievementData(value.achievement.achievementType);
         }
 
-        void ChangeData((QuestSave questSave, int progress) value) {
-            View.ChangeData(value.questSave.id);
+        void ActionQuestSlotCallBack(SlotBase<QuestDataConfig> slotBase) {
+            slotBase.AnimDone();
+        }
+        
+        void ActionAchievementSlotCallBack(SlotBase<AchievementDataConfig> slotBase) {
+            slotBase.AnimDone();
+        }
+
+        void ChangeQuestData((QuestSave questSave, int progress) value) {
+            View.ChangeQuestData(value.questSave.id);
         }
     }
 }

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90a7aeed97a4c8892cac10748189300, type: 3}
+  m_Name: BaseMapGenerateGlobalConfig
+  m_EditorClassIdentifier: 
+  <BaseMapObject>k__BackingField: {fileID: 16840536537986587, guid: c25770695a841f24286b5376061642f9, type: 3}
+  <TileSprites>k__BackingField:
+  - {fileID: 21300000, guid: f64dfb691a313ba48b2a7509ea006a0d, type: 3}
+  - {fileID: 21300000, guid: 157303a7a40c28242aae1d027eba9136, type: 3}
+  - {fileID: 21300000, guid: 08933cc5d3b1e52439b701d37f93a539, type: 3}
+  - {fileID: 21300000, guid: ee9b3a71097a9674587479d479de921c, type: 3}
+  - {fileID: 21300000, guid: af5848e80dffe5a4cb15ac24660cc2b0, type: 3}
+  - {fileID: 21300000, guid: 69d16ec3feef826468ae57707a3e4065, type: 3}
+  - {fileID: 21300000, guid: f11bd10bdd474854f9d52c591c2a8fb2, type: 3}
+  - {fileID: 21300000, guid: 461abae860ce02f41a05332a14b81ac1, type: 3}
+  - {fileID: 21300000, guid: 979da8ffa56b8fb4ebad49cd80f0679e, type: 3}
+  <GroundSprites>k__BackingField:
+  - {fileID: -1273759662, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
+  - {fileID: 849031375, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
+  - {fileID: 1990107654, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
+  - {fileID: -243243957, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
+  - {fileID: 2066487447, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
+  - {fileID: -1640347526, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
+  - {fileID: 1149973743, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
+  - {fileID: -887236285, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
+  - {fileID: 228109095, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
+  <TilePrefabList>k__BackingField:
+  - {fileID: 7590976411059534985, guid: 35673724331a0fb4fbcfa29dfd63f368, type: 3}
+  - {fileID: 3727849529724384905, guid: 38e48643d323852459bf34d44d6c9d31, type: 3}
+  - {fileID: 5568251391747148025, guid: 8020d421c4faa704e9b43efeb9cdbb26, type: 3}
+  - {fileID: 3356203538600803911, guid: 2e90d89f25d6b734db6c7a008c5b3755, type: 3}
+  - {fileID: 1817669987387395841, guid: eca92f12830be0249b8ba34c16130a81, type: 3}
+  - {fileID: 812239118464596779, guid: 40993f5e0357d444b8395d890bd92034, type: 3}
+  - {fileID: 4625451734169535142, guid: 9fd32dec4bd4db548bc934b6eb8e1c11, type: 3}
+  - {fileID: 7548776843777132762, guid: 6a8dae1738b9c68419aedce02ec3f519, type: 3}
+  - {fileID: 5237646908809176476, guid: 57a27787bd5950e44afdcf626a5ee49b, type: 3}
+  <GroundPrefabList>k__BackingField: []
