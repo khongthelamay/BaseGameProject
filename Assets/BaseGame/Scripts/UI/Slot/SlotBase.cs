@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,4 +45,13 @@ public class SlotBase<Data> : MonoBehaviour
 
     public virtual void AnimOpen() { }
     public virtual void AnimDone() { }
+
+    public virtual void CleanAnimation()
+    {
+        if (sequence != null)
+            sequence.Kill();
+
+        if (animOnSlot != null)
+            animOnSlot.CleanAnimation();
+    }
 }

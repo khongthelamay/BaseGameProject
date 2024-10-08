@@ -1,4 +1,5 @@
 using Core;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,7 @@ public class SlotHeroesUpgrade : SlotBase<HeroStatData>
 {
     [Header("========= Slot Heroes Upgrade =========")]
     public Image imgBG;
+    public Image imgSubBG;
     public ProgressBar pieceProgress;
     public TextMeshProUGUI txtName;
     public TextMeshProUGUI txtRequire;
@@ -22,6 +24,8 @@ public class SlotHeroesUpgrade : SlotBase<HeroStatData>
         base.InitData(data);
         AnimOpen();
         imgIcon.sprite = data.HeroSprite;
+        imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroRarity);
+        imgSubBG.sprite = imgBG.sprite;
         txtName.text = data.Name;
 
         objUnLock.SetActive(true);
@@ -31,6 +35,8 @@ public class SlotHeroesUpgrade : SlotBase<HeroStatData>
 
     public override void AnimOpen()
     {
-        UIAnimation.AnimSlotPopUp(trsContent);
+        if (sequence != null) sequence.Kill();
+        sequence = DOTween.Sequence();
+        sequence = UIAnimation.AnimSlotPopUp(trsContent);
     }
 }

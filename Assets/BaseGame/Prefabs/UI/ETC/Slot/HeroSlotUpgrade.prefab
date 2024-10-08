@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 5711957107914277452}
   - component: {fileID: 3460033287092759698}
   m_Layer: 5
-  m_Name: BG
+  m_Name: SubBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,14 +259,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7735849, g: 0.6882484, b: 0.5947846, a: 1}
+  m_Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f420753e7e9a404ca68aa66e745f053, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 379513dd2d51cad40a1c3a86e0d25ce8, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1046,7 +1046,8 @@ MonoBehaviour:
   btnChoose: {fileID: 2761065692497192931}
   trsContent: {fileID: 8683970424811236861}
   animOnSlot: {fileID: 7611287924326152207}
-  imgBG: {fileID: 3460033287092759698}
+  imgBG: {fileID: 2186462907814712777}
+  imgSubBG: {fileID: 3460033287092759698}
   pieceProgress: {fileID: 734851905488811844}
   txtName: {fileID: 6561743720879109838}
   txtRequire: {fileID: 2731949320006145502}
@@ -1169,14 +1170,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6431373, g: 0.56078434, b: 0.47058827, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f420753e7e9a404ca68aa66e745f053, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 379513dd2d51cad40a1c3a86e0d25ce8, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

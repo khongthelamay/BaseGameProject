@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,5 +28,11 @@ public class AnimOnSlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             sequence.OnComplete(() => {
                 actionCallback();
             });
+    }
+
+    public void CleanAnimation()
+    {
+        if (sequence != null)
+            sequence.Kill();
     }
 }

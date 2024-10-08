@@ -63,4 +63,10 @@ public class MainContent<Data> : MonoBehaviour
 
     public virtual void SortSlot() { }
     public virtual void AnimOpen() { }
+    public virtual void CleanAnimation() {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            slots[i].CleanAnimation();
+        }
+    }
 }

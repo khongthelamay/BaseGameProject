@@ -58,6 +58,11 @@ public class ScreensHeroesContext
             await Model.Initialize(args);
             await View.Initialize(args);
             View.InitData();
-        }      
+        }
+
+        public async UniTask Cleanup(Memory<object> args)
+        {
+            View.mainContentHeroes.CleanAnimation();
+        }
     }
 }
