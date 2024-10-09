@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Bone Mantis
   <HeroRarity>k__BackingField: 4
-  <HeroClass>k__BackingField: 101
-  <HeroJob>k__BackingField: 0200000004000000
+  <HeroClass>k__BackingField: 1
+  <HeroJob>k__BackingField: 030000000500000000000000
   <BaseAttackDamage>k__BackingField: 8600
   <BaseAttackSpeed>k__BackingField: 2.2
   <BaseAttackRange>k__BackingField: 2

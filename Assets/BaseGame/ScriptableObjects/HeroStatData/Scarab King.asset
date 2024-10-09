@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Scarab King
   <HeroRarity>k__BackingField: 4
-  <HeroClass>k__BackingField: 101
-  <HeroJob>k__BackingField: 0400000001000000
+  <HeroClass>k__BackingField: 1
+  <HeroJob>k__BackingField: 050000000200000000000000
   <BaseAttackDamage>k__BackingField: 15000
   <BaseAttackSpeed>k__BackingField: 2.5
   <BaseAttackRange>k__BackingField: 2

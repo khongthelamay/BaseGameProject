@@ -7,7 +7,7 @@ namespace Core
     [CreateAssetMenu(fileName = "NormalAttackAbility", menuName = "ScriptableObjects/NormalAttackAbility")]
     public class NormalAttackAbility : Ability
     {
-        [field: SerializeField] public Projectile Projectile {get; private set;}
+        [field: SerializeField] public Projectile Projectile {get; set;}
         
         private void Reset()    
         {

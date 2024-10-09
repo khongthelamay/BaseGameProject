@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc323b84b86e9f4b95343614b0c45eb, type: 3}
   m_Name: BaseHeroGenerateGlobalConfig
   m_EditorClassIdentifier: 
-  <SheetHeroStatDataList>k__BackingField:
-  - {fileID: 11400000, guid: 4b2f4ccde3e32a54cab162754fcdbd24, type: 2}
-  - {fileID: 11400000, guid: 00401726ec2221f48b7823c247ebc6bb, type: 2}
-  - {fileID: 11400000, guid: d2d3e930322ab2549805055b94b28e99, type: 2}
-  - {fileID: 11400000, guid: 7b794966a51efc24b8313a5abee26e89, type: 2}
+  <SheetHeroStatDataList>k__BackingField: []
   <HeroStatDataList>k__BackingField:
   - {fileID: 0}
   - {fileID: 0}
@@ -72,10 +68,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c93ba1948713824a8f77011615d73fd, type: 2}
   - {fileID: 11400000, guid: 04d395946e58bdb45bcc09e895972bf3, type: 2}
   <HeroPrefabList>k__BackingField:
+  - {fileID: 6792108791387911584, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
   - {fileID: 5289782157480354100, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
   - {fileID: 1353056294452694483, guid: e8211c91701e23541a87916deb2bb9fd, type: 3}
   - {fileID: 7465919830268259058, guid: ca586a35bc5bd444f9dac5a4885df0be, type: 3}
   <BaseHero>k__BackingField: {fileID: 899073806387762782, guid: 0d4112a616dec1e40932d772c0c41f0a, type: 3}
+  <BaseProjectile>k__BackingField: {fileID: 8853763310275192392, guid: 89aea41ff06b3f04f95a389c4e1c4d61, type: 3}
   <GraphicArray>k__BackingField: []
   <RarityArray>k__BackingField:
   - {fileID: 21300000, guid: f47d6e3567ee4dd4985636bfd5ced958, type: 3}

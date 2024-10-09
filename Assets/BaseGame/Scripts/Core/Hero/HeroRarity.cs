@@ -1,7 +1,10 @@
-﻿namespace Core
+﻿using Sirenix.OdinInspector;
+
+namespace Core
 {
     public partial class Hero
     {
+        [GUIColor("@TW.Utility.Extension.AColorExtension.GetColorInPalette(\"Rarity\", (int)$value)")]
         public enum Rarity
         {
             Common = 0,

@@ -13,22 +13,23 @@ namespace Core
 {
     public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble
     {
+        [GUIColor("@TW.Utility.Extension.AColorExtension.GetColorInPalette(\"Job\", (int)$value)")]
         public enum Job
         {
-            Human = 0,
-            Beast = 1,
-            Undead = 2,
-            Chess = 3,
-            Insect = 4,
-            Fish = 5,
-
-            Legendary = 100,
-
+            Legend = 0,
+            
+            Human = 1,
+            Beast = 2,
+            Undead = 3,
+            Chess = 4,
+            Insect = 5,
+            Fish = 6,
         }
+        [GUIColor("@TW.Utility.Extension.AColorExtension.GetColorInPalette(\"Class\", (int)$value)")]
         public enum Class
         {
-            Melee = 101,
-            Range = 102,
+            Melee = 1,
+            Range = 2,
         }
         public class Factory : PlaceholderFactory<Object, Hero>
         {

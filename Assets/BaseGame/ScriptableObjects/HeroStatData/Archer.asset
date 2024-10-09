@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 11400000, guid: 45335d00c33f37949893d8de709302c8, type: 2}
   <Name>k__BackingField: Archer
   <HeroRarity>k__BackingField: 1
-  <HeroClass>k__BackingField: 102
-  <HeroJob>k__BackingField: 00000000
+  <HeroClass>k__BackingField: 2
+  <HeroJob>k__BackingField: 01000000
   <BaseAttackDamage>k__BackingField: 80
   <BaseAttackSpeed>k__BackingField: 1.5
   <BaseAttackRange>k__BackingField: 4
