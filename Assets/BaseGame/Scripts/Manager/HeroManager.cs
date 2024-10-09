@@ -65,11 +65,11 @@ public class HeroManager : Singleton<HeroManager>
     }
 
     public bool IsCanUpgradeHero(string heroName) {
-        for (int i = 0; i < heroSaves.Count; i++)
-        {
-            if (heroSaves[i].Value.heroName == heroName)
-                return BaseHeroGenerateGlobalConfig.Instance.GetHeroStatDataConfig(heroName, heroSaves[i].Value.piece) != null;
-        }
+        // for (int i = 0; i < heroSaves.Count; i++)
+        // {
+        //     if (heroSaves[i].Value.heroName == heroName)
+        //         return BaseHeroGenerateGlobalConfig.Instance.GetHeroStatDataConfig(heroName, heroSaves[i].Value.piece) != null;
+        // }
         return false;
     }
 

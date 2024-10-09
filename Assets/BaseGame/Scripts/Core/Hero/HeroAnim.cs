@@ -53,7 +53,7 @@ namespace Core
             if (CurrentState == State.Idle) return;
             
             CancellationTokenSource = new CancellationTokenSource();
-            await UniTask.Delay((int)(900 / speed), cancellationToken: CancellationTokenSource.Token);
+            await UniTask.Delay((int)(2000 / speed), cancellationToken: CancellationTokenSource.Token);
             PlayIdleAnimation(1);
         }
     }

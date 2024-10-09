@@ -40,122 +40,40 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         
         SheetHeroStatDataList = new List<HeroStatData>();
         string result = await ABakingSheet.GetCsv(sheetId, "UnitAbility");
-        List<Dictionary<string, string>> allData = ACsvReader.ReadDataFromString(result);
+        List<Dictionary<string, string>> csvData = ACsvReader.ReadDataFromString(result);
         HeroStatData heroStatData = null;
-        foreach (Dictionary<string, string> data in allData)
+        for (var i = 0; i < csvData.Count; i++)
         {
-            if (!data["ID"].IsNullOrWhitespace())
+            Dictionary<string, string> data = csvData[i];
+            if (data["ID"].IsNullOrWhitespace()) continue;
+            heroStatData = heroStatDataList.FirstOrDefault(d => d.Name == data["Name"]);
+            if (heroStatData == null)
             {
-                Debug.Log(data["ID"]);
-                heroStatData = heroStatDataList.FirstOrDefault(d => d.Name == data["Name"]);
-                if (heroStatData == null)
-                {
-                    heroStatData = CreateInstance<HeroStatData>();
-                    heroStatData.Name = data["Name"];
-                    heroStatData.name = data["Name"];
-                    AssetDatabase.CreateAsset(heroStatData, $"Assets/BaseGame/ScriptableObjects/HeroStatData/{heroStatData.Name}.asset");
-                    AssetDatabase.SaveAssets();
-                    
-                    heroStatData = AssetDatabase.LoadAssetAtPath<HeroStatData>($"Assets/BaseGame/ScriptableObjects/HeroStatData/{heroStatData.Name}.asset");
-                    
-                }
-                EditorUtility.SetDirty(heroStatData);
-                List<Hero.Job> jobList = new List<Hero.Job>();
-                if (Enum.TryParse(typeof(Hero.Job), data["MainRace"], out object job1))
-                {
-                    jobList.Add((Hero.Job) job1);
-                }
-                if (Enum.TryParse(typeof(Hero.Job), data["SubRace1"], out object job2))
-                {
-                    jobList.Add((Hero.Job) job2);
-                }
-                if (Enum.TryParse(typeof(Hero.Job), data["SubRace2"], out object job3))
-                {
-                    
-                    jobList.Add((Hero.Job) job3);
-                }
-                heroStatData.HeroJob = jobList.ToArray();
-                if (Enum.TryParse(typeof(Hero.Class), data["Class"], out object class1))
-                {
-                    heroStatData.HeroClass = (Hero.Class) class1;
-                }
-
-                if (int.TryParse(data["Tier"], out int tier))
-                {
-                    heroStatData.HeroRarity = (Hero.Rarity) (tier-1);
-                }
-                if (int.TryParse(data["AttackDamage"], out int attackDamage))
-                {
-                    heroStatData.BaseAttackDamage = attackDamage;
-                }
-                if (float.TryParse(data["AttackSpeed"], out float attackSpeed))
-                {
-                    heroStatData.BaseAttackSpeed = attackSpeed;
-                }
-                if (float.TryParse(data["AttackRange"], out float attackRange))
-                {
-                    heroStatData.BaseAttackRange = attackRange;
-                }
-                if (float.TryParse(data["UpgradePercentage"], out float upgradePercentage))
-                {
-                    heroStatData.UpgradePercentage = upgradePercentage;
-                }
-
-                try
-                {
-                    heroStatData.HeroSkeletonDataAsset = AssetDatabase.LoadAssetAtPath<SkeletonDataAsset>(
-                        AssetDatabase.GUIDToAssetPath(
-                            AssetDatabase.FindAssets($"t:SkeletonDataAsset {data["Name"]}_SkeletonData")[0]));
-                }
-                catch (Exception e)
-                {
-                    Debug.Log($"SkeletonDataAsset {data["Name"]} not found");
-                }
-                List<Ability> abilities = new List<Ability>();
-                NormalAttackAbility normalAttackAbility = null;
-                try
-                {
-                    normalAttackAbility = AssetDatabase.LoadAssetAtPath<NormalAttackAbility>(
-                        AssetDatabase.GUIDToAssetPath(
-                            AssetDatabase.FindAssets($"t:NormalAttackAbility {data["Name"]}_NormalAttackAbility")[0]));
-                }
-                catch (Exception e)
-                {
-                    normalAttackAbility = CreateInstance<NormalAttackAbility>();
-                    normalAttackAbility.name = $"{data["Name"]}_NormalAttackAbility";
-                    AssetDatabase.CreateAsset(normalAttackAbility, $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
-                    AssetDatabase.SaveAssets();
-                    
-                    normalAttackAbility = AssetDatabase.LoadAssetAtPath<NormalAttackAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
-                }
-                EditorUtility.SetDirty(normalAttackAbility);
-                if (heroStatData.HeroClass == Hero.Class.Range)
-                {
-                    Projectile projectile = null;
-                    try
-                    {
-                        projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
-                            AssetDatabase.GUIDToAssetPath(
-                                AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_NormalAttackProjectile")[0]));
-                    }
-                    catch (Exception e)
-                    {
-                        projectile = Instantiate(BaseProjectile);
-                        projectile.name = $"{data["Name"]}_NormalAttackProjectile";
-                        PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
-                        AssetDatabase.SaveAssets();
-                        DestroyImmediate(projectile.gameObject);
-                        
-                        projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
-                    }
-                    normalAttackAbility.Projectile = projectile;
-                }
-                normalAttackAbility.AbilityTarget = Ability.Target.EnemyInRange;
-                normalAttackAbility.AbilityTrigger = Ability.Trigger.NormalAttack;
-                abilities.Add(normalAttackAbility);
-                
-                heroStatData.HeroAbilities = abilities;
+                heroStatData = CreateInstance<HeroStatData>();
+                heroStatData.Name = data["Name"];
+                heroStatData.name = data["Name"];
+                AssetDatabase.CreateAsset(heroStatData,
+                    $"Assets/BaseGame/ScriptableObjects/HeroStatData/{heroStatData.Name}.asset");
+                AssetDatabase.SaveAssets();
+                heroStatData =
+                    AssetDatabase.LoadAssetAtPath<HeroStatData>(
+                        $"Assets/BaseGame/ScriptableObjects/HeroStatData/{heroStatData.Name}.asset");
             }
+
+            EditorUtility.SetDirty(heroStatData);
+            GenerateBaseData(data, heroStatData);
+            heroStatData.HeroAbilities.Clear();
+
+            NormalAttackAbility normalAttackAbility = GenerateNormalAttackAbility(data, heroStatData);
+            heroStatData.HeroAbilities.Add(normalAttackAbility);
+
+            for (int j = i; j < csvData.Count; j++)
+            {
+                if (csvData[j]["AbilityName"].IsNullOrWhitespace()) break;
+                Ability ability = GenerateAbility(csvData[j], heroStatData);
+                heroStatData.HeroAbilities.Add(ability);
+            }
+            heroStatData.HeroAbilities = heroStatData.HeroAbilities.Where(a => a != null).ToList();
         }
 
         SheetHeroStatDataList = AssetDatabase.FindAssets("t:HeroStatData")
@@ -195,43 +113,172 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         HeroPoolGlobalConfig.Instance.GetAllHeroPrefab();
         
     }
-    
-    public void GenerateAllHeroStatData()
+
+    private static void GenerateBaseData(Dictionary<string, string> data, HeroStatData heroStatData)
     {
-#if UNITY_EDITOR
-        EditorUtility.SetDirty(this);
-        HeroStatDataList = AssetDatabase.FindAssets("t:HeroStatData")
-            .Select(AssetDatabase.GUIDToAssetPath)
-            .Select(AssetDatabase.LoadAssetAtPath<HeroStatData>)
-            .ToList();
+        GenerateHeroJob(data, heroStatData);
+        GenerateHeroClass(data, heroStatData);
+        GenerateBaseStat(data, heroStatData);
+        GenerateSkeletonData(data, heroStatData);
+    }
 
-
-        HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/BaseGame/Prefabs/Hero" })
-            .Select(AssetDatabase.GUIDToAssetPath)
-            .Select(AssetDatabase.LoadAssetAtPath<Hero>)
-            .ToList();
-        HeroStatDataList.ForEach(heroStatData =>
+    private static void GenerateSkeletonData(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        try
         {
-            if (HeroPrefabList.Any(p => p.HeroStatData == heroStatData)) return;
-            Hero hero = Instantiate(BaseHero);
-            hero.HeroStatData = heroStatData;
-            hero.name = hero.HeroStatData.Name;
-            hero.InitHero();
-            PrefabUtility.SaveAsPrefabAsset(hero.gameObject, $"Assets/BaseGame/Prefabs/Hero/{hero.name}.prefab");
+            heroStatData.HeroSkeletonDataAsset = AssetDatabase.LoadAssetAtPath<SkeletonDataAsset>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets($"t:SkeletonDataAsset {data["Name"]}_SkeletonData")[0]));
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"SkeletonDataAsset {data["Name"]} not found");
+        }
+    }
+
+    private static void GenerateBaseStat(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        if (int.TryParse(data["Tier"], out int tier))
+        {
+            heroStatData.HeroRarity = (Hero.Rarity) (tier-1);
+        }
+        if (int.TryParse(data["AttackDamage"], out int attackDamage))
+        {
+            heroStatData.BaseAttackDamage = attackDamage;
+        }
+        if (float.TryParse(data["AttackSpeed"], out float attackSpeed))
+        {
+            heroStatData.BaseAttackSpeed = attackSpeed;
+        }
+        if (float.TryParse(data["AttackRange"], out float attackRange))
+        {
+            heroStatData.BaseAttackRange = attackRange;
+        }
+        if (float.TryParse(data["UpgradePercentage"], out float upgradePercentage))
+        {
+            heroStatData.UpgradePercentage = upgradePercentage;
+        }
+    }
+
+    private static void GenerateHeroClass(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        if (Enum.TryParse(typeof(Hero.Class), data["Class"], out object class1))
+        {
+            heroStatData.HeroClass = (Hero.Class) class1;
+        }
+    }
+
+    private static void GenerateHeroJob(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        List<Hero.Job> jobList = new List<Hero.Job>();
+        if (Enum.TryParse(typeof(Hero.Job), data["MainRace"], out object job1))
+        {
+            jobList.Add((Hero.Job) job1);
+        }
+        if (Enum.TryParse(typeof(Hero.Job), data["SubRace1"], out object job2))
+        {
+            jobList.Add((Hero.Job) job2);
+        }
+        if (Enum.TryParse(typeof(Hero.Job), data["SubRace2"], out object job3))
+        {
+            jobList.Add((Hero.Job) job3);
+        }
+        heroStatData.HeroJob = jobList.ToArray();
+    }
+
+    private NormalAttackAbility GenerateNormalAttackAbility(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        NormalAttackAbility normalAttackAbility = null;
+        try
+        {
+            normalAttackAbility = AssetDatabase.LoadAssetAtPath<NormalAttackAbility>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets($"t:NormalAttackAbility {data["Name"]}_NormalAttackAbility")[0]));
+        }
+        catch (Exception e)
+        {
+            normalAttackAbility = CreateInstance<NormalAttackAbility>();
+            normalAttackAbility.name = $"{data["Name"]}_NormalAttackAbility";
+            AssetDatabase.CreateAsset(normalAttackAbility, $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
             AssetDatabase.SaveAssets();
+                    
+            normalAttackAbility = AssetDatabase.LoadAssetAtPath<NormalAttackAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
+        }
+        EditorUtility.SetDirty(normalAttackAbility);
+        if (heroStatData.HeroClass == Hero.Class.Range)
+        {
+            Projectile projectile = null;
+            try
+            {
+                projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
+                    AssetDatabase.GUIDToAssetPath(
+                        AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_NormalAttackProjectile")[0]));
+            }
+            catch (Exception e)
+            {
+                projectile = Instantiate(BaseProjectile);
+                projectile.name = $"{data["Name"]}_NormalAttackProjectile";
+                PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
+                AssetDatabase.SaveAssets();
+                DestroyImmediate(projectile.gameObject);
+                        
+                projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
+            }
+            normalAttackAbility.Projectile = projectile;
+        }
+        normalAttackAbility.AbilityTarget = Ability.Target.EnemyInRange;
+        normalAttackAbility.AbilityTrigger = Ability.Trigger.NormalAttack;
+        return normalAttackAbility;
+    }
+    private Ability GenerateAbility(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        if (data["ActiveType"] == "Chance")
+        {
+            return GenerateProbabilityAttackAbility(data, heroStatData);
+        }
 
-            DestroyImmediate(hero.gameObject);
-        });
-
-        HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/BaseGame/Prefabs/Hero" })
-            .Select(AssetDatabase.GUIDToAssetPath)
-            .Select(AssetDatabase.LoadAssetAtPath<Hero>)
-            .ToList();
-
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-
-        HeroPoolGlobalConfig.Instance.GetAllHeroPrefab();
-#endif
+        Debug.Log($"Not found ability type {data["ActiveType"]}");
+        return null;
+    }
+    private ProbabilityAttackAbility GenerateProbabilityAttackAbility(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        ProbabilityAttackAbility probabilityAttackAbility = null;
+        try
+        {
+            probabilityAttackAbility = AssetDatabase.LoadAssetAtPath<ProbabilityAttackAbility>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets($"t:ProbabilityAttackAbility {data["Name"]}_{data["AbilityName"]}")[0]));
+        }
+        catch (Exception e)
+        {
+            probabilityAttackAbility = CreateInstance<ProbabilityAttackAbility>();
+            probabilityAttackAbility.name = $"{data["Name"]}_{data["AbilityName"]}";
+            AssetDatabase.CreateAsset(probabilityAttackAbility, $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
+            AssetDatabase.SaveAssets();
+                    
+            probabilityAttackAbility = AssetDatabase.LoadAssetAtPath<ProbabilityAttackAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
+        }
+        EditorUtility.SetDirty(probabilityAttackAbility);
+        Projectile projectile = null;
+        try
+        {
+            projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_{data["AbilityName"]}_Projectile")[0]));
+        }
+        catch (Exception e)
+        {
+            projectile = Instantiate(BaseProjectile);
+            projectile.name = $"{data["Name"]}_ProbabilityAttackProjectile";
+            PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_{data["AbilityName"]}_Projectile.prefab");
+            AssetDatabase.SaveAssets();
+            DestroyImmediate(projectile.gameObject);
+                        
+            projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_{data["AbilityName"]}_Projectile.prefab");
+        }
+        probabilityAttackAbility.Projectile = projectile;
+        probabilityAttackAbility.AbilityTarget = Ability.Target.EnemyInRange;
+        probabilityAttackAbility.AbilityTrigger = Ability.Trigger.ProbabilityAttack;
+        return probabilityAttackAbility;
     }
 }

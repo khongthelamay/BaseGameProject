@@ -19,8 +19,9 @@ MonoBehaviour:
   <HeroClass>k__BackingField: 1
   <HeroJob>k__BackingField: 01000000
   <BaseAttackDamage>k__BackingField: 24
-  <BaseAttackSpeed>k__BackingField: 1.8
+  <BaseAttackSpeed>k__BackingField: 3
   <BaseAttackRange>k__BackingField: 2
   <UpgradePercentage>k__BackingField: 5
   <HeroAbilities>k__BackingField:
   - {fileID: 11400000, guid: 23cdc95b8db700549923c421b1a81cd9, type: 2}
+  - {fileID: 11400000, guid: 35d9c0227194bcb40b5c6d499638f6d1, type: 2}

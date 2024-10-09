@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Core
 {
-    [CreateAssetMenu(fileName = "ProbabilityAttack", menuName = "ScriptableObjects/ProbabilityAttack")]
-    public class ProbabilityAttack : Ability
+    [CreateAssetMenu(fileName = "ProbabilityAttackAbility", menuName = "ScriptableObjects/ProbabilityAttackAbility")]
+    public class ProbabilityAttackAbility : Ability
     {
         [field: SerializeField] private float Probability { get; set; }
-        [field: SerializeField] public Projectile Projectile { get; private set; }
+        [field: SerializeField] public Projectile Projectile { get; set; }
 
         private void Reset()
         {
