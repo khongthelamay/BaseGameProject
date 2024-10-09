@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Archmage
   <HeroRarity>k__BackingField: 4
-  <HeroClass>k__BackingField: 102
-  <HeroJob>k__BackingField: 0000000001000000
+  <HeroClass>k__BackingField: 2
+  <HeroJob>k__BackingField: 010000000200000000000000
   <BaseAttackDamage>k__BackingField: 8000
   <BaseAttackSpeed>k__BackingField: 1.5
   <BaseAttackRange>k__BackingField: 4

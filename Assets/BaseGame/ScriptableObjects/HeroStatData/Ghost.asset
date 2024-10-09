@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Ghost
   <HeroRarity>k__BackingField: 2
-  <HeroClass>k__BackingField: 102
-  <HeroJob>k__BackingField: 02000000
+  <HeroClass>k__BackingField: 2
+  <HeroJob>k__BackingField: 03000000
   <BaseAttackDamage>k__BackingField: 400
   <BaseAttackSpeed>k__BackingField: 1.4
   <BaseAttackRange>k__BackingField: 4

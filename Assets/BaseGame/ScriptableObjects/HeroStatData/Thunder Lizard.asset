@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Thunder Lizard
   <HeroRarity>k__BackingField: 3
-  <HeroClass>k__BackingField: 101
-  <HeroJob>k__BackingField: 01000000
+  <HeroClass>k__BackingField: 1
+  <HeroJob>k__BackingField: 02000000
   <BaseAttackDamage>k__BackingField: 2100
   <BaseAttackSpeed>k__BackingField: 2.2
   <BaseAttackRange>k__BackingField: 2

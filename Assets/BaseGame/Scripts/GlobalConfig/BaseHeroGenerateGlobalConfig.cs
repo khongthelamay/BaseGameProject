@@ -22,6 +22,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
     [field: SerializeField] public List<HeroStatData> HeroStatDataList { get; private set; }
     [field: SerializeField] public List<Hero> HeroPrefabList { get; private set; }
     [field: SerializeField] public Hero BaseHero { get; private set; }
+    [field: SerializeField] public Projectile BaseProjectile { get; private set; }
 
     [field: SerializeField] public Sprite[] GraphicArray { get; private set; }
     [field: SerializeField] public Sprite[] RarityArray { get; private set; }
@@ -110,6 +111,50 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
                 {
                     Debug.Log($"SkeletonDataAsset {data["Name"]} not found");
                 }
+                List<Ability> abilities = new List<Ability>();
+                NormalAttackAbility normalAttackAbility = null;
+                try
+                {
+                    normalAttackAbility = AssetDatabase.LoadAssetAtPath<NormalAttackAbility>(
+                        AssetDatabase.GUIDToAssetPath(
+                            AssetDatabase.FindAssets($"t:NormalAttackAbility {data["Name"]}_NormalAttackAbility")[0]));
+                }
+                catch (Exception e)
+                {
+                    normalAttackAbility = CreateInstance<NormalAttackAbility>();
+                    normalAttackAbility.name = $"{data["Name"]}_NormalAttackAbility";
+                    AssetDatabase.CreateAsset(normalAttackAbility, $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
+                    AssetDatabase.SaveAssets();
+                    
+                    normalAttackAbility = AssetDatabase.LoadAssetAtPath<NormalAttackAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
+                }
+                EditorUtility.SetDirty(normalAttackAbility);
+                if (heroStatData.HeroClass == Hero.Class.Range)
+                {
+                    Projectile projectile = null;
+                    try
+                    {
+                        projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
+                            AssetDatabase.GUIDToAssetPath(
+                                AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_NormalAttackProjectile")[0]));
+                    }
+                    catch (Exception e)
+                    {
+                        projectile = Instantiate(BaseProjectile);
+                        projectile.name = $"{data["Name"]}_NormalAttackProjectile";
+                        PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
+                        AssetDatabase.SaveAssets();
+                        DestroyImmediate(projectile.gameObject);
+                        
+                        projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
+                    }
+                    normalAttackAbility.Projectile = projectile;
+                }
+                normalAttackAbility.AbilityTarget = Ability.Target.EnemyInRange;
+                normalAttackAbility.AbilityTrigger = Ability.Trigger.NormalAttack;
+                abilities.Add(normalAttackAbility);
+                
+                heroStatData.HeroAbilities = abilities;
             }
         }
 
@@ -150,8 +195,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         HeroPoolGlobalConfig.Instance.GetAllHeroPrefab();
         
     }
-
-    [Button]
+    
     public void GenerateAllHeroStatData()
     {
 #if UNITY_EDITOR

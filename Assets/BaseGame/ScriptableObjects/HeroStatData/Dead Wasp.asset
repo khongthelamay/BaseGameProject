@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Dead Wasp
   <HeroRarity>k__BackingField: 3
-  <HeroClass>k__BackingField: 102
-  <HeroJob>k__BackingField: 0200000004000000
+  <HeroClass>k__BackingField: 2
+  <HeroJob>k__BackingField: 0300000005000000
   <BaseAttackDamage>k__BackingField: 480
   <BaseAttackSpeed>k__BackingField: 3
   <BaseAttackRange>k__BackingField: 4

@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: 'Piranha '
   <HeroRarity>k__BackingField: 1
-  <HeroClass>k__BackingField: 101
-  <HeroJob>k__BackingField: 05000000
+  <HeroClass>k__BackingField: 1
+  <HeroJob>k__BackingField: 06000000
   <BaseAttackDamage>k__BackingField: 80
   <BaseAttackSpeed>k__BackingField: 1.5
   <BaseAttackRange>k__BackingField: 2

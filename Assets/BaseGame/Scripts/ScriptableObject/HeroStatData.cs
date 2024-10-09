@@ -36,7 +36,7 @@ public class HeroStatData : ScriptableObject
     [field: VerticalGroup(nameof(HeroStatData)+"/Stats")]
     [field: SerializeField] public float UpgradePercentage {get; set;}
     
-    [field: SerializeField] public List<Ability> HeroAbilities {get; private set;}
+    [field: SerializeField] public List<Ability> HeroAbilities {get; set;}
 
     [Button]
     private void UpdateName()

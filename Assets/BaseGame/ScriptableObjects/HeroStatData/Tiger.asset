@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Tiger
   <HeroRarity>k__BackingField: 4
-  <HeroClass>k__BackingField: 101
-  <HeroJob>k__BackingField: 0100000000000000
+  <HeroClass>k__BackingField: 1
+  <HeroJob>k__BackingField: 0200000001000000
   <BaseAttackDamage>k__BackingField: 7800
   <BaseAttackSpeed>k__BackingField: 1.75
   <BaseAttackRange>k__BackingField: 2

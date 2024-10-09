@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Dread Scorpion
   <HeroRarity>k__BackingField: 3
-  <HeroClass>k__BackingField: 101
-  <HeroJob>k__BackingField: 0400000002000000
+  <HeroClass>k__BackingField: 1
+  <HeroJob>k__BackingField: 0500000003000000
   <BaseAttackDamage>k__BackingField: 1300
   <BaseAttackSpeed>k__BackingField: 2.4
   <BaseAttackRange>k__BackingField: 2

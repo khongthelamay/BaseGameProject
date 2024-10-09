@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Spider
   <HeroRarity>k__BackingField: 1
-  <HeroClass>k__BackingField: 102
-  <HeroJob>k__BackingField: 04000000
+  <HeroClass>k__BackingField: 2
+  <HeroJob>k__BackingField: 05000000
   <BaseAttackDamage>k__BackingField: 120
   <BaseAttackSpeed>k__BackingField: 2.1
   <BaseAttackRange>k__BackingField: 4

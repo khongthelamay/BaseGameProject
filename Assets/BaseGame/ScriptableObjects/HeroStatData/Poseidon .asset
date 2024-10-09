@@ -16,8 +16,8 @@ MonoBehaviour:
   <HeroSkeletonDataAsset>k__BackingField: {fileID: 0}
   <Name>k__BackingField: 'Poseidon '
   <HeroRarity>k__BackingField: 4
-  <HeroClass>k__BackingField: 102
-  <HeroJob>k__BackingField: 0500000000000000
+  <HeroClass>k__BackingField: 2
+  <HeroJob>k__BackingField: 060000000100000000000000
   <BaseAttackDamage>k__BackingField: 8000
   <BaseAttackSpeed>k__BackingField: 1.5
   <BaseAttackRange>k__BackingField: 4
