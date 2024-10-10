@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainContentHeroes : MainContent<HeroStatData>
+public class MainContentHeroes : MainContent<Hero>
 {
 
    
@@ -13,16 +13,16 @@ public class MainContentHeroes : MainContent<HeroStatData>
     public Transform contentNotOwned;
     public RectTransform rectRebuild;
 
-    public override void InitData(List<HeroStatData> datas)
+    public override void InitData(List<Hero> datas)
     {
-        datas.Sort((a, b) => { return SortDataHeroes(a.HeroRarity, b.HeroRarity); });
+        datas.Sort((a, b) => { return SortDataHeroes(a.HeroStatData.HeroRarity, b.HeroStatData.HeroRarity); });
         for (int i = 0; i < datas.Count; i++)
         {
             slotTemp = GetSlot();
             slotTemp.gameObject.SetActive(true);
            
             slotTemp.SetActionChooseCallBack(ActionSlotCallBack);
-            if (!HeroManager.Instance.IsHaveHero(datas[i].Name))
+            if (!HeroManager.Instance.IsHaveHero(datas[i].HeroStatData.Name))
                 slotTemp.transform.SetParent(contentNotOwned);
             else
                 slotTemp.transform.SetParent(trsContentParents);
@@ -41,14 +41,14 @@ public class MainContentHeroes : MainContent<HeroStatData>
         return 0;
     }
 
-    public override void ReloadData(HeroStatData data)
+    public override void ReloadData(Hero data)
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            if (slots[i].slotData.Name == data.Name)
+            if (slots[i].slotData.HeroStatData.Name == data.HeroStatData.Name)
             {
                 slots[i].InitData(data);
-                if (!HeroManager.Instance.IsHaveHero(data.Name))
+                if (!HeroManager.Instance.IsHaveHero(data.HeroStatData.Name))
                     slots[i].transform.SetParent(contentNotOwned);
                 else
                     slots[i].transform.SetParent(trsContentParents);

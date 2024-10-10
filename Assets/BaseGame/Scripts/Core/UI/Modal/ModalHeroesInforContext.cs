@@ -9,6 +9,8 @@ using UGUI.Core.Modals;
 using TMPro;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
+using Core;
+using Spine.Unity;
 
 [Serializable]
 public class ModalHeroesInforContext 
@@ -25,7 +27,7 @@ public class ModalHeroesInforContext
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; }
-        [field: SerializeField] public ReactiveValue<HeroStatData> currentHeroChoose { get; private set; }
+        [field: SerializeField] public ReactiveValue<Hero> currentHeroChoose { get; private set; }
 
         public UniTask Initialize(Memory<object> args)
         {
@@ -47,7 +49,7 @@ public class ModalHeroesInforContext
         [field: SerializeField] public TextMeshProUGUI txtAtk {get; private set;}  
         [field: SerializeField] public TextMeshProUGUI txtSpeed {get; private set;}  
         [field: SerializeField] public ProgressBar piecesProgress {get; private set;}  
-        [field: SerializeField] public Image imgHeroIcon {get; private set;}  
+        [field: SerializeField] public SkeletonGraphic imgHeroIcon {get; private set;}  
         [field: SerializeField] public Button btnExit {get; private set;}  
         [field: SerializeField] public Button btnUpgrade {get; private set;}  
         
@@ -56,12 +58,14 @@ public class ModalHeroesInforContext
             return UniTask.CompletedTask;
         }
 
-        public void InitData(HeroStatData heroData, HeroSave heroDataSave) {
-            imgHeroIcon.sprite = heroData.HeroSprite;
+        public void InitData(Hero heroData, HeroSave heroDataSave) {
+            imgHeroIcon.skeletonDataAsset = heroData.HeroStatData.HeroSkeletonDataAsset;
+            imgHeroIcon.Initialize(true);
+            imgHeroIcon.AnimationState.SetAnimation(0, "Idle", true);
             txtLevel.text = "Lv. " + heroDataSave.level.Value.ToString();
-            txtName.text = heroData.Name;
-            txtAtk.text = heroData.BaseAttackDamage.ToString();
-            txtSpeed.text = heroData.BaseAttackSpeed.ToString();
+            txtName.text = heroData.HeroStatData.Name;
+            txtAtk.text = heroData.HeroStatData.BaseAttackDamage.ToString();
+            txtSpeed.text = heroData.HeroStatData.BaseAttackSpeed.ToString();
             piecesProgress.ChangeProgress(0);
             piecesProgress.ChangeTextProgress("0/0");
         }

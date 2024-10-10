@@ -1,14 +1,17 @@
 using Core;
 using DG.Tweening;
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SlotHeroesUpgrade : SlotBase<HeroStatData>
+public class SlotHeroesUpgrade : SlotBase<Hero>
 {
     [Header("========= Slot Heroes Upgrade =========")]
+    public SkeletonGraphic iconHero;
+    public Spine.AnimationState heroAnimation;
     public Image imgBG;
     public Image imgSubBG;
     public ProgressBar pieceProgress;
@@ -24,21 +27,23 @@ public class SlotHeroesUpgrade : SlotBase<HeroStatData>
     {
         AnimOpen();
     }
-    public override void InitData(HeroStatData data)
+    public override void InitData(Hero data)
     {
         base.InitData(data);
-        
-        imgIcon.sprite = data.HeroSprite;
-        imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroRarity);
+        iconHero.skeletonDataAsset = data.HeroStatData.HeroSkeletonDataAsset;
+        iconHero.Initialize(true);
+        heroAnimation = iconHero.AnimationState;
+        heroAnimation.SetAnimation(0, "Idle", true);
+        imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroStatData.HeroRarity);
         imgSubBG.sprite = imgBG.sprite;
-        txtName.text = data.Name;
+        txtName.text = data.HeroStatData.Name;
 
         objUnLock.SetActive(true);
         objPurchase.SetActive(false);
         objRequire.SetActive(false);
         pieceProgress.ChangeProgress(0);
 
-        heroSave = HeroManager.Instance.GetHeroSaveData(data.Name);
+        heroSave = HeroManager.Instance.GetHeroSaveData(data.HeroStatData.Name);
         txtLevel.text = $"Lv. {heroSave.level.Value}";
         pieceProgress.ChangeProgress(0);
         pieceProgress.ChangeTextProgress("0/0");

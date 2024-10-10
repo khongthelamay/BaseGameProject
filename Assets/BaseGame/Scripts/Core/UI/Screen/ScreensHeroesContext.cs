@@ -7,6 +7,8 @@ using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
 using System.Collections.Generic;
+using Core;
+using TW.UGUI.Core.Views;
 
 [Serializable]
 public class ScreensHeroesContext 
@@ -24,7 +26,7 @@ public class ScreensHeroesContext
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public List<ReactiveValue<HeroSave>> heroSaves { get; set; } = new();
         [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; } = new();
-        [field: SerializeField] public ReactiveValue<HeroStatData> currentHeroConfig { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<Hero> currentHeroConfig { get; set; } = new();
         public UniTask Initialize(Memory<object> args)
         {
             heroSaves = HeroManager.Instance.heroSaves;
@@ -48,10 +50,10 @@ public class ScreensHeroesContext
         }
 
         public void InitData() {
-            mainContentHeroes.InitData(BaseHeroGenerateGlobalConfig.Instance.HeroStatDataList);
+            mainContentHeroes.InitData(HeroPoolGlobalConfig.Instance.HeroPrefabList);
         }
 
-        public void ReloadData(HeroStatData heroData)
+        public void ReloadData(Hero heroData)
         {
             mainContentHeroes.ReloadData(heroData);
         }
@@ -77,14 +79,13 @@ public class ScreensHeroesContext
                     .Subscribe(ChangeData)
                     .AddTo(View.MainView);
             }
-
+            View.mainContentHeroes.SetActionSlotCallBack(ActionSlotHeroCallBack);
             View.InitData();
         }
 
         public async UniTask Cleanup(Memory<object> args)
         {
             View.mainContentHeroes.CleanAnimation();
-            View.mainContentHeroes.SetActionSlotCallBack(ActionSlotHeroCallBack);
         }
 
         private void ChangeData((HeroSave heroData, int heroLevel, int heroPieces) data)
@@ -92,7 +93,7 @@ public class ScreensHeroesContext
             View.ReloadData(Model.currentHeroConfig.Value);
         }
 
-        void ActionSlotHeroCallBack(SlotBase<HeroStatData> slotBase)
+        void ActionSlotHeroCallBack(SlotBase<Hero> slotBase)
         {
             HeroManager.Instance.ChooseHero(slotBase.slotData);
         }

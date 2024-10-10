@@ -1,3 +1,4 @@
+using Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using UnityEngine;
 public class HeroManager : Singleton<HeroManager>
 {
     [field: SerializeField] public List<ReactiveValue<HeroSave>> heroSaves { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<HeroStatData> currentHeroChoose { get; set; } = new();
+    [field: SerializeField] public ReactiveValue<Hero> currentHeroChoose { get; set; } = new();
     [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; } = new();
 
     private void Start()
@@ -32,11 +33,12 @@ public class HeroManager : Singleton<HeroManager>
         return false;
     }
 
-    public void ChooseHero(HeroStatData heroStatData) {
+    public void ChooseHero(Hero heroStatData) {
         currentHeroChoose.Value = heroStatData;
-        currentHeroSave.Value = GetHeroSaveData(heroStatData.Name);
+        currentHeroSave.Value = GetHeroSaveData(heroStatData.HeroStatData.Name);
         ViewOptions options = new ViewOptions(nameof(ModalHeroInfor));
         ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
+        Debug.Log("show model hero infor");
     }
 
 
