@@ -9,10 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 091ea45dee374763a5c6c5ac1017e678, type: 3}
+  m_Script: {fileID: 11500000, guid: afa49663c2c0445780ddb83a21549dd0, type: 3}
   m_Name: Archer_Piercing Shot
   m_EditorClassIdentifier: 
-  <AbilityTrigger>k__BackingField: 2
+  <AbilityTrigger>k__BackingField: 4
   <AbilityTarget>k__BackingField: 1
-  <Probability>k__BackingField: 0
-  <Projectile>k__BackingField: {fileID: 1992938281856571184, guid: 48ec4fb17f02c6f49825d22aa1fa285e, type: 3}
+  <PassiveAbilityBehavior>k__BackingField:
+    rid: 7889111653494030367
+  references:
+    version: 2
+    RefIds:
+    - rid: 7889111653494030367
+      type: {class: ProbabilityAttackAbilityBehavior, ns: Core, asm: Assembly-CSharp}
+      data:
+        <Probability>k__BackingField: 10
+        <Projectile>k__BackingField: {fileID: 4236009647947967788, guid: 48ec4fb17f02c6f49825d22aa1fa285e, type: 3}

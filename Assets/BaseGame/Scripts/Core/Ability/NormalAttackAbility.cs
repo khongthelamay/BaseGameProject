@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core
@@ -26,32 +25,10 @@ namespace Core
             if (enemies.Count == 0) return false;
             foreach (var enemy in enemies)
             {
-                if (Projectile)
-                {
-                    RangeAttack(hero, enemy);
-                }
-                else
-                {
-                    MeleeAttack(hero, enemy);
-                }
+                Projectile.Spawn(hero, enemy);
             }
 
             return true;
-        }
-        
-        private void RangeAttack(Hero hero, Enemy enemy)
-        {
-            if (!Projectile) return;
-            // TODO: Attack animation
-            Instantiate(Projectile, hero.Transform.position, Quaternion.identity)
-                .Init(hero, enemy, hero.HeroStatData.BaseAttackDamage);
-        }
-        
-        private void MeleeAttack(Hero hero, Enemy enemy)
-        {
-            if (Projectile) return;
-            // TODO: Attack animation
-            enemy.TakeDamage(hero.HeroStatData.BaseAttackDamage);
         }
     }
 }

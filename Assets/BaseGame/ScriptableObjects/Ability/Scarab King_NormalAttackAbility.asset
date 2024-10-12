@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AbilityTrigger>k__BackingField: 0
   <AbilityTarget>k__BackingField: 1
-  <Projectile>k__BackingField: {fileID: 0}
+  <Projectile>k__BackingField: {fileID: 2096645389415352374, guid: 5e558da72a5cade4d98dbe26ac5539c3, type: 3}

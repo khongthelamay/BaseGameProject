@@ -10,7 +10,7 @@ namespace Core
             NormalAttack,
             SpecialAttack,
             ProbabilityAttack,
-            FullMana,
+            Active,
             Passive,
         }
         public enum Target      

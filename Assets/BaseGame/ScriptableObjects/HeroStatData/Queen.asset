@@ -24,3 +24,5 @@ MonoBehaviour:
   <UpgradePercentage>k__BackingField: 5
   <HeroAbilities>k__BackingField:
   - {fileID: 11400000, guid: 400098cef82c0304eae418cf73d42d75, type: 2}
+  - {fileID: 11400000, guid: 2ffea493922c0f44d88eca0c7780c219, type: 2}
+  - {fileID: 0}

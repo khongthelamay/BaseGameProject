@@ -73,7 +73,7 @@ MonoBehaviour:
   - {fileID: 1353056294452694483, guid: e8211c91701e23541a87916deb2bb9fd, type: 3}
   - {fileID: 7465919830268259058, guid: ca586a35bc5bd444f9dac5a4885df0be, type: 3}
   <BaseHero>k__BackingField: {fileID: 899073806387762782, guid: 0d4112a616dec1e40932d772c0c41f0a, type: 3}
-  <BaseProjectile>k__BackingField: {fileID: 8853763310275192392, guid: 89aea41ff06b3f04f95a389c4e1c4d61, type: 3}
+  <BaseProjectile>k__BackingField: {fileID: 4670623762309924594, guid: 89aea41ff06b3f04f95a389c4e1c4d61, type: 3}
   <GraphicArray>k__BackingField: []
   <RarityArray>k__BackingField:
   - {fileID: 21300000, guid: f47d6e3567ee4dd4985636bfd5ced958, type: 3}

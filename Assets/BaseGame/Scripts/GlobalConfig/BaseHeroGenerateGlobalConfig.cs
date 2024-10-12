@@ -205,80 +205,105 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
             normalAttackAbility = AssetDatabase.LoadAssetAtPath<NormalAttackAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
         }
         EditorUtility.SetDirty(normalAttackAbility);
-        if (heroStatData.HeroClass == Hero.Class.Range)
+        Projectile projectile = null;
+        try
         {
-            Projectile projectile = null;
-            try
-            {
-                projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
-                    AssetDatabase.GUIDToAssetPath(
-                        AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_NormalAttackProjectile")[0]));
-            }
-            catch (Exception e)
-            {
-                projectile = Instantiate(BaseProjectile);
-                projectile.name = $"{data["Name"]}_NormalAttackProjectile";
-                PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
-                AssetDatabase.SaveAssets();
-                DestroyImmediate(projectile.gameObject);
-                        
-                projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
-            }
-            normalAttackAbility.Projectile = projectile;
+            projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_NormalAttackProjectile")[0]));
         }
+        catch (Exception e)
+        {
+            projectile = Instantiate(BaseProjectile);
+            projectile.name = $"{data["Name"]}_NormalAttackProjectile";
+            PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
+            AssetDatabase.SaveAssets();
+            DestroyImmediate(projectile.gameObject);
+                        
+            projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
+        }
+        normalAttackAbility.Projectile = projectile;
         normalAttackAbility.AbilityTarget = Ability.Target.EnemyInRange;
         normalAttackAbility.AbilityTrigger = Ability.Trigger.NormalAttack;
         return normalAttackAbility;
     }
     private Ability GenerateAbility(Dictionary<string, string> data, HeroStatData heroStatData)
     {
-        if (data["ActiveType"] == "Chance")
+        if (data["ActiveType"] == "Passive")
         {
-            return GenerateProbabilityAttackAbility(data, heroStatData);
+            return GeneratePassiveAbility(data, heroStatData);
+        }
+        if (data["ActiveType"] == "Active")
+        {
+            return GenerateActiveAbility(data, heroStatData);
         }
 
         Debug.Log($"Not found ability type {data["ActiveType"]}");
         return null;
     }
-    private ProbabilityAttackAbility GenerateProbabilityAttackAbility(Dictionary<string, string> data, HeroStatData heroStatData)
+    private PassiveAbility GeneratePassiveAbility(Dictionary<string, string> data, HeroStatData heroStatData)
     {
-        ProbabilityAttackAbility probabilityAttackAbility = null;
+        PassiveAbility passiveAbility = null;
         try
         {
-            probabilityAttackAbility = AssetDatabase.LoadAssetAtPath<ProbabilityAttackAbility>(
+            passiveAbility = AssetDatabase.LoadAssetAtPath<PassiveAbility>(
                 AssetDatabase.GUIDToAssetPath(
-                    AssetDatabase.FindAssets($"t:ProbabilityAttackAbility {data["Name"]}_{data["AbilityName"]}")[0]));
+                    AssetDatabase.FindAssets($"t:PassiveAbility {data["Name"]}_{data["AbilityName"]}")[0]));
         }
         catch (Exception e)
         {
-            probabilityAttackAbility = CreateInstance<ProbabilityAttackAbility>();
-            probabilityAttackAbility.name = $"{data["Name"]}_{data["AbilityName"]}";
-            AssetDatabase.CreateAsset(probabilityAttackAbility, $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
+            passiveAbility = CreateInstance<PassiveAbility>();
+            passiveAbility.name = $"{data["Name"]}_{data["AbilityName"]}";
+            AssetDatabase.CreateAsset(passiveAbility, $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
             AssetDatabase.SaveAssets();
                     
-            probabilityAttackAbility = AssetDatabase.LoadAssetAtPath<ProbabilityAttackAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
+            passiveAbility = AssetDatabase.LoadAssetAtPath<PassiveAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
         }
-        EditorUtility.SetDirty(probabilityAttackAbility);
+        EditorUtility.SetDirty(passiveAbility);
+        ProbabilityAttackAbilityBehavior probabilityAttackAbilityBehavior = new ProbabilityAttackAbilityBehavior();
         Projectile projectile = null;
         try
         {
             projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
                 AssetDatabase.GUIDToAssetPath(
-                    AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_{data["AbilityName"]}_Projectile")[0]));
+                    AssetDatabase.FindAssets($"t:Prefab {heroStatData.Name}_{data["AbilityName"]}_Projectile")[0]));
         }
         catch (Exception e)
         {
             projectile = Instantiate(BaseProjectile);
             projectile.name = $"{data["Name"]}_ProbabilityAttackProjectile";
-            PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_{data["AbilityName"]}_Projectile.prefab");
+            PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{heroStatData.Name}_{data["AbilityName"]}_Projectile.prefab");
             AssetDatabase.SaveAssets();
             DestroyImmediate(projectile.gameObject);
                         
-            projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_{data["AbilityName"]}_Projectile.prefab");
+            projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{heroStatData.Name}_{data["AbilityName"]}_Projectile.prefab");
         }
-        probabilityAttackAbility.Projectile = projectile;
-        probabilityAttackAbility.AbilityTarget = Ability.Target.EnemyInRange;
-        probabilityAttackAbility.AbilityTrigger = Ability.Trigger.ProbabilityAttack;
-        return probabilityAttackAbility;
+        
+        probabilityAttackAbilityBehavior.Projectile = projectile;
+        passiveAbility.PassiveAbilityBehavior = probabilityAttackAbilityBehavior;
+        passiveAbility.AbilityTarget = Ability.Target.EnemyInRange;
+        passiveAbility.AbilityTrigger = Ability.Trigger.Passive;
+        return passiveAbility;
+    }
+
+    private ActiveAbility GenerateActiveAbility(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        ActiveAbility activeAbility = null;
+        try
+        {
+            activeAbility = AssetDatabase.LoadAssetAtPath<ActiveAbility>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets($"t:ActiveAbility {heroStatData.Name}_{data["AbilityName"]}")[0]));
+        }
+        catch (Exception e)
+        {
+            activeAbility = CreateInstance<ActiveAbility>();
+            activeAbility.name = $"{data["Name"]}_{data["AbilityName"]}";
+            AssetDatabase.CreateAsset(activeAbility, $"Assets/BaseGame/ScriptableObjects/Ability/{heroStatData.Name}_{data["AbilityName"]}.asset");
+            AssetDatabase.SaveAssets();
+                    
+            activeAbility = AssetDatabase.LoadAssetAtPath<ActiveAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{heroStatData.Name}_{data["AbilityName"]}.asset");
+        }
+        return activeAbility;
     }
 }

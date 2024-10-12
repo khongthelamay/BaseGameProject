@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f61dc01d6e448c2b4e0ed5d1d0358c4, type: 3}
+  m_Name: Archer_ArrowStorm
+  m_EditorClassIdentifier: 
+  <AbilityTrigger>k__BackingField: 3
+  <AbilityTarget>k__BackingField: 1
+  <Cooldown>k__BackingField: 5
+  <ActiveAbilityBehavior>k__BackingField:
+    rid: 7889111653494030373
+  references:
+    version: 2
+    RefIds:
+    - rid: 7889111653494030373
+      type: {class: ArrowStormBehavior, ns: Core, asm: Assembly-CSharp}
+      data:
+        <ArrowCount>k__BackingField: 5
+        <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: a51c8cc451ba520479ce9f265f00f716, type: 3}

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Spine.Unity;
 using UnityEngine;
@@ -20,6 +21,13 @@ namespace Core
         [field: SerializeField] public SkeletonAnimation SkeletonAnimation { get; private set; }
         [field: SerializeField] public State CurrentState { get; private set; }
         private CancellationTokenSource CancellationTokenSource { get; set; }
+        private float AttackAnimDuration { get; set; }
+        private float AttackScaleTimeDefault { get; set; } = 2f;
+        private void Awake()
+        {
+            AttackAnimDuration = SkeletonAnimation.AnimationState.Data.SkeletonData.FindAnimation(Attack).Duration;
+        }
+
         public HeroAnim PlayIdleAnimation(float speed)
         {
             if (CurrentState == State.Idle) return this;
@@ -51,9 +59,9 @@ namespace Core
 
             if (loop) return;
             if (CurrentState == State.Idle) return;
-            
+            SkeletonAnimation.timeScale = speed * AttackScaleTimeDefault;
             CancellationTokenSource = new CancellationTokenSource();
-            await UniTask.Delay((int)(2000 / speed), cancellationToken: CancellationTokenSource.Token);
+            await UniTask.Delay((int)(AttackAnimDuration / speed / AttackScaleTimeDefault * 1000) , cancellationToken: CancellationTokenSource.Token);
             PlayIdleAnimation(1);
         }
     }

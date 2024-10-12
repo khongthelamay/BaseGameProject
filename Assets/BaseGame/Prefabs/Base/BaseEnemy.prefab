@@ -79,7 +79,7 @@ SpriteRenderer:
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.08, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentHealthPoint>k__BackingField: 100
+  <MarkLoseHealthPoint>k__BackingField: 100
   <MovementSpeed>k__BackingField: 1.5
   <MovePoint>k__BackingField: []
   <CurrentPoint>k__BackingField: 0
