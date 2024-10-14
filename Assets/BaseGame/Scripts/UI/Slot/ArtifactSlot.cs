@@ -4,6 +4,7 @@ using TW.Reactive.CustomComponent;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class ArtifactSlot : SlotBase <ArtifactDataConfig>
 {
@@ -39,7 +40,13 @@ public class ArtifactSlot : SlotBase <ArtifactDataConfig>
             progressBar.ChangeTextProgress("MAX");
             progressBar.ChangeProgress(1f);
         }
-       
+    }
+
+    public override void AnimOpen()
+    {
+        if (mySequence != null) mySequence.Kill();
+        mySequence = DOTween.Sequence();
+        mySequence = UIAnimation.AnimSlotPopUp(trsContent);
     }
 
     public override void ReloadData()

@@ -83,6 +83,11 @@ public class ScreensArtifactContext
             View.InitData(ArtifactGlobalConfig.Instance.artifactDataConfigs);
         }
 
+        public async UniTask Cleanup(Memory<object> args)
+        {
+            View.artifactMainContent.CleanAnimation();
+        }
+
         private void ChangeData((ArtifactInfor artifactinfor, int level, int pieceAmount) value)
         {
             View.ReloadData(value.artifactinfor.Id);

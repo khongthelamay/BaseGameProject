@@ -23,7 +23,7 @@ public class MainContentArtifact : MainContent<ArtifactDataConfig>
                 slotTemp.transform.SetParent(trsContentParents);
             else 
                 slotTemp.transform.SetParent(trsDeactiveContentParent);
-
+            slotTemp.AnimOpen();
             slotTemp.gameObject.SetActive(true);
             totalSlotUsing++;
         }

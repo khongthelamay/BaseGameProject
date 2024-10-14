@@ -143,7 +143,8 @@ MonoBehaviour:
     piecesRequire: 
   imgIcon: {fileID: 432548000483607528}
   btnChoose: {fileID: 2087935764379687208}
-  trsContent: {fileID: 1368764670465481026}
+  trsContent: {fileID: 7686599904604833498}
+  animOnSlot: {fileID: 0}
   imgBG: {fileID: 3063322608197373078}
   txtName: {fileID: 4329914485560700483}
   txtLevel: {fileID: 1929458703800093036}

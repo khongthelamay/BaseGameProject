@@ -1,4 +1,5 @@
-using Core;
+﻿using Core;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ public class HeroManager : Singleton<HeroManager>
     [field: SerializeField] public List<ReactiveValue<HeroSave>> heroSaves { get; set; } = new();
     [field: SerializeField] public ReactiveValue<Hero> currentHeroChoose { get; set; } = new();
     [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; } = new();
+    [field: SerializeField] public List<Hero> heroList { get; private set; }
 
     private void Start()
     {
@@ -21,6 +23,7 @@ public class HeroManager : Singleton<HeroManager>
 
     void LoadData() {
         heroSaves = InGameDataManager.Instance.InGameData.heroDataSave.heroSaves;
+        heroList = HeroPoolGlobalConfig.Instance.HeroPrefabList;
     }
 
     public bool IsHaveHero(string heroName)
@@ -28,7 +31,9 @@ public class HeroManager : Singleton<HeroManager>
         for (int i = 0; i < heroSaves.Count; i++)
         {
             if (heroSaves[i].Value.heroName == heroName)
-                return heroSaves[i].Value.level > 0;
+            {
+                return heroSaves[i].Value.level.Value > 0;
+            }
         }
         return false;
     }
@@ -38,13 +43,24 @@ public class HeroManager : Singleton<HeroManager>
         currentHeroSave.Value = GetHeroSaveData(heroStatData.HeroStatData.Name);
         ViewOptions options = new ViewOptions(nameof(ModalHeroInfor));
         ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
-        Debug.Log("show model hero infor");
     }
 
 
     public void UpgradeHero() {
         currentHeroSave.Value.UpgradeHero();
         InGameDataManager.Instance.SaveData();
+    }
+
+    [Button]
+    public void AddPieces(string heroName, int amount){
+        for (int i = 0; i < heroSaves.Count; i++)
+        {
+            if (heroSaves[i].Value.heroName == heroName) {
+                heroSaves[i].Value.piece.Value += amount;
+                InGameDataManager.Instance.SaveData();
+                break;
+            }   
+        }
     }
 
     public HeroSave GetHeroSaveData(string heroName)
@@ -67,12 +83,16 @@ public class HeroManager : Singleton<HeroManager>
     }
 
     public bool IsCanUpgradeHero(string heroName) {
-        // for (int i = 0; i < heroSaves.Count; i++)
-        // {
-        //     if (heroSaves[i].Value.heroName == heroName)
-        //         return BaseHeroGenerateGlobalConfig.Instance.GetHeroStatDataConfig(heroName, heroSaves[i].Value.piece) != null;
-        // }
+        for (int i = 0; i < heroSaves.Count; i++)
+        {
+            if (heroSaves[i].Value.heroName == heroName)
+                return IsEnoughPieces(heroName, heroSaves[i].Value.piece.Value, heroSaves[i].Value.level.Value);
+        }
         return false;
+    }
+
+    public bool IsEnoughPieces(string heroName, int pieces, int level) {
+        return true;
     }
 
 }

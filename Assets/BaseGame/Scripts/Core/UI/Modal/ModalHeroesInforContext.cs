@@ -52,6 +52,8 @@ public class ModalHeroesInforContext
         [field: SerializeField] public SkeletonGraphic imgHeroIcon {get; private set;}  
         [field: SerializeField] public Button btnExit {get; private set;}  
         [field: SerializeField] public Button btnUpgrade {get; private set;}  
+        [field: SerializeField] public MainContentAbility mainContentAbility {get; private set;}  
+
         
         public UniTask Initialize(Memory<object> args)
         {
@@ -68,6 +70,7 @@ public class ModalHeroesInforContext
             txtSpeed.text = heroData.HeroStatData.BaseAttackSpeed.ToString();
             piecesProgress.ChangeProgress(0);
             piecesProgress.ChangeTextProgress("0/0");
+            mainContentAbility.InitData(heroData.HeroStatData.HeroAbilities);
         }
 
         public void AnimOpen()
@@ -104,8 +107,6 @@ public class ModalHeroesInforContext
 
             View.btnExit.onClick.AddListener(Exit);
             View.btnUpgrade.onClick.AddListener(Upgrade);
-
-            View.InitData(Model.currentHeroChoose.Value, Model.currentHeroSave);
 
             View.AnimOpen();
         }
