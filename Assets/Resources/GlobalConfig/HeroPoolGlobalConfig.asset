@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: HeroPoolGlobalConfig
   m_EditorClassIdentifier: 
   <HeroPrefabList>k__BackingField:
-  - {fileID: 6792108791387911584, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
-  - {fileID: 5289782157480354100, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-  - {fileID: 1353056294452694483, guid: e8211c91701e23541a87916deb2bb9fd, type: 3}
-  - {fileID: 7465919830268259058, guid: ca586a35bc5bd444f9dac5a4885df0be, type: 3}
+  - {fileID: 6941605953791124748, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
+  - {fileID: 1844857667129006671, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
+  - {fileID: 2051826958585476992, guid: 8d4e61a10c6340345803a2aa7c499262, type: 3}
+  - {fileID: 1720596159791680503, guid: ca586a35bc5bd444f9dac5a4885df0be, type: 3}
   <HeroPoolLevelConfig>k__BackingField:
     <Level>k__BackingField: 1
     <ProbabilityRarity>k__BackingField:
