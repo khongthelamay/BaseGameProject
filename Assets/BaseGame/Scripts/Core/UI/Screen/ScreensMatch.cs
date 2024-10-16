@@ -1,14 +1,13 @@
-using Cysharp.Threading.Tasks;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TW.UGUI.Core.Modals;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using Screen = TW.UGUI.Core.Screens.Screen;
+using System;
 
-public class ModalDefault : Modal
+public class ScreensMatch : Screen
 {
-
-    [field: SerializeField] public ModalDefaultContext.UIPresenter UIPresenter { get; private set; }
+    [field: SerializeField] public ScreensMatchContext.UIPresenter UIPresenter { get; private set; }
 
     protected override void Awake()
     {
@@ -21,10 +20,5 @@ public class ModalDefault : Modal
     public override async UniTask Initialize(Memory<object> args)
     {
         await base.Initialize(args);
-    }
-
-    protected override void Start()
-    {
-        UIPresenter.Initialize(null);
     }
 }

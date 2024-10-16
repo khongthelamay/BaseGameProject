@@ -54,7 +54,7 @@ public class AchievementSlot : SlotBase<AchievementDataConfig>
 
         achievementSave = AchievementManager.Instance.GetAchievementDataSave(slotData.achievementType);
 
-        txtReward.text = data.reward.value.ToString();
+        txtReward.text = data.reward.value.Value.ToString();
         txtDes.text = string.Format(data.strDes, data.require);
         txtProgress.text = $"{(BigNumber)achievementSave.currentProgress.Value} / {(BigNumber)data.require}";
 

@@ -8,7 +8,9 @@ using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
 using System.Collections.Generic;
 using Core;
-using TW.UGUI.Core.Views;
+using UnityEngine.UI;
+using TMPro;
+using TW.Utility.CustomType;
 
 [Serializable]
 public class ScreensHeroesContext 
@@ -27,11 +29,13 @@ public class ScreensHeroesContext
         [field: SerializeField] public List<ReactiveValue<HeroSave>> heroSaves { get; set; } = new();
         [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; } = new();
         [field: SerializeField] public ReactiveValue<Hero> currentHeroConfig { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<BigNumber> summonRecipe { get; set; } = new(0);
         public UniTask Initialize(Memory<object> args)
         {
             heroSaves = HeroManager.Instance.heroSaves;
             currentHeroSave = HeroManager.Instance.currentHeroSave;
             currentHeroConfig = HeroManager.Instance.currentHeroChoose;
+            summonRecipe = HeroManager.Instance.summonRecipe;
             return UniTask.CompletedTask;
         }
     }
@@ -43,6 +47,7 @@ public class ScreensHeroesContext
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView { get; private set; }
         [field: SerializeField] public MainContentHeroes mainContentHeroes { get; private set; }
+        [field: SerializeField] public UIResource resourceMythicPieces { get; private set; }
 
         public UniTask Initialize(Memory<object> args)
         {
@@ -57,14 +62,16 @@ public class ScreensHeroesContext
         {
             mainContentHeroes.ReloadData(heroData);
         }
+
+        public void ChangeUpgradeMysthicPieces(string value) { resourceMythicPieces.ChangeValue(value); }
     }
 
     [HideLabel]
     [Serializable]
     public class UIPresenter : IAPresenter, IScreenLifecycleEventSimple
     {
-        [field: SerializeField] public UIModel Model {get; private set;} = new();
-        [field: SerializeField] public UIView View { get; set; } = new();        
+        [field: SerializeField] public UIModel Model { get; private set; } = new();
+        [field: SerializeField] public UIView View { get; set; } = new();
 
         public async UniTask Initialize(Memory<object> args)
         {
@@ -81,6 +88,8 @@ public class ScreensHeroesContext
             }
             View.mainContentHeroes.SetActionSlotCallBack(ActionSlotHeroCallBack);
             View.InitData();
+
+            Model.summonRecipe.ReactiveProperty.Subscribe(ChangeUpgradeMysthicPieces);
         }
 
         public async UniTask Cleanup(Memory<object> args)
@@ -96,6 +105,10 @@ public class ScreensHeroesContext
         void ActionSlotHeroCallBack(SlotBase<Hero> slotBase)
         {
             HeroManager.Instance.ChooseHero(slotBase.slotData);
+        }
+
+        void ChangeUpgradeMysthicPieces(BigNumber value) {
+            View.ChangeUpgradeMysthicPieces(value.ToString());
         }
     }
 }

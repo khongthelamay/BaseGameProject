@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Modals;
 using TW.UGUI.Core.Views;
+using TW.Utility.CustomType;
 using TW.Utility.DesignPattern;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class HeroManager : Singleton<HeroManager>
     [field: SerializeField] public ReactiveValue<Hero> currentHeroChoose { get; set; } = new();
     [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; } = new();
     [field: SerializeField] public List<Hero> heroList { get; private set; }
+    [field: SerializeField] public ReactiveValue<BigNumber> summonRecipe { get; private set; } = new(0);
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class HeroManager : Singleton<HeroManager>
     void LoadData() {
         heroSaves = InGameDataManager.Instance.InGameData.heroDataSave.heroSaves;
         heroList = HeroPoolGlobalConfig.Instance.HeroPrefabList;
+        summonRecipe = InGameDataManager.Instance.InGameData.playerResourceDataSave.GetResourceValue(ResourceType.SummonRecipe);
     }
 
     public bool IsHaveHero(string heroName)

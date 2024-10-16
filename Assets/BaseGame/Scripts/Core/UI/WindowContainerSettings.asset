@@ -19,6 +19,12 @@ MonoBehaviour:
     sortingLayer:
       id: 0
     orderInLayer: 150
+  - name: MidleScreens
+    containerType: 1
+    overrideSorting: 1
+    sortingLayer:
+      id: 0
+    orderInLayer: 180
   - name: Modals
     containerType: 0
     overrideSorting: 1
@@ -26,7 +32,7 @@ MonoBehaviour:
       id: 0
     orderInLayer: 200
   - name: Activities
-    containerType: 0
+    containerType: 2
     overrideSorting: 1
     sortingLayer:
       id: 0

@@ -12,7 +12,7 @@ using TW.UGUI.Core.Views;
 using TW.UGUI.Core.Modals;
 
 [Serializable]
-public class ModalDefaultContext 
+public class ScreensDefaultContext 
 {
     public static class Events
     {
@@ -118,7 +118,7 @@ public class ModalDefaultContext
 
     [HideLabel]
     [Serializable]
-    public class UIPresenter : IAPresenter, IModalLifecycleEventSimple
+    public class UIPresenter : IAPresenter, IScreenLifecycleEventSimple
     {
         [field: SerializeField] public UIModel Model {get; private set;} = new();
         [field: SerializeField] public UIView View { get; set; } = new();        

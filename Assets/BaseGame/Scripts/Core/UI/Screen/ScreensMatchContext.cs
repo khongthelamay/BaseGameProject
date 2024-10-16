@@ -6,13 +6,9 @@ using R3;
 using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
-using System.Collections.Generic;
-using TW.UGUI.Core.Views;
-using UnityEngine.UI;
-using TW.UGUI.Core.Modals;
 
 [Serializable]
-public class ScreensBattleContext 
+public class ScreensMatchContext 
 {
     public static class Events
     {
@@ -27,26 +23,20 @@ public class ScreensBattleContext
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
 
         public UniTask Initialize(Memory<object> args)
-        {
+        {   
             return UniTask.CompletedTask;
         }
     }
-
+    
     [HideLabel]
     [Serializable]
     public class UIView : IAView
     {
         [field: Title(nameof(UIView))]
-        [field: SerializeField] public CanvasGroup MainView { get; private set; }
-
-        [field: SerializeField] public ButtonNotice btnQuest;
-        [field: SerializeField] public Button btnRecruit;
-        [field: SerializeField] public Button btnSpecialShop;
-        [field: SerializeField] public Button btnMatch;
-
+        [field: SerializeField] public CanvasGroup MainView {get; private set;}  
+        
         public UniTask Initialize(Memory<object> args)
         {
-          
             return UniTask.CompletedTask;
         }
     }
@@ -62,23 +52,6 @@ public class ScreensBattleContext
         {
             await Model.Initialize(args);
             await View.Initialize(args);
-
-            View.btnQuest.SetButtonOnClick(ShowModalQuest);
-            View.btnMatch.onClick.AddListener(Match);
-        }
-
-        void ShowModalQuest()
-        {
-            ViewOptions options = new ViewOptions(nameof(ModalQuest));
-            ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
-        }
-
-        void Match() {
-            ViewOptions options = new ViewOptions(nameof(ScreensMatch));
-            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
-
-            ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
-        }
-
+        }      
     }
 }

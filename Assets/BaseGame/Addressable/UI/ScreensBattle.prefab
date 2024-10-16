@@ -2003,6 +2003,7 @@ MonoBehaviour:
       btnQuest: {fileID: 218042879258081968}
       btnRecruit: {fileID: 0}
       btnSpecialShop: {fileID: 0}
+      btnMatch: {fileID: 7385710914702800371}
 --- !u!225 &1835724710181177364
 CanvasGroup:
   m_ObjectHideFlags: 0

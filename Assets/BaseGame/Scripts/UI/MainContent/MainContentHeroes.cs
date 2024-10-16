@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class MainContentHeroes : MainContent<Hero>
 {
-
-   
     [Header("==== MainContentHeroes ====")]
     public Transform contentNotOwned;
     public RectTransform rectRebuild;
@@ -54,5 +52,6 @@ public class MainContentHeroes : MainContent<Hero>
                     slots[i].transform.SetParent(trsContentParents);
             }
         }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectRebuild);
     }
 }
