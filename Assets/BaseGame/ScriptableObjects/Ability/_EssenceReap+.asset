@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa49663c2c0445780ddb83a21549dd0, type: 3}
   m_Name: _EssenceReap+
   m_EditorClassIdentifier: 
-  <AbilityTrigger>k__BackingField: 0
-  <AbilityTarget>k__BackingField: 0
+  <AbilityTrigger>k__BackingField: 4
+  <AbilityTarget>k__BackingField: 1
   <PassiveAbilityBehavior>k__BackingField:
-    rid: -2
+    rid: 7889111755123851276
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 7889111755123851276
+      type: {class: ProbabilityAttackAbilityBehavior, ns: Core, asm: Assembly-CSharp}
+      data:
+        <Probability>k__BackingField: 0
+        <Projectile>k__BackingField: {fileID: 4063439289868389794, guid: e4d7d9a1662339a47a668958f35772b9, type: 3}

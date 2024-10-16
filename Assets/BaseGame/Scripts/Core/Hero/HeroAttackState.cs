@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
@@ -18,7 +19,11 @@ namespace Core
         [field: SerializeField] private float CurrentAttackTimeCounter { get; set; }
         [field: SerializeField] public int CurrentAttackCount {get; private set;}
         [field: SerializeField] public float CurrentAttackProbability {get; private set;}
-        public Dictionary<ActiveAbility, float> Cooldown {get; private set;} = new Dictionary<ActiveAbility, float>();
+        private Dictionary<ActiveAbility, float> Cooldown {get; set;} = new Dictionary<ActiveAbility, float>();
+#if UNITY_EDITOR
+        [ShowInInspector]
+        private List<float> CooldownList => Cooldown.Values.ToList();
+#endif
         public UniTask OnStateEnter(HeroAttackState state, CancellationToken token)
         {
             CurrentAttackTimeCounter = CurrentAttackTimer;

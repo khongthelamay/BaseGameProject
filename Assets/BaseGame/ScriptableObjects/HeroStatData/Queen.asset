@@ -25,4 +25,5 @@ MonoBehaviour:
   <HeroAbilities>k__BackingField:
   - {fileID: 11400000, guid: 400098cef82c0304eae418cf73d42d75, type: 2}
   - {fileID: 11400000, guid: 2ffea493922c0f44d88eca0c7780c219, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: c3504ecb48774c44e891ac85f7ab268f, type: 2}
+  - {fileID: 11400000, guid: 29eb30acebdd56a49b91b6cbf7fec9e6, type: 2}

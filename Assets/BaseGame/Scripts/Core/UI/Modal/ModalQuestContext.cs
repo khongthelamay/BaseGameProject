@@ -5,7 +5,6 @@ using UnityEngine;
 using R3;
 using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
-using UGUI.Core.Modals;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
 using System.Collections.Generic;
