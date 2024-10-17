@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1977698295199644925}
-  - component: {fileID: 8853763310275192392}
+  - component: {fileID: 4670623762309924594}
   - component: {fileID: 7239941972937960627}
   m_Layer: 0
   m_Name: BaseProjectile
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 1683359727183045636}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8853763310275192392
+--- !u!114 &4670623762309924594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,140 +44,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1598014113171583970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ba069499cc4c88b92599c48c0798bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 44079df61f484ea9b8f66a7f653313e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Graphic>k__BackingField: {fileID: 3015630929580733689}
-  <Shadow>k__BackingField: {fileID: 1877391094353633620}
-  <ShadowTransform>k__BackingField: {fileID: 1683359727183045636}
-  <CurrentPosition>k__BackingField: {x: 0, y: 0, z: 0}
-  <TargetEnemy>k__BackingField: {fileID: 0}
-  <AttackDamage>k__BackingField: 0
-  <MaxMoveSpeed>k__BackingField: 7
-  <TrajectoryMaxHeight>k__BackingField: 1
-  <Trajectory>k__BackingField:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2.3906517
-      outSlope: 2.3906517
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.09865471
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2.1037729
-      outSlope: -2.1037729
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.10313904
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  <Axis>k__BackingField:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  <Velocity>k__BackingField:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -0.39999998
-      outSlope: -0.39999998
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.8
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.39999998
-      outSlope: 0.39999998
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  <Scale>k__BackingField:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 10
-      outSlope: 10
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  <ProjectileBehaviorGroup>k__BackingField:
+    <ProjectileBehaviors>k__BackingField:
+    - rid: 7889111653494030341
+  references:
+    version: 2
+    RefIds:
+    - rid: 7889111653494030341
+      type: {class: DamageScaleBehavior, ns: Core, asm: Assembly-CSharp}
+      data:
+        <DamageScale>k__BackingField: 1
 --- !u!96 &7239941972937960627
 TrailRenderer:
   serializedVersion: 3
@@ -307,7 +186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7094874408286670863
 Transform:
   m_ObjectHideFlags: 0
@@ -391,7 +270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1683359727183045636
 Transform:
   m_ObjectHideFlags: 0

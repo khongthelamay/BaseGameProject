@@ -38,6 +38,7 @@ public class HeroStatData : ScriptableObject
     
     [field: SerializeField] public List<Ability> HeroAbilities {get; set;}
 
+    
     [Button]
     private void UpdateName()
     {

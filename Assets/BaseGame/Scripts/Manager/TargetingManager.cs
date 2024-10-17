@@ -41,6 +41,7 @@ namespace Manager
         {
             foreach (Enemy enemy in BattleManager.EnemyList)
             {
+                if (enemy.WillBeDead)continue;
                 if ((hero.Transform.position - enemy.Transform.position).sqrMagnitude > hero.AttackRange * hero.AttackRange) continue;
                 return new List<IAbilityTargetAble>() {enemy};
             }
@@ -51,6 +52,7 @@ namespace Manager
             List<IAbilityTargetAble> enemyList = new();
             foreach (Enemy enemy in BattleManager.EnemyList)
             {
+                if (enemy.WillBeDead)continue;
                 if ((hero.Transform.position - enemy.transform.position).sqrMagnitude > hero.AttackRange * hero.AttackRange) continue;
                 enemyList.Add(enemy);
             }

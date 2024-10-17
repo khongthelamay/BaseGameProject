@@ -7,11 +7,11 @@ namespace Core
     {
         public enum Trigger
         {
-            NormalAttack,
-            SpecialAttack,
-            ProbabilityAttack,
-            FullMana,
-            Passive,
+            NormalAttack = 0,
+            // SpecialAttack = 1,
+            // ProbabilityAttack = 2,
+            Active = 3,
+            Passive = 4,
         }
         public enum Target      
         {
