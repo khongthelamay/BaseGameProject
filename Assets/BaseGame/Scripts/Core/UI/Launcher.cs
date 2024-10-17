@@ -9,13 +9,9 @@ using ZBase.UnityScreenNavigator.Core;
 
 public class Launcher : UnityScreenNavigatorLauncher
 {
-    public GameObject objModalDefault;
     protected override void Start()
     {
         base.Start();
-        // ShowLoadingScreen().Forget();
-        //ShowPanelTest();
-        //objModalDefault.SetActive(true);
         ShowPanelTest();
 
     }
