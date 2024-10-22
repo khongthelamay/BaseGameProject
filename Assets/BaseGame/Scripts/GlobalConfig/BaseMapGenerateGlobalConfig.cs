@@ -18,7 +18,7 @@ public class BaseMapGenerateGlobalConfig : GlobalConfig<BaseMapGenerateGlobalCon
     [field: SerializeField] public List<GameObject> GroundPrefabList {get; private set;}
     
 #if UNITY_EDITOR
-    [Button]
+
     private void GenerateAllPrefabMap()
     {
         EditorUtility.SetDirty(this);

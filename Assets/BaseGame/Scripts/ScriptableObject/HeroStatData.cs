@@ -15,10 +15,10 @@ public class HeroStatData : ScriptableObject
     [field: HorizontalGroup(nameof(HeroStatData), width: 200), PreviewField(200), HideLabel]
     [field: SerializeField]
     public Sprite HeroSprite {get; set;}
-    [field: HorizontalGroup(nameof(HeroStatData), width: 200), PreviewField(200), HideLabel]
-    [field: SerializeField]
-    [field: HideInInspector]
-    public SkeletonDataAsset HeroSkeletonDataAsset {get; set;}
+    // [field: HorizontalGroup(nameof(HeroStatData), width: 200), PreviewField(200), HideLabel]
+    // [field: SerializeField]
+    // [field: HideInInspector]
+    // public SkeletonDataAsset HeroSkeletonDataAsset {get; set;}
     
     
     [field: VerticalGroup(nameof(HeroStatData)+"/Stats")]
@@ -38,6 +38,7 @@ public class HeroStatData : ScriptableObject
     [field: VerticalGroup(nameof(HeroStatData)+"/Stats")]
     [field: SerializeField] public float UpgradePercentage {get; set;}
     [field: SerializeField] public AnimatorController AnimatorController {get; set;}
+    [field: SerializeField] public AnimatorController ImageAnimatorController {get; set;}
     [field: SerializeField] public List<Ability> HeroAbilities {get; set;}
 
     

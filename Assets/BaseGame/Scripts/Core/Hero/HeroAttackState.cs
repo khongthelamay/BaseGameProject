@@ -47,7 +47,6 @@ namespace Core
                 }
                 else if (TryTriggerAbility(Ability.Trigger.Active))
                 {
-                    Debug.Log(1);
                     HeroAnim.PlayAttackAnimation(HeroStatData.BaseAttackSpeed);
                     CurrentAttackTimeCounter -= CurrentAttackTimer;
                     CurrentAttackCount = AIntExtension.Repeat(CurrentAttackCount + 1, 720720);
