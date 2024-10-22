@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Spine.Unity;
 using TW.Utility.Extension;
+using UnityEditor.Animations;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -26,7 +27,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
 
     [field: SerializeField] public Sprite[] GraphicArray { get; private set; }
     [field: SerializeField] public Sprite[] RarityArray { get; private set; }
-    [field: SerializeField] public Color[] RarityColorArray {get; private set;}
+    [field: SerializeField] public Color[] RarityColorArray { get; private set; }
 
     [Button]
     public async UniTask GenerateHeroStatData()
@@ -37,7 +38,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<HeroStatData>)
             .ToList();
-        
+
         SheetHeroStatDataList = new List<HeroStatData>();
         string result = await ABakingSheet.GetCsv(sheetId, "UnitAbility");
         List<Dictionary<string, string>> csvData = ACsvReader.ReadDataFromString(result);
@@ -45,6 +46,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         for (var i = 0; i < csvData.Count; i++)
         {
             Dictionary<string, string> data = csvData[i];
+            data = data.ToDictionary(d => d.Key, d => d.Value.Replace(" ", ""));
             if (data["ID"].IsNullOrWhitespace()) continue;
             heroStatData = heroStatDataList.FirstOrDefault(d => d.Name == data["Name"]);
             if (heroStatData == null)
@@ -62,7 +64,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
 
             EditorUtility.SetDirty(heroStatData);
             GenerateBaseData(data, heroStatData);
-            heroStatData.HeroAbilities.Clear();
+            heroStatData.HeroAbilities = new List<Ability>();
 
             NormalAttackAbility normalAttackAbility = GenerateNormalAttackAbility(data, heroStatData);
             heroStatData.HeroAbilities.Add(normalAttackAbility);
@@ -73,6 +75,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
                 Ability ability = GenerateAbility(csvData[j], heroStatData);
                 heroStatData.HeroAbilities.Add(ability);
             }
+
             heroStatData.HeroAbilities = heroStatData.HeroAbilities.Where(a => a != null).ToList();
         }
 
@@ -81,13 +84,13 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
             .Select(AssetDatabase.LoadAssetAtPath<HeroStatData>)
             .Where(hsd => hsd.HeroSkeletonDataAsset != null)
             .ToList();
-        
+
         HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/BaseGame/Prefabs/Hero" })
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Hero>)
             .ToList();
-        
-        
+
+
         SheetHeroStatDataList.ForEach(hsd =>
         {
             if (HeroPrefabList.Any(p => p.HeroStatData == hsd)) return;
@@ -100,7 +103,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
 
             DestroyImmediate(hero.gameObject);
         });
-        
+
         HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/BaseGame/Prefabs/Hero" })
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Hero>)
@@ -111,7 +114,6 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         AssetDatabase.Refresh();
 
         HeroPoolGlobalConfig.Instance.GetAllHeroPrefab();
-        
     }
 
     private static void GenerateBaseData(Dictionary<string, string> data, HeroStatData heroStatData)
@@ -120,6 +122,10 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         GenerateHeroClass(data, heroStatData);
         GenerateBaseStat(data, heroStatData);
         GenerateSkeletonData(data, heroStatData);
+        // GenerateAnimData(data, heroStatData);
+        GenerateIdleAnimData(data, heroStatData);
+        GenerateAttackAnimData(data, heroStatData);
+        GenerateSkillAnimData(data, heroStatData);
     }
 
     private static void GenerateSkeletonData(Dictionary<string, string> data, HeroStatData heroStatData)
@@ -135,25 +141,239 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
             Debug.Log($"SkeletonDataAsset {data["Name"]} not found");
         }
     }
+    private static void GenerateIdleAnimData(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        AnimationClip idleAnim;
+        try
+        {
+            string animIdleGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Idle-Animation")[0];
+            idleAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animIdleGuid));
+        }
+        catch (Exception e)
+        {
+            idleAnim = null;
+        }
+
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Idle");
+        List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
+            .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
+            .ToList();
+        if (idleAnim == null)
+        {
+            if (spriteAnim.Length == 0) return;
+            idleAnim = new AnimationClip
+            {
+                name = $"{data["Name"]}-Idle-Animation",
+                frameRate = 30
+            };
+            if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
+            {
+                AssetDatabase.CreateFolder("Assets/BaseGame/Animations/Hero", data["Name"]);
+            }
+
+            AssetDatabase.CreateAsset(idleAnim,
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Idle-Animation.anim");
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            idleAnim.ClearCurves();
+        }
+
+
+        EditorCurveBinding curveBinding = new EditorCurveBinding
+        {
+            type = typeof(SpriteRenderer),
+            path = "",
+            propertyName = "m_Sprite"
+        };
+        ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[spriteList.Count];
+        for (int i = 0; i < spriteList.Count; i++)
+        {
+            keyFrames[i] = new ObjectReferenceKeyframe
+            {
+                time = i / idleAnim.frameRate,
+                value = spriteList[i]
+            };
+        }
+
+        AnimationUtility.SetObjectReferenceCurve(idleAnim, curveBinding, keyFrames);
+
+        idleAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Idle-Animation.anim");
+    }
+    private static void GenerateAttackAnimData(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        AnimationClip attackAnim;
+        try
+        {
+            string animAttackGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Attack-Animation")[0];
+            attackAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animAttackGuid));
+        }
+        catch (Exception e)
+        {
+            attackAnim = null;
+        }
+
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Attack");
+        List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
+            .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
+            .ToList();
+        if (attackAnim == null)
+        {
+            if (spriteAnim.Length == 0) return;
+            attackAnim = new AnimationClip
+            {
+                name = $"{data["Name"]}-Attack-Animation",
+                frameRate = 30
+            };
+            if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
+            {
+                AssetDatabase.CreateFolder("Assets/BaseGame/Animations/Hero", data["Name"]);
+            }
+
+            AssetDatabase.CreateAsset(attackAnim,
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Attack-Animation.anim");
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            attackAnim.ClearCurves();
+        }
+
+        EditorCurveBinding curveBinding = new EditorCurveBinding
+        {
+            type = typeof(SpriteRenderer),
+            path = "",
+            propertyName = "m_Sprite"
+        };
+        ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[spriteList.Count];
+        for (int i = 0; i < spriteList.Count; i++)
+        {
+            keyFrames[i] = new ObjectReferenceKeyframe
+            {
+                time = i / attackAnim.frameRate,
+                value = spriteList[i]
+            };
+        }
+
+        AnimationUtility.SetObjectReferenceCurve(attackAnim, curveBinding, keyFrames);
+
+        attackAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Attack-Animation.anim");
+    }
+    private static void GenerateSkillAnimData(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        AnimationClip skillAnim;
+        try
+        {
+            string animSkillGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Skill-Animation")[0];
+            skillAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animSkillGuid));
+        }
+        catch (Exception e)
+        {
+            skillAnim = null;
+        }
+
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Skill");
+        List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
+            .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
+            .ToList();
+        if (skillAnim == null)
+        {
+            if (spriteAnim.Length == 0) return;
+            skillAnim = new AnimationClip
+            {
+                name = $"{data["Name"]}-Skill-Animation",
+                frameRate = 30
+            };
+            if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
+            {
+                AssetDatabase.CreateFolder("Assets/BaseGame/Animations/Hero", data["Name"]);
+            }
+
+            AssetDatabase.CreateAsset(skillAnim,
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill-Animation.anim");
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            skillAnim.ClearCurves();
+        }
+
+        EditorCurveBinding curveBinding = new EditorCurveBinding
+        {
+            type = typeof(SpriteRenderer),
+            path = "",
+            propertyName = "m_Sprite"
+        };
+        ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[spriteList.Count];
+        for (int i = 0; i < spriteList.Count; i++)
+        {
+            keyFrames[i] = new ObjectReferenceKeyframe
+            {
+                time = i / skillAnim.frameRate,
+                value = spriteList[i]
+            };
+        }
+
+        AnimationUtility.SetObjectReferenceCurve(skillAnim, curveBinding, keyFrames);
+
+        skillAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill-Animation.anim");
+    }
+    private static void GenerateAnimatorData(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        AnimatorController animatorController;
+        try
+        {
+            string animControllerGuid = AssetDatabase.FindAssets($"t:AnimatorController {data["Name"]}-AnimatorController")[0];
+            animatorController = AssetDatabase.LoadAssetAtPath<AnimatorController>(AssetDatabase.GUIDToAssetPath(animControllerGuid));
+        }
+        catch (Exception e)
+        {
+            animatorController = null;
+        }
+
+        if (animatorController == null)
+        {
+            animatorController = new AnimatorController
+            {
+                name = $"{data["Name"]}-AnimatorController"
+            };
+            if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
+            {
+                AssetDatabase.CreateFolder("Assets/BaseGame/Animations/Hero", data["Name"]);
+            }
+
+            AssetDatabase.CreateAsset(animatorController,
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-AnimatorController.controller");
+            AssetDatabase.SaveAssets();
+        }
+    }
 
     private static void GenerateBaseStat(Dictionary<string, string> data, HeroStatData heroStatData)
     {
         if (int.TryParse(data["Tier"], out int tier))
         {
-            heroStatData.HeroRarity = (Hero.Rarity) (tier-1);
+            heroStatData.HeroRarity = (Hero.Rarity)(tier - 1);
         }
+
         if (int.TryParse(data["AttackDamage"], out int attackDamage))
         {
             heroStatData.BaseAttackDamage = attackDamage;
         }
+
         if (float.TryParse(data["AttackSpeed"], out float attackSpeed))
         {
             heroStatData.BaseAttackSpeed = attackSpeed;
         }
+
         if (float.TryParse(data["AttackRange"], out float attackRange))
         {
             heroStatData.BaseAttackRange = attackRange;
         }
+
         if (float.TryParse(data["UpgradePercentage"], out float upgradePercentage))
         {
             heroStatData.UpgradePercentage = upgradePercentage;
@@ -164,7 +384,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
     {
         if (Enum.TryParse(typeof(Hero.Class), data["Class"], out object class1))
         {
-            heroStatData.HeroClass = (Hero.Class) class1;
+            heroStatData.HeroClass = (Hero.Class)class1;
         }
     }
 
@@ -173,16 +393,19 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         List<Hero.Job> jobList = new List<Hero.Job>();
         if (Enum.TryParse(typeof(Hero.Job), data["MainRace"], out object job1))
         {
-            jobList.Add((Hero.Job) job1);
+            jobList.Add((Hero.Job)job1);
         }
+
         if (Enum.TryParse(typeof(Hero.Job), data["SubRace1"], out object job2))
         {
-            jobList.Add((Hero.Job) job2);
+            jobList.Add((Hero.Job)job2);
         }
+
         if (Enum.TryParse(typeof(Hero.Job), data["SubRace2"], out object job3))
         {
-            jobList.Add((Hero.Job) job3);
+            jobList.Add((Hero.Job)job3);
         }
+
         heroStatData.HeroJob = jobList.ToArray();
     }
 
@@ -199,86 +422,129 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         {
             normalAttackAbility = CreateInstance<NormalAttackAbility>();
             normalAttackAbility.name = $"{data["Name"]}_NormalAttackAbility";
-            AssetDatabase.CreateAsset(normalAttackAbility, $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
+            AssetDatabase.CreateAsset(normalAttackAbility,
+                $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
             AssetDatabase.SaveAssets();
-                    
-            normalAttackAbility = AssetDatabase.LoadAssetAtPath<NormalAttackAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
-        }
-        EditorUtility.SetDirty(normalAttackAbility);
-        if (heroStatData.HeroClass == Hero.Class.Range)
-        {
-            Projectile projectile = null;
-            try
-            {
-                projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
-                    AssetDatabase.GUIDToAssetPath(
-                        AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_NormalAttackProjectile")[0]));
-            }
-            catch (Exception e)
-            {
-                projectile = Instantiate(BaseProjectile);
-                projectile.name = $"{data["Name"]}_NormalAttackProjectile";
-                PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
-                AssetDatabase.SaveAssets();
-                DestroyImmediate(projectile.gameObject);
-                        
-                projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
-            }
-            normalAttackAbility.Projectile = projectile;
-        }
-        normalAttackAbility.AbilityTarget = Ability.Target.EnemyInRange;
-        normalAttackAbility.AbilityTrigger = Ability.Trigger.NormalAttack;
-        return normalAttackAbility;
-    }
-    private Ability GenerateAbility(Dictionary<string, string> data, HeroStatData heroStatData)
-    {
-        if (data["ActiveType"] == "Chance")
-        {
-            return GenerateProbabilityAttackAbility(data, heroStatData);
+
+            normalAttackAbility = AssetDatabase.LoadAssetAtPath<NormalAttackAbility>(
+                $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_NormalAttackAbility.asset");
         }
 
-        Debug.Log($"Not found ability type {data["ActiveType"]}");
-        return null;
-    }
-    private ProbabilityAttackAbility GenerateProbabilityAttackAbility(Dictionary<string, string> data, HeroStatData heroStatData)
-    {
-        ProbabilityAttackAbility probabilityAttackAbility = null;
-        try
-        {
-            probabilityAttackAbility = AssetDatabase.LoadAssetAtPath<ProbabilityAttackAbility>(
-                AssetDatabase.GUIDToAssetPath(
-                    AssetDatabase.FindAssets($"t:ProbabilityAttackAbility {data["Name"]}_{data["AbilityName"]}")[0]));
-        }
-        catch (Exception e)
-        {
-            probabilityAttackAbility = CreateInstance<ProbabilityAttackAbility>();
-            probabilityAttackAbility.name = $"{data["Name"]}_{data["AbilityName"]}";
-            AssetDatabase.CreateAsset(probabilityAttackAbility, $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
-            AssetDatabase.SaveAssets();
-                    
-            probabilityAttackAbility = AssetDatabase.LoadAssetAtPath<ProbabilityAttackAbility>($"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
-        }
-        EditorUtility.SetDirty(probabilityAttackAbility);
+        EditorUtility.SetDirty(normalAttackAbility);
         Projectile projectile = null;
         try
         {
             projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
                 AssetDatabase.GUIDToAssetPath(
-                    AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_{data["AbilityName"]}_Projectile")[0]));
+                    AssetDatabase.FindAssets($"t:Prefab {data["Name"]}_NormalAttackProjectile")[0]));
+        }
+        catch (Exception e)
+        {
+            projectile = Instantiate(BaseProjectile);
+            projectile.name = $"{data["Name"]}_NormalAttackProjectile";
+            PrefabUtility.SaveAsPrefabAsset(projectile.gameObject,
+                $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
+            AssetDatabase.SaveAssets();
+            DestroyImmediate(projectile.gameObject);
+
+            projectile =
+                AssetDatabase.LoadAssetAtPath<Projectile>(
+                    $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_NormalAttackProjectile.prefab");
+        }
+
+        normalAttackAbility.Projectile = projectile;
+        normalAttackAbility.AbilityTarget = Ability.Target.EnemyInRange;
+        normalAttackAbility.AbilityTrigger = Ability.Trigger.NormalAttack;
+        return normalAttackAbility;
+    }
+
+    private Ability GenerateAbility(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        if (data["ActiveType"] == "Passive")
+        {
+            return GeneratePassiveAbility(data, heroStatData);
+        }
+
+        if (data["ActiveType"] == "Active")
+        {
+            return GenerateActiveAbility(data, heroStatData);
+        }
+
+        Debug.Log($"Not found ability type {data["ActiveType"]}");
+        return null;
+    }
+
+    private PassiveAbility GeneratePassiveAbility(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        PassiveAbility passiveAbility = null;
+        try
+        {
+            passiveAbility = AssetDatabase.LoadAssetAtPath<PassiveAbility>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets($"t:PassiveAbility {data["Name"]}_{data["AbilityName"]}")[0]));
+        }
+        catch (Exception e)
+        {
+            passiveAbility = CreateInstance<PassiveAbility>();
+            passiveAbility.name = $"{data["Name"]}_{data["AbilityName"]}";
+            AssetDatabase.CreateAsset(passiveAbility,
+                $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
+            AssetDatabase.SaveAssets();
+
+            passiveAbility = AssetDatabase.LoadAssetAtPath<PassiveAbility>(
+                $"Assets/BaseGame/ScriptableObjects/Ability/{data["Name"]}_{data["AbilityName"]}.asset");
+        }
+
+        EditorUtility.SetDirty(passiveAbility);
+        ProbabilityAttackAbilityBehavior probabilityAttackAbilityBehavior = new ProbabilityAttackAbilityBehavior();
+        Projectile projectile = null;
+        try
+        {
+            projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets($"t:Prefab {heroStatData.Name}_{data["AbilityName"]}_Projectile")[0]));
         }
         catch (Exception e)
         {
             projectile = Instantiate(BaseProjectile);
             projectile.name = $"{data["Name"]}_ProbabilityAttackProjectile";
-            PrefabUtility.SaveAsPrefabAsset(projectile.gameObject, $"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_{data["AbilityName"]}_Projectile.prefab");
+            PrefabUtility.SaveAsPrefabAsset(projectile.gameObject,
+                $"Assets/BaseGame/Prefabs/Projectile/{heroStatData.Name}_{data["AbilityName"]}_Projectile.prefab");
             AssetDatabase.SaveAssets();
             DestroyImmediate(projectile.gameObject);
-                        
-            projectile = AssetDatabase.LoadAssetAtPath<Projectile>($"Assets/BaseGame/Prefabs/Projectile/{data["Name"]}_{data["AbilityName"]}_Projectile.prefab");
+
+            projectile = AssetDatabase.LoadAssetAtPath<Projectile>(
+                $"Assets/BaseGame/Prefabs/Projectile/{heroStatData.Name}_{data["AbilityName"]}_Projectile.prefab");
         }
-        probabilityAttackAbility.Projectile = projectile;
-        probabilityAttackAbility.AbilityTarget = Ability.Target.EnemyInRange;
-        probabilityAttackAbility.AbilityTrigger = Ability.Trigger.ProbabilityAttack;
-        return probabilityAttackAbility;
+
+        probabilityAttackAbilityBehavior.Projectile = projectile;
+        passiveAbility.PassiveAbilityBehavior = probabilityAttackAbilityBehavior;
+        passiveAbility.AbilityTarget = Ability.Target.EnemyInRange;
+        passiveAbility.AbilityTrigger = Ability.Trigger.Passive;
+        return passiveAbility;
+    }
+
+    private ActiveAbility GenerateActiveAbility(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        ActiveAbility activeAbility = null;
+        try
+        {
+            activeAbility = AssetDatabase.LoadAssetAtPath<ActiveAbility>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets($"t:ActiveAbility {heroStatData.Name}_{data["AbilityName"]}")[0]));
+        }
+        catch (Exception e)
+        {
+            activeAbility = CreateInstance<ActiveAbility>();
+            activeAbility.name = $"{data["Name"]}_{data["AbilityName"]}";
+            AssetDatabase.CreateAsset(activeAbility,
+                $"Assets/BaseGame/ScriptableObjects/Ability/{heroStatData.Name}_{data["AbilityName"]}.asset");
+            AssetDatabase.SaveAssets();
+
+            activeAbility = AssetDatabase.LoadAssetAtPath<ActiveAbility>(
+                $"Assets/BaseGame/ScriptableObjects/Ability/{heroStatData.Name}_{data["AbilityName"]}.asset");
+        }
+
+        return activeAbility;
     }
 }

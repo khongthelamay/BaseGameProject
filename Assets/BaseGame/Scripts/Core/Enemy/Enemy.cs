@@ -1,4 +1,5 @@
-﻿using LitMotion;
+﻿using BaseGame.Scripts.Enum;
+using LitMotion;
 using Manager;
 using R3;
 using TW.Reactive.CustomComponent;
@@ -19,13 +20,14 @@ namespace Core
         }
         [Inject] private BattleManager BattleManager { get; set; }
         [field: SerializeField] public int CurrentHealthPoint { get; private set; }
+        [field: SerializeField] public int MarkLoseHealthPoint { get; private set; }
         [field: SerializeField] private float MovementSpeed { get; set; }
         [field: SerializeField] public Transform[] MovePoint { get; private set; }
         [field: SerializeField] public int CurrentPoint { get; private set; }
         [field: SerializeField] public ReactiveValue<float> PlaybackSpeed { get; private set; }
 
         private MotionHandle _movementMotionHandle;
-
+        public bool WillBeDead => MarkLoseHealthPoint <= 0;
         public Enemy SetupMovePoint(Transform[] movePoint)
         {
             MovePoint = movePoint;
@@ -73,10 +75,13 @@ namespace Core
             BattleManager.RemoveEnemy(this);
             Destroy(gameObject);
         }
-
-        public void TakeDamage(int attackDamage)
+        public void MarkLoseHealth(int attackDamage)
         {
-            attackDamage = (int)(attackDamage * Random.Range(0.2f, 1.8f));
+            MarkLoseHealthPoint -= attackDamage;
+        }
+        public void TakeDamage(int attackDamage, DamageType damageType)
+        {
+            // attackDamage = (int)(attackDamage * Random.Range(0.2f, 1.8f));
             FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage);
             CurrentHealthPoint -= attackDamage;
             if (CurrentHealthPoint <= 0)
