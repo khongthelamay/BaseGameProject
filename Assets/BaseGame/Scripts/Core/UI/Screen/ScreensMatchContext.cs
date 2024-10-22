@@ -6,7 +6,8 @@ using R3;
 using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
-
+using UnityEngine.UI;
+using TMPro;
 [Serializable]
 public class ScreensMatchContext 
 {
@@ -34,6 +35,15 @@ public class ScreensMatchContext
     {
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView {get; private set;}  
+        [field: SerializeField] public Button btnReroll {get; private set;}  
+        [field: SerializeField] public Button btnUpgrade {get; private set;}  
+        [field: SerializeField] public TextMeshProUGUI txtCoin {get; private set;}  
+        [field: SerializeField] public TextMeshProUGUI txtCurrentGem {get; private set;}  
+        [field: SerializeField] public TextMeshProUGUI txtCountChamp {get; private set;}  
+        [field: SerializeField] public TextMeshProUGUI txtCountEnemy {get; private set;}  
+        [field: SerializeField] public TextMeshProUGUI txtDifficult {get; private set;}  
+        [field: SerializeField] public TextMeshProUGUI txtTimeWave {get; private set;}  
+        [field: SerializeField] public TextMeshProUGUI txtWave {get; private set;}  
         
         public UniTask Initialize(Memory<object> args)
         {
