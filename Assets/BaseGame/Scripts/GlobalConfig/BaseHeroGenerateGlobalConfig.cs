@@ -10,6 +10,7 @@ using Spine.Unity;
 using TW.Utility.Extension;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -64,6 +65,8 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
 
             EditorUtility.SetDirty(heroStatData);
             GenerateBaseData(data, heroStatData);
+            
+            EditorUtility.SetDirty(heroStatData);
             heroStatData.HeroAbilities = new List<Ability>();
 
             NormalAttackAbility normalAttackAbility = GenerateNormalAttackAbility(data, heroStatData);
@@ -82,7 +85,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         SheetHeroStatDataList = AssetDatabase.FindAssets("t:HeroStatData")
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<HeroStatData>)
-            .Where(hsd => hsd.HeroSkeletonDataAsset != null)
+            .Where(hsd => hsd.HeroSprite != null)
             .ToList();
 
         HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/BaseGame/Prefabs/Hero" })
@@ -107,7 +110,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/BaseGame/Prefabs/Hero" })
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Hero>)
-            .Where(h => h.HeroStatData.HeroSkeletonDataAsset != null)
+            .Where(h => h.HeroStatData.HeroSprite != null)
             .ToList();
 
         AssetDatabase.SaveAssets();
@@ -121,28 +124,42 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         GenerateHeroJob(data, heroStatData);
         GenerateHeroClass(data, heroStatData);
         GenerateBaseStat(data, heroStatData);
-        GenerateSkeletonData(data, heroStatData);
-        // GenerateAnimData(data, heroStatData);
+        // GenerateSkeletonData(data, heroStatData);
         GenerateIdleAnimData(data, heroStatData);
         GenerateAttackAnimData(data, heroStatData);
         GenerateSkillAnimData(data, heroStatData);
+        GenerateAnimatorData(data, heroStatData);
+        
+        GenerateIdleImageAnimData(data, heroStatData);
+        GenerateImageAnimatorData(data, heroStatData);
     }
 
-    private static void GenerateSkeletonData(Dictionary<string, string> data, HeroStatData heroStatData)
+    // private static void GenerateSkeletonData(Dictionary<string, string> data, HeroStatData heroStatData)
+    // {
+    //     try
+    //     {
+    //         heroStatData.HeroSkeletonDataAsset = AssetDatabase.LoadAssetAtPath<SkeletonDataAsset>(
+    //             AssetDatabase.GUIDToAssetPath(
+    //                 AssetDatabase.FindAssets($"t:SkeletonDataAsset {data["Name"]}_SkeletonData")[0]));
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Debug.Log($"SkeletonDataAsset {data["Name"]} not found");
+    //     }
+    // }
+    private static void GenerateIdleAnimData(Dictionary<string, string> data, HeroStatData heroStatData)
     {
         try
         {
-            heroStatData.HeroSkeletonDataAsset = AssetDatabase.LoadAssetAtPath<SkeletonDataAsset>(
-                AssetDatabase.GUIDToAssetPath(
-                    AssetDatabase.FindAssets($"t:SkeletonDataAsset {data["Name"]}_SkeletonData")[0]));
+            EditorUtility.SetDirty(heroStatData);
+            heroStatData.HeroSprite = AssetDatabase.LoadAssetAtPath<Sprite>(
+                AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Idle")[0]));
         }
         catch (Exception e)
         {
-            Debug.Log($"SkeletonDataAsset {data["Name"]} not found");
+            UnityEngine.Debug.Log(e);
         }
-    }
-    private static void GenerateIdleAnimData(Dictionary<string, string> data, HeroStatData heroStatData)
-    {
+
         AnimationClip idleAnim;
         try
         {
@@ -201,6 +218,11 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
 
         idleAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(
             $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Idle-Animation.anim");
+        // set loop animation
+        AnimationClipSettings clipSettings = AnimationUtility.GetAnimationClipSettings(idleAnim);
+        clipSettings.loopTime = true;
+        AnimationUtility.SetAnimationClipSettings(idleAnim, clipSettings);
+        
     }
     private static void GenerateAttackAnimData(Dictionary<string, string> data, HeroStatData heroStatData)
     {
@@ -327,7 +349,8 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         AnimatorController animatorController;
         try
         {
-            string animControllerGuid = AssetDatabase.FindAssets($"t:AnimatorController {data["Name"]}-AnimatorController")[0];
+            string animControllerGuid = AssetDatabase.FindAssets($"t:AnimatorController {data["Name"]}-AnimatorController", 
+                new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0];
             animatorController = AssetDatabase.LoadAssetAtPath<AnimatorController>(AssetDatabase.GUIDToAssetPath(animControllerGuid));
         }
         catch (Exception e)
@@ -350,8 +373,174 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
                 $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-AnimatorController.controller");
             AssetDatabase.SaveAssets();
         }
+        EditorUtility.SetDirty(heroStatData);
+        heroStatData.AnimatorController = AssetDatabase.LoadAssetAtPath<AnimatorController>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-AnimatorController.controller");
+        animatorController.layers = Array.Empty<AnimatorControllerLayer>();
+        animatorController.AddLayer("Base Layer");
+        AnimatorStateMachine stateMachine = animatorController.layers[0].stateMachine;
+        animatorController.parameters = Array.Empty<AnimatorControllerParameter>();
+        animatorController.AddParameter("TickRate", AnimatorControllerParameterType.Float);
+        animatorController.parameters[0].defaultFloat = 1;
+
+        AnimationClip idleClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Idle-Animation.anim");
+        AnimatorState idleState = stateMachine.AddState("Idle");
+        idleState.motion = idleClip;
+        
+        AnimationClip attackClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Attack-Animation.anim");
+        AnimatorState attackState = stateMachine.AddState("Attack");
+        attackState.motion = attackClip;
+        attackState.speedParameterActive = true;
+        attackState.speedParameter = "TickRate";
+        AnimatorStateTransition attackToIdle = attackState.AddTransition(idleState);
+        attackToIdle.hasExitTime = true;
+        attackToIdle.exitTime = 1;
+        attackToIdle.hasFixedDuration = false;
+        attackToIdle.duration = 0;
+        attackToIdle.offset = 0;
+        
+        // attackToIdle;
+        
+        
+        AnimationClip skillClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill-Animation.anim");
+        if (skillClip != null)
+        {
+            AnimatorState skillState = stateMachine.AddState("Skill");
+            skillState.motion = skillClip;
+            skillState.speedParameterActive = true;
+            skillState.speedParameter = "TickRate";
+            AnimatorStateTransition skillToIdle = skillState.AddTransition(idleState);
+            skillToIdle.hasExitTime = true;
+            skillToIdle.exitTime = 1;
+            skillToIdle.hasFixedDuration = false;
+            skillToIdle.duration = 0;
+            skillToIdle.offset = 0;
+        }
     }
 
+    
+    private static void GenerateIdleImageAnimData(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        try
+        {
+            EditorUtility.SetDirty(heroStatData);
+            heroStatData.HeroSprite = AssetDatabase.LoadAssetAtPath<Sprite>(
+                AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Idle")[0]));
+        }
+        catch (Exception e)
+        {
+            UnityEngine.Debug.Log(e);
+        }
+
+        AnimationClip idleAnim;
+        try
+        {
+            string animIdleGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Idle-Image-Animation")[0];
+            idleAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animIdleGuid));
+        }
+        catch (Exception e)
+        {
+            idleAnim = null;
+        }
+
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Idle");
+        List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
+            .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
+            .ToList();
+        if (idleAnim == null)
+        {
+            if (spriteAnim.Length == 0) return;
+            idleAnim = new AnimationClip
+            {
+                name = $"{data["Name"]}-Idle-Image-Animation",
+                frameRate = 30
+            };
+            if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
+            {
+                AssetDatabase.CreateFolder("Assets/BaseGame/Animations/Hero", data["Name"]);
+            }
+
+            AssetDatabase.CreateAsset(idleAnim,
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Idle-Image-Animation.anim");
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            idleAnim.ClearCurves();
+        }
+
+
+        EditorCurveBinding curveBinding = new EditorCurveBinding
+        {
+            type = typeof(Image),
+            path = "",
+            propertyName = "m_Sprite"
+        };
+        ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[spriteList.Count];
+        for (int i = 0; i < spriteList.Count; i++)
+        {
+            keyFrames[i] = new ObjectReferenceKeyframe
+            {
+                time = i / idleAnim.frameRate,
+                value = spriteList[i]
+            };
+        }
+
+        AnimationUtility.SetObjectReferenceCurve(idleAnim, curveBinding, keyFrames);
+
+        idleAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Idle-Image-Animation.anim");
+        // set loop animation
+        AnimationClipSettings clipSettings = AnimationUtility.GetAnimationClipSettings(idleAnim);
+        clipSettings.loopTime = true;
+        AnimationUtility.SetAnimationClipSettings(idleAnim, clipSettings);
+    }
+
+    private static void GenerateImageAnimatorData(Dictionary<string, string> data, HeroStatData heroStatData)
+    {
+        
+        AnimatorController animatorController;
+        try
+        {
+            string animControllerGuid = AssetDatabase.FindAssets($"t:AnimatorController {data["Name"]}-Image-AnimatorController", 
+                new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0];
+            animatorController = AssetDatabase.LoadAssetAtPath<AnimatorController>(AssetDatabase.GUIDToAssetPath(animControllerGuid));
+        }
+        catch (Exception e)
+        {
+            animatorController = null;
+        }
+
+        if (animatorController == null)
+        {
+            animatorController = new AnimatorController
+            {
+                name = $"{data["Name"]}-Image-AnimatorController"
+            };
+            if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
+            {
+                AssetDatabase.CreateFolder("Assets/BaseGame/Animations/Hero", data["Name"]);
+            }
+
+            AssetDatabase.CreateAsset(animatorController,
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Image-AnimatorController.controller");
+            AssetDatabase.SaveAssets();
+        }
+        EditorUtility.SetDirty(heroStatData);
+        heroStatData.ImageAnimatorController = AssetDatabase.LoadAssetAtPath<AnimatorController>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Image-AnimatorController.controller");
+        animatorController.layers = Array.Empty<AnimatorControllerLayer>();
+        animatorController.AddLayer("Base Layer");
+        AnimatorStateMachine stateMachine = animatorController.layers[0].stateMachine;
+
+        AnimationClip idleClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Idle-Image-Animation.anim");
+        AnimatorState idleState = stateMachine.AddState("Idle");
+        idleState.motion = idleClip;
+    }
     private static void GenerateBaseStat(Dictionary<string, string> data, HeroStatData heroStatData)
     {
         if (int.TryParse(data["Tier"], out int tier))

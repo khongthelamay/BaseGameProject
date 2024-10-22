@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f61dc01d6e448c2b4e0ed5d1d0358c4, type: 3}
   m_Name: Archer_ArrowStorm
   m_EditorClassIdentifier: 
-  <AbilityTrigger>k__BackingField: 3
-  <AbilityTarget>k__BackingField: 1
+  <AbilityTrigger>k__BackingField: 0
+  <AbilityTarget>k__BackingField: 0
   <Cooldown>k__BackingField: 5
   <ActiveAbilityBehavior>k__BackingField:
-    rid: 7889111653494030373
+    rid: 3698086836598997023
   references:
     version: 2
     RefIds:
-    - rid: 7889111653494030373
-      type: {class: ArrowStormBehavior, ns: Core, asm: Assembly-CSharp}
+    - rid: 3698086836598997023
+      type: {class: SpawnProjectileOnActiveBehavior, ns: Core, asm: Assembly-CSharp}
       data:
-        <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: a51c8cc451ba520479ce9f265f00f716, type: 3}
+        <Projectile>k__BackingField: {fileID: 0}

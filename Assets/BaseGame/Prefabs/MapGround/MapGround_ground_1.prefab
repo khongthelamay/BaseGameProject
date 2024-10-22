@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5100732016319247826}
   - component: {fileID: 7525363851673787404}
   m_Layer: 0
-  m_Name: MapGround_Ground_1
+  m_Name: MapGround_ground_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 849031375, guid: 81c80539eec96dc4b9eb4c550badc193, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

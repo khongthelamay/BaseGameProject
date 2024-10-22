@@ -14,7 +14,7 @@ namespace Core
     {
         public UniTask OnStateEnter(HeroMoveState state, CancellationToken token)
         {
-            HeroAnim.PlayIdleAnimation(1);
+            // HeroAnim.PlayIdleAnimation(1);
             Instantiate(MoveProjectile, Transform.position, Quaternion.identity)
                 .Init(MoveFromPosition, MoveToPosition, OnMoveComplete);
             
