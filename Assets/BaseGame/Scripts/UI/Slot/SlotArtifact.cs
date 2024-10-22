@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class ArtifactSlot : SlotBase <ArtifactDataConfig>
+public class SlotArtifact : SlotBase <ArtifactDataConfig>
 {
     [Header(" ======ArtifactSlot====== ")]
     [SerializeField] Image imgBG;

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3341516964160180464}
   - component: {fileID: 6667986000873377729}
   - component: {fileID: 2360090890130005201}
+  - component: {fileID: 4394623294648996932}
   m_Layer: 5
-  m_Name: HeroJobSlot
+  m_Name: SlotHeroJob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,6 +77,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 15
+--- !u!114 &4394623294648996932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084490011719385312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f75b6ef00bf43459799edb43bc90f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotData: 0
+  imgIcon: {fileID: 0}
+  btnChoose: {fileID: 0}
+  trsContent: {fileID: 3341516964160180464}
+  animOnSlot: {fileID: 0}
+  txtJobName: {fileID: 4726443535919244568}
+  imgBG: {fileID: 2360090890130005201}
 --- !u!1 &7765675032438682813
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,8 @@ public class SlotBase<Data> : MonoBehaviour
     public virtual void SetActionChooseCallBack(UnityAction<SlotBase<Data>> actionCallBack) { actionChooseCallBack = actionCallBack; }
 
     public virtual void Awake() {
-        btnChoose.onClick.AddListener(OnChoose);
+        if (btnChoose != null)
+            btnChoose.onClick.AddListener(OnChoose);
     }
 
     public virtual void InitData(Data data) {

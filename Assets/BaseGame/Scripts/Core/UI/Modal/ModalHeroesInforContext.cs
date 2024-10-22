@@ -11,6 +11,7 @@ using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
 using Core;
 using Spine.Unity;
+using System.Collections.Generic;
 
 [Serializable]
 public class ModalHeroesInforContext 
@@ -52,9 +53,11 @@ public class ModalHeroesInforContext
         [field: SerializeField] public SkeletonGraphic imgHeroIcon {get; private set;}  
         [field: SerializeField] public Button btnExit {get; private set;}  
         [field: SerializeField] public Button btnUpgrade {get; private set;}  
-        [field: SerializeField] public MainContentAbility mainContentAbility {get; private set;}  
+        [field: SerializeField] public MainContentAbility mainContentHeroAbility { get; private set;}  
+        [field: SerializeField] public MainContentHeroJob mainContentHeroJob {get; private set;}
 
-        
+        List<Hero.Job> jobs;
+
         public UniTask Initialize(Memory<object> args)
         {
             return UniTask.CompletedTask;
@@ -70,7 +73,9 @@ public class ModalHeroesInforContext
             txtSpeed.text = heroData.HeroStatData.BaseAttackSpeed.ToString();
             piecesProgress.ChangeProgress(0);
             piecesProgress.ChangeTextProgress("0/0");
-            mainContentAbility.InitData(heroData.HeroStatData.HeroAbilities);
+            mainContentHeroAbility.InitData(heroData.HeroStatData.HeroAbilities);
+            jobs = new(heroData.HeroStatData.HeroJob);
+            mainContentHeroJob.InitData(jobs);
         }
 
         public void AnimOpen()

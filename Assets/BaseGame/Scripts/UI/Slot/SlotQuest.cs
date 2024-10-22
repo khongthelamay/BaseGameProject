@@ -1,18 +1,17 @@
 using DG.Tweening;
-using Spine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Claims;
-using TMPro;
-using TW.Utility.CustomType;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using TW.Reactive.CustomComponent;
+using R3;
+using TW.Utility.CustomType;
 
-public class AchievementSlot : SlotBase<AchievementDataConfig>
+public class SlotQuest : SlotBase<QuestDataConfig>
 {
-    [Header("==== AchievementSlot ====")]
-    AchievementSave achievementSave = new();
-
+    [Header("======= QuestSlot =======")]
     [SerializeField] RectMask2D myMask;
     [SerializeField] TextMeshProUGUI txtDes;
     [SerializeField] TextMeshProUGUI txtProgress;
@@ -34,54 +33,38 @@ public class AchievementSlot : SlotBase<AchievementDataConfig>
     [SerializeField] Transform pointLightEnd;
     [SerializeField] Vector3 vectorRotate;
 
-    bool onClaim;
+    ReactiveValue<QuestSave> questSave = new(null);
 
     float heightDefault;
+
     public override void Awake()
     {
         base.Awake();
         heightDefault = myLayout.preferredHeight;
     }
 
-    public bool IsClaimed() { return objProgressDone.activeSelf; }
-    public bool IsCanClaim() { return btnChoose.interactable; }
-
-    public override void InitData(AchievementDataConfig data)
+    public override void InitData(QuestDataConfig data)
     {
-        if (onClaim) return;
         base.InitData(data);
         animOnSlot.enabled = true;
+        questSave = QuestManager.Instance.GetQuestSaveData(slotData.questID);
+        
+        txtReward.text = data.starReward.ToString();
+        txtDes.text = string.Format(data.questDes, data.questRequire);
+        txtProgress.text = $"{(BigNumber)questSave.Value.progress.Value} / {(BigNumber)data.questRequire}";
 
-        achievementSave = AchievementManager.Instance.GetAchievementDataSave(slotData.achievementType);
+        progressBar.ChangeProgress((float)questSave.Value.progress.Value / (float)data.questRequire);
 
-        txtReward.text = data.reward.value.Value.ToString();
-        txtDes.text = string.Format(data.strDes, data.require);
-        txtProgress.text = $"{(BigNumber)achievementSave.currentProgress.Value} / {(BigNumber)data.require}";
-
-        progressBar.ChangeProgress((float)achievementSave.currentProgress.Value / (float)data.require);
-
-        btnChoose.interactable = AchievementManager.Instance.IsCanClaim(achievementSave);
+        btnChoose.interactable = QuestManager.Instance.IsCanClaim(questSave.Value.id.Value);
 
         objBGCanClaim.SetActive(btnChoose.interactable);
         objNotice.SetActive(btnChoose.interactable);
         objTextNotice.SetActive(btnChoose.interactable);
-        objProgressDone.SetActive(false);
 
-        if (!AchievementManager.Instance.IsCanUpdateLevelAchievement(
-            (AchievementType)achievementSave.achievementType.Value, 
-            achievementSave.achievementLevel.Value))
-            ActionCallBackClaimed();
+        if (questSave.Value.claimed.Value) ActionCallBackClaimed();
     }
 
-    void ActionCallBackClaimed()
-    {
-        objProgressDone.SetActive(true);
-        myLayout.preferredHeight = heightDefault;
-        transform.SetAsLastSibling();
-    }
-
-    public override void AnimOpen()
-    {
+    public override void AnimOpen() {
         if (mySequence != null) mySequence.Kill();
 
         mySequence = DOTween.Sequence();
@@ -90,13 +73,14 @@ public class AchievementSlot : SlotBase<AchievementDataConfig>
 
         myMask.enabled = true;
 
-        mySequence.Append(UIAnimation.AnimSlotVerticalOpen(myLayout, heightDefault, () => { myMask.enabled = false; }));
+        mySequence.Append(UIAnimation.AnimSlotVerticalOpen(myLayout, heightDefault,()=> { myMask.enabled = false; }));
     }
 
     public override void AnimDone()
     {
         if (mySequence != null) mySequence.Kill();
-        onClaim = true;
+
+        QuestManager.Instance.ClaimQuest(slotData.questID);
 
         btnChoose.interactable = false;
 
@@ -121,20 +105,26 @@ public class AchievementSlot : SlotBase<AchievementDataConfig>
         mySequence.Append(UIAnimation.AnimSlotVerticalClose(myLayout, heightDefault, () =>
         {
             myMask.enabled = false;
-            onClaim = false;
-            ReloadData();
-            AnimOpen();
+            ActionCallBackClaimed();
         }).SetDelay(.25f));
 
         mySequence.SetDelay(.45f);
         mySequence.Play();
-        slotData = AchievementManager.Instance.GetAchievementDataConfig(slotData.achievementType);
+    }
+
+    void ActionCallBackClaimed() {
+        objProgressDone.SetActive(true);
+        myLayout.preferredHeight = heightDefault;
+        transform.SetAsLastSibling();
     }
 
     public override void ReloadData()
     {
         InitData(slotData);
     }
+
+    public bool IsClaimed() { return objProgressDone.activeSelf; }
+    public bool IsCanClaim() { return btnChoose.interactable; }
 
     public override void OnChoose()
     {

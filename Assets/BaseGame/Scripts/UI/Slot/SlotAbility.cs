@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilitySlot : SlotBase<Ability>
+public class SlotAbility : SlotBase<Ability>
 {
     [Header("==== Ability Slot ====")]
     [SerializeField] GameObject objLock;

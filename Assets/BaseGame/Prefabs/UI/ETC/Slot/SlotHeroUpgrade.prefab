@@ -1027,7 +1027,7 @@ GameObject:
   - component: {fileID: 2761065692497192931}
   - component: {fileID: 7611287924326152207}
   m_Layer: 5
-  m_Name: HeroSlotUpgrade
+  m_Name: SlotHeroUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

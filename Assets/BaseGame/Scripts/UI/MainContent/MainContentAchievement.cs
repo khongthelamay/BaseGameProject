@@ -24,9 +24,9 @@ public class MainContentAchievement : MainContent<AchievementDataConfig>
     {
         for (int i = slots.Count - 1; i >= 0; i--)
         {
-            if ((slots[i] as AchievementSlot).IsClaimed())
+            if ((slots[i] as SlotAchievement).IsClaimed())
                 slots[i].transform.SetAsLastSibling();
-            if ((slots[i] as AchievementSlot).IsCanClaim())
+            if ((slots[i] as SlotAchievement).IsCanClaim())
                 slots[i].transform.SetAsFirstSibling();
         }
     }

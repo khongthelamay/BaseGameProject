@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TW.Reactive.CustomComponent;
 using UnityEngine;
 
-public class StreakSlot : SlotBase<StreakDataConfig>
+public class SlotStreak : SlotBase<StreakDataConfig>
 {
     public ReactiveValue<StreakSave> streakSave = new();
 

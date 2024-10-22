@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 1201300306412660803}
   - component: {fileID: 3942867960584969196}
   m_Layer: 5
-  m_Name: LevelBuffSlot
+  m_Name: SlotLevelBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -87,8 +87,9 @@ GameObject:
   - component: {fileID: 48396806498491475}
   - component: {fileID: 5056758799163415158}
   - component: {fileID: 2087935764379687208}
+  - component: {fileID: 1774332545517140480}
   m_Layer: 5
-  m_Name: ArtifactSlot
+  m_Name: SlotArtifact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +145,7 @@ MonoBehaviour:
   imgIcon: {fileID: 432548000483607528}
   btnChoose: {fileID: 2087935764379687208}
   trsContent: {fileID: 7686599904604833498}
-  animOnSlot: {fileID: 0}
+  animOnSlot: {fileID: 1774332545517140480}
   imgBG: {fileID: 3063322608197373078}
   txtName: {fileID: 4329914485560700483}
   txtLevel: {fileID: 1929458703800093036}
@@ -194,6 +195,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1774332545517140480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660558552207607602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec023d38812c8f646a279c1be61ce718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contentAnim: {fileID: 1368764670465481026}
 --- !u!1 &2401778542384599355
 GameObject:
   m_ObjectHideFlags: 0
