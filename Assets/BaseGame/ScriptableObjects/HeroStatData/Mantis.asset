@@ -22,5 +22,6 @@ MonoBehaviour:
   <BaseAttackSpeed>k__BackingField: 2.2
   <BaseAttackRange>k__BackingField: 2
   <UpgradePercentage>k__BackingField: 5
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: a0934aaaf5535bb438ab892e171d8baf, type: 2}
   <HeroAbilities>k__BackingField:
   - {fileID: 11400000, guid: b3fe67d679662ff4c8ff061e0b28abac, type: 2}

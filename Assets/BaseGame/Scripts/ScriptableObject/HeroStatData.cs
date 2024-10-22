@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Core;
 using Sirenix.OdinInspector;
 using Spine.Unity;
+using UnityEditor.Animations;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -13,12 +14,13 @@ public class HeroStatData : ScriptableObject
 {
     [field: HorizontalGroup(nameof(HeroStatData), width: 200), PreviewField(200), HideLabel]
     [field: SerializeField]
-    [field: ShowIf("@HeroSprite != null")]
     public Sprite HeroSprite {get; set;}
     [field: HorizontalGroup(nameof(HeroStatData), width: 200), PreviewField(200), HideLabel]
     [field: SerializeField]
-    [field: ShowIf("@HeroSkeletonDataAsset != null")]
+    [field: HideInInspector]
     public SkeletonDataAsset HeroSkeletonDataAsset {get; set;}
+    
+    
     [field: VerticalGroup(nameof(HeroStatData)+"/Stats")]
     [field: SerializeField] public string Name {get; set;}
     [field: VerticalGroup(nameof(HeroStatData)+"/Stats")]
@@ -35,7 +37,7 @@ public class HeroStatData : ScriptableObject
     [field: SerializeField] public float BaseAttackRange {get; set;}
     [field: VerticalGroup(nameof(HeroStatData)+"/Stats")]
     [field: SerializeField] public float UpgradePercentage {get; set;}
-    
+    [field: SerializeField] public AnimatorController AnimatorController {get; set;}
     [field: SerializeField] public List<Ability> HeroAbilities {get; set;}
 
     

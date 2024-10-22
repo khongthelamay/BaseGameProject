@@ -42,8 +42,9 @@ namespace Core
         [Inject] private TargetingManager TargetingManager { get; set; }
         [field: SerializeField] public HeroStatData HeroStatData { get; set; }
         [field: SerializeField] public HeroAttackRange HeroAttackRange { get; set; }
+
         [field: SerializeField] public SpriteRenderer SpriteGraphic { get; set; }
-        [field: SerializeField] public SpriteRenderer SpriteShadow { get; set; }
+        // [field: SerializeField] public SpriteRenderer SpriteShadow { get; set; }
         [field: SerializeField] public SpriteRenderer SpriteRarity { get; set; }
         [field: SerializeField] public MoveProjectile MoveProjectile { get; private set; }
         [field: SerializeField] public GameObject VisibleGroup {get; private set;}
@@ -161,13 +162,14 @@ namespace Core
         [Button]
         public void InitHero()
         {
-            if (HeroStatData.HeroSkeletonDataAsset != null)
-            {
-                HeroAnim.SkeletonAnimation.skeletonDataAsset = HeroStatData.HeroSkeletonDataAsset;
-                HeroAnim.SkeletonAnimation.Initialize(true);
-            }
+            // if (HeroStatData.HeroSkeletonDataAsset != null)
+            // {
+            //     HeroAnim.SkeletonAnimation.skeletonDataAsset = HeroStatData.HeroSkeletonDataAsset;
+            //     HeroAnim.SkeletonAnimation.Initialize(true);
+            // }
+            SpriteGraphic.sprite = HeroStatData.HeroSprite;
             SpriteRarity.color = BaseHeroGenerateGlobalConfig.Instance.RarityColorArray[(int)HeroStatData.HeroRarity];
-            
+            HeroAnim.Animator.runtimeAnimatorController = HeroStatData.AnimatorController;
         }
     }
 #endif

@@ -17,52 +17,32 @@ namespace Core
 
         private static readonly string Idle = "Idle";
         private static readonly string Attack = "Attack";
+        private static readonly int TickRate = Animator.StringToHash("TickRate");
 
-        [field: SerializeField] public SkeletonAnimation SkeletonAnimation { get; private set; }
+        [field: SerializeField] public Animator Animator { get; private set; }
+
         [field: SerializeField] public State CurrentState { get; private set; }
         private CancellationTokenSource CancellationTokenSource { get; set; }
-        private float AttackAnimDuration { get; set; }
-        private float AttackScaleTimeDefault { get; set; } = 2f;
-        private void Awake()
-        {
-            AttackAnimDuration = SkeletonAnimation.AnimationState.Data.SkeletonData.FindAnimation(Attack).Duration;
-        }
+
 
         public HeroAnim PlayIdleAnimation(float speed)
         {
-            if (CurrentState == State.Idle) return this;
-            CurrentState = State.Idle;
-            PlayAnimation(Idle, speed, true).Forget();
+            PlayAnimation(Idle, speed);
             return this;
         }
 
         public HeroAnim PlayAttackAnimation(float speed)
         {
-            if (CurrentState == State.Attack) return this;
-            CurrentState = State.Attack;
-            PlayAnimation(Attack, speed, false).Forget();
-            
+            PlayAnimation(Attack, speed);
+
             return this;
         }
 
-        private async UniTask PlayAnimation(string animationName, float speed, bool loop = false)
+        private void PlayAnimation(string animationName, float speed)
         {
-            if (SkeletonAnimation == null) return;
-            CancellationTokenSource?.Cancel();
-            CancellationTokenSource?.Dispose();
-            CancellationTokenSource = null;
-            
-            
-            
-            SkeletonAnimation.timeScale = speed;
-            SkeletonAnimation.AnimationState.SetAnimation(0, animationName, loop);
-
-            if (loop) return;
-            if (CurrentState == State.Idle) return;
-            SkeletonAnimation.timeScale = speed * AttackScaleTimeDefault;
-            CancellationTokenSource = new CancellationTokenSource();
-            await UniTask.Delay((int)(AttackAnimDuration / speed / AttackScaleTimeDefault * 1000) , cancellationToken: CancellationTokenSource.Token);
-            PlayIdleAnimation(1);
+            if (Animator.runtimeAnimatorController == null) return;
+            Animator.SetFloat(TickRate, speed);
+            Animator.Play(animationName);
         }
     }
 }

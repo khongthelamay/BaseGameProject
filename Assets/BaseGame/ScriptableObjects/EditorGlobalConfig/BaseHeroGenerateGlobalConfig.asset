@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc323b84b86e9f4b95343614b0c45eb, type: 3}
   m_Name: BaseHeroGenerateGlobalConfig
   m_EditorClassIdentifier: 
-  <SheetHeroStatDataList>k__BackingField: []
+  <SheetHeroStatDataList>k__BackingField:
+  - {fileID: 11400000, guid: 4b2f4ccde3e32a54cab162754fcdbd24, type: 2}
+  - {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+  - {fileID: 11400000, guid: 7b794966a51efc24b8313a5abee26e89, type: 2}
+  - {fileID: 11400000, guid: bb922d3e51cb27e4f9c456b42b6cf6fb, type: 2}
   <HeroStatDataList>k__BackingField: []
-  <HeroPrefabList>k__BackingField: []
+  <HeroPrefabList>k__BackingField:
+  - {fileID: 8013252171766711324, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
+  - {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
+  - {fileID: 1857084527054048234, guid: 8d4e61a10c6340345803a2aa7c499262, type: 3}
+  - {fileID: 2335573605449318257, guid: ca586a35bc5bd444f9dac5a4885df0be, type: 3}
   <BaseHero>k__BackingField: {fileID: 899073806387762782, guid: 0d4112a616dec1e40932d772c0c41f0a, type: 3}
   <BaseProjectile>k__BackingField: {fileID: 4670623762309924594, guid: 89aea41ff06b3f04f95a389c4e1c4d61, type: 3}
   <GraphicArray>k__BackingField: []
@@ -25,8 +33,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6ea869f9f4902fb449bf3d7ef7e65002, type: 3}
   - {fileID: 21300000, guid: 1c531a2a29325ce4b8cc3dd814c8dc65, type: 3}
   <RarityColorArray>k__BackingField:
-  - {r: 0.15294118, g: 0.68235296, b: 0.3764706, a: 1}
-  - {r: 0.14117648, g: 0.44313726, b: 0.6392157, a: 1}
-  - {r: 0.49019608, g: 0.23529412, b: 0.59607846, a: 1}
-  - {r: 0.94509804, g: 0.76862746, b: 0.05882353, a: 1}
-  - {r: 0.827451, g: 0.32941177, b: 0, a: 1}
+  - {r: 0.15294118, g: 0.68235296, b: 0.3764706, a: 0.78431374}
+  - {r: 0.14117648, g: 0.44313726, b: 0.6392157, a: 0.78431374}
+  - {r: 0.49019608, g: 0.23529412, b: 0.59607846, a: 0.78431374}
+  - {r: 0.94509804, g: 0.76862746, b: 0.05882353, a: 0.78431374}
+  - {r: 0.827451, g: 0.32941177, b: 0, a: 0.78431374}
