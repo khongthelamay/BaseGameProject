@@ -15,11 +15,11 @@ MonoBehaviour:
   <AbilityTrigger>k__BackingField: 4
   <AbilityTarget>k__BackingField: 1
   <PassiveAbilityBehavior>k__BackingField:
-    rid: 7889111889801641989
+    rid: 7889111933795958799
   references:
     version: 2
     RefIds:
-    - rid: 7889111889801641989
+    - rid: 7889111933795958799
       type: {class: ProbabilityAttackAbilityBehavior, ns: Core, asm: Assembly-CSharp}
       data:
         <Probability>k__BackingField: 0

@@ -112,6 +112,11 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
             .Select(AssetDatabase.LoadAssetAtPath<Hero>)
             .Where(h => h.HeroStatData.HeroSprite != null)
             .ToList();
+        HeroPrefabList.ForEach(h =>
+        {
+            using PrefabUtility.EditPrefabContentsScope editorScope = new PrefabUtility.EditPrefabContentsScope(AssetDatabase.GetAssetPath(h));
+            editorScope.prefabContentsRoot.GetComponent<Hero>().InitHero();
+        });
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -133,20 +138,7 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
         GenerateIdleImageAnimData(data, heroStatData);
         GenerateImageAnimatorData(data, heroStatData);
     }
-
-    // private static void GenerateSkeletonData(Dictionary<string, string> data, HeroStatData heroStatData)
-    // {
-    //     try
-    //     {
-    //         heroStatData.HeroSkeletonDataAsset = AssetDatabase.LoadAssetAtPath<SkeletonDataAsset>(
-    //             AssetDatabase.GUIDToAssetPath(
-    //                 AssetDatabase.FindAssets($"t:SkeletonDataAsset {data["Name"]}_SkeletonData")[0]));
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         Debug.Log($"SkeletonDataAsset {data["Name"]} not found");
-    //     }
-    // }
+    
     private static void GenerateIdleAnimData(Dictionary<string, string> data, HeroStatData heroStatData)
     {
         try

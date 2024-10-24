@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2237fc6c84688654d89812c5ae2271c0, type: 3}
+  m_Name: Rook
+  m_EditorClassIdentifier: 
+  <HeroSprite>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: Rook
+  <HeroRarity>k__BackingField: 3
+  <HeroClass>k__BackingField: 1
+  <HeroJob>k__BackingField: 0400000002000000
+  <BaseAttackDamage>k__BackingField: 1400
+  <BaseAttackSpeed>k__BackingField: 1.3
+  <BaseAttackRange>k__BackingField: 2
+  <UpgradePercentage>k__BackingField: 5
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: c9ef904514d076b47b7f936ad654fd94, type: 2}
+  <ImageAnimatorController>k__BackingField: {fileID: 9100000, guid: e57da52b0ec51414bb64290abc4b467c, type: 2}
+  <HeroAbilities>k__BackingField:
+  - {fileID: 11400000, guid: f4d1e640a7b40d84096c782a9cfa6dc4, type: 2}

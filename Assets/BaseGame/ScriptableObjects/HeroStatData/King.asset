@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2237fc6c84688654d89812c5ae2271c0, type: 3}
+  m_Name: King
+  m_EditorClassIdentifier: 
+  <HeroSprite>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: King
+  <HeroRarity>k__BackingField: 4
+  <HeroClass>k__BackingField: 1
+  <HeroJob>k__BackingField: 040000000100000000000000
+  <BaseAttackDamage>k__BackingField: 15000
+  <BaseAttackSpeed>k__BackingField: 1.2
+  <BaseAttackRange>k__BackingField: 2
+  <UpgradePercentage>k__BackingField: 5
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 98792bac1fcc24a46a14f46a2ac5f688, type: 2}
+  <ImageAnimatorController>k__BackingField: {fileID: 9100000, guid: 2684b47f32468fe4b90c18e9369321c2, type: 2}
+  <HeroAbilities>k__BackingField:
+  - {fileID: 11400000, guid: 814b048001f2bef4b9e674481c2f83f6, type: 2}

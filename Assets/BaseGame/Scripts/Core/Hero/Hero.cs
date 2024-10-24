@@ -42,9 +42,7 @@ namespace Core
         [Inject] private TargetingManager TargetingManager { get; set; }
         [field: SerializeField] public HeroStatData HeroStatData { get; set; }
         [field: SerializeField] public HeroAttackRange HeroAttackRange { get; set; }
-
         [field: SerializeField] public SpriteRenderer SpriteGraphic { get; set; }
-        // [field: SerializeField] public SpriteRenderer SpriteShadow { get; set; }
         [field: SerializeField] public SpriteRenderer SpriteRarity { get; set; }
         [field: SerializeField] public MoveProjectile MoveProjectile { get; private set; }
         [field: SerializeField] public GameObject VisibleGroup {get; private set;}
@@ -52,6 +50,7 @@ namespace Core
         [field: SerializeField] public HeroAnim HeroAnim {get; private set;}
 
         private UniTaskStateMachine<Hero> StateMachine { get; set; }
+        private StateMachine RunnerStateMachine { get; set; }
         public float AttackRange => HeroStatData.BaseAttackRange;
         private Vector3 MoveFromPosition { get; set; }
         private Vector3 MoveToPosition { get; set; }
@@ -68,7 +67,7 @@ namespace Core
         private void InitStateMachine()
         {
             StateMachine = new UniTaskStateMachine<Hero>(this);
-            StateMachine.RegisterState(HeroSleepState.Instance);
+            StateMachine.RegisterState(HeroSleepState1.Instance);
             StateMachine.Run();
         }
 
@@ -78,7 +77,7 @@ namespace Core
         }
         public void ChangeToSleepState()
         {
-            StateMachine.RequestTransition(HeroSleepState.Instance);
+            StateMachine.RequestTransition(HeroSleepState1.Instance);
         }
         public void MoveToFieldSlot(FieldSlot fieldSlot)
         {
@@ -162,11 +161,6 @@ namespace Core
         [Button]
         public void InitHero()
         {
-            // if (HeroStatData.HeroSkeletonDataAsset != null)
-            // {
-            //     HeroAnim.SkeletonAnimation.skeletonDataAsset = HeroStatData.HeroSkeletonDataAsset;
-            //     HeroAnim.SkeletonAnimation.Initialize(true);
-            // }
             SpriteGraphic.sprite = HeroStatData.HeroSprite;
             SpriteRarity.color = BaseHeroGenerateGlobalConfig.Instance.RarityColorArray[(int)HeroStatData.HeroRarity];
             HeroAnim.Animator.runtimeAnimatorController = HeroStatData.AnimatorController;

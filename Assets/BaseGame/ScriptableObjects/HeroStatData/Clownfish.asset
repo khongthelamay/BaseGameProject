@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2237fc6c84688654d89812c5ae2271c0, type: 3}
+  m_Name: Clownfish
+  m_EditorClassIdentifier: 
+  <HeroSprite>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: Clownfish
+  <HeroRarity>k__BackingField: 0
+  <HeroClass>k__BackingField: 1
+  <HeroJob>k__BackingField: 06000000
+  <BaseAttackDamage>k__BackingField: 20
+  <BaseAttackSpeed>k__BackingField: 2
+  <BaseAttackRange>k__BackingField: 2
+  <UpgradePercentage>k__BackingField: 5
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: d9a830ee9ee2c1348956dc3e712dbfdf, type: 2}
+  <ImageAnimatorController>k__BackingField: {fileID: 9100000, guid: 39d83c657d6f0d049b3194c794d7a2af, type: 2}
+  <HeroAbilities>k__BackingField:
+  - {fileID: 11400000, guid: 27f62add6012bb74780118e3eb714fd7, type: 2}

@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: HeroPoolGlobalConfig
   m_EditorClassIdentifier: 
   <HeroPrefabList>k__BackingField:
-  - {fileID: 8013252171766711324, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
-  - {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-  - {fileID: 1096430479915068473, guid: 8d4e61a10c6340345803a2aa7c499262, type: 3}
-  - {fileID: 2335573605449318257, guid: ca586a35bc5bd444f9dac5a4885df0be, type: 3}
+  - {fileID: 2557431559876081381, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
+  - {fileID: 6995974192129293514, guid: 639b26a564f90b848851e8df56412295, type: 3}
+  - {fileID: 915289735684312176, guid: 2db961d06da399d4c9510c8f5b1af27d, type: 3}
+  - {fileID: 1935011394705878801, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
+  - {fileID: 3064246233606108837, guid: d52e6479226ebb54f8c54db116c31276, type: 3}
+  - {fileID: 6580050625717356286, guid: 8d4e61a10c6340345803a2aa7c499262, type: 3}
+  - {fileID: 5789579612786993236, guid: ca586a35bc5bd444f9dac5a4885df0be, type: 3}
+  - {fileID: 8151900761742474142, guid: ed8de641268b1cb428ec7585a0c93ecf, type: 3}
+  - {fileID: 3231087576175002432, guid: fbeeebaf888efcd49bf2d20e2bf0f3bc, type: 3}
   <HeroPoolLevelConfig>k__BackingField:
     <Level>k__BackingField: 1
     <ProbabilityRarity>k__BackingField:
