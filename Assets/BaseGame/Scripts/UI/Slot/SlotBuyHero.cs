@@ -11,8 +11,7 @@ public class SlotBuyHero : SlotBase<Hero>
 {
     [Header("===SlotBuyHero===")]
     public Image imgBG;
-    public SkeletonGraphic iconHero;
-    Spine.AnimationState animState;
+    public Animator animator;
 
     public override void AnimOpen()
     {
@@ -30,10 +29,7 @@ public class SlotBuyHero : SlotBase<Hero>
     public override void InitData(Hero data)
     {
         base.InitData(data);
-        iconHero.skeletonDataAsset = data.HeroStatData.HeroSkeletonDataAsset;
-        iconHero.Initialize(true);
-        animState = iconHero.AnimationState;
-        animState.SetAnimation(0, "Idle", true);
+        animator.runtimeAnimatorController = data.HeroStatData.ImageAnimatorController;
         imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroStatData.HeroRarity);
     }
 }

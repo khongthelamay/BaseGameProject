@@ -2001,7 +2001,7 @@ MonoBehaviour:
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 0}
       btnQuest: {fileID: 218042879258081968}
-      btnRecruit: {fileID: 0}
+      btnRecruit: {fileID: 9010248819730287108}
       btnSpecialShop: {fileID: 0}
       btnMatch: {fileID: 7385710914702800371}
 --- !u!225 &1835724710181177364

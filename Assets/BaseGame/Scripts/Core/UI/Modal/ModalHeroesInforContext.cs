@@ -49,7 +49,7 @@ public class ModalHeroesInforContext
         [field: SerializeField] public TextMeshProUGUI txtAtk {get; private set;}  
         [field: SerializeField] public TextMeshProUGUI txtSpeed {get; private set;}  
         [field: SerializeField] public ProgressBar piecesProgress {get; private set;}  
-        [field: SerializeField] public SkeletonGraphic imgHeroIcon {get; private set;}  
+        [field: SerializeField] public Animator heroAnimator {get; private set;}  
         [field: SerializeField] public Button btnExit {get; private set;}  
         [field: SerializeField] public Button btnUpgrade {get; private set;}  
         [field: SerializeField] public MainContentAbility mainContentHeroAbility { get; private set;}  
@@ -63,9 +63,7 @@ public class ModalHeroesInforContext
         }
 
         public void InitData(Hero heroData, HeroSave heroDataSave) {
-            imgHeroIcon.skeletonDataAsset = heroData.HeroStatData.HeroSkeletonDataAsset;
-            imgHeroIcon.Initialize(true);
-            imgHeroIcon.AnimationState.SetAnimation(0, "Idle", true);
+            heroAnimator.runtimeAnimatorController = heroData.HeroStatData.ImageAnimatorController;
             txtLevel.text = "Lv. " + heroDataSave.level.Value.ToString();
             txtName.text = heroData.HeroStatData.Name;
             txtAtk.text = heroData.HeroStatData.BaseAttackDamage.ToString();

@@ -65,6 +65,7 @@ public class ScreensBattleContext
 
             View.btnQuest.SetButtonOnClick(ShowModalQuest);
             View.btnMatch.onClick.AddListener(Match);
+            View.btnRecruit.onClick.AddListener(Recruit);
         }
 
         void ShowModalQuest()
@@ -75,6 +76,13 @@ public class ScreensBattleContext
 
         void Match() {
             ViewOptions options = new ViewOptions(nameof(ScreensMatch));
+            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+
+            ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
+        }
+
+        void Recruit() {
+            ViewOptions options = new ViewOptions(nameof(ScreensRecruit));
             ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
 
             ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
