@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.SimplePool;
 using Manager;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
@@ -48,9 +49,7 @@ namespace Core
         [field: SerializeField] public GameObject VisibleGroup {get; private set;}
         [field: SerializeField] public FieldSlot FieldSlot { get; private set; }
         [field: SerializeField] public HeroAnim HeroAnim {get; private set;}
-
-        private UniTaskStateMachine<Hero> StateMachine { get; set; }
-        private StateMachine RunnerStateMachine { get; set; }
+        private StateMachine StateMachine { get; set; }
         public float AttackRange => HeroStatData.BaseAttackRange;
         private Vector3 MoveFromPosition { get; set; }
         private Vector3 MoveToPosition { get; set; }
@@ -62,22 +61,23 @@ namespace Core
         }
         public void OnDestroy()
         {
-            StateMachine?.Stop();
+            StateMachine.Stop();
         }
         private void InitStateMachine()
         {
-            StateMachine = new UniTaskStateMachine<Hero>(this);
-            StateMachine.RegisterState(HeroSleepState1.Instance);
+            StateMachine = new StateMachine();
+            StateMachine.RegisterState(HeroSleepState);
             StateMachine.Run();
         }
 
         public bool IsCurrentState(UniTaskState<Hero> state)
         {
-            return StateMachine.IsCurrentState(state);
+            // return StateMachine.IsCurrentState(state);
+            return false;
         }
         public void ChangeToSleepState()
         {
-            StateMachine.RequestTransition(HeroSleepState1.Instance);
+            StateMachine.RequestTransition(HeroSleepState);
         }
         public void MoveToFieldSlot(FieldSlot fieldSlot)
         {
@@ -90,13 +90,13 @@ namespace Core
             Transform.SetParent(FieldSlot.Transform);
             Transform.localPosition = Vector3.zero;
             
-            StateMachine.RequestTransition(HeroMoveState.Instance);
+            StateMachine.RequestTransition(HeroMoveState);
             return;
             void MoveComplete()
             {
                 SetVisible(true);
                 FieldSlot.FieldSlotChangedCallback?.Invoke();
-                StateMachine.RequestTransition(HeroAttackState.Instance);
+                StateMachine.RequestTransition(HeroBattleDecisionState);
             }
         }
         public void MoveToPositionAndSelfDespawn(Vector3 toPosition)
@@ -108,7 +108,7 @@ namespace Core
             
             Transform.localPosition = Vector3.zero;
             
-            StateMachine.RequestTransition(HeroMoveState.Instance);
+            StateMachine.RequestTransition(HeroMoveState);
             return;
             void MoveComplete()
             {
@@ -136,7 +136,7 @@ namespace Core
         {
             Transform.SetParent(waitSlot.Transform);
             Transform.localPosition = Vector3.zero;
-            StateMachine.RequestTransition(HeroIdleInShopState.Instance);
+            StateMachine.RequestTransition(HeroIdleState);
         }
 
         public void ShowAttackRange()

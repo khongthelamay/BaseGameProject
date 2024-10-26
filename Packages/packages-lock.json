@@ -16,7 +16,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "753a5557e9415201c01dae34b1a551b95ef1a150"
+      "hash": "ca28202a65b22b6fd3ea66b4c75eab252255a097"
     },
     "com.cysharp.r3": {
       "version": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
@@ -25,14 +25,14 @@
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
       },
-      "hash": "2798494d642f30893c478e58dceb83929a0d5fbd"
+      "hash": "9b18209448c5e1f4572a4191b1f4f530a1d26c01"
     },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "f057abff0f4ea52e4c9699c2831808d6c0a27bcc"
+      "hash": "f9fd769be7c634610f2a61aa914a1a55f34740e1"
     },
     "com.github-glitchenzo.nugetforunity": {
       "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
@@ -46,21 +46,21 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "4b7ef911094e1308bcf947f2fb72f2b6e600aa4c"
+      "hash": "5d63e2e47bb13a1b21f82415ecec0623b8627ad1"
     },
     "com.tw.reactive": {
       "version": "https://github.com/thinhwar123/TW-CustomPackage.git?path=Packages/TW.Reactive",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "f301bc0f16be878cd3a8c79899f3342b0e96ceee"
+      "hash": "5d63e2e47bb13a1b21f82415ecec0623b8627ad1"
     },
     "com.tw.ugui": {
       "version": "https://github.com/thinhwar123/TW-CustomPackage.git?path=Packages/TW.UGUI",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "4b7ef911094e1308bcf947f2fb72f2b6e600aa4c"
+      "hash": "5d63e2e47bb13a1b21f82415ecec0623b8627ad1"
     },
     "com.tw.utility": {
       "version": "https://github.com/thinhwar123/TW-CustomPackage.git?path=Packages/TW.Utility",

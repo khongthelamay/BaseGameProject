@@ -5,35 +5,63 @@ using UnityEngine;
 
 namespace Core
 {
-    public class HeroMoveState : SingletonState<Hero, HeroMoveState>
+    public class HeroMoveState : IState
     {
-        
+        public interface IHandler
+        {
+            UniTask OnEnter(HeroMoveState state, CancellationToken ct);
+            UniTask OnUpdate(HeroMoveState state, CancellationToken ct);
+            UniTask OnExit(HeroMoveState state, CancellationToken ct);
+        }
+
+        private IHandler Owner { get; set; }
+
+        public HeroMoveState(IHandler owner)
+        {
+            Owner = owner;
+        }
+
+        public UniTask OnEnter(CancellationToken ct)
+        {
+            Owner.OnEnter(this, ct);
+            return UniTask.CompletedTask;
+        }
+
+        public UniTask OnUpdate(CancellationToken ct)
+        {
+            Owner.OnUpdate(this, ct);
+            return UniTask.CompletedTask;
+        }
+
+        public UniTask OnExit(CancellationToken ct)
+        {
+            Owner.OnExit(this, ct);
+            return UniTask.CompletedTask;
+        }
     }
-    
+
     public partial class Hero : HeroMoveState.IHandler
     {
-        public UniTask OnStateEnter(HeroMoveState state, CancellationToken token)
+        private HeroMoveState HeroMoveStateCache { get; set; }
+        public HeroMoveState HeroMoveState => HeroMoveStateCache ??= new HeroMoveState(this);
+
+        public UniTask OnEnter(HeroMoveState state, CancellationToken ct)
         {
-            // HeroAnim.PlayIdleAnimation(1);
+            // MoveProjectile.Spawn(Transform.position, Quaternion.identity)
+            //     .Init(MoveFromPosition, MoveToPosition, OnMoveComplete);
             Instantiate(MoveProjectile, Transform.position, Quaternion.identity)
                 .Init(MoveFromPosition, MoveToPosition, OnMoveComplete);
-            
             return UniTask.CompletedTask;
         }
 
-        public UniTask OnStateExecute(HeroMoveState state, CancellationToken token)
-        {
+        public UniTask OnUpdate(HeroMoveState state, CancellationToken ct)
+        { 
             return UniTask.CompletedTask;
         }
 
-        public UniTask OnStateExit(HeroMoveState state, CancellationToken token)
+        public UniTask OnExit(HeroMoveState state, CancellationToken ct)
         {
             return UniTask.CompletedTask;
         }
-        // private void OnMoveComplete()
-        // {
-        //     SetVisible(true);
-        //     StateMachine.RequestTransition(HeroAttackState.Instance);
-        // }
     }
 }
