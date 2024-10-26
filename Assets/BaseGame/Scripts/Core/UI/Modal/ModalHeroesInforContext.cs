@@ -24,7 +24,7 @@ public class ModalHeroesInforContext
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; }
-        [field: SerializeField] public ReactiveValue<HeroStatData> currentHeroChoose { get; private set; }
+        [field: SerializeField] public ReactiveValue<HeroConfigData> currentHeroChoose { get; private set; }
 
         public UniTask Initialize(Memory<object> args)
         {
@@ -55,7 +55,7 @@ public class ModalHeroesInforContext
             return UniTask.CompletedTask;
         }
 
-        public void InitData(HeroStatData heroData, HeroSave heroDataSave) {
+        public void InitData(HeroConfigData heroData, HeroSave heroDataSave) {
             imgHeroIcon.sprite = heroData.HeroSprite;
             txtLevel.text = "Lv. " + heroDataSave.level.Value.ToString();
             txtName.text = heroData.Name;

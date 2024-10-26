@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SlotHeroesUpgrade : SlotBase<HeroStatData>
+public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
 {
     [Header("========= Slot Heroes Upgrade =========")]
     public Image imgBG;
@@ -24,7 +24,7 @@ public class SlotHeroesUpgrade : SlotBase<HeroStatData>
     {
         AnimOpen();
     }
-    public override void InitData(HeroStatData data)
+    public override void InitData(HeroConfigData data)
     {
         base.InitData(data);
         

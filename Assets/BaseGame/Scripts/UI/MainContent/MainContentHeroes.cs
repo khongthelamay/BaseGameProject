@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainContentHeroes : MainContent<HeroStatData>
+public class MainContentHeroes : MainContent<HeroConfigData>
 {
 
    
@@ -13,7 +13,7 @@ public class MainContentHeroes : MainContent<HeroStatData>
     public Transform contentNotOwned;
     public RectTransform rectRebuild;
 
-    public override void InitData(List<HeroStatData> datas)
+    public override void InitData(List<HeroConfigData> datas)
     {
         datas.Sort((a, b) => { return SortDataHeroes(a.HeroRarity, b.HeroRarity); });
         for (int i = 0; i < datas.Count; i++)
@@ -41,7 +41,7 @@ public class MainContentHeroes : MainContent<HeroStatData>
         return 0;
     }
 
-    public override void ReloadData(HeroStatData data)
+    public override void ReloadData(HeroConfigData data)
     {
         for (int i = 0; i < slots.Count; i++)
         {

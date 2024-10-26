@@ -10,7 +10,7 @@ using UnityEngine;
 public class HeroManager : Singleton<HeroManager>
 {
     [field: SerializeField] public List<ReactiveValue<HeroSave>> heroSaves { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<HeroStatData> currentHeroChoose { get; set; } = new();
+    [field: SerializeField] public ReactiveValue<HeroConfigData> currentHeroChoose { get; set; } = new();
     [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; } = new();
 
     private void Start()
@@ -32,9 +32,9 @@ public class HeroManager : Singleton<HeroManager>
         return false;
     }
 
-    public void ChooseHero(HeroStatData heroStatData) {
-        currentHeroChoose.Value = heroStatData;
-        currentHeroSave.Value = GetHeroSaveData(heroStatData.Name);
+    public void ChooseHero(HeroConfigData heroConfigData) {
+        currentHeroChoose.Value = heroConfigData;
+        currentHeroSave.Value = GetHeroSaveData(heroConfigData.Name);
         ViewOptions options = new ViewOptions(nameof(ModalHeroInfor));
         ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
     }

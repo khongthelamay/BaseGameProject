@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b1737fbf89a8d47bed5deb731fc8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HeroStatData>k__BackingField: {fileID: 11400000, guid: 2f605c2399f5c4847b78ef9aabae77ab, type: 2}
+  <HeroConfigData>k__BackingField: {fileID: 11400000, guid: 2f605c2399f5c4847b78ef9aabae77ab, type: 2}
   <HeroAttackRange>k__BackingField: {fileID: 5293470638949937830}
   <SpriteGraphic>k__BackingField: {fileID: 9034866483059793744}
   <SpriteRarity>k__BackingField: {fileID: 7798856333702347197}
@@ -522,10 +522,9 @@ MonoBehaviour:
   <VisibleGroup>k__BackingField: {fileID: 1264128420956515732}
   <FieldSlot>k__BackingField: {fileID: 0}
   <HeroAnim>k__BackingField: {fileID: 7892420298190041046}
-  <CurrentAttackTimer>k__BackingField: 0
-  <CurrentAttackTimeCounter>k__BackingField: 0
-  <CurrentAttackCount>k__BackingField: 0
-  <CurrentAttackProbability>k__BackingField: 0
+  <AttackDamage>k__BackingField: 0
+  <AttackSpeed>k__BackingField: 0
+  <AttackRange>k__BackingField: 0
 --- !u!114 &7892420298190041046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,7 +538,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 1622809579953468090}
-  <CurrentState>k__BackingField: 0
 --- !u!1 &7106185555159458629
 GameObject:
   m_ObjectHideFlags: 0

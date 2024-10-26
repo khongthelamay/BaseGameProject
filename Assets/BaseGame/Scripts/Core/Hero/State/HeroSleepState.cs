@@ -12,30 +12,30 @@ namespace Core
             UniTask OnUpdate(HeroSleepState state, CancellationToken ct);
             UniTask OnExit(HeroSleepState state, CancellationToken ct);
         }
+
         private IHandler Owner { get; set; }
 
         public HeroSleepState(IHandler owner)
         {
             Owner = owner;
         }
+
         public UniTask OnEnter(CancellationToken ct)
         {
-            Owner.OnEnter(this, ct);
-            return UniTask.CompletedTask;   
+            return Owner.OnEnter(this, ct);
         }
 
         public UniTask OnUpdate(CancellationToken ct)
         {
-            Owner.OnUpdate(this, ct);
-            return UniTask.CompletedTask;  
+            return Owner.OnUpdate(this, ct);
         }
 
         public UniTask OnExit(CancellationToken ct)
         {
-            Owner.OnExit(this, ct);
-            return UniTask.CompletedTask;  
+            return Owner.OnExit(this, ct);
         }
     }
+
     public partial class Hero : HeroSleepState.IHandler
     {
         private HeroSleepState HeroSleepStateCache { get; set; }
