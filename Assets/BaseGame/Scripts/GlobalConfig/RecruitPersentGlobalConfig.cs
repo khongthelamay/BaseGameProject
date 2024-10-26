@@ -47,7 +47,7 @@ public class RecruitPersentGlobalConfig : GlobalConfig<RecruitPersentGlobalConfi
 
             RateHeroTier rateHeroTier2 = new();
             rateHeroTier2.persent = float.Parse(data[i]["Tier2"]);
-            rateHeroTier2.rarity = Hero.Rarity.Common;
+            rateHeroTier2.rarity = Hero.Rarity.Rare;
 
             RateHeroTier rateHeroTier3 = new();
             rateHeroTier3.persent = float.Parse(data[i]["Tier3"]);

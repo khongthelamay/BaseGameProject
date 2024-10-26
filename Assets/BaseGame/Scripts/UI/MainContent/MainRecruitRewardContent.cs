@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class MainRecruitRewardContent : MainContent<RecruitReward>
 {
+    [SerializeField] Transform pointStart;
+    [SerializeField] Transform pointEnd;
+    [SerializeField] Transform pointLoose;
+    [ShowInInspector] List<ILooseRewardFunction> listLooseFunction = new();
     [Button]
     public override void InitData(List<RecruitReward> datas)
     {

@@ -18,7 +18,7 @@ MonoBehaviour:
     rateHeroTiers:
     - rarity: 0
       persent: 29.8
-    - rarity: 0
+    - rarity: 1
       persent: 23.8
     - rarity: 2
       persent: 17
@@ -31,7 +31,7 @@ MonoBehaviour:
     rateHeroTiers:
     - rarity: 0
       persent: 28
-    - rarity: 0
+    - rarity: 1
       persent: 22.4
     - rarity: 2
       persent: 16
@@ -44,7 +44,7 @@ MonoBehaviour:
     rateHeroTiers:
     - rarity: 0
       persent: 24.5
-    - rarity: 0
+    - rarity: 1
       persent: 19.6
     - rarity: 2
       persent: 14
@@ -57,7 +57,7 @@ MonoBehaviour:
     rateHeroTiers:
     - rarity: 0
       persent: 17.5
-    - rarity: 0
+    - rarity: 1
       persent: 14
     - rarity: 2
       persent: 10
@@ -70,7 +70,7 @@ MonoBehaviour:
     rateHeroTiers:
     - rarity: 0
       persent: 10.5
-    - rarity: 0
+    - rarity: 1
       persent: 8.4
     - rarity: 2
       persent: 6

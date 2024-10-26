@@ -21,7 +21,7 @@ public class SlotHeroesUpgrade : SlotBase<Hero>
     public GameObject objPurchase;
     public GameObject objRequire;
 
-    HeroSave heroSave;
+    public HeroSave heroSave;
     private void Start()
     {
         AnimOpen();

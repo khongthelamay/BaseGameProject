@@ -542,6 +542,9 @@ MonoBehaviour:
   slots: []
   currentSlotOnChoose: {fileID: 0}
   totalSlotUsing: 2
+  pointStart: {fileID: 0}
+  pointEnd: {fileID: 0}
+  pointLoose: {fileID: 0}
 --- !u!1 &3617702756020826773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,6 +1142,9 @@ MonoBehaviour:
   slots: []
   currentSlotOnChoose: {fileID: 0}
   totalSlotUsing: 4
+  pointStart: {fileID: 0}
+  pointEnd: {fileID: 0}
+  pointLoose: {fileID: 0}
 --- !u!1 &5627466657162762007
 GameObject:
   m_ObjectHideFlags: 0

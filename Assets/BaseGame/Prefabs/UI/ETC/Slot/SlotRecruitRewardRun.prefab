@@ -124,3 +124,7 @@ MonoBehaviour:
   btnChoose: {fileID: 0}
   trsContent: {fileID: 0}
   animOnSlot: {fileID: 0}
+  isCollect: 0
+  pointStart: {fileID: 0}
+  pointEnd: {fileID: 0}
+  timeMove: 2
