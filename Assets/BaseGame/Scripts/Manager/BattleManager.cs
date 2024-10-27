@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core;
+using Core.SimplePool;
 using Cysharp.Threading.Tasks;
 using TW.Utility.DesignPattern;
 using UnityEngine;
@@ -11,10 +12,11 @@ namespace Manager
 {
     public class BattleManager : Singleton<BattleManager>
     {
-        [Inject] Hero.Factory HeroFactory { get; }
         [field: SerializeField] public Map CurrentMap { get; private set; }
-        public List<Enemy> EnemyList { get; private set; } = new();
+        [field: SerializeField] public TickRate TickRate {get; private set;}
 
+        public List<Enemy> EnemyList { get; private set; } = new();
+        public List<Hero> HeroList { get; private set; } = new();
         private void Start()
         {
             StartBattle();
@@ -24,7 +26,30 @@ namespace Manager
         {
             CurrentMap.StartMap().Forget();
         }
-
+        public Hero RegisterHero(Hero hero)
+        {
+            if (HeroList.Contains(hero)) return hero;
+            HeroList.Add(hero);
+            return hero;
+        }
+        public Hero UnregisterHero(Hero hero)
+        {
+            if (!HeroList.Contains(hero)) return hero;
+            HeroList.Remove(hero);
+            return hero;
+        }
+        public Enemy RegisterEnemy(Enemy enemy)
+        {
+            if (EnemyList.Contains(enemy)) return enemy;
+            EnemyList.Add(enemy);
+            return enemy;
+        }
+        public Enemy UnregisterEnemy(Enemy enemy)
+        {
+            if (!EnemyList.Contains(enemy)) return enemy;
+            EnemyList.Remove(enemy);
+            return enemy;
+        }
         public void RemoveEnemy(Enemy enemy)
         {
             if (!EnemyList.Contains(enemy)) return;
@@ -62,34 +87,19 @@ namespace Manager
 
             return false;
         }
-
-        // public bool TryFusionHeroInFieldSlot(FieldSlot fieldSlot)
-        // {
-        //     if (fieldSlot.TryGetHero(out Hero selectHero) && selectHero.HeroStatData.HeroRarity.IsMaxRarity())
-        //         return false;
-        //     if (!TryGetSameHeroInFieldSlot(fieldSlot, out List<FieldSlot> sameHeroFieldSlotList)) return false;
-        //     if (sameHeroFieldSlotList.Count < 2) return false;
-        //
-        //
-        //     if (fieldSlot.TryUpgradeHero())
-        //     {
-        //         FieldSlot.FieldSlotChangedCallback?.Invoke();
-        //     }
-        //
-        //     return true;
-        // }
+        
 
         public bool CanFusionHeroInFieldSlot(FieldSlot fieldSlot)
         {
-            if (fieldSlot.TryGetHero(out Hero selectHero) && selectHero.HeroStatData.HeroRarity.IsMaxRarity()) return false;
+            if (fieldSlot.TryGetHero(out Hero selectHero) && selectHero.HeroConfigData.HeroRarity.IsMaxRarity()) return false;
             return HasSame2HeroInOtherFieldSlot(fieldSlot);
         }
 
         public async UniTask FusionHeroInFieldSlot(FieldSlot fieldSlot)
         {
             if (!fieldSlot.TryGetHero(out Hero selectHero)) return;
-            HeroStatData heroStatData = selectHero.HeroStatData;
-            if (heroStatData.HeroRarity == Hero.Rarity.Mythic) return;
+            HeroConfigData heroConfigData = selectHero.HeroConfigData;
+            if (heroConfigData.HeroRarity == Hero.Rarity.Mythic) return;
             
             
             if (!TryGetSameHeroInFieldSlot(fieldSlot, out List<FieldSlot> sameHeroFieldSlotList)) return;
@@ -109,8 +119,8 @@ namespace Manager
             fieldSlot.TryRemoveHero(out _);
             selectHero.SelfDespawn();
             
-            Hero heroPrefab = HeroPoolGlobalConfig.Instance.GetRandomHeroUpgradePrefab(heroStatData.HeroRarity + 1);
-            Hero newHero = HeroFactory.Create(heroPrefab);
+            HeroConfigData newHeroConfigData = HeroPoolGlobalConfig.Instance.GetRandomHeroConfigDataUpgrade(heroConfigData.HeroRarity + 1);
+            Hero newHero = newHeroConfigData.HeroPrefab.Spawn();
             newHero.Transform.position = fieldSlot.Transform.position;
             fieldSlot.TryAddHero(newHero);
             FieldSlot.FieldSlotChangedCallback?.Invoke();
@@ -159,7 +169,21 @@ namespace Manager
 
         private bool IsFieldSlotHasSameHeroData(FieldSlot fieldSlot, Hero hero)
         {
-            return fieldSlot.TryGetHero(out Hero otherHero) && otherHero.HeroStatData == hero.HeroStatData;
+            return fieldSlot.TryGetHero(out Hero otherHero) && otherHero.HeroConfigData == hero.HeroConfigData;
         }
+        public bool TryGetEnemyInAttackRange(Hero hero, out Enemy enemy)
+        {
+            enemy = null;
+            foreach (var e in EnemyList)
+            {
+                if ((hero.Transform.position - e.Transform.position).sqrMagnitude <= hero.AttackRange * hero.AttackRange)
+                {
+                    enemy = e;
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

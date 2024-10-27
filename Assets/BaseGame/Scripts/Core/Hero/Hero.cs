@@ -1,17 +1,20 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using Core.SimplePool;
 using Manager;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using TW.Utility.DesignPattern;
 using UnityEngine;
-using Zenject;
+
 using Object = UnityEngine.Object;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Core
 {
-    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble
+    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero>
     {
         [GUIColor("@TW.Utility.Extension.AColorExtension.GetColorInPalette(\"Job\", (int)$value)")]
         public enum Job
@@ -31,54 +34,81 @@ namespace Core
             Melee = 1,
             Range = 2,
         }
-        public class Factory : PlaceholderFactory<Object, Hero>
-        {
-            public static Factory CreateInstance()
-            {
-                return new Factory();
-            }
-        }
-        
-        [Inject] private TargetingManager TargetingManager { get; set; }
-        [field: SerializeField] public HeroStatData HeroStatData { get; set; }
+        [field: SerializeField] public HeroConfigData HeroConfigData { get; set; }
         [field: SerializeField] public HeroAttackRange HeroAttackRange { get; set; }
-
         [field: SerializeField] public SpriteRenderer SpriteGraphic { get; set; }
-        // [field: SerializeField] public SpriteRenderer SpriteShadow { get; set; }
         [field: SerializeField] public SpriteRenderer SpriteRarity { get; set; }
         [field: SerializeField] public MoveProjectile MoveProjectile { get; private set; }
         [field: SerializeField] public GameObject VisibleGroup {get; private set;}
         [field: SerializeField] public FieldSlot FieldSlot { get; private set; }
         [field: SerializeField] public HeroAnim HeroAnim {get; private set;}
-
-        private UniTaskStateMachine<Hero> StateMachine { get; set; }
-        public float AttackRange => HeroStatData.BaseAttackRange;
+        
+        
+        private StateMachine StateMachine { get; set; }
+        [field: SerializeField] public int AttackDamage { get; set; }
+        [field: SerializeField] public float AttackSpeed { get; set; }
+        [field: SerializeField] public float AttackRange { get; set; }
+        [ShowInInspector]
+        private List<ActiveAbility> ActiveAbilities { get; set; } = new();
+        [ShowInInspector]
+        private List<PassiveAbility> PassiveAbilities { get; set; } = new();
+        
         private Vector3 MoveFromPosition { get; set; }
         private Vector3 MoveToPosition { get; set; }
         private Action OnMoveComplete { get; set; }
-        private void Awake()
-        {
-            InitStateMachine();
-            HeroAttackRange.InitAttackRange(HeroStatData.BaseAttackRange);
-        }
+
         public void OnDestroy()
         {
-            StateMachine?.Stop();
+            StateMachine.Stop();
+        }
+        public Hero OnSpawn()
+        {
+            InitStateMachine();
+            InitStat();
+            InitAbility();
+            return BattleManager.Instance.RegisterHero(this);
+        }
+
+        public void OnDespawn()
+        {
+            BattleManager.Instance.UnregisterHero(this);
         }
         private void InitStateMachine()
         {
-            StateMachine = new UniTaskStateMachine<Hero>(this);
-            StateMachine.RegisterState(HeroSleepState.Instance);
+            StateMachine = new StateMachine();
+            StateMachine.RegisterState(HeroSleepState);
             StateMachine.Run();
         }
+        private void InitStat()
+        {
+            AttackDamage = HeroConfigData.BaseAttackDamage;
+            AttackSpeed = HeroConfigData.BaseAttackSpeed;
+            AttackRange = HeroConfigData.BaseAttackRange;
+        }
 
-        public bool IsCurrentState(UniTaskState<Hero> state)
+        private void InitAbility()
+        {
+            HeroConfigData.HeroAbilities.ForEach(ability =>
+            {
+                switch (ability)
+                {
+                    case ActiveAbility activeAbility:
+                        ActiveAbilities.Add(activeAbility.CreateAbility(this) as ActiveAbility);
+                        break;
+                    case PassiveAbility passiveAbility:
+                        PassiveAbilities.Add(passiveAbility.CreateAbility(this) as PassiveAbility);
+                        break;
+                }
+            });
+        }
+
+        public bool IsCurrentState(IState state)
         {
             return StateMachine.IsCurrentState(state);
         }
         public void ChangeToSleepState()
         {
-            StateMachine.RequestTransition(HeroSleepState.Instance);
+            StateMachine.RequestTransition(HeroSleepState);
         }
         public void MoveToFieldSlot(FieldSlot fieldSlot)
         {
@@ -91,13 +121,13 @@ namespace Core
             Transform.SetParent(FieldSlot.Transform);
             Transform.localPosition = Vector3.zero;
             
-            StateMachine.RequestTransition(HeroMoveState.Instance);
+            StateMachine.RequestTransition(HeroMoveState);
             return;
             void MoveComplete()
             {
                 SetVisible(true);
                 FieldSlot.FieldSlotChangedCallback?.Invoke();
-                StateMachine.RequestTransition(HeroAttackState.Instance);
+                StateMachine.RequestTransition(HeroBattleDecisionState);
             }
         }
         public void MoveToPositionAndSelfDespawn(Vector3 toPosition)
@@ -109,7 +139,7 @@ namespace Core
             
             Transform.localPosition = Vector3.zero;
             
-            StateMachine.RequestTransition(HeroMoveState.Instance);
+            StateMachine.RequestTransition(HeroMoveState);
             return;
             void MoveComplete()
             {
@@ -125,19 +155,14 @@ namespace Core
         {
             Destroy(gameObject);
         }
+        
 
-        public void SetupFieldSlot(FieldSlot fieldSlot)
-        {
-            FieldSlot = fieldSlot;
-            Transform.SetParent(FieldSlot.Transform);
-            Transform.localPosition = Vector3.zero;
-        }
-
-        public void WaitSlotInit(WaitSlot waitSlot)
+        public Hero WaitSlotInit(WaitSlot waitSlot)
         {
             Transform.SetParent(waitSlot.Transform);
             Transform.localPosition = Vector3.zero;
-            StateMachine.RequestTransition(HeroIdleInShopState.Instance);
+            StateMachine.RequestTransition(HeroIdleState);
+            return this;
         }
 
         public void ShowAttackRange()
@@ -149,27 +174,21 @@ namespace Core
         {
             HeroAttackRange.HideAttackRange();
         }
-        public List<T> GetAbilityTarget<T>(Ability.Target target) where T : IAbilityTargetAble
-        {
-            return TargetingManager.GetAbilityTarget<T>(this, target);
-        }
-        
     }
 
 #if UNITY_EDITOR
     public partial class Hero
     {
-        [Button]
-        public void InitHero()
+        public void InitHero(HeroConfigData heroConfigData)
         {
-            // if (HeroStatData.HeroSkeletonDataAsset != null)
-            // {
-            //     HeroAnim.SkeletonAnimation.skeletonDataAsset = HeroStatData.HeroSkeletonDataAsset;
-            //     HeroAnim.SkeletonAnimation.Initialize(true);
-            // }
-            SpriteGraphic.sprite = HeroStatData.HeroSprite;
-            SpriteRarity.color = BaseHeroGenerateGlobalConfig.Instance.RarityColorArray[(int)HeroStatData.HeroRarity];
-            HeroAnim.Animator.runtimeAnimatorController = HeroStatData.AnimatorController;
+            string assetPath = AssetDatabase.GetAssetPath(this);
+            using var editingScope = new PrefabUtility.EditPrefabContentsScope(assetPath);
+            Hero hero = editingScope.prefabContentsRoot.GetComponentInChildren<Hero>();
+                
+            hero.HeroConfigData = heroConfigData;
+            hero.SpriteGraphic.sprite = hero.HeroConfigData.HeroSprite;
+            hero.SpriteRarity.color = BaseHeroGenerateGlobalConfig.Instance.RarityColorArray[(int)hero.HeroConfigData.HeroRarity];
+            hero.HeroAnim.Animator.runtimeAnimatorController = hero.HeroConfigData.AnimatorController;
         }
     }
 #endif

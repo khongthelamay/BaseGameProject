@@ -12,8 +12,8 @@ public class MainContentAbility : MainContent<Ability>
         base.InitData(datas);
         for (int i = 0; i < slots.Count; i++)
         {
-            if (slots[i].slotData.AbilityTrigger == Ability.Trigger.NormalAttack)
-                slots[i].gameObject.SetActive(false);
+            //if (slots[i].slotData.AbilityTrigger == Ability.Trigger.NormalAttack)
+            //    slots[i].gameObject.SetActive(false);
         }
     }
 }

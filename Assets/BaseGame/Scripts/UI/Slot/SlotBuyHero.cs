@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SlotBuyHero : SlotBase<Hero>
+public class SlotBuyHero : SlotBase<HeroConfigData>
 {
     [Header("===SlotBuyHero===")]
     public Image imgBG;
@@ -26,10 +26,10 @@ public class SlotBuyHero : SlotBase<Hero>
         mySequence.Play();
     }
 
-    public override void InitData(Hero data)
+    public override void InitData(HeroConfigData data)
     {
         base.InitData(data);
-        animator.runtimeAnimatorController = data.HeroStatData.ImageAnimatorController;
-        imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroStatData.HeroRarity);
+        animator.runtimeAnimatorController = data.ImageAnimatorController;
+        imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroRarity);
     }
 }

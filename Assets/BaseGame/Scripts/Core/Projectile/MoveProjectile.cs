@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.SimplePool;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using TW.Utility.CustomComponent;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public class MoveProjectile : ACachedMonoBehaviour
+    public class MoveProjectile : ACachedMonoBehaviour, IPoolAble<MoveProjectile>
     {
         private delegate void UpdatePosition(Vector3 currentPosition, Vector3 distance, Vector3 targetPosition,
             out bool isComplete);
@@ -27,6 +28,16 @@ namespace Core
         private float CurrentMoveSpeed { get; set; }
         private UpdatePosition UpdatePositionCallback { get; set; }
         private Action OnMoveComplete { get; set; }
+        
+        public MoveProjectile OnSpawn()
+        {
+            return this;
+        }
+
+        public void OnDespawn()
+        {
+
+        }
 
         public MoveProjectile Init(Vector3 startPosition, Vector3 endPosition, Action onMoveComplete)
         {
@@ -135,5 +146,7 @@ namespace Core
             OnMoveComplete?.Invoke();
             Destroy(gameObject);
         }
+
+
     }
 }

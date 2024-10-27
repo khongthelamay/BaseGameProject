@@ -28,7 +28,7 @@ public class ScreensHeroesContext
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public List<ReactiveValue<HeroSave>> heroSaves { get; set; } = new();
         [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; } = new();
-        [field: SerializeField] public ReactiveValue<Hero> currentHeroConfig { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<HeroConfigData> currentHeroConfig { get; set; } = new();
         [field: SerializeField] public ReactiveValue<BigNumber> summonRecipe { get; set; } = new(0);
         public UniTask Initialize(Memory<object> args)
         {
@@ -59,10 +59,9 @@ public class ScreensHeroesContext
         }
 
         public void InitData() {
-            mainContentHeroes.InitData(HeroPoolGlobalConfig.Instance.HeroPrefabList);
+            mainContentHeroes.InitData(HeroPoolGlobalConfig.Instance.HeroConfigDataList);
         }
-
-        public void ReloadData(Hero heroData)
+        public void ReloadData(HeroConfigData heroData)
         {
             mainContentHeroes.ReloadData(heroData);
         }
@@ -146,7 +145,7 @@ public class ScreensHeroesContext
             View.ReloadData(Model.currentHeroConfig.Value);
         }
 
-        void ActionSlotHeroCallBack(SlotBase<Hero> slotBase)
+        void ActionSlotHeroCallBack(SlotBase<HeroConfigData> slotBase)
         {
             HeroManager.Instance.ChooseHero(slotBase.slotData);
         }

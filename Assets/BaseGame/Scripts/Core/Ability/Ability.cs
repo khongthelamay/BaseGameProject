@@ -1,31 +1,25 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
 using UnityEngine;
 
 namespace Core
 {
-    public abstract class Ability : ScriptableObject
+    [Serializable]
+    public abstract class Ability
     {
-        public enum Trigger
-        {
-            NormalAttack = 0,
-            // SpecialAttack = 1,
-            // ProbabilityAttack = 2,
-            Active = 3,
-            Passive = 4,
-        }
-        public enum Target      
-        {
-            Self,
-            EnemyInRange,
-            AllEnemiesInRange,
-            AllyInRange,
-            AllAlliesInRange,
-        }
-        [field: SerializeField] public Trigger AbilityTrigger {get; set;}
-        [field: SerializeField] public Target AbilityTarget {get; set;}
+        protected Hero Owner { get; set; }
+        [field: SerializeField] public int LevelUnlock {get; private set;}
 
-        public abstract bool CanUseAbility(Hero hero);
+        protected Ability()
+        {
+            
+        }
+        protected Ability(Hero owner, int levelUnlock)
+        {
+            Owner = owner;
+            LevelUnlock = levelUnlock;
+        }
+        public abstract Ability CreateAbility(Hero owner);
+        public bool IsUnlocked(int level) => level >= LevelUnlock;
 
-        public abstract bool TryUseAbility(Hero hero);
     }
 }

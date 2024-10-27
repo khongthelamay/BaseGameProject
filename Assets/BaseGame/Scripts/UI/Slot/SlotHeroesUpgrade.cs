@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SlotHeroesUpgrade : SlotBase<Hero>
+public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
 {
     [Header("========= Slot Heroes Upgrade =========")]
     public Animator animator;
@@ -26,20 +26,20 @@ public class SlotHeroesUpgrade : SlotBase<Hero>
     {
         AnimOpen();
     }
-    public override void InitData(Hero data)
+    public override void InitData(HeroConfigData data)
     {
         base.InitData(data);
-        animator.runtimeAnimatorController = data.HeroStatData.ImageAnimatorController;
-        imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroStatData.HeroRarity);
+        animator.runtimeAnimatorController = data.ImageAnimatorController;
+        imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroRarity);
         imgSubBG.sprite = imgBG.sprite;
-        txtName.text = data.HeroStatData.Name;
+        txtName.text = data.Name;
 
         objUnLock.SetActive(true);
         objPurchase.SetActive(false);
         objRequire.SetActive(false);
         pieceProgress.ChangeProgress(0);
 
-        heroSave = HeroManager.Instance.GetHeroSaveData(data.HeroStatData.Name);
+        heroSave = HeroManager.Instance.GetHeroSaveData(data.Name);
         txtLevel.text = $"Lv. {heroSave.level.Value}";
         pieceProgress.ChangeProgress(0);
         pieceProgress.ChangeTextProgress("0/0");

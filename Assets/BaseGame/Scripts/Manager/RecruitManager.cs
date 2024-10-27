@@ -10,7 +10,7 @@ public class RecruitManager : Singleton<RecruitManager>
     public List<RecruitReward> recruitRewards = new();
     public int currentTurn;
     RecruitRewardType recruitRewardTypeTemp = RecruitRewardType.Hero;
-    List<Hero> currentHeroHave = new();
+    List<HeroConfigData> currentHeroHave = new();
     RecruitTurn currentRecruitTurn;
 
     [Button]
@@ -50,8 +50,8 @@ public class RecruitManager : Singleton<RecruitManager>
         currentTurn++;
     }
 
-    Hero GetHeroRandom() {
-        currentHeroHave = HeroPoolGlobalConfig.Instance.HeroPrefabList;
+    HeroConfigData GetHeroRandom() {
+        currentHeroHave = HeroPoolGlobalConfig.Instance.HeroConfigDataList;
         float randomHero = Random.Range(0, 101);
         Debug.Log("=============================");
         Debug.Log("Hero random is: "+ randomHero);
@@ -71,7 +71,7 @@ public class RecruitManager : Singleton<RecruitManager>
         }
         Debug.Log("Hero random last is: " + randomHero);
 
-        currentHeroHave = currentHeroHave.FindAll(e=>e.HeroStatData.HeroRarity == rarity);
+        currentHeroHave = currentHeroHave.FindAll(e=>e.HeroRarity == rarity);
         if (currentHeroHave.Count == 0)
             return null;
 
