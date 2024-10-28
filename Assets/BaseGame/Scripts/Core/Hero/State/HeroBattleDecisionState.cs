@@ -51,6 +51,10 @@ namespace Core
             {
                 passiveAbility.OnEnterBattleField();
             }
+            foreach (var activeAbility in ActiveAbilities)
+            {
+                activeAbility.OnEnterBattleField();
+            }
 
             return UniTask.CompletedTask;
         }
@@ -63,6 +67,7 @@ namespace Core
                 await activeAbility.UseAbility(BattleManager.Instance.TickRate, ct);
                 break;
             }
+            
         }
 
         public UniTask OnExit(HeroBattleDecisionState state, CancellationToken ct)
@@ -71,7 +76,10 @@ namespace Core
             {
                 passiveAbility.OnExitBattleField();
             }
-
+            foreach (var activeAbility in ActiveAbilities)
+            {
+                activeAbility.OnExitBattleField();
+            }
             return UniTask.CompletedTask;
         }
     }

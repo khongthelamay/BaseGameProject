@@ -5,6 +5,7 @@ using Manager;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using TW.Utility.DesignPattern;
+using TW.Utility.Extension;
 using UnityEngine;
 
 using Object = UnityEngine.Object;
@@ -34,6 +35,7 @@ namespace Core
             Melee = 1,
             Range = 2,
         }
+        [field: Title(nameof(Hero))]
         [field: SerializeField] public HeroConfigData HeroConfigData { get; set; }
         [field: SerializeField] public HeroAttackRange HeroAttackRange { get; set; }
         [field: SerializeField] public SpriteRenderer SpriteGraphic { get; set; }
@@ -49,9 +51,9 @@ namespace Core
         [field: SerializeField] public float AttackSpeed { get; set; }
         [field: SerializeField] public float AttackRange { get; set; }
         [ShowInInspector]
-        private List<ActiveAbility> ActiveAbilities { get; set; } = new();
+        protected List<ActiveAbility> ActiveAbilities { get; set; } = new();
         [ShowInInspector]
-        private List<PassiveAbility> PassiveAbilities { get; set; } = new();
+        protected List<PassiveAbility> PassiveAbilities { get; set; } = new();
         
         private Vector3 MoveFromPosition { get; set; }
         private Vector3 MoveToPosition { get; set; }
@@ -66,6 +68,8 @@ namespace Core
             InitStateMachine();
             InitStat();
             InitAbility();
+            
+            
             return BattleManager.Instance.RegisterHero(this);
         }
 
@@ -86,22 +90,10 @@ namespace Core
             AttackRange = HeroConfigData.BaseAttackRange;
         }
 
-        private void InitAbility()
+        protected virtual void InitAbility()
         {
-            HeroConfigData.HeroAbilities.ForEach(ability =>
-            {
-                switch (ability)
-                {
-                    case ActiveAbility activeAbility:
-                        ActiveAbilities.Add(activeAbility.CreateAbility(this) as ActiveAbility);
-                        break;
-                    case PassiveAbility passiveAbility:
-                        PassiveAbilities.Add(passiveAbility.CreateAbility(this) as PassiveAbility);
-                        break;
-                }
-            });
-        }
 
+        }
         public bool IsCurrentState(IState state)
         {
             return StateMachine.IsCurrentState(state);
@@ -179,16 +171,22 @@ namespace Core
 #if UNITY_EDITOR
     public partial class Hero
     {
-        public void InitHero(HeroConfigData heroConfigData)
+        public void EditorInit(HeroConfigData heroConfigData)
         {
-            string assetPath = AssetDatabase.GetAssetPath(this);
-            using var editingScope = new PrefabUtility.EditPrefabContentsScope(assetPath);
-            Hero hero = editingScope.prefabContentsRoot.GetComponentInChildren<Hero>();
-                
-            hero.HeroConfigData = heroConfigData;
-            hero.SpriteGraphic.sprite = hero.HeroConfigData.HeroSprite;
-            hero.SpriteRarity.color = BaseHeroGenerateGlobalConfig.Instance.RarityColorArray[(int)hero.HeroConfigData.HeroRarity];
-            hero.HeroAnim.Animator.runtimeAnimatorController = hero.HeroConfigData.AnimatorController;
+            HeroConfigData = heroConfigData;
+            HeroAttackRange = GetComponentInChildren<HeroAttackRange>();
+            
+            SpriteGraphic = transform.FindChildOrCreate("SpriteGraphic").GetComponentInChildren<SpriteRenderer>();
+            SpriteRarity = transform.FindChildOrCreate("SpriteRarity").GetComponentInChildren<SpriteRenderer>();
+            HeroAnim = GetComponentInChildren<HeroAnim>();
+            MoveProjectile = AssetDatabase.LoadAssetAtPath<MoveProjectile>(
+                AssetDatabase.GUIDToAssetPath(
+                    AssetDatabase.FindAssets("t:Prefab MoveProjectile")[0]));
+            VisibleGroup = transform.FindChildOrCreate("VisibleGroup").gameObject;
+            
+            SpriteGraphic.sprite = HeroConfigData.HeroSprite;
+            SpriteRarity.color = BaseHeroGenerateGlobalConfig.Instance.RarityColorArray[(int)HeroConfigData.HeroRarity];
+            HeroAnim.Animator.runtimeAnimatorController = HeroConfigData.AnimatorController;
         }
     }
 #endif

@@ -58,7 +58,8 @@ namespace Core
             {
                 TryUpdateEndPosition();
                 if (TryMoveToTarget()) continue;
-                TargetEnemy.TakeDamage(AttackDamage, DamageType);
+                
+                OnCompleteCallback?.Invoke();
                 this.Despawn();
                 break;
             }

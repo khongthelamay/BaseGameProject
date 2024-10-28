@@ -25,6 +25,17 @@ namespace Core
             return true;
         }
 
+        public override void OnEnterBattleField()
+        {
+            
+        }
+
+        public override void OnExitBattleField()
+        {
+            
+        }
+
+
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
             EnemyTarget.TakeDamage(Owner.AttackDamage, DamageType);
@@ -32,10 +43,6 @@ namespace Core
             int timeDelay = (int)(1000 / tickRate.ToValue() / Owner.AttackSpeed);
             await UniTask.Delay(timeDelay, cancellationToken: ct);
         }
-
-        public override Ability CreateAbility(Hero owner)
-        {
-            return new MeleeAttackAbility(owner, LevelUnlock, DamageType);
-        }
+        
     }
 }

@@ -23,7 +23,8 @@ MonoBehaviour:
   <UpgradePercentage>k__BackingField: 5
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 781090f780b27944ca1c5181f3d2a42e, type: 2}
   <ImageAnimatorController>k__BackingField: {fileID: 9100000, guid: 52cfa303a56825d41b6adeea4b420dae, type: 2}
-  <HeroPrefab>k__BackingField: {fileID: 6995974192129293514, guid: 639b26a564f90b848851e8df56412295, type: 3}
+  <HeroGameObjectPrefab>k__BackingField: {fileID: 6108580363313997809, guid: 639b26a564f90b848851e8df56412295, type: 3}
+  <HeroPrefab>k__BackingField: {fileID: 9066059459939707764, guid: 639b26a564f90b848851e8df56412295, type: 3}
   <HeroAbilities>k__BackingField:
   - rid: 7889111977268346885
   references:
