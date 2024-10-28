@@ -102,6 +102,8 @@ public class MainContentHeroes : MainContent<HeroConfigData>
         {
             slots[i].transform.SetSiblingIndex(i);
         }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectRebuild);
     }
 
     int CompareLevel(int aLevel, int bLevel) {
@@ -157,6 +159,8 @@ public class MainContentHeroes : MainContent<HeroConfigData>
         {
             slots[i].transform.SetSiblingIndex(i);
         }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectRebuild);
     }
 
     int CompareTier(int aTier, int bTier)
@@ -175,6 +179,8 @@ public class MainContentHeroes : MainContent<HeroConfigData>
             if (slots[i].slotData.HeroRarity != Hero.Rarity.Mythic)
                 slots[i].gameObject.SetActive(false);
         }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectRebuild);
     }
 
     public void SelectGuardian()
@@ -184,5 +190,7 @@ public class MainContentHeroes : MainContent<HeroConfigData>
             if (slots[i].slotData.HeroRarity != Hero.Rarity.Mythic)
                 slots[i].gameObject.SetActive(true);
         }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectRebuild);
     }
 }

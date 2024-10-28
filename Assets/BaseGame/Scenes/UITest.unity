@@ -613,97 +613,110 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recruitRewards:
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 8013252171766711324, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
-    amount: 0
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-    amount: 0
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-    amount: 0
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-    amount: 0
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-    amount: 0
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-    amount: 0
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-    amount: 0
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 1096430479915068473, guid: 8d4e61a10c6340345803a2aa7c499262, type: 3}
-    amount: 0
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 8013252171766711324, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
-    amount: 0
-  - type: 2
-    resource:
-      type: 0
-      value:
-        m_Value:
-          v: 0
-          m: 0
-    heroData: {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-    amount: 0
+    <Value>k__BackingField:
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: eaaab2763f3d5aa4ba8c9930c2709357, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 9813d21fb267517429fdd61ffdd9447b, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 4b2f4ccde3e32a54cab162754fcdbd24, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 9813d21fb267517429fdd61ffdd9447b, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 4b2f4ccde3e32a54cab162754fcdbd24, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 9813d21fb267517429fdd61ffdd9447b, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 2f605c2399f5c4847b78ef9aabae77ab, type: 2}
+      amount: 0
+      isMiss: 1
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 2f605c2399f5c4847b78ef9aabae77ab, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+      amount: 0
+      isMiss: 1
   currentTurn: 1
+  totalRewardCanGetThisTurn:
+    m_Value: 0
 --- !u!1 &669461533
 GameObject:
   m_ObjectHideFlags: 0

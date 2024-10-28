@@ -771,8 +771,12 @@ MonoBehaviour:
     <Model>k__BackingField:
       <SampleValue>k__BackingField:
         m_Value: 0
+      <recruitRewards>k__BackingField:
+        <Value>k__BackingField: []
     <View>k__BackingField:
-      <MainView>k__BackingField: {fileID: 0}
+      <MainView>k__BackingField: {fileID: 4728295362600865893}
+      <rewardMove>k__BackingField: {fileID: 2147274277239683019}
+      <rewardShow>k__BackingField: {fileID: 7349553628058335409}
 --- !u!1 &4512504256126758225
 GameObject:
   m_ObjectHideFlags: 0

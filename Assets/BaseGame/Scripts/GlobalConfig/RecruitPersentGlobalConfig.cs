@@ -98,4 +98,5 @@ public class RecruitReward {
     [ShowIf("type", RecruitRewardType.Item)] public Resource resource;
     [ShowIf("type", RecruitRewardType.Hero)] public HeroConfigData heroData;
     public int amount;
+    public bool isMiss;
 }
