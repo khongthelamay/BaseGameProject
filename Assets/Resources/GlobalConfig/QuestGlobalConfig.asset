@@ -67,83 +67,95 @@ MonoBehaviour:
     reward:
       type: 2
       value:
-        v: 10
-        m: 0
+        m_Value:
+          v: 10
+          m: 0
   - streak: 20
     gold: 3000
     reward:
       type: 2
       value:
-        v: 20
-        m: 0
+        m_Value:
+          v: 20
+          m: 0
   - streak: 40
     gold: 4000
     reward:
       type: 3
       value:
-        v: 10
-        m: 0
+        m_Value:
+          v: 10
+          m: 0
   - streak: 60
     gold: 5000
     reward:
       type: 2
       value:
-        v: 30
-        m: 0
+        m_Value:
+          v: 30
+          m: 0
   - streak: 80
     gold: 5000
     reward:
       type: 1
       value:
-        v: 50
-        m: 0
+        m_Value:
+          v: 50
+          m: 0
   - streak: 100
     gold: 5000
     reward:
       type: 4
       value:
-        v: 1
-        m: 0
+        m_Value:
+          v: 1
+          m: 0
   weeklyStreaks:
   - streak: 140
     gold: 0
     reward:
       type: 3
       value:
-        v: 30
-        m: 0
+        m_Value:
+          v: 30
+          m: 0
   - streak: 280
     gold: 0
     reward:
       type: 1
       value:
-        v: 100
-        m: 0
+        m_Value:
+          v: 100
+          m: 0
   - streak: 420
     gold: 0
     reward:
       type: 4
       value:
-        v: 2
-        m: 0
+        m_Value:
+          v: 2
+          m: 0
   - streak: 560
     gold: 0
     reward:
       type: 3
       value:
-        v: 50
-        m: 0
+        m_Value:
+          v: 50
+          m: 0
   - streak: 720
     gold: 0
     reward:
       type: 2
       value:
-        v: 300
-        m: 0
+        m_Value:
+          v: 300
+          m: 0
   - streak: 860
     gold: 0
     reward:
       type: 1
       value:
-        v: 250
-        m: 0
+        m_Value:
+          v: 250
+          m: 0

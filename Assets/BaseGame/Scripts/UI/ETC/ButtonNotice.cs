@@ -11,8 +11,6 @@ public class ButtonNotice : MonoBehaviour
     [Header("====== Button Notice ======")]
     [SerializeField] Button btnWithNotice;
     public GameObject objNotice;
-    [Range(-1, 1)]
-    [SerializeField] float punchScale;
     Sequence sequence;
     UnityAction actionCallBack;
 

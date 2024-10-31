@@ -1,5 +1,6 @@
 using Core;
 using DG.Tweening;
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,7 @@ using UnityEngine.UI;
 public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
 {
     [Header("========= Slot Heroes Upgrade =========")]
+    public Animator animator;
     public Image imgBG;
     public Image imgSubBG;
     public ProgressBar pieceProgress;
@@ -19,7 +21,7 @@ public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
     public GameObject objPurchase;
     public GameObject objRequire;
 
-    HeroSave heroSave;
+    public HeroSave heroSave;
     private void Start()
     {
         AnimOpen();
@@ -27,8 +29,7 @@ public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
     public override void InitData(HeroConfigData data)
     {
         base.InitData(data);
-        
-        imgIcon.sprite = data.HeroSprite;
+        animator.runtimeAnimatorController = data.ImageAnimatorController;
         imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroRarity);
         imgSubBG.sprite = imgBG.sprite;
         txtName.text = data.Name;

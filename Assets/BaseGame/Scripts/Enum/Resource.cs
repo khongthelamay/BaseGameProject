@@ -1,5 +1,7 @@
+using MemoryPack;
 using System.Collections;
 using System.Collections.Generic;
+using TW.Reactive.CustomComponent;
 using TW.Utility.CustomType;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,14 +16,15 @@ public enum ResourceType {
 }
 
 [System.Serializable]
-public class Resource
+[MemoryPackable]
+public partial class Resource
 {
     public ResourceType type;
-    public BigNumber value;
+    public ReactiveValue<BigNumber> value = new(0);
 
-    public void Add(BigNumber amount) { value += amount; }
+    public void Add(BigNumber amount) { value.Value += amount; }
 
-    public void Consume(BigNumber amount) { value -= amount; }
+    public void Consume(BigNumber amount) { value.Value -= amount; }
 }
 
 

@@ -72,7 +72,10 @@ public class ModalArtifactInforContext
             if (artifactInfor.Level.Value >= artifactDataConfig.piecesRequire.Count)
             {
                 piecesProgress.ChangeProgress(1);
-                piecesProgress.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}");
+                if (artifactInfor.PiecesAmount.Value > 0)
+                    piecesProgress.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}");
+                else
+                    piecesProgress.ChangeTextProgress("MAX");
                 btnUpgrade.interactable = false;
                 txtUpgradeRequire.text = "";
             }

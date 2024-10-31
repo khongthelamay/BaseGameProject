@@ -11,9 +11,9 @@ public class MainContent<Data> : MonoBehaviour
     public SlotBase<Data> slotPref;
     [HideInInspector] public SlotBase<Data> slotTemp;
     public List<SlotBase<Data>> slots;
-    public SlotBase<Data> currentSlotOnChoose;
+    [HideInInspector] public SlotBase<Data> currentSlotOnChoose;
 
-    public int totalSlotUsing;
+    [HideInInspector] public int totalSlotUsing;
 
     public virtual void SetActionSlotCallBack(UnityAction<SlotBase<Data>> actionCallBack) { actionSlotCallBack = actionCallBack; }
     
@@ -27,6 +27,13 @@ public class MainContent<Data> : MonoBehaviour
             totalSlotUsing++;
         }
         DeActiveSlotOut(totalSlotUsing);
+    }
+
+    public virtual void AddSlot(Data data) {
+        slotTemp = GetSlot();
+        slotTemp.gameObject.SetActive(true);
+        slotTemp.InitData(data);
+        slotTemp.SetActionChooseCallBack(ActionSlotCallBack);
     }
 
     public virtual void DeActiveSlotOut(int totalSlotusing) {

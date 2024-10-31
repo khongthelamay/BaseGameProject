@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8609356153195731408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1126933113430299472}
+  - component: {fileID: 316466427127925068}
+  m_Layer: 0
+  m_Name: RecruitManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1126933113430299472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8609356153195731408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &316466427127925068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8609356153195731408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 448f82c9657ae1247b9efb5d8f19ac7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recruitRewards:
+    <Value>k__BackingField:
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: eaaab2763f3d5aa4ba8c9930c2709357, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 9813d21fb267517429fdd61ffdd9447b, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 4b2f4ccde3e32a54cab162754fcdbd24, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 9813d21fb267517429fdd61ffdd9447b, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 4b2f4ccde3e32a54cab162754fcdbd24, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 9813d21fb267517429fdd61ffdd9447b, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 2f605c2399f5c4847b78ef9aabae77ab, type: 2}
+      amount: 0
+      isMiss: 1
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: 2f605c2399f5c4847b78ef9aabae77ab, type: 2}
+      amount: 0
+      isMiss: 0
+    - type: 2
+      resource:
+        type: 0
+        value:
+          m_Value:
+            v: 0
+            m: 0
+      heroData: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+      amount: 0
+      isMiss: 1
+  currentTurn: 1
+  totalRewardCanGetThisTurn:
+    m_Value: 0

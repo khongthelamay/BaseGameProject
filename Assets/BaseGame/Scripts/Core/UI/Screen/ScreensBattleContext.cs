@@ -42,17 +42,12 @@ public class ScreensBattleContext
         [field: SerializeField] public ButtonNotice btnQuest;
         [field: SerializeField] public Button btnRecruit;
         [field: SerializeField] public Button btnSpecialShop;
+        [field: SerializeField] public Button btnMatch;
 
         public UniTask Initialize(Memory<object> args)
         {
-            btnQuest.SetButtonOnClick(ShowModalQuest);
+          
             return UniTask.CompletedTask;
-        }
-
-        void ShowModalQuest()
-        {
-            ViewOptions options = new ViewOptions(nameof(ModalQuest));
-            ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
         }
     }
 
@@ -67,7 +62,35 @@ public class ScreensBattleContext
         {
             await Model.Initialize(args);
             await View.Initialize(args);
-        }      
+
+            View.btnQuest.SetButtonOnClick(ShowModalQuest);
+            View.btnMatch.onClick.AddListener(Match);
+            View.btnRecruit.onClick.AddListener(Recruit);
+        }
+
+        void ShowModalQuest()
+        {
+            ViewOptions options = new ViewOptions(nameof(ModalQuest));
+            ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
+        }
+
+        void Match() {
+            ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+
+            ViewOptions options = new ViewOptions(nameof(ScreensMatch));
+            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+
+            ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
+        }
+
+        void Recruit() {
+            ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+
+            ViewOptions options = new ViewOptions(nameof(ScreensRecruit));
+            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+
+            ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
+        }
 
     }
 }

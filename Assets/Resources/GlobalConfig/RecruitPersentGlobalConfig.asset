@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424be0c067b266644b3c60ec51154682, type: 3}
+  m_Name: RecruitPersentGlobalConfig
+  m_EditorClassIdentifier: 
+  recruitTurns:
+  - turn: 0
+    miss: 15
+    rateHeroTiers:
+    - rarity: 0
+      persent: 29.8
+    - rarity: 1
+      persent: 23.8
+    - rarity: 2
+      persent: 17
+    - rarity: 3
+      persent: 10.2
+    - rarity: 4
+      persent: 4.3
+  - turn: 1
+    miss: 20
+    rateHeroTiers:
+    - rarity: 0
+      persent: 28
+    - rarity: 1
+      persent: 22.4
+    - rarity: 2
+      persent: 16
+    - rarity: 3
+      persent: 9.6
+    - rarity: 4
+      persent: 4
+  - turn: 2
+    miss: 30
+    rateHeroTiers:
+    - rarity: 0
+      persent: 24.5
+    - rarity: 1
+      persent: 19.6
+    - rarity: 2
+      persent: 14
+    - rarity: 3
+      persent: 8.4
+    - rarity: 4
+      persent: 3.5
+  - turn: 3
+    miss: 50
+    rateHeroTiers:
+    - rarity: 0
+      persent: 17.5
+    - rarity: 1
+      persent: 14
+    - rarity: 2
+      persent: 10
+    - rarity: 3
+      persent: 6
+    - rarity: 4
+      persent: 2.5
+  - turn: 4
+    miss: 70
+    rateHeroTiers:
+    - rarity: 0
+      persent: 10.5
+    - rarity: 1
+      persent: 8.4
+    - rarity: 2
+      persent: 6
+    - rarity: 3
+      persent: 3.6
+    - rarity: 4
+      persent: 1.5

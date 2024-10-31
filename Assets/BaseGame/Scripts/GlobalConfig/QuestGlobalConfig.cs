@@ -69,6 +69,7 @@ public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
 
                 Resource reward = new();
                 reward.type = resourceType;
+                reward.value = new(0);
                 reward.Add(rewardAmount);
 
                 StreakDataConfig newStreak = new();
@@ -98,6 +99,7 @@ public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
 
                 Resource reward = new();
                 reward.type = resourceType;
+                reward.value = new(0);
                 reward.Add(rewardAmout);
 
                 StreakDataConfig newStreak = new();

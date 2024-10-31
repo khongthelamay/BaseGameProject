@@ -9,19 +9,16 @@ using ZBase.UnityScreenNavigator.Core;
 
 public class Launcher : UnityScreenNavigatorLauncher
 {
-    public GameObject objModalDefault;
     protected override void Start()
     {
         base.Start();
-        // ShowLoadingScreen().Forget();
-        //ShowPanelTest();
-        objModalDefault.SetActive(true);
+        ShowPanelTest();
 
     }
 
     async UniTaskVoid ShowPanelTest() {
-        ViewOptions options = new ViewOptions(nameof(ScreensArtifact));
-        await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+        ViewOptions options = new ViewOptions(nameof(ScreensDefault));
+        await ScreenContainer.Find(ContainerKey.MidleScreens).PushAsync(options);
     }
 
 

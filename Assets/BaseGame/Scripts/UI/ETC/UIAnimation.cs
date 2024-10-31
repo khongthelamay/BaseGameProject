@@ -165,4 +165,20 @@ public static class UIAnimation
 
         return sequence;
     }
+
+    public static Sequence AnimSlotDrop(Transform trsContent,int index, UnityAction actionCallBack = null)
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(trsContent.DOScale(Vector3.one * 1.2f, .25f).SetEase(Ease.InBack));
+        sequence.Append(trsContent.DOScale(Vector3.one, .25f).SetEase(Ease.OutBack));
+
+        if (actionCallBack != null)
+            sequence.OnComplete(() => {
+                actionCallBack();
+            });
+        sequence.SetDelay(index * .1f);
+        sequence.Play();
+
+        return sequence;
+    }
 }

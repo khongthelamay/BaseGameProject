@@ -8,6 +8,9 @@ using TW.Reactive.CustomComponent;
 using TMPro;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
+using Core;
+using Spine.Unity;
+using System.Collections.Generic;
 
 [Serializable]
 public class ModalHeroesInforContext 
@@ -46,23 +49,29 @@ public class ModalHeroesInforContext
         [field: SerializeField] public TextMeshProUGUI txtAtk {get; private set;}  
         [field: SerializeField] public TextMeshProUGUI txtSpeed {get; private set;}  
         [field: SerializeField] public ProgressBar piecesProgress {get; private set;}  
-        [field: SerializeField] public Image imgHeroIcon {get; private set;}  
+        [field: SerializeField] public Animator heroAnimator {get; private set;}  
         [field: SerializeField] public Button btnExit {get; private set;}  
         [field: SerializeField] public Button btnUpgrade {get; private set;}  
-        
+        [field: SerializeField] public MainContentAbility mainContentHeroAbility { get; private set;}  
+        [field: SerializeField] public MainContentHeroJob mainContentHeroJob {get; private set;}
+
+        List<Hero.Job> jobs;
+
         public UniTask Initialize(Memory<object> args)
         {
             return UniTask.CompletedTask;
         }
-
         public void InitData(HeroConfigData heroData, HeroSave heroDataSave) {
-            imgHeroIcon.sprite = heroData.HeroSprite;
+            heroAnimator.runtimeAnimatorController = heroData.ImageAnimatorController;
             txtLevel.text = "Lv. " + heroDataSave.level.Value.ToString();
             txtName.text = heroData.Name;
             txtAtk.text = heroData.BaseAttackDamage.ToString();
             txtSpeed.text = heroData.BaseAttackSpeed.ToString();
             piecesProgress.ChangeProgress(0);
             piecesProgress.ChangeTextProgress("0/0");
+            mainContentHeroAbility.InitData(heroData.HeroAbilities);
+            jobs = new(heroData.HeroJob);
+            mainContentHeroJob.InitData(jobs);
         }
 
         public void AnimOpen()
@@ -99,8 +108,6 @@ public class ModalHeroesInforContext
 
             View.btnExit.onClick.AddListener(Exit);
             View.btnUpgrade.onClick.AddListener(Upgrade);
-
-            View.InitData(Model.currentHeroChoose.Value, Model.currentHeroSave);
 
             View.AnimOpen();
         }

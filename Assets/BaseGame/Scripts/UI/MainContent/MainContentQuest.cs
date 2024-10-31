@@ -24,9 +24,9 @@ public class MainContentQuest : MainContent<QuestDataConfig>
     {
         for (int i = slots.Count - 1; i >= 0 ; i--)
         {
-            if ((slots[i] as QuestSlot).IsClaimed())
+            if ((slots[i] as SlotQuest).IsClaimed())
                 slots[i].transform.SetAsLastSibling();
-            if ((slots[i] as QuestSlot).IsCanClaim())
+            if ((slots[i] as SlotQuest).IsCanClaim())
                 slots[i].transform.SetAsFirstSibling();
         }
     }
