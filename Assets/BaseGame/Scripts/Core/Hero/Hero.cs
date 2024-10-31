@@ -159,7 +159,7 @@ namespace Core
 
         public void ShowAttackRange()
         {
-            HeroAttackRange.ShowAttackRange();
+            HeroAttackRange.ShowAttackRange(HeroConfigData.BaseAttackRange);
         }
 
         public void HideAttackRange()

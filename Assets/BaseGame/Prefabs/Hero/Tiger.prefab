@@ -42,8 +42,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7756562649187048276}
-  - component: {fileID: 8151900761742474142}
   - component: {fileID: 1606053922063266286}
+  - component: {fileID: 5534161902302239852}
   m_Layer: 0
   m_Name: Tiger
   m_TagString: Untagged
@@ -67,26 +67,6 @@ Transform:
   - {fileID: 4111363209871364736}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8151900761742474142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245487937391515122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5b1737fbf89a8d47bed5deb731fc8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <HeroConfigData>k__BackingField: {fileID: 11400000, guid: 89202d8e1342d1740a5acb44f3eecb13, type: 2}
-  <HeroAttackRange>k__BackingField: {fileID: 262183918225449898}
-  <SpriteGraphic>k__BackingField: {fileID: 3234590284100064069}
-  <SpriteRarity>k__BackingField: {fileID: 439441760434721709}
-  <MoveProjectile>k__BackingField: {fileID: 4845609547942700330, guid: 84727164c6cf08646a00b92bf0e0b342, type: 3}
-  <VisibleGroup>k__BackingField: {fileID: 1232542653650005813}
-  <FieldSlot>k__BackingField: {fileID: 0}
-  <HeroAnim>k__BackingField: {fileID: 1606053922063266286}
 --- !u!114 &1606053922063266286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +80,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 3108917903286676556}
+--- !u!114 &5534161902302239852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245487937391515122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16708f5cd5ebde64c82b37f505b325d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <HeroConfigData>k__BackingField: {fileID: 11400000, guid: 6e69dcd499840ee47be0407d05f43965, type: 2}
+  <HeroAttackRange>k__BackingField: {fileID: 262183918225449898}
+  <SpriteGraphic>k__BackingField: {fileID: 3234590284100064069}
+  <SpriteRarity>k__BackingField: {fileID: 439441760434721709}
+  <MoveProjectile>k__BackingField: {fileID: 4845609547942700330, guid: 84727164c6cf08646a00b92bf0e0b342, type: 3}
+  <VisibleGroup>k__BackingField: {fileID: 1232542653650005813}
+  <FieldSlot>k__BackingField: {fileID: 0}
+  <HeroAnim>k__BackingField: {fileID: 1606053922063266286}
+  <AttackDamage>k__BackingField: 0
+  <AttackSpeed>k__BackingField: 0
+  <AttackRange>k__BackingField: 0
 --- !u!1 &1685808369699710915
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,12 +479,12 @@ SpriteRenderer:
   m_SortingLayerID: -392905563
   m_SortingLayer: 1
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: 860a27ae671ffd74f97d0f89f0e4e41f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 98d01fffcb52b694489f8f9bbc57bb6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -497,7 +500,7 @@ Animator:
   m_GameObject: {fileID: 4550068924597694608}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 275b50326c7445d43b5281202cee7689, type: 2}
+  m_Controller: {fileID: 9100000, guid: cf95bfb02b4f1c74992f6cecc48e5d61, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

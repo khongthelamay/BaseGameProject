@@ -69,10 +69,10 @@ public class HeroConfigData : ScriptableObject
         EditorUtility.SetDirty(this);
         string result = await ABakingSheet.GetCsv(sheetId, "UnitAbility");
         List<Dictionary<string, string>> csvData = ACsvReader.ReadDataFromString(result)
-            .Select(value =>
-                value.ToDictionary(
-                    d => d.Key,
-                    d => d.Value.Replace(" ", "")))
+            // .Select(value =>
+            //     value.ToDictionary(
+            //         d => d.Key,
+            //         d => d.Value.Replace(" ", "")))
             .ToList();
 
         Dictionary<string, string> data = csvData.Find(x => x["Name"] == Name);
@@ -117,6 +117,10 @@ public class HeroConfigData : ScriptableObject
                 .FirstOrDefault(t => t.name == Name);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+            if (HeroGameObjectPrefab == null)
+            {
+                GenerateNewGameObjectPrefab(data);
+            }
         }
         catch (Exception _)
         {
@@ -137,7 +141,7 @@ public class HeroConfigData : ScriptableObject
             Hero hero = Instantiate(heroPrefab);
             hero.name = $"{Name}";
 
-            PrefabUtility.SaveAsPrefabAsset(hero.gameObject, $"Assets/BaseGame/Prefabs/Hero/{hero.name}.prefab");
+            PrefabUtility.SaveAsPrefabAsset(hero.gameObject, $"Assets/BaseGame/Prefabs/Hero/{Name}.prefab");
                 
                 
             AssetDatabase.SaveAssets();

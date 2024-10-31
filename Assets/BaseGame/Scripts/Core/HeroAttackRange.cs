@@ -9,12 +9,12 @@ public class HeroAttackRange : ACachedMonoBehaviour
     [field: SerializeField] private float AttackRange {get; set;}
     private MotionHandle UpdateAttackMotion {get; set;}
     private float OriginalScale {get; set;} = 0;
-    public void InitAttackRange(float attackRange)
-    {
-        AttackRange = attackRange;
-        OriginalScale = 0;
-        Transform.localScale = Vector3.zero;
-    }
+    // public void InitAttackRange(float attackRange)
+    // {
+    //     AttackRange = attackRange;
+    //     OriginalScale = 0;
+    //     Transform.localScale = Vector3.zero;
+    // }
 
     private void OnDestroy()
     {
@@ -22,10 +22,10 @@ public class HeroAttackRange : ACachedMonoBehaviour
     }
 
     [Button]
-    public void ShowAttackRange()
+    public void ShowAttackRange(float range)
     {
         UpdateAttackMotion.TryCancel();
-        UpdateAttackMotion = LMotion.Create(OriginalScale, AttackRange * 2, 0.2f)
+        UpdateAttackMotion = LMotion.Create(OriginalScale, range * 2, 0.2f)
             .WithEase(Ease.OutBack)
             .Bind(UpdateAttackRange);
     }
