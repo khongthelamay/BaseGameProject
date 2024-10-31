@@ -18,11 +18,13 @@ public class SlotRecruitRewardRun : SlotRecruitReward
         base.InitData(data);
         transform.localPosition = Vector3.zero;
         looseRewardFuction = new LooseRewardByJump();
+        (looseRewardFuction as LooseRewardByJump).trsJump = transform;
     }
 
     public void SetPoint(Transform pointStart, Transform pointEnd, Transform pointLoose) {
         this.pointEnd = pointEnd;
         this.pointStart = pointStart;
+        this.pointLoose = pointLoose;
     }
 
     [Button]
@@ -32,17 +34,26 @@ public class SlotRecruitRewardRun : SlotRecruitReward
             mySequence.Kill();
         mySequence = DOTween.Sequence();
         mySequence.Append(transform.DOMove(pointEnd.position, timeMove).From(pointStart.position).SetEase(Ease.Linear)).OnComplete(()=> {
-            if (isCollect)
-                ActionCollect();
-            else
-                LooseRewardFunction();
-        }).SetDelay(.25f * transform.GetSiblingIndex());
+            ActionCollect();
+        }).SetDelay(.25f * transform.GetSiblingIndex()).SetEase(Ease.Linear);
+
+        if (slotData.isMiss)
+            mySequence.OnUpdate(() => {
+                if (transform.position.x > pointLoose.position.x)
+                {
+                    LooseRewardFunction();
+                    mySequence.Kill();
+                }
+            });
     }
 
-    void ActionCollect() { }
+    void ActionCollect() {
+        gameObject.SetActive(false);
+    }
 
     public void LooseRewardFunction() {
         looseRewardFuction.LooseRewardFunction();
+        
     }
 }
 
@@ -55,7 +66,10 @@ class LooseRewardByJump : ILooseRewardFunction
     public Transform trsJump;
     public void LooseRewardFunction()
     {
-
+        Debug.Log("Loose reward");
+        trsJump.DOLocalMoveY(trsJump.localPosition.y + 100f, .25f).OnComplete(()=> {
+            trsJump.gameObject.SetActive(false);
+        });
     }
 }
 
