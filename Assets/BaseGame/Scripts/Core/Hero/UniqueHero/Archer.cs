@@ -17,5 +17,6 @@ namespace Core
             ActiveAbilities.Add(new PiercingShotAbility(this, 0, PiercingShotProjectile, ProjectileSpawnPosition));
             ActiveAbilities.Add(new RangeAttackAbility(this, 0, RangeAttackProjectile, ProjectileSpawnPosition));
         }
+        
     }
 }

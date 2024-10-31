@@ -7,25 +7,7 @@ using UnityEngine;
 
 public class FieldManager : Singleton<FieldManager>
 {
-    [field: SerializeField] public WaitSlot[] WaitSlotArray {get; private set;}
-    
-    private void Start()
-    {
-        RandomWaitSlot();
-        this.UpdateAsObservable()
-            .Where(_ => Input.GetKeyDown(KeyCode.C))
-            .Subscribe(_ => RandomWaitSlot());
-    }
 
-    
-    [Button]
-    public void RandomWaitSlot()
-    {
-        foreach (var waitSlot in WaitSlotArray)
-        {
-            waitSlot.RandomOwnerHero();
-        }
-    }
     
     
 }

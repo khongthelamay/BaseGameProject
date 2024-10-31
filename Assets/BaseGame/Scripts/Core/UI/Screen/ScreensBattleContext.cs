@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
 using System.Collections.Generic;
+using Manager;
 using TW.UGUI.Core.Views;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
@@ -79,8 +80,8 @@ public class ScreensBattleContext
 
             ViewOptions options = new ViewOptions(nameof(ScreensMatch));
             ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
-
             ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
+            BattleManager.Instance.StartNewMatch();
         }
 
         void Recruit() {

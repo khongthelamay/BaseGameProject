@@ -184,13 +184,16 @@ public class HeroConfigData : ScriptableObject
             using PrefabUtility.EditPrefabContentsScope editorScope = new PrefabUtility.EditPrefabContentsScope(assetPath);
                 
             Hero[] heroes = editorScope.prefabContentsRoot.GetComponents<Hero>(); 
+            string typeName = $"Core.{Name.Replace(" ", "")}";
+            Type type = Type.GetType(typeName);
+            
             foreach (Hero hero in heroes)
             {
+                if (hero.GetType() == type) continue;
                 DestroyImmediate(hero);
             }
                 
-            string typeName = $"Core.{Name.Replace(" ", "")}";
-            Type type = Type.GetType(typeName);
+
             if (type == null)
             {
                 // create new script
@@ -208,6 +211,13 @@ public class HeroConfigData : ScriptableObject
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
                 Debug.Log("Add script failed. Create new script instead.");
+            }
+            else if (heroes.Any(hero => hero.GetType() == type))
+            {
+                Hero hero = editorScope.prefabContentsRoot.GetComponent<Hero>();
+                hero.EditorInit(this);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
             else
             {
@@ -238,8 +248,7 @@ public class HeroConfigData : ScriptableObject
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            Debug.LogError(e);
         }
 
     }

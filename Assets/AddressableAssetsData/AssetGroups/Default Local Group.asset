@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: af1cbe86942051948b4bdd7948504a4f
+  m_SerializeEntries:
+  - m_GUID: 3007617901366a44ebe54edbada33b79
+    m_Address: DefaultModalBackdrop
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1dff5b57fec4f94bbbe8d1b57ddfbc0
+    m_Address: ScreensBattle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d279394e03565dd459b02b8babede8f1
+    m_Address: PanelClaimItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 617d61ec5d51f82488967fab003cc811
+    m_Address: ScreensDefault
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a25de43b89143154ba0b469413d95f2b
+    m_Address: ScreensRecruit
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2864c7891b97dc8419a095d94b501c51
+    m_Address: ScreensHeroes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0d1e1cb903e6b94ea4acd827d1c39aa
+    m_Address: ModalHeroInfor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd735fd8b9f701644a66d14939fa1d1e
+    m_Address: ScreensArtifact
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3a213419dfefba4f9dc575899a68a91
+    m_Address: ModalQuest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 207da897910ca364a9fd82ca524d8590
+    m_Address: ScreensMatch
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65bb7948907a4cf45878621f99c0ee0a
+    m_Address: ModalArtifactInfor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 32c21ea75503fc74db3fedbc82881964, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1fb103be9a67e714fbdc00399306d85b, type: 2}
+    - {fileID: 11400000, guid: 338d416d645dc5f4296d9bb92d2e3a19, type: 2}

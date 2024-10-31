@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5839916290294885089}
   - component: {fileID: 3040993713661131822}
+  - component: {fileID: 1471565477829411787}
   - component: {fileID: 2581990304215201561}
   m_Layer: 0
   m_Name: Archmage
@@ -131,6 +132,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 89550316112178981}
+--- !u!210 &1471565477829411787
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833816250345312829}
+  m_Enabled: 1
+  m_SortingLayerID: -392905563
+  m_SortingLayer: 1
+  m_SortingOrder: 20
+  m_SortAtRoot: 0
 --- !u!114 &2581990304215201561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,9 +164,11 @@ MonoBehaviour:
   <VisibleGroup>k__BackingField: {fileID: 3688341809522711098}
   <FieldSlot>k__BackingField: {fileID: 0}
   <HeroAnim>k__BackingField: {fileID: 3040993713661131822}
+  <SortingGroup>k__BackingField: {fileID: 1471565477829411787}
   <AttackDamage>k__BackingField: 0
   <AttackSpeed>k__BackingField: 0
   <AttackRange>k__BackingField: 0
+  <IsCancelAbility>k__BackingField: 0
 --- !u!1 &1234575495039687051
 GameObject:
   m_ObjectHideFlags: 0
