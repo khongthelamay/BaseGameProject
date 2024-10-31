@@ -18,7 +18,6 @@ namespace Core
             Owner = owner;
             LevelUnlock = levelUnlock;
         }
-        public abstract Ability CreateAbility(Hero owner);
         public bool IsUnlocked(int level) => level >= LevelUnlock;
 
     }

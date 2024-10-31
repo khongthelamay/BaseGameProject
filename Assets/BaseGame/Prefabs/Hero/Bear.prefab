@@ -393,8 +393,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3454300642732932449}
-  - component: {fileID: 6995974192129293514}
   - component: {fileID: 960777080092179863}
+  - component: {fileID: 9066059459939707764}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Untagged
@@ -418,29 +418,6 @@ Transform:
   - {fileID: 8275289936596230162}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6995974192129293514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6108580363313997809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5b1737fbf89a8d47bed5deb731fc8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <HeroConfigData>k__BackingField: {fileID: 11400000, guid: eaaab2763f3d5aa4ba8c9930c2709357, type: 2}
-  <HeroAttackRange>k__BackingField: {fileID: 3176410073839938263}
-  <SpriteGraphic>k__BackingField: {fileID: 1382070992260175589}
-  <SpriteRarity>k__BackingField: {fileID: 4117043260040164137}
-  <MoveProjectile>k__BackingField: {fileID: 4845609547942700330, guid: 84727164c6cf08646a00b92bf0e0b342, type: 3}
-  <VisibleGroup>k__BackingField: {fileID: 2590342776063789919}
-  <FieldSlot>k__BackingField: {fileID: 0}
-  <HeroAnim>k__BackingField: {fileID: 960777080092179863}
-  <AttackDamage>k__BackingField: 0
-  <AttackSpeed>k__BackingField: 0
-  <AttackRange>k__BackingField: 0
 --- !u!114 &960777080092179863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +431,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 736828333418740401}
+--- !u!114 &9066059459939707764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108580363313997809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e82333d5b457c40ad52c7c96beff8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <HeroConfigData>k__BackingField: {fileID: 11400000, guid: eaaab2763f3d5aa4ba8c9930c2709357, type: 2}
+  <HeroAttackRange>k__BackingField: {fileID: 3176410073839938263}
+  <SpriteGraphic>k__BackingField: {fileID: 1382070992260175589}
+  <SpriteRarity>k__BackingField: {fileID: 4117043260040164137}
+  <MoveProjectile>k__BackingField: {fileID: 4845609547942700330, guid: 84727164c6cf08646a00b92bf0e0b342, type: 3}
+  <VisibleGroup>k__BackingField: {fileID: 2590342776063789919}
+  <FieldSlot>k__BackingField: {fileID: 0}
+  <HeroAnim>k__BackingField: {fileID: 960777080092179863}
+  <AttackDamage>k__BackingField: 0
+  <AttackSpeed>k__BackingField: 0
+  <AttackRange>k__BackingField: 0
 --- !u!1 &6554614012547110440
 GameObject:
   m_ObjectHideFlags: 0

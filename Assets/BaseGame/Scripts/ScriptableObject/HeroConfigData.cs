@@ -55,8 +55,8 @@ public class HeroConfigData : ScriptableObject
 
     [field: SerializeField] public AnimatorController AnimatorController { get; set; }
     [field: SerializeField] public AnimatorController ImageAnimatorController { get; set; }
+    [field: SerializeField] public GameObject HeroGameObjectPrefab {get; private set;}
     [field: SerializeField] public Hero HeroPrefab {get; private set;}
-
     [field: SerializeReference] public List<Ability> HeroAbilities { get; set; }
     
     
@@ -92,8 +92,11 @@ public class HeroConfigData : ScriptableObject
         GenerateIdleImageAnimData(data);
         GenerateImageAnimatorData(data);
         
+        GenerateHeroGameObjectPrefab(data);
+        AddUniqueHeroScript();
+        
         GenerateHeroPrefab(data);
-
+        
         string newName = $"{Name}.asset";
         string assetPath = AssetDatabase.GetAssetPath(this);
         AssetDatabase.RenameAsset(assetPath, newName);
@@ -102,95 +105,206 @@ public class HeroConfigData : ScriptableObject
         
     }
 
-    private void GenerateHeroPrefab(Dictionary<string, string> data)
+    private void GenerateHeroGameObjectPrefab(Dictionary<string, string> data)
     {
-        EditorUtility.SetDirty(this);
         try
         {
-            HeroPrefab = AssetDatabase.LoadAssetAtPath<Hero>(
-                AssetDatabase.GUIDToAssetPath(
-                    AssetDatabase.FindAssets($"t:Prefab {Name}", 
-                        new string[] { "Assets/BaseGame/Prefabs/Hero" })[0]));
-             
+            EditorUtility.SetDirty(this);
+            HeroGameObjectPrefab = AssetDatabase.FindAssets($"t:Prefab {Name}",
+                    new string[] { "Assets/BaseGame/Prefabs/Hero" })
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Select(AssetDatabase.LoadAssetAtPath<GameObject>)
+                .FirstOrDefault(t => t.name == Name);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
         catch (Exception _)
         {
-            Hero baseHero = AssetDatabase.LoadAssetAtPath<Hero>(
+            GenerateNewGameObjectPrefab(data);
+        }
+        
+    }
+
+    private void GenerateNewGameObjectPrefab(Dictionary<string, string> data)
+    {
+        try
+        {
+            EditorUtility.SetDirty(this);
+            Hero heroPrefab = AssetDatabase.LoadAssetAtPath<Hero>(
                 AssetDatabase.GUIDToAssetPath(
                     AssetDatabase.FindAssets("t:Prefab BaseHero")[0]));
-            Hero hero = Instantiate(baseHero);
-            hero.name = Name;
+                
+            Hero hero = Instantiate(heroPrefab);
+            hero.name = $"{Name}";
+
             PrefabUtility.SaveAsPrefabAsset(hero.gameObject, $"Assets/BaseGame/Prefabs/Hero/{hero.name}.prefab");
+                
+                
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            HeroPrefab = AssetDatabase.LoadAssetAtPath<Hero>(
-                AssetDatabase.GUIDToAssetPath(
-                    AssetDatabase.FindAssets($"t:Prefab {Name}", 
-                        new string[] { "Assets/BaseGame/Prefabs/Hero" })[0]));
+            
+            HeroGameObjectPrefab = AssetDatabase.FindAssets($"t:Prefab {Name}",
+                    new string[] { "Assets/BaseGame/Prefabs/Hero" })
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Select(AssetDatabase.LoadAssetAtPath<GameObject>)
+                .FirstOrDefault(t => t.name == Name);
             DestroyImmediate(hero.gameObject);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
-        HeroPrefab.InitHero(this);
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
+    }
+    private void GenerateHeroPrefab(Dictionary<string, string> data)
+    {
+        try
+        {
+            EditorUtility.SetDirty(this);
+            HeroPrefab = HeroGameObjectPrefab.GetComponent<Hero>();
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
+    }
+    private void AddUniqueHeroScript()
+    {
+        try
+        { 
+            EditorUtility.SetDirty(this);
+            string assetPath = AssetDatabase.GetAssetPath(HeroGameObjectPrefab);
+            using PrefabUtility.EditPrefabContentsScope editorScope = new PrefabUtility.EditPrefabContentsScope(assetPath);
+                
+            Hero[] heroes = editorScope.prefabContentsRoot.GetComponents<Hero>(); 
+            foreach (Hero hero in heroes)
+            {
+                DestroyImmediate(hero);
+            }
+                
+            string typeName = $"Core.{Name.Replace(" ", "")}";
+            Type type = Type.GetType(typeName);
+            if (type == null)
+            {
+                // create new script
+                string scriptPath = $"Assets/BaseGame/Scripts/Core/Hero/UniqueHero/{Name.Replace(" ", "")}.cs";
+                string code = @$"namespace Core
+{{
+    public class {Name.Replace(" ", "")} : Hero
+    {{
+
+    }}
+}}";
+                
+                System.IO.File.WriteAllText(scriptPath, code);
+                AssetDatabase.ImportAsset(scriptPath);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                Debug.Log("Add script failed. Create new script instead.");
+            }
+            else
+            {
+                Component component = editorScope.prefabContentsRoot.AddComponent(Type.GetType(typeName));
+                Hero hero = editorScope.prefabContentsRoot.GetComponent<Hero>();
+                hero.EditorInit(this);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                Debug.Log("Add script success.");
+            }
+         
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     private void GenerateHeroSprite(Dictionary<string, string> data)
     {
-        HeroSprite = AssetDatabase.LoadAssetAtPath<Sprite>(
-            AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets($"t:Sprite {Name}-Idle", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0]));
+        try
+        {
+            EditorUtility.SetDirty(this);
+            HeroSprite = AssetDatabase.LoadAssetAtPath<Sprite>(
+                AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets($"t:Sprite {Name}-Idle", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0]));
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
     }
     private void GenerateBaseStat(Dictionary<string, string> data)
     {
-        if (int.TryParse(data["Tier"], out int tier))
+        try
         {
-            HeroRarity = (Hero.Rarity)(tier - 1);
+            EditorUtility.SetDirty(this);
+            HeroRarity = (Hero.Rarity)(int.Parse(data["Tier"]) - 1);
+            BaseAttackDamage = int.Parse(data["AttackDamage"]);
+            BaseAttackSpeed = float.Parse(data["AttackSpeed"]);
+            BaseAttackRange = float.Parse(data["AttackRange"]);
+            UpgradePercentage = float.Parse(data["UpgradePercentage"]);
+            
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
-
-        if (int.TryParse(data["AttackDamage"], out int attackDamage))
+        catch (Exception e)
         {
-            BaseAttackDamage = attackDamage;
+            Console.WriteLine(e);
+            throw;
         }
-
-        if (float.TryParse(data["AttackSpeed"], out float attackSpeed))
-        {
-            BaseAttackSpeed = attackSpeed;
-        }
-
-        if (float.TryParse(data["AttackRange"], out float attackRange))
-        {
-            BaseAttackRange = attackRange;
-        }
-
-        if (float.TryParse(data["UpgradePercentage"], out float upgradePercentage))
-        {
-            UpgradePercentage = upgradePercentage;
-        }
+        
     }
 
     private void GenerateHeroJob(Dictionary<string, string> data)
     {
-        List<Hero.Job> jobList = new List<Hero.Job>();
-        if (Enum.TryParse(typeof(Hero.Job), data["MainRace"], out object job1))
+        try
         {
-            jobList.Add((Hero.Job)job1);
+            EditorUtility.SetDirty(this);
+            List<Hero.Job> jobList = new List<Hero.Job>();
+            if (Enum.TryParse<Hero.Job>(data["MainRace"], out var mainRace))
+            {
+                jobList.Add(mainRace);
+            }
+            if (Enum.TryParse<Hero.Job>(data["SubRace1"], out var subRace1))
+            {
+                jobList.Add(subRace1);
+            }
+            if (Enum.TryParse<Hero.Job>(data["SubRace2"], out var subRace2))
+            {
+                jobList.Add(subRace2);
+            }
+
+            HeroJob = jobList.ToArray();
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
 
-        if (Enum.TryParse(typeof(Hero.Job), data["SubRace1"], out object job2))
-        {
-            jobList.Add((Hero.Job)job2);
-        }
-
-        if (Enum.TryParse(typeof(Hero.Job), data["SubRace2"], out object job3))
-        {
-            jobList.Add((Hero.Job)job3);
-        }
-
-        HeroJob = jobList.ToArray();
     }
 
     private void GenerateHeroClass(Dictionary<string, string> data)
     {
-        if (Enum.TryParse(typeof(Hero.Class), data["Class"], out object class1))
+        try
         {
-            HeroClass = (Hero.Class)class1;
+            EditorUtility.SetDirty(this);
+            HeroClass = Enum.Parse<Hero.Class>(data["Class"]);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
     }
 
