@@ -10,7 +10,6 @@ using Zenject;
 public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler
 {
     public static Action FieldSlotChangedCallback { get; private set; }
-    [Inject] private Hero.Factory HeroFactory { get; set; }
     [Inject] private BattleManager BattleManager { get; set; }
     [field: SerializeField] public Vector2 DefaultSize {get; private set;}
     [field: SerializeField] public int RowId {get; private set;}
@@ -47,26 +46,13 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragH
         Hero = null;
         return true;
     }
-    public bool TryUpgradeHero()
-    {
-        if (!TryGetHero(out Hero hero)) return false;
-        HeroStatData heroStatData = hero.HeroStatData;
-        if (heroStatData.HeroRarity == Hero.Rarity.Mythic) return false;
-        hero.SelfDespawn();
-        
-        Hero heroPrefab = HeroPoolGlobalConfig.Instance.GetRandomHeroUpgradePrefab(heroStatData.HeroRarity + 1);
-        Hero = HeroFactory.Create(heroPrefab);
-        Hero.MoveToFieldSlot(this);
-
-        return true;
-    }
     public void SetUpgradeMark(bool isShow)
     {
         UpgradeMark.SetActive(isShow);
     }
     private void OnFieldSlotChanged()
     {
-        if (TryGetHero(out Hero hero) && hero.HeroStatData.HeroRarity.IsMaxRarity())
+        if (TryGetHero(out Hero hero) && hero.HeroConfigData.HeroRarity.IsMaxRarity())
         {
             SetUpgradeMark(false);
             return;
@@ -79,14 +65,14 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragH
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!TryGetHero(out Hero hero)) return;
-        if (!hero.IsCurrentState(HeroAttackState.Instance)) return;
+        if (!hero.IsCurrentState(hero.HeroAttackState)) return;
         TempUIManager.Instance.ShowModalHeroInteract(this);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!TryGetHero(out Hero hero)) return;
-        if (!hero.IsCurrentState(HeroAttackState.Instance)) return;
+        if (!hero.IsCurrentState(hero.HeroAttackState)) return;
         InputManager.Instance.SetStartDragFieldSlot(this);
         InputManager.Instance.SetEndDragFieldSlot(this);
     }

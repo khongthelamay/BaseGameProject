@@ -27,7 +27,7 @@ public class ModalHeroesInforContext
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; }
-        [field: SerializeField] public ReactiveValue<Hero> currentHeroChoose { get; private set; }
+        [field: SerializeField] public ReactiveValue<HeroConfigData> currentHeroChoose { get; private set; }
 
         public UniTask Initialize(Memory<object> args)
         {
@@ -61,17 +61,16 @@ public class ModalHeroesInforContext
         {
             return UniTask.CompletedTask;
         }
-
-        public void InitData(Hero heroData, HeroSave heroDataSave) {
-            heroAnimator.runtimeAnimatorController = heroData.HeroStatData.ImageAnimatorController;
+        public void InitData(HeroConfigData heroData, HeroSave heroDataSave) {
+            heroAnimator.runtimeAnimatorController = heroData.ImageAnimatorController;
             txtLevel.text = "Lv. " + heroDataSave.level.Value.ToString();
-            txtName.text = heroData.HeroStatData.Name;
-            txtAtk.text = heroData.HeroStatData.BaseAttackDamage.ToString();
-            txtSpeed.text = heroData.HeroStatData.BaseAttackSpeed.ToString();
+            txtName.text = heroData.Name;
+            txtAtk.text = heroData.BaseAttackDamage.ToString();
+            txtSpeed.text = heroData.BaseAttackSpeed.ToString();
             piecesProgress.ChangeProgress(0);
             piecesProgress.ChangeTextProgress("0/0");
-            mainContentHeroAbility.InitData(heroData.HeroStatData.HeroAbilities);
-            jobs = new(heroData.HeroStatData.HeroJob);
+            mainContentHeroAbility.InitData(heroData.HeroAbilities);
+            jobs = new(heroData.HeroJob);
             mainContentHeroJob.InitData(jobs);
         }
 

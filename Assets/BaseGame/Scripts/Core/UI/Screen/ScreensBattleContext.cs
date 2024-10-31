@@ -75,6 +75,8 @@ public class ScreensBattleContext
         }
 
         void Match() {
+            ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+
             ViewOptions options = new ViewOptions(nameof(ScreensMatch));
             ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
 
@@ -82,6 +84,8 @@ public class ScreensBattleContext
         }
 
         void Recruit() {
+            ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+
             ViewOptions options = new ViewOptions(nameof(ScreensRecruit));
             ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
 

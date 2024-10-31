@@ -16,14 +16,14 @@ namespace Core
         public override void StartBehavior(Hero hero, Enemy enemy)
         {
             if (enemy == null) return;
-            int attackDamage = (int)(hero.HeroStatData.BaseAttackDamage * DamageScale);
+            int attackDamage = (int)(hero.HeroConfigData.BaseAttackDamage * DamageScale);
             enemy.MarkLoseHealth(attackDamage);
         }
 
         public override void EndBehavior(Hero hero, Enemy enemy)
         {
             if (enemy == null) return;
-            int attackDamage = (int)(hero.HeroStatData.BaseAttackDamage * DamageScale);
+            int attackDamage = (int)(hero.HeroConfigData.BaseAttackDamage * DamageScale);
             enemy.TakeDamage(attackDamage, DamageType);
         }
         

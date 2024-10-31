@@ -62,6 +62,14 @@ public class ScreensMatchContext
         {
             await Model.Initialize(args);
             await View.Initialize(args);
-        }      
+
+            View.btnReroll.onClick.AddListener(Reroll);
+        }
+
+        void Reroll()
+        {
+            UIAnimation.BasicButton(View.btnReroll.transform);
+            Debug.Log("Reroll");
+        }
     }
 }

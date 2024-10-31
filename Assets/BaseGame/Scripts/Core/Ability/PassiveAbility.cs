@@ -1,23 +1,13 @@
-﻿using System;
-using UnityEngine;
-
-namespace Core
+﻿namespace Core
 {
-    [CreateAssetMenu(fileName = "PassiveAbility", menuName = "ScriptableObjects/PassiveAbility")]
-    public class PassiveAbility : Ability
+    public abstract class PassiveAbility : Ability
     {
-        [field: SerializeReference] public PassiveAbilityBehavior PassiveAbilityBehavior {get; set;}
-
-        public override bool CanUseAbility(Hero hero)
+        protected PassiveAbility(Hero owner, int levelUnlock) : base(owner, levelUnlock)
         {
-            return PassiveAbilityBehavior.CanUseAbility(hero, AbilityTrigger, AbilityTarget);
+            
         }
-
-        public override bool TryUseAbility(Hero hero)
-        {
-            return PassiveAbilityBehavior.TryUseAbility(hero, AbilityTrigger, AbilityTarget);
-        }
+        
+        public abstract void OnEnterBattleField();
+        public abstract void OnExitBattleField();
     }
-    
-
 }

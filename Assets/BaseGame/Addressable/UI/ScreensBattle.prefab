@@ -1999,7 +1999,7 @@ MonoBehaviour:
       <SampleValue>k__BackingField:
         m_Value: 0
     <View>k__BackingField:
-      <MainView>k__BackingField: {fileID: 0}
+      <MainView>k__BackingField: {fileID: 1835724710181177364}
       btnQuest: {fileID: 218042879258081968}
       btnRecruit: {fileID: 9010248819730287108}
       btnSpecialShop: {fileID: 0}

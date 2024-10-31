@@ -9,6 +9,7 @@ public class SlotRecruitRewardRun : SlotRecruitReward
     [Header("---- Slot Recruit Reward Run ----")]
     public Transform pointStart;
     public Transform pointEnd;
+    public Transform pointLoose;
     public float timeMove;
     [ShowInInspector]public ILooseRewardFunction looseRewardFuction;
     
@@ -17,6 +18,11 @@ public class SlotRecruitRewardRun : SlotRecruitReward
         base.InitData(data);
         transform.localPosition = Vector3.zero;
         looseRewardFuction = new LooseRewardByJump();
+    }
+
+    public void SetPoint(Transform pointStart, Transform pointEnd, Transform pointLoose) {
+        this.pointEnd = pointEnd;
+        this.pointStart = pointStart;
     }
 
     [Button]

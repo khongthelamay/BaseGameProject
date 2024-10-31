@@ -13,9 +13,9 @@ using UnityEngine;
 public class HeroManager : Singleton<HeroManager>
 {
     [field: SerializeField] public List<ReactiveValue<HeroSave>> heroSaves { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<Hero> currentHeroChoose { get; set; } = new();
+    [field: SerializeField] public ReactiveValue<HeroConfigData> currentHeroChoose { get; set; } = new();
     [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; } = new();
-    [field: SerializeField] public List<Hero> heroList { get; private set; }
+    [field: SerializeField] public List<HeroConfigData> heroList { get; private set; }
     [field: SerializeField] public ReactiveValue<BigNumber> summonRecipe { get; private set; } = new(0);
 
     private void Start()
@@ -25,7 +25,7 @@ public class HeroManager : Singleton<HeroManager>
 
     void LoadData() {
         heroSaves = InGameDataManager.Instance.InGameData.heroDataSave.heroSaves;
-        heroList = HeroPoolGlobalConfig.Instance.HeroPrefabList;
+        heroList = HeroPoolGlobalConfig.Instance.HeroConfigDataList;
         summonRecipe = InGameDataManager.Instance.InGameData.playerResourceDataSave.GetResourceValue(ResourceType.SummonRecipe);
     }
 
@@ -40,10 +40,9 @@ public class HeroManager : Singleton<HeroManager>
         }
         return false;
     }
-
-    public void ChooseHero(Hero heroStatData) {
-        currentHeroChoose.Value = heroStatData;
-        currentHeroSave.Value = GetHeroSaveData(heroStatData.HeroStatData.Name);
+    public void ChooseHero(HeroConfigData heroConfigData) {
+        currentHeroChoose.Value = heroConfigData;
+        currentHeroSave.Value = GetHeroSaveData(heroConfigData.Name);
         ViewOptions options = new ViewOptions(nameof(ModalHeroInfor));
         ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
     }

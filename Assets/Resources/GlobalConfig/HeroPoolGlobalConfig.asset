@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784ce2598ad2ae7468ad106a0d8c376b, type: 3}
   m_Name: HeroPoolGlobalConfig
   m_EditorClassIdentifier: 
-  <HeroPrefabList>k__BackingField:
-  - {fileID: 8013252171766711324, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
-  - {fileID: 5497396313601445816, guid: 38ba73dba91a5934e835a6bf8417d1e5, type: 3}
-  - {fileID: 1096430479915068473, guid: 8d4e61a10c6340345803a2aa7c499262, type: 3}
-  - {fileID: 2335573605449318257, guid: ca586a35bc5bd444f9dac5a4885df0be, type: 3}
+  <HeroConfigDataList>k__BackingField:
+  - {fileID: 11400000, guid: 4b2f4ccde3e32a54cab162754fcdbd24, type: 2}
+  - {fileID: 11400000, guid: eaaab2763f3d5aa4ba8c9930c2709357, type: 2}
+  - {fileID: 11400000, guid: 2f605c2399f5c4847b78ef9aabae77ab, type: 2}
+  - {fileID: 11400000, guid: e56fe3ad825f8f44b99e578acbd1bf07, type: 2}
+  - {fileID: 11400000, guid: 3daf40cf05de4ee438ee270ef6e32f22, type: 2}
+  - {fileID: 11400000, guid: 7617213d9a5e2c74683d1e1c7cd1a887, type: 2}
+  - {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+  - {fileID: 11400000, guid: 7b794966a51efc24b8313a5abee26e89, type: 2}
+  - {fileID: 11400000, guid: 9813d21fb267517429fdd61ffdd9447b, type: 2}
   <HeroPoolLevelConfig>k__BackingField:
     <Level>k__BackingField: 1
     <ProbabilityRarity>k__BackingField:

@@ -88,6 +88,7 @@ public class ScreensDefaultContext
         }
         void TabBattle()
         {
+            Debug.Log("Open tab battle");
             ViewOptions options = new ViewOptions(nameof(ScreensBattle));
             ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
         }
@@ -126,7 +127,6 @@ public class ScreensDefaultContext
         {
             await Model.Initialize(args);
             await View.Initialize(args);
-
             Model.OnChooseTab(Model.tabs[2]);
         }      
     }

@@ -151,10 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90d9ce92d63432e8cf90435ba7c2b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHealthPoint>k__BackingField: 100
+  <CurrentHealthPoint>k__BackingField: 100000
   <MarkLoseHealthPoint>k__BackingField: 100
   <MovementSpeed>k__BackingField: 1.5
   <MovePoint>k__BackingField: []
   <CurrentPoint>k__BackingField: 0
   <PlaybackSpeed>k__BackingField:
     m_Value: 0
+  <Deep>k__BackingField: 0

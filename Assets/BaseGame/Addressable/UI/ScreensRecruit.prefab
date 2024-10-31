@@ -1298,11 +1298,18 @@ MonoBehaviour:
     <Model>k__BackingField:
       <SampleValue>k__BackingField:
         m_Value: 0
+      <recruitRewards>k__BackingField:
+        <Value>k__BackingField: []
+      <totalRewardCanGetThisTurn>k__BackingField:
+        m_Value: 0
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 4728295362600865893}
       <btnExit>k__BackingField: {fileID: 3015858007683842619}
       <btnRecruit>k__BackingField: {fileID: 7491113007205169289}
       <btnRecruitX10>k__BackingField: {fileID: 1797774754722790137}
+      <rewardMove>k__BackingField: {fileID: 2147274277239683019}
+      <rewardShow>k__BackingField: {fileID: 7349553628058335409}
+      <txtCountCurrentRewardGet>k__BackingField: {fileID: 5186539740302749140}
 --- !u!1 &4512504256126758225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,9 +1847,9 @@ MonoBehaviour:
   slots: []
   currentSlotOnChoose: {fileID: 0}
   totalSlotUsing: 4
-  pointStart: {fileID: 0}
-  pointEnd: {fileID: 0}
-  pointLoose: {fileID: 0}
+  pointStart: {fileID: 4676964872668236485}
+  pointEnd: {fileID: 1316451464240693710}
+  pointLoose: {fileID: 7034439749895992520}
 --- !u!1 &5627466657162762007
 GameObject:
   m_ObjectHideFlags: 0

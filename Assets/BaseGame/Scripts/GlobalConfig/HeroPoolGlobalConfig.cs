@@ -16,50 +16,36 @@ using UnityEditor;
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
 public class HeroPoolGlobalConfig : GlobalConfig<HeroPoolGlobalConfig>
 {
-    [field: SerializeField] public List<Hero> HeroPrefabList { get; private set; }
+    [field: SerializeField] public List<HeroConfigData> HeroConfigDataList { get; private set; }
     [field: SerializeField] public HeroPoolLevelConfig HeroPoolLevelConfig { get; private set; }
 
-    private Dictionary<Hero.Rarity, List<Hero>> m_HeroPrefabDictionary;
-    private Dictionary<Hero.Rarity, List<Hero>> HeroPrefabDictionary => m_HeroPrefabDictionary ??= InitHeroDictionary();
+    private Dictionary<Hero.Rarity, List<HeroConfigData>> HeroPrefabDictionaryCache { get; set; }
+    private Dictionary<Hero.Rarity, List<HeroConfigData>> HeroPrefabDictionary => HeroPrefabDictionaryCache ??= InitHeroDictionary();
+    
 
-    public Hero GetHeroPrefab(string heroName)
+    public HeroConfigData GetRandomHeroPrefab(int poolLevel)
     {
-        foreach (Hero hero in HeroPrefabList)
-        {
-            if (hero.HeroStatData.Name == heroName)
-            {
-                return hero;
-            }
-        }
-
-        return null;
+        return HeroConfigDataList.GetRandomElement();
     }
 
-    public Hero GetRandomHeroPrefab(int poolLevel)
+    private Dictionary<Hero.Rarity, List<HeroConfigData>> InitHeroDictionary()
     {
-        // Hero.Rarity rarity = HeroPoolLevelConfig.ProbabilityRarity.GetRandomItem();
-        // return HeroPrefabDictionary[rarity].GetRandomElement();
-        return HeroPrefabList.GetRandomElement();
-    }
-
-    private Dictionary<Hero.Rarity, List<Hero>> InitHeroDictionary()
-    {
-        Dictionary<Hero.Rarity, List<Hero>> heroDictionary = new Dictionary<Hero.Rarity, List<Hero>>();
+        Dictionary<Hero.Rarity, List<HeroConfigData>> heroDictionary = new Dictionary<Hero.Rarity, List<HeroConfigData>>();
         foreach (Hero.Rarity rarity in Enum.GetValues(typeof(Hero.Rarity)))
         {
-            heroDictionary.Add(rarity, new List<Hero>());
+            heroDictionary.Add(rarity, new List<HeroConfigData>());
         }
 
-        foreach (Hero hero in HeroPrefabList)
+        foreach (HeroConfigData heroStatData in HeroConfigDataList)
         {
-            heroDictionary[hero.HeroStatData.HeroRarity].Add(hero);
+            heroDictionary[heroStatData.HeroRarity].Add(heroStatData);
         }
 
         return heroDictionary;
     }
-    public Hero GetRandomHeroUpgradePrefab(Hero.Rarity heroRarity)
+    public HeroConfigData GetRandomHeroConfigDataUpgrade(Hero.Rarity heroRarity)
     {
-        return m_HeroPrefabDictionary[heroRarity].GetRandomElement();
+        return HeroPrefabDictionary[heroRarity].GetRandomElement();
     }
 
 #if UNITY_EDITOR
@@ -67,9 +53,9 @@ public class HeroPoolGlobalConfig : GlobalConfig<HeroPoolGlobalConfig>
     public void GetAllHeroPrefab()
     {
         EditorUtility.SetDirty(this);
-        HeroPrefabList = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/BaseGame/Prefabs/Hero" })
+        HeroConfigDataList = AssetDatabase.FindAssets("t:HeroConfigData")
             .Select(AssetDatabase.GUIDToAssetPath)
-            .Select(AssetDatabase.LoadAssetAtPath<Hero>)
+            .Select(AssetDatabase.LoadAssetAtPath<HeroConfigData>)
             .ToList();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();

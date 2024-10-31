@@ -2,24 +2,31 @@ using Core;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using TW.Reactive.CustomComponent;
 using TW.Utility.DesignPattern;
 using UnityEngine;
 
 public class RecruitManager : Singleton<RecruitManager>
 {
-    public List<RecruitReward> recruitRewards = new();
+    public ReactiveList<RecruitReward> recruitRewards = new();
     public int currentTurn;
+    public ReactiveValue<int> totalRewardCanGetThisTurn = new(0);
     RecruitRewardType recruitRewardTypeTemp = RecruitRewardType.Hero;
-    List<Hero> currentHeroHave = new();
+    List<HeroConfigData> currentHeroHave = new();
     RecruitTurn currentRecruitTurn;
 
     [Button]
     public void InitData(int recruitTotal) {
 
+        if (currentTurn == 5) {
+            currentTurn = 0;
+            Debug.Log("Time out");
+            return;
+        }
         
         currentRecruitTurn = RecruitPersentGlobalConfig.Instance.GetRecruitTurn(currentTurn);
 
-        recruitRewards.Clear();
+        recruitRewards.ObservableList.Clear();
 
         for (int i = 0; i < 10; i++)
         {
@@ -44,17 +51,19 @@ public class RecruitManager : Singleton<RecruitManager>
 
             newRecruitReward.amount = recruitTotal;
 
-            recruitRewards.Add(newRecruitReward);
+            int randomRewardCanGet = Random.Range(0, 101);
+            newRecruitReward.isMiss = randomRewardCanGet <= currentRecruitTurn.miss;
+
+            recruitRewards.ObservableList.Add(newRecruitReward);
         }
         
         currentTurn++;
+        totalRewardCanGetThisTurn.Value = 0;
     }
 
-    Hero GetHeroRandom() {
-        currentHeroHave = HeroPoolGlobalConfig.Instance.HeroPrefabList;
+    HeroConfigData GetHeroRandom() {
+        currentHeroHave = HeroPoolGlobalConfig.Instance.HeroConfigDataList;
         float randomHero = Random.Range(0, 101);
-        Debug.Log("=============================");
-        Debug.Log("Hero random is: "+ randomHero);
 
         Hero.Rarity rarity = Hero.Rarity.Common;
 
@@ -69,9 +78,8 @@ public class RecruitManager : Singleton<RecruitManager>
                 randomHero -= currentRecruitTurn.rateHeroTiers[i].persent;
             }
         }
-        Debug.Log("Hero random last is: " + randomHero);
 
-        currentHeroHave = currentHeroHave.FindAll(e=>e.HeroStatData.HeroRarity == rarity);
+        currentHeroHave = currentHeroHave.FindAll(e=>e.HeroRarity == rarity);
         if (currentHeroHave.Count == 0)
             return null;
 
