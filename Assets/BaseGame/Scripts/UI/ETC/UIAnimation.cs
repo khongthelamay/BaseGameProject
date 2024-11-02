@@ -98,7 +98,7 @@ public static class UIAnimation
 
         myLayout.preferredHeight = 0;
 
-        sequence.Append(DOVirtual.Float(0, heighDefault, .15f, (value) =>
+        sequence.Append(DOVirtual.Float(0, heighDefault, .1f, (value) =>
             {
                 myLayout.preferredHeight = value;
             }).SetDelay(.2f * myLayout.transform.GetSiblingIndex())

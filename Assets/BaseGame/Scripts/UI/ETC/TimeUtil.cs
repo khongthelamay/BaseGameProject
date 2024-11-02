@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using UnityEngine;
+using Cysharp.Text;
 
 public class TimeUtil : MonoBehaviour {
     public static string RemainTimeToString(float remainTime) {
@@ -24,60 +26,129 @@ public class TimeUtil : MonoBehaviour {
         {
             if (timeSpan.TotalDays >= 1)
             {
-                return string.Format("{0:D2}d {1:D2}h {2:D2}m", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes);
+                return ZString.Format("{0:D2}d {1:D2}h {2:D2}m", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes);
             }
             else if (timeSpan.TotalHours >= 1)
             {
                 if (timeSpan.Seconds == 0)
                 {
                     if (timeSpan.Minutes == 0)
-                        return string.Format("{0:D2}h", timeSpan.Hours);
+                        return ZString.Format("{0:D2}h", timeSpan.Hours);
                     else
-                        return string.Format("{0:D2}h {1:D2}m", timeSpan.Hours, timeSpan.Minutes);
+                        return ZString.Format("{0:D2}h {1:D2}m", timeSpan.Hours, timeSpan.Minutes);
                 }
-                return string.Format("{0:D2}h {1:D2}m {2:D2}s", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+                return ZString.Format("{0:D2}h {1:D2}m {2:D2}s", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
             }
             else if (timeSpan.TotalMinutes >= 1)
             {
                 if (timeSpan.Seconds == 0)
-                    return string.Format("{0:D2}m", timeSpan.Minutes);
-                return string.Format("{0:D2}m {1:D2}s", timeSpan.Minutes, timeSpan.Seconds);
+                    return ZString.Format("{0:D2}m", timeSpan.Minutes);
+                return ZString.Format("{0:D2}m {1:D2}s", timeSpan.Minutes, timeSpan.Seconds);
             }
             if (timeSpan.TotalSeconds < 10)
             {
-                return string.Format("{0:D2}s", timeSpan.Seconds);
+                return ZString.Format("{0:D2}s", timeSpan.Seconds);
             }
-            return string.Format("{0:D2}s", timeSpan.Seconds);
+            return ZString.Format("{0:D2}s", timeSpan.Seconds);
         }
         else if (timeFommat == TimeFommat.Symbol)
         {
             if (timeSpan.TotalDays >= 1)
             {
-                return string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes);
+                return ZString.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes);
             }
             else if (timeSpan.TotalHours >= 1)
             {
                 if (timeSpan.Seconds == 0)
                 {
                     if (timeSpan.Minutes == 0)
-                        return string.Format("{0:D2}:00:00", timeSpan.Hours);
+                        return ZString.Format("{0:D2}:00:00", timeSpan.Hours);
                     else
-                        return string.Format("{0:D2}:{1:D2}:00", timeSpan.Hours, timeSpan.Minutes);
+                        return ZString.Format("{0:D2}:{1:D2}:00", timeSpan.Hours, timeSpan.Minutes);
                 }
-                return string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+                return ZString.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
             }
             else if (timeSpan.TotalMinutes >= 1)
             {
-                return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+                return ZString.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
             }
             if (timeSpan.TotalSeconds < 10)
             {
-                return string.Format("00:{0:D2}", timeSpan.Seconds);
+                return ZString.Format("00:{0:D2}", timeSpan.Seconds);
             }
-            return string.Format("00:{0:D2}", timeSpan.Seconds);
+            return ZString.Format("00:{0:D2}", timeSpan.Seconds);
         }
         return "";
     }
+    //public static string TimeToString(float inputTime, TimeFommat timeFommat = TimeFommat.Symbol)
+    //{
+    //    TimeSpan timeSpan = TimeSpan.FromSeconds(inputTime);
+    //    StringBuilder sb = new StringBuilder();
+
+    //    if (timeFommat == TimeFommat.Keyword)
+    //    {
+    //        if (timeSpan.TotalDays >= 1)
+    //        {
+    //            sb.AppendFormat("{0:D2}d {1:D2}h {2:D2}m", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes);
+    //        }
+    //        else if (timeSpan.TotalHours >= 1)
+    //        {
+    //            if (timeSpan.Seconds == 0)
+    //            {
+    //                if (timeSpan.Minutes == 0)
+    //                    sb.AppendFormat("{0:D2}h", timeSpan.Hours);
+    //                else
+    //                    sb.AppendFormat("{0:D2}h {1:D2}m", timeSpan.Hours, timeSpan.Minutes);
+    //            }
+    //            else
+    //            {
+    //                sb.AppendFormat("{0:D2}h {1:D2}m {2:D2}s", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+    //            }
+    //        }
+    //        else if (timeSpan.TotalMinutes >= 1)
+    //        {
+    //            if (timeSpan.Seconds == 0)
+    //                sb.AppendFormat("{0:D2}m", timeSpan.Minutes);
+    //            else
+    //                sb.AppendFormat("{0:D2}m {1:D2}s", timeSpan.Minutes, timeSpan.Seconds);
+    //        }
+    //        else
+    //        {
+    //            sb.AppendFormat("{0:D2}s", timeSpan.Seconds);
+    //        }
+    //    }
+    //    else if (timeFommat == TimeFommat.Symbol)
+    //    {
+    //        if (timeSpan.TotalDays >= 1)
+    //        {
+    //            sb.AppendFormat("{0:D2}:{1:D2}:{2:D2}", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes);
+    //        }
+    //        else if (timeSpan.TotalHours >= 1)
+    //        {
+    //            if (timeSpan.Seconds == 0)
+    //            {
+    //                if (timeSpan.Minutes == 0)
+    //                    sb.AppendFormat("{0:D2}:00:00", timeSpan.Hours);
+    //                else
+    //                    sb.AppendFormat("{0:D2}:{1:D2}:00", timeSpan.Hours, timeSpan.Minutes);
+    //            }
+    //            else
+    //            {
+    //                sb.AppendFormat("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+    //            }
+    //        }
+    //        else if (timeSpan.TotalMinutes >= 1)
+    //        {
+    //            sb.AppendFormat("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+    //        }
+    //        else
+    //        {
+    //            sb.AppendFormat("00:{0:D2}", timeSpan.Seconds);
+    //        }
+    //    }
+
+    //    return sb.ToString();
+    //}
 
     public static string ConvertFloatToString(float value, string format = "{0:0.00}") {
         if (value == (int)value) return value.ToString();
