@@ -18,6 +18,7 @@ public class ModalQuestContext
     public static class Events
     {
         public static Subject<Unit> SampleEvent { get; set; } = new();
+        public static Action ChangeTextDaily { get; internal set; }
     }
     
     [HideLabel]
@@ -30,8 +31,8 @@ public class ModalQuestContext
         [field: SerializeField] public List<ReactiveValue<AchievementSave>> achievementSaves { get; set; } = new();
         [field: SerializeField] public List<ReactiveValue<QuestSave>> dailyStreakSaves { get; set; } = new();
         [field: SerializeField] public List<ReactiveValue<QuestSave>> weeklyStreakSaves { get; set; } = new();
-        [field: SerializeField] public ReactiveValue<string> strTimeDailyRemaining { get; set; } = new();
-        [field: SerializeField] public ReactiveValue<string> strTimeWeeklyRemaining { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<float> timeDailyRemaining { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<float> timeWeeklyRemaining { get; set; } = new();
         [field: SerializeField] public ReactiveValue<float> currentDailyStreak { get; set; } = new();
         [field: SerializeField] public ReactiveValue<float> currentWeeklyStreak { get; set; } = new();
 
@@ -40,8 +41,8 @@ public class ModalQuestContext
         {
             questSaves = QuestManager.Instance.questSaves;
             achievementSaves = AchievementManager.Instance.achievements;
-            strTimeDailyRemaining = QuestManager.Instance.strTimeDailyRemaining;
-            strTimeWeeklyRemaining = QuestManager.Instance.strTimeWeeklyRemaining;
+            timeDailyRemaining = QuestManager.Instance.timeDailyRemaining;
+            timeWeeklyRemaining = QuestManager.Instance.timeWeeklyRemaining;
             currentDailyStreak = QuestManager.Instance.currentDailyStreak;
             currentWeeklyStreak = QuestManager.Instance.currentWeeklyStreak;
             return UniTask.CompletedTask;
@@ -144,9 +145,9 @@ public class ModalQuestContext
             mainContentQuest.ReloadData(id.Value);
         }
 
-        public void ChangeTextTimeRemaining(string strChange)
+        public void ChangeTextTimeRemaining(float time)
         {
-            txtTimeDailyRemaining.text = strChange;
+            txtTimeDailyRemaining.text = TimeUtil.TimeToString(time);
         }
 
         public void ChangeDailyProgress(float value)
@@ -172,6 +173,8 @@ public class ModalQuestContext
             await Model.Initialize(args);
             await View.Initialize(args);
 
+            QuestManager.Instance.ShowModelQuest();
+
             View.OnOpen();
             View.SetActionCallBackOnQuestSlot(ActionQuestSlotCallBack);
             View.SetActionCallBackOnAchievementSlot(ActionAchievementSlotCallBack);
@@ -194,8 +197,8 @@ public class ModalQuestContext
                     .Subscribe(ChangeAchievementData)
                     .AddTo(View.MainView);
             }
-
-            Model.strTimeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
+            //Events.ChangeTextDaily = View.ChangeTextTimeRemaining;
+            Model.timeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
             //Model.strTimeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
             Model.currentDailyStreak.ReactiveProperty.Subscribe(View.ChangeDailyProgress).AddTo(View.MainView);
             //Model.strTimeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
@@ -226,6 +229,8 @@ public class ModalQuestContext
             View.mainContentAchievement.CleanAnimation();
             View.mainContentQuest.CleanAnimation();
             View.mainContentDailyStreak.CleanAnimation();
+            QuestManager.Instance.showModalQuest = false;
+            Events.ChangeTextDaily = null;
             return UniTask.CompletedTask;
         }
     }

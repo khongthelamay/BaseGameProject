@@ -12,19 +12,25 @@ public class MainRecruitRewardContent : MainContent<RecruitReward>
     [Button]
     public override void InitData(List<RecruitReward> datas)
     {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            slots[i].gameObject.SetActive(false);
+        }
         base.InitData(datas);
         for (int i = 0; i < slots.Count; i++)
         {
             if (pointStart != null) {
                 (slots[i] as SlotRecruitRewardRun).SetPoint(pointStart, pointEnd, pointLoose);
+                slots[i].gameObject.SetActive(false);
             }
-            slots[i].gameObject.SetActive(false);
+           
         }
     }
 
     public void SlotRewardRunNow() {
         for (int i = 0; i < slots.Count; i++)
-        {
+        { 
+            slots[i].gameObject.SetActive(true);
             (slots[i] as SlotRecruitRewardRun).RunNow();
         }
     }

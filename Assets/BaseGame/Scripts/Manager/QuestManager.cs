@@ -18,20 +18,18 @@ public class QuestManager : Singleton<QuestManager>
     [field: SerializeField] public ReactiveValue<float> currentDailyStreak { get; set; } = new();
     [field: SerializeField] public ReactiveValue<float> currentWeeklyStreak { get; set; } = new();
 
-
-    public ReactiveValue<string> strTimeDailyRemaining;
-    public ReactiveValue<string> strTimeWeeklyRemaining;
-
-    float timeDailyRemaining;
-    float timeWeeklyRemaining;
+    public ReactiveValue<float> timeDailyRemaining = new();
+    public float timeDailyRemainingf = new();
+    public ReactiveValue<float> timeWeeklyRemaining = new();
 
     DateTime lastDailyDay;
     DateTime lastWeeklyDay;
-    DateTime timeDailyEnd;
+    public DateTime timeDailyEnd;
     DateTime timeWeelyEnd;
 
     bool canCountDailyDown;
     bool canCountWeeklyDown;
+    public bool showModalQuest;
     private void Start()
     {
         LoadData();
@@ -56,30 +54,41 @@ public class QuestManager : Singleton<QuestManager>
     
     private void Update()
     {
-        if (canCountDailyDown)
+        if (showModalQuest)
         {
-            timeDailyRemaining = (float)timeDailyEnd.Subtract(DateTime.Now).TotalSeconds;
-
-            if (timeDailyRemaining <= 0)
+            if (canCountDailyDown)
             {
-                strTimeDailyRemaining.Value = "0";
-                canCountDailyDown = false; 
-                ChangeDayOnGame();
+                timeDailyRemainingf -= Time.deltaTime;
+                timeDailyRemaining.Value = timeDailyRemainingf;
+                //ModalQuestContext.Events.ChangeTextDaily?.Invoke();
+                //if (timeDailyRemaining.Value <= 0)
+                //{
+                //    //strTimeDailyRemaining.Value = "0";
+                //    canCountDailyDown = false;
+                //    ChangeDayOnGame();
+                //}
+                //else strTimeDailyRemaining.Value = TimeUtil.TimeToString(timeDailyRemaining, TimeFommat.Keyword);
             }
-            else strTimeDailyRemaining.Value = TimeUtil.TimeToString(timeDailyRemaining, TimeFommat.Keyword);
-        }
 
-        if (canCountWeeklyDown)
-        {
-            timeWeeklyRemaining = (float)timeWeelyEnd.Subtract(DateTime.Now).TotalSeconds;
-            if (timeWeeklyRemaining <= 0)
+            if (canCountWeeklyDown)
             {
-                strTimeWeeklyRemaining.Value = "0";
-                canCountWeeklyDown = false;
-                ChangeWeekOnGame();
+                //timeWeeklyRemaining.Value -= Time.deltaTime;
+                //if (timeWeeklyRemaining.Value <= 0)
+                //{
+                //    //strTimeWeeklyRemaining.Value = "0";
+                //    canCountWeeklyDown = false;
+                //    ChangeWeekOnGame();
+                //}
+                //else strTimeWeeklyRemaining.Value = TimeUtil.TimeToString(timeWeeklyRemaining, TimeFommat.Keyword);
             }
-            else strTimeWeeklyRemaining.Value = TimeUtil.TimeToString(timeWeeklyRemaining, TimeFommat.Keyword);
         }
+    }
+
+    public void ShowModelQuest() {
+        timeDailyRemaining.Value = (float)timeDailyEnd.Subtract(DateTime.Now).TotalSeconds;
+        timeDailyRemainingf = (float)timeDailyEnd.Subtract(DateTime.Now).TotalSeconds;
+        timeWeeklyRemaining.Value = (float)timeWeelyEnd.Subtract(DateTime.Now).TotalSeconds;
+        showModalQuest = true;
     }
 
     void CheckDailyDay() {
