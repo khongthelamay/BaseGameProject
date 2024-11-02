@@ -4,13 +4,13 @@ using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using System.Linq;
 using TW.Utility.Extension;
-using UnityEditor.Animations;
 using UnityEngine;
+using System;
+using UnityEngine.UI;
 
 #if UNITY_EDITOR
-using System;
+using UnityEditor.Animations;
 using UnityEditor;
-using UnityEngine.UI;
 #endif
 
 [CreateAssetMenu(fileName = "HeroConfigData", menuName = "ScriptableObjects/HeroConfigData")]
@@ -53,8 +53,8 @@ public class HeroConfigData : ScriptableObject
     [field: SerializeField]
     public float UpgradePercentage { get; set; }
 
-    [field: SerializeField] public AnimatorController AnimatorController { get; set; }
-    [field: SerializeField] public AnimatorController ImageAnimatorController { get; set; }
+    [field: SerializeField] public RuntimeAnimatorController AnimatorController { get; set; }
+    [field: SerializeField] public RuntimeAnimatorController ImageAnimatorController { get; set; }
     [field: SerializeField] public GameObject HeroGameObjectPrefab {get; private set;}
     [field: SerializeField] public Hero HeroPrefab {get; private set;}
     [field: SerializeReference] public List<Ability> HeroAbilities { get; set; }
@@ -65,6 +65,7 @@ public class HeroConfigData : ScriptableObject
     [Button]
     private async UniTask UpdateData()
     {
+        Animator a = new GameObject().AddComponent<Animator>();
         string sheetId = "1-HkinUwSW4A4SkuiLGtl0Tm8771jFPVZB5ZpLs5pxz4";
         EditorUtility.SetDirty(this);
         string result = await ABakingSheet.GetCsv(sheetId, "UnitAbility");

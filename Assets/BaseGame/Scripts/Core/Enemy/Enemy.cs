@@ -1,5 +1,7 @@
 ﻿using BaseGame.Scripts.Enum;
+using DG.Tweening;
 using LitMotion;
+using LitMotion.Extensions;
 using Manager;
 using R3;
 using TW.ACacheEverything;
@@ -7,18 +9,20 @@ using TW.Reactive.CustomComponent;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 using Zenject;
+using Ease = LitMotion.Ease;
 
 namespace Core
 {
     public partial class Enemy : ACachedMonoBehaviour, IAbilityTargetAble
     {
-        public class Factory : PlaceholderFactory<Object ,Enemy>
+        public class Factory : PlaceholderFactory<Object, Enemy>
         {
             public static Factory CreateInstance()
             {
                 return new Factory();
             }
         }
+
         [Inject] private BattleManager BattleManager { get; set; }
         [field: SerializeField] public int CurrentHealthPoint { get; private set; }
         [field: SerializeField] public int MarkLoseHealthPoint { get; private set; }
@@ -26,12 +30,13 @@ namespace Core
         [field: SerializeField] public Transform[] MovePoint { get; private set; }
         [field: SerializeField] public int CurrentPoint { get; private set; }
         [field: SerializeField] public ReactiveValue<float> PlaybackSpeed { get; private set; }
-        [field: SerializeField] public float Deep {get; private set;}
+        [field: SerializeField] public float Deep { get; private set; }
         private MotionHandle m_MovementMotionHandle;
         public bool WillBeDead => MarkLoseHealthPoint <= 0;
+
         public Enemy SetupMovePoint(Transform[] movePoint)
         {
-            Deep = Random.Range(0f,1f);
+            Deep = Random.Range(0f, 1f);
             MovePoint = movePoint;
             CurrentPoint = 0;
             Transform.position = MovePoint[CurrentPoint].position;
@@ -48,16 +53,15 @@ namespace Core
             Vector3 targetPosition = MovePoint[CurrentPoint].position;
             float distance = Vector3.Distance(currentPosition, targetPosition);
             float duration = distance / MovementSpeed;
-
+            Transform.localScale = currentPosition.x < targetPosition.x ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
             m_MovementMotionHandle = LMotion.Create(currentPosition, targetPosition, duration)
                 .WithEase(Ease.Linear)
                 .WithOnComplete(StartMoveToNextPointCache)
-                .Bind(OnMoveUpdateCache);
-
+                .BindToPosition(Transform);
+            
             m_MovementMotionHandle.PlaybackSpeed = PlaybackSpeed.Value;
             PlaybackSpeed.ReactiveProperty.Subscribe(OnPlaybackSpeedChangedCache).AddTo(this);
-            return;
-
+        
         }
         [ACacheMethod]
         private void OnMoveUpdate(UnityEngine.Vector3 position)
@@ -75,6 +79,47 @@ namespace Core
         }
 
 
+        // [ACacheMethod]
+        // public void StartMoveToNextPoint()
+        // {
+        //     Vector3 currentPosition = MovePoint[CurrentPoint].position;
+        //     CurrentPoint = (CurrentPoint + 1) % MovePoint.Length;
+        //     Vector3 targetPosition = MovePoint[CurrentPoint].position;
+        //     float distance = Vector3.Distance(currentPosition, targetPosition);
+        //     float duration = distance / MovementSpeed;
+        //     Vector3 last = currentPosition;
+        //     Vector3 current = currentPosition;
+        //
+        //     Transform.DOMove(targetPosition, duration)
+        //         .SetEase(DG.Tweening.Ease.Linear)
+        //         .OnUpdate(OnMoveUpdate)
+        //         .OnComplete(StartMoveToNextPoint);
+        //
+        //     // m_MovementMotionHandle = LMotion.Create(currentPosition, targetPosition, duration)
+        //     //     .WithEase(Ease.Linear)
+        //     //     .WithOnComplete(StartMoveToNextPointCache)
+        //     //     .Bind(OnMoveUpdateCache);
+        //
+        //     // m_MovementMotionHandle.PlaybackSpeed = PlaybackSpeed.Value;
+        //     // PlaybackSpeed.ReactiveProperty.Subscribe(OnPlaybackSpeedChangedCache).AddTo(this);
+        //     return;
+        //     
+        //     void OnMoveUpdate()
+        //     {
+        //         // Transform.position = Transform.position + Vector3.forward * Deep;
+        //         if (current.x < last.x)
+        //         {
+        //             Transform.localScale = new Vector3(1, 1, 1);
+        //         }
+        //         else if (current.x > last.x)
+        //         {
+        //             Transform.localScale = new Vector3(-1, 1, 1);
+        //         }
+        //         last = current;
+        //     }
+        // }
+
+
         [ACacheMethod]
         private void OnPlaybackSpeedChanged(float speed)
         {
@@ -88,10 +133,12 @@ namespace Core
             BattleManager.RemoveEnemy(this);
             Destroy(gameObject);
         }
+
         public void MarkLoseHealth(int attackDamage)
         {
             MarkLoseHealthPoint -= attackDamage;
         }
+
         public void TakeDamage(int attackDamage, DamageType damageType)
         {
             // attackDamage = (int)(attackDamage * Random.Range(0.2f, 1.8f));

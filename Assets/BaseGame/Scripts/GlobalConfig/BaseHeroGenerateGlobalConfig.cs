@@ -8,11 +8,11 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Spine.Unity;
 using TW.Utility.Extension;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
 #if UNITY_EDITOR
+using UnityEditor.Animations;
 using UnityEditor;
 #endif
 

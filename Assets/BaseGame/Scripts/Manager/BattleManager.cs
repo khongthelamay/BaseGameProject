@@ -21,6 +21,9 @@ namespace Manager
     
         private void Start()
         {
+#if !UNITY_EDITOR
+            Application.targetFrameRate = 60;
+#endif
             this.UpdateAsObservable()
                 .Where(_ => Input.GetKeyDown(KeyCode.C))
                 .Subscribe(_ => ReRollWaitSlot());
