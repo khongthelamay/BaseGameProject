@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,5 +15,11 @@ public class SlotRecruitReward : SlotBase<RecruitReward>
         base.InitData(data);
 
         imgIcon.sprite = data.heroData.HeroSprite;
+    }
+
+    public override void AnimOpen()
+    {
+        CleanAnimation();
+        UIAnimation.BasicButton(trsContent);
     }
 }

@@ -53,6 +53,7 @@ public class MainRecruitRewardContent : MainContent<RecruitReward>
         mySequence = DOTween.Sequence();
         mySequence.Append(DOVirtual.DelayedCall(.15f, ()=> {
             slots[slotIndex].gameObject.SetActive(true);
+            slots[slotIndex].AnimOpen();
         }));
     }
 }

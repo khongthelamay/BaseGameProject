@@ -54,7 +54,6 @@ public class SlotRecruitRewardRun : SlotRecruitReward
     }
 
     void ActionCollect() {
-        Debug.Log("Collect");
         callBackMoveDone(this);
         gameObject.SetActive(false);
     }
