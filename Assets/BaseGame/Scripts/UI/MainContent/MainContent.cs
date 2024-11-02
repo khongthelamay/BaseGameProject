@@ -1,4 +1,5 @@
 using Core;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class MainContent<Data> : MonoBehaviour
     [HideInInspector] public SlotBase<Data> currentSlotOnChoose;
 
     [HideInInspector] public int totalSlotUsing;
+
+    public Sequence mySequence;
 
     public virtual void SetActionSlotCallBack(UnityAction<SlotBase<Data>> actionCallBack) { actionSlotCallBack = actionCallBack; }
     
@@ -71,6 +74,8 @@ public class MainContent<Data> : MonoBehaviour
     public virtual void SortSlot() { }
     public virtual void AnimOpen() { }
     public virtual void CleanAnimation() {
+        if (mySequence != null)
+            mySequence.Kill();
         for (int i = 0; i < slots.Count; i++)
         {
             slots[i].CleanAnimation();

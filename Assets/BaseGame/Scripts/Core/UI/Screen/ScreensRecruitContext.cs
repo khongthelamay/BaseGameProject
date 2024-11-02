@@ -18,6 +18,7 @@ public class ScreensRecruitContext
     public static class Events
     {
         public static Subject<Unit> SampleEvent { get; set; } = new();
+        public static Action LastSlotMoveDone;
     }
     
     [HideLabel]
@@ -46,6 +47,7 @@ public class ScreensRecruitContext
         [field: SerializeField] public Button btnExit {get; private set;}
         [field: SerializeField] public ButtonNotice btnRecruit { get; private set; }
         [field: SerializeField] public ButtonNotice btnRecruitX10 {get; private set;}  
+        [field: SerializeField] public GameObject objButtonRecruit {get; private set;}  
         [field: SerializeField] public MainRecruitRewardContent rewardMove {get; private set;}  
         [field: SerializeField] public MainRecruitRewardContent rewardShow {get; private set;}  
         [field: SerializeField] public TextMeshProUGUI txtCountCurrentRewardGet {get; private set;}  
@@ -71,6 +73,11 @@ public class ScreensRecruitContext
         {
             rewardMove.SlotRewardRunNow();
         }
+
+        public void ShowReward(int slotIndex)
+        {
+            rewardShow.ShowReward(slotIndex);
+        }
     }
 
     [HideLabel]
@@ -87,11 +94,18 @@ public class ScreensRecruitContext
             View.btnExit.onClick.AddListener(OnClose);
             View.btnRecruit.SetButtonOnClick(Recruit);
             View.btnRecruitX10.SetButtonOnClick(RecruitX10);
+            View.rewardMove.SetActionCallbackMoveDone(ActionCallbackMoveDone);
             Model.recruitRewards.ObservableList.ObserveChanged().Subscribe(ChangeListRewards).AddTo(View.MainView);
+            Events.LastSlotMoveDone = LastSlotMoveDone;
+        }
 
+        void LastSlotMoveDone() {
+            View.objButtonRecruit.gameObject.SetActive(true);
         }
 
         void OnClose() {
+            View.rewardMove.CleanAnimation();
+            View.rewardShow.CleanAnimation();
 
             ScreenContainer.Find(ContainerKey.Screens).PopAsync(true);
 
@@ -101,10 +115,12 @@ public class ScreensRecruitContext
 
         void Recruit() {
             RecruitManager.Instance.InitData(1);
+            View.objButtonRecruit.gameObject.SetActive(false);
         }
 
         void RecruitX10() {
             RecruitManager.Instance.InitData(10);
+            View.objButtonRecruit.gameObject.SetActive(false);
         }
 
         void ChangeListRewards(CollectionChangedEvent<RecruitReward> recruitReward) {
@@ -112,6 +128,10 @@ public class ScreensRecruitContext
             View.InitDataRewardShow(Model.recruitRewards);
             View.ChangeCountRewardText(Model.totalRewardCanGetThisTurn);
             View.StartMoveReward();
+        }
+
+        void ActionCallbackMoveDone(SlotRecruitReward slot) {
+            View.ShowReward(slot.transform.GetSiblingIndex() - 1);
         }
     }
 }

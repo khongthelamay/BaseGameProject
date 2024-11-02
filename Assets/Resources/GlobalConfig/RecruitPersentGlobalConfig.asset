@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recruitTurns:
   - turn: 0
-    miss: 15
+    miss: 50
     rateHeroTiers:
     - rarity: 0
       persent: 29.8
@@ -27,7 +27,7 @@ MonoBehaviour:
     - rarity: 4
       persent: 4.3
   - turn: 1
-    miss: 20
+    miss: 60
     rateHeroTiers:
     - rarity: 0
       persent: 28
@@ -40,7 +40,7 @@ MonoBehaviour:
     - rarity: 4
       persent: 4
   - turn: 2
-    miss: 30
+    miss: 70
     rateHeroTiers:
     - rarity: 0
       persent: 24.5
@@ -53,7 +53,7 @@ MonoBehaviour:
     - rarity: 4
       persent: 3.5
   - turn: 3
-    miss: 50
+    miss: 80
     rateHeroTiers:
     - rarity: 0
       persent: 17.5
@@ -66,7 +66,7 @@ MonoBehaviour:
     - rarity: 4
       persent: 2.5
   - turn: 4
-    miss: 70
+    miss: 90
     rateHeroTiers:
     - rarity: 0
       persent: 10.5

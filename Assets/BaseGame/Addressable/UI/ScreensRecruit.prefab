@@ -659,8 +659,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 35
+    m_Right: 35
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
@@ -1034,7 +1034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1436617186280629766}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -1307,6 +1307,7 @@ MonoBehaviour:
       <btnExit>k__BackingField: {fileID: 3015858007683842619}
       <btnRecruit>k__BackingField: {fileID: 7491113007205169289}
       <btnRecruitX10>k__BackingField: {fileID: 1797774754722790137}
+      <objButtonRecruit>k__BackingField: {fileID: 3172840302344117186}
       <rewardMove>k__BackingField: {fileID: 2147274277239683019}
       <rewardShow>k__BackingField: {fileID: 7349553628058335409}
       <txtCountCurrentRewardGet>k__BackingField: {fileID: 5186539740302749140}

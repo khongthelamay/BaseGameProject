@@ -545,6 +545,86 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1976557632}
     m_Modifications:
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: currentTurn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[0].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[1].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[2].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[3].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[4].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[5].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[6].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[7].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[8].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[0].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[1].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[2].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[3].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[4].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[5].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[6].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[7].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[8].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
     - target: {fileID: 1126933113430299472, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
