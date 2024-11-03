@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_SizeDelta: {x: -10, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7762131917219383903
 CanvasRenderer:
@@ -302,6 +302,7 @@ MonoBehaviour:
   btnChoose: {fileID: 0}
   trsContent: {fileID: 2992042021775204798}
   animOnSlot: {fileID: 4740421773507195231}
+  txtAmount: {fileID: 2660298898126063218}
 --- !u!114 &4740421773507195231
 MonoBehaviour:
   m_ObjectHideFlags: 0

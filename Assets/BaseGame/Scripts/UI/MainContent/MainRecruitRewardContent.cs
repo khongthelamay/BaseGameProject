@@ -34,7 +34,6 @@ public class MainRecruitRewardContent : MainContent<RecruitReward>
                     (slots[i] as SlotRecruitRewardRun).SetActionCallBackMoveDone(action);
             }
             slots[i].gameObject.SetActive(false);
-
         }
     }
 

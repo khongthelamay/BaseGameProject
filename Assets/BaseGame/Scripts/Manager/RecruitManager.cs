@@ -10,7 +10,7 @@ public class RecruitManager : Singleton<RecruitManager>
 {
     public ReactiveList<RecruitReward> recruitRewards = new();
     public int currentTurn;
-    public ReactiveValue<int> totalRewardCanGetThisTurn = new(0);
+    public ReactiveValue<int> totalRewardNeedGetThisTurn = new(0);
     RecruitRewardType recruitRewardTypeTemp = RecruitRewardType.Hero;
     List<HeroConfigData> currentHeroHave = new();
     RecruitTurn currentRecruitTurn;
@@ -20,7 +20,6 @@ public class RecruitManager : Singleton<RecruitManager>
 
         if (currentTurn == 5) {
             currentTurn = 0;
-            Debug.Log("Time out");
             return;
         }
         
@@ -56,9 +55,22 @@ public class RecruitManager : Singleton<RecruitManager>
 
             recruitRewards.ObservableList.Add(newRecruitReward);
         }
-        
+        totalRewardNeedGetThisTurn.Value = 5 + currentTurn;
         currentTurn++;
-        totalRewardCanGetThisTurn.Value = 0;
+    }
+
+    public void ResetTurn() { currentTurn = 0; }
+
+    public bool IsCanContinue()
+    {
+        int totalRewardEarn = 0;
+        for (int i = 0; i < recruitRewards.ObservableList.Count; i++)
+        {
+            if (!recruitRewards.ObservableList[i].isMiss)
+                totalRewardEarn++;
+        }
+
+        return totalRewardEarn >= totalRewardNeedGetThisTurn;
     }
 
     HeroConfigData GetHeroRandom() {

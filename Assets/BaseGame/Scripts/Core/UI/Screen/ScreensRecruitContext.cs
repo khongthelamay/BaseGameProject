@@ -11,6 +11,7 @@ using TMPro;
 using UnityEngine.UI;
 using TW.UGUI.Core.Views;
 using ObservableCollections;
+using TW.UGUI.Core.Modals;
 
 [Serializable]
 public class ScreensRecruitContext 
@@ -29,11 +30,12 @@ public class ScreensRecruitContext
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public ReactiveList<RecruitReward> recruitRewards { get; private set; } = new();
         [field: SerializeField] public ReactiveValue<int> totalRewardCanGetThisTurn { get; private set; } = new();
+        [field: SerializeField] public int lastRecruitAmount;
 
         public UniTask Initialize(Memory<object> args)
         {
             recruitRewards = RecruitManager.Instance.recruitRewards;
-            totalRewardCanGetThisTurn = RecruitManager.Instance.totalRewardCanGetThisTurn;
+            totalRewardCanGetThisTurn = RecruitManager.Instance.totalRewardNeedGetThisTurn;
             return UniTask.CompletedTask;
         }
     }
@@ -45,6 +47,7 @@ public class ScreensRecruitContext
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView {get; private set;}  
         [field: SerializeField] public Button btnExit {get; private set;}
+        [field: SerializeField] public Button btnContinueRecruit {get; private set;}
         [field: SerializeField] public ButtonNotice btnRecruit { get; private set; }
         [field: SerializeField] public ButtonNotice btnRecruitX10 {get; private set;}  
         [field: SerializeField] public GameObject objButtonRecruit {get; private set;}  
@@ -92,15 +95,27 @@ public class ScreensRecruitContext
             await Model.Initialize(args);
             await View.Initialize(args);
             View.btnExit.onClick.AddListener(OnClose);
+            View.btnContinueRecruit.onClick.AddListener(ContinueRecruit);
             View.btnRecruit.SetButtonOnClick(Recruit);
             View.btnRecruitX10.SetButtonOnClick(RecruitX10);
             View.rewardMove.SetActionCallbackMoveDone(ActionCallbackMoveDone);
+            View.btnContinueRecruit.gameObject.SetActive(false);
             Model.recruitRewards.ObservableList.ObserveChanged().Subscribe(ChangeListRewards).AddTo(View.MainView);
             Events.LastSlotMoveDone = LastSlotMoveDone;
         }
 
+        void ContinueRecruit()
+        {
+            RecruitManager.Instance.InitData(Model.lastRecruitAmount);
+            View.btnContinueRecruit.gameObject.SetActive(false);
+        }
+
         void LastSlotMoveDone() {
             View.objButtonRecruit.gameObject.SetActive(true);
+            bool isCanContinue = RecruitManager.Instance.IsCanContinue();
+            View.btnRecruit.gameObject.SetActive(!isCanContinue);
+            View.btnRecruitX10.gameObject.SetActive(!isCanContinue);
+            View.btnContinueRecruit.gameObject.SetActive(isCanContinue);
         }
 
         void OnClose() {
@@ -114,11 +129,15 @@ public class ScreensRecruitContext
         }
 
         void Recruit() {
+            Model.lastRecruitAmount = 1;
+            RecruitManager.Instance.ResetTurn();
             RecruitManager.Instance.InitData(1);
             View.objButtonRecruit.gameObject.SetActive(false);
         }
 
         void RecruitX10() {
+            Model.lastRecruitAmount = 10;
+            RecruitManager.Instance.ResetTurn();
             RecruitManager.Instance.InitData(10);
             View.objButtonRecruit.gameObject.SetActive(false);
         }
