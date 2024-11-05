@@ -17,6 +17,7 @@ public class SlotRecruitRewardRun : SlotRecruitReward
     public override void InitData(RecruitReward data)
     {
         slotData = data;
+        imgIcon.sprite = data.heroData.HeroSprite;
         transform.localPosition = Vector3.zero;
 
         looseRewardFuction = new LooseRewardByJump();

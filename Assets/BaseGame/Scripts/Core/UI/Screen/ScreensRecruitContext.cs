@@ -30,6 +30,8 @@ public class ScreensRecruitContext
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public ReactiveList<RecruitReward> recruitRewards { get; private set; } = new();
         [field: SerializeField] public ReactiveValue<int> totalRewardCanGetThisTurn { get; private set; } = new();
+        [field: SerializeField] public int currentRewardMoveDone;
+
         [field: SerializeField] public int lastRecruitAmount;
 
         public UniTask Initialize(Memory<object> args)
@@ -68,8 +70,8 @@ public class ScreensRecruitContext
             rewardShow.InitData(recruitRewards);
         }
 
-        public void ChangeCountRewardText(int totalReward) {
-            txtCountCurrentRewardGet.text = totalReward.ToString();
+        public void ChangeCountRewardText(int currentRewardEarned, int totalReward) {
+            txtCountCurrentRewardGet.text = currentRewardEarned.ToString() + "/" + totalReward.ToString();
         }
 
         public void StartMoveReward()
@@ -101,11 +103,18 @@ public class ScreensRecruitContext
             View.rewardMove.SetActionCallbackMoveDone(ActionCallbackMoveDone);
             View.btnContinueRecruit.gameObject.SetActive(false);
             Model.recruitRewards.ObservableList.ObserveChanged().Subscribe(ChangeListRewards).AddTo(View.MainView);
+            Model.totalRewardCanGetThisTurn.ReactiveProperty.Subscribe(ChangeTotalRewardNeedEarn).AddTo(View.MainView);
             Events.LastSlotMoveDone = LastSlotMoveDone;
+        }
+
+        void ChangeTotalRewardNeedEarn(int totalRewardNeedEarn) {
+            View.ChangeCountRewardText(Model.currentRewardMoveDone, Model.totalRewardCanGetThisTurn);
         }
 
         void ContinueRecruit()
         {
+            Model.currentRewardMoveDone = 0;
+            View.ChangeCountRewardText(Model.currentRewardMoveDone, Model.totalRewardCanGetThisTurn);
             RecruitManager.Instance.InitData(Model.lastRecruitAmount);
             View.btnContinueRecruit.gameObject.SetActive(false);
         }
@@ -124,12 +133,13 @@ public class ScreensRecruitContext
 
             ScreenContainer.Find(ContainerKey.Screens).PopAsync(true);
 
-            ViewOptions options = new ViewOptions(nameof(ScreensDefault));
+            ViewOptions options = new ViewOptions(nameof(ScreensClaimHeroes));
             ScreenContainer.Find(ContainerKey.MidleScreens).PushAsync(options);
         }
 
         void Recruit() {
             Model.lastRecruitAmount = 1;
+            Model.currentRewardMoveDone = 0;
             RecruitManager.Instance.ResetTurn();
             RecruitManager.Instance.InitData(1);
             View.objButtonRecruit.gameObject.SetActive(false);
@@ -137,6 +147,7 @@ public class ScreensRecruitContext
 
         void RecruitX10() {
             Model.lastRecruitAmount = 10;
+            Model.currentRewardMoveDone = 0;
             RecruitManager.Instance.ResetTurn();
             RecruitManager.Instance.InitData(10);
             View.objButtonRecruit.gameObject.SetActive(false);
@@ -145,12 +156,14 @@ public class ScreensRecruitContext
         void ChangeListRewards(CollectionChangedEvent<RecruitReward> recruitReward) {
             View.InitDataRewardMove(Model.recruitRewards);
             View.InitDataRewardShow(Model.recruitRewards);
-            View.ChangeCountRewardText(Model.totalRewardCanGetThisTurn);
+            View.ChangeCountRewardText(Model.currentRewardMoveDone, Model.totalRewardCanGetThisTurn);
             View.StartMoveReward();
         }
 
         void ActionCallbackMoveDone(SlotRecruitReward slot) {
             View.ShowReward(slot.transform.GetSiblingIndex() - 1);
+            Model.currentRewardMoveDone++;
+            View.ChangeCountRewardText(Model.currentRewardMoveDone, Model.totalRewardCanGetThisTurn);
         }
     }
 }

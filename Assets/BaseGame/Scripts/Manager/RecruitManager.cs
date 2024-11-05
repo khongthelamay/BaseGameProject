@@ -9,6 +9,7 @@ using UnityEngine;
 public class RecruitManager : Singleton<RecruitManager>
 {
     public ReactiveList<RecruitReward> recruitRewards = new();
+    public ReactiveList<RecruitReward> recruitRewardEarned = new();
     public int currentTurn;
     public ReactiveValue<int> totalRewardNeedGetThisTurn = new(0);
     RecruitRewardType recruitRewardTypeTemp = RecruitRewardType.Hero;
@@ -52,11 +53,36 @@ public class RecruitManager : Singleton<RecruitManager>
 
             int randomRewardCanGet = Random.Range(0, 101);
             newRecruitReward.isMiss = randomRewardCanGet <= currentRecruitTurn.miss;
-
+            if (!newRecruitReward.isMiss)
+                AddRewardEarned(newRecruitReward);
             recruitRewards.ObservableList.Add(newRecruitReward);
         }
         totalRewardNeedGetThisTurn.Value = 5 + currentTurn;
         currentTurn++;
+    }
+
+    void AddRewardEarned(RecruitReward recruitReward) {
+        if (recruitReward.type == RecruitRewardType.Item)
+            return;
+
+        for (int i = 0; i < recruitRewardEarned.ObservableList.Count; i++)
+        {
+            if (recruitRewardEarned.ObservableList[i].type == recruitReward.type)
+            {
+                if (recruitRewardEarned.ObservableList[i].heroData.Name == recruitReward.heroData.Name)
+                {
+                    recruitRewardEarned.ObservableList[i].amount += recruitReward.amount;
+                    return;
+                }
+            }
+        }
+        RecruitReward newRecruitReward = new();
+        newRecruitReward.type = recruitReward.type;
+        newRecruitReward.heroData = recruitReward.heroData;
+        newRecruitReward.resource = recruitReward.resource;
+        newRecruitReward.amount = recruitReward.amount;
+        recruitRewardEarned.ObservableList.Add(newRecruitReward);
+
     }
 
     public void ResetTurn() { currentTurn = 0; }
