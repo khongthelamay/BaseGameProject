@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TW.UGUI.Core.Modals;
 using UnityEngine;
 using UnityEngine.Events;
@@ -170,6 +171,21 @@ public static class UIAnimation
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Append(trsContent.DOScale(Vector3.one * 1.2f, .25f).SetEase(Ease.InBack));
+        sequence.Append(trsContent.DOScale(Vector3.one, .25f).SetEase(Ease.OutBack));
+
+        if (actionCallBack != null)
+            sequence.OnComplete(() => {
+                actionCallBack();
+            });
+        sequence.SetDelay(index * .1f);
+        sequence.Play();
+
+        return sequence;
+    }
+
+    public static Sequence AnimSlotHeroRewardShow(Transform trsContent, int index, UnityAction actionCallBack = null) {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(trsContent.DOScale(Vector3.one * 1.2f, .25f).From(0).SetEase(Ease.InBack));
         sequence.Append(trsContent.DOScale(Vector3.one, .25f).SetEase(Ease.OutBack));
 
         if (actionCallBack != null)

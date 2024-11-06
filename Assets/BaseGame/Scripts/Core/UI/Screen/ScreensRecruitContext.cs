@@ -130,9 +130,7 @@ public class ScreensRecruitContext
         void OnClose() {
             View.rewardMove.CleanAnimation();
             View.rewardShow.CleanAnimation();
-
             ScreenContainer.Find(ContainerKey.Screens).PopAsync(true);
-
             ViewOptions options = new ViewOptions(nameof(ScreensClaimHeroes));
             ScreenContainer.Find(ContainerKey.MidleScreens).PushAsync(options);
         }

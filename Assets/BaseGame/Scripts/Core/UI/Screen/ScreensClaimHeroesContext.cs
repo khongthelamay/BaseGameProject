@@ -9,6 +9,7 @@ using TW.UGUI.Core.Screens;
 using System.Collections.Generic;
 using ObservableCollections;
 using UnityEngine.UI;
+using TW.UGUI.Core.Views;
 
 [Serializable]
 public class ScreensClaimHeroesContext 
@@ -53,6 +54,7 @@ public class ScreensClaimHeroesContext
         public void InitData(List<RecruitReward> rewards)
         {
             mainContentHeroReward.InitData(rewards);
+            mainContentHeroReward.AnimOpen();
         }
     }
 
@@ -72,8 +74,12 @@ public class ScreensClaimHeroesContext
             View.InitData(Model.rewards);
         }
 
-        void OnClose() { 
-        
+        void OnClose() {
+            RecruitManager.Instance.ClearRewardEarned();
+            ScreenContainer.Find(ContainerKey.MidleScreens).PopAsync(true);
+            ViewOptions options = new ViewOptions(nameof(ScreensDefault));
+            ScreenContainer.Find(ContainerKey.MidleScreens).PushAsync(options);
+            
         }
     }
 }

@@ -123,6 +123,7 @@ MonoBehaviour:
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 8950471396515632620}
       <mainContentHeroReward>k__BackingField: {fileID: 7970144520838540116}
+      <btnExit>k__BackingField: {fileID: 2379735727379704324}
 --- !u!1 &1043740752622621565
 GameObject:
   m_ObjectHideFlags: 0

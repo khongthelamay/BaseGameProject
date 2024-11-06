@@ -123,4 +123,9 @@ public class RecruitManager : Singleton<RecruitManager>
 
         return currentHeroHave[Random.Range(0, currentHeroHave.Count)];
     }
+
+    public void ClearRewardEarned()
+    {
+        recruitRewardEarned.ObservableList.Clear();
+    }
 }

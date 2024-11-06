@@ -72,7 +72,9 @@ public class MainContent<Data> : MonoBehaviour
     }
 
     public virtual void SortSlot() { }
-    public virtual void AnimOpen() { }
+    public virtual void AnimOpen() {
+        
+    }
     public virtual void CleanAnimation() {
         if (mySequence != null)
             mySequence.Kill();

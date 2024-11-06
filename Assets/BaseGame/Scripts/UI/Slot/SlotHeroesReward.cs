@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -37,5 +38,19 @@ public class SlotHeroesReward : SlotBase<RecruitReward>
         pieceProgress.ChangeTextProgress("0/0");
 
         txtCountReward.text = data.amount.ToString();
+        AnimOpen();
+    }
+
+    public override void AnimOpen()
+    {
+        trsContent.gameObject.SetActive(false);
+        if (mySequence != null)
+            mySequence.Kill();
+        mySequence = DOTween.Sequence();
+        //mySequence.Append(UIAnimation.AnimSlotHeroRewardShow(trsContent, transform.GetSiblingIndex()));
+        mySequence.Append(UIAnimation.AnimSlotDrop(trsContent, transform.GetSiblingIndex()));
+        mySequence.OnStart(() => {
+            trsContent.gameObject.SetActive(true);
+        });
     }
 }
