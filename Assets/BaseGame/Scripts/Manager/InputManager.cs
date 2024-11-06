@@ -69,11 +69,11 @@ public class InputManager : Singleton<InputManager>
         StartDragFieldSlot.TryRemoveHero(out Hero startHero);
         EndDragFieldSlot.TryRemoveHero(out Hero endHero);
 
-        if (startHero != null && startHero.IsCurrentState(startHero.HeroAttackState))
+        if (startHero != null && startHero.IsInBattleState())
         {
             EndDragFieldSlot.TryAddHero(startHero);
         }
-        if (endHero != null && endHero.IsCurrentState(endHero.HeroAttackState))
+        if (endHero != null && startHero.IsInBattleState())
         {
             StartDragFieldSlot.TryAddHero(endHero);
         }

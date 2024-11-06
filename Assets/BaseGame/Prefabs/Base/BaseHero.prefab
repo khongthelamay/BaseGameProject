@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 5790664334070574991}
   - component: {fileID: 899073806387762782}
   - component: {fileID: 619450188916677119}
+  - component: {fileID: 7905082569779916817}
   m_Layer: 0
   m_Name: BaseHero
   m_TagString: Untagged
@@ -496,6 +497,7 @@ MonoBehaviour:
   <AttackDamage>k__BackingField: 0
   <AttackSpeed>k__BackingField: 0
   <AttackRange>k__BackingField: 0
+  <IsCancelAbility>k__BackingField: 0
 --- !u!114 &619450188916677119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +511,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 464891674084575782}
+--- !u!210 &7905082569779916817
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336253906698360458}
+  m_Enabled: 1
+  m_SortingLayerID: -392905563
+  m_SortingLayer: 1
+  m_SortingOrder: 20
+  m_SortAtRoot: 0
 --- !u!1 &7968801095349760649
 GameObject:
   m_ObjectHideFlags: 0

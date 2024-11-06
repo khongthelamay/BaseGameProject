@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Core;
 using Core.SimplePool;
 using Cysharp.Threading.Tasks;
+using R3;
+using R3.Triggers;
 using TW.Utility.DesignPattern;
 using UnityEngine;
-using Zenject;
 
 namespace Manager
 {
@@ -14,18 +14,34 @@ namespace Manager
     {
         [field: SerializeField] public Map CurrentMap { get; private set; }
         [field: SerializeField] public TickRate TickRate {get; private set;}
+        [field: SerializeField] public WaitSlot[] WaitSlotArray {get; private set;}
 
-        public List<Enemy> EnemyList { get; private set; } = new();
-        public List<Hero> HeroList { get; private set; } = new();
+        private List<Enemy> EnemyList { get; set; } = new();
+        private List<Hero> HeroList { get; set; } = new();
+    
         private void Start()
         {
-            StartBattle();
+#if !UNITY_EDITOR
+            Application.targetFrameRate = 60;
+#endif
+            this.UpdateAsObservable()
+                .Where(_ => Input.GetKeyDown(KeyCode.C))
+                .Subscribe(_ => ReRollWaitSlot());
         }
-
-        public void StartBattle()
+        
+        public void StartNewMatch()
         {
             CurrentMap.StartMap().Forget();
+            ReRollWaitSlot();
         }
+        public void ReRollWaitSlot()
+        {
+            foreach (var waitSlot in WaitSlotArray)
+            {
+                waitSlot.RandomOwnerHero();
+            }
+        }
+
         public Hero RegisterHero(Hero hero)
         {
             if (HeroList.Contains(hero)) return hero;

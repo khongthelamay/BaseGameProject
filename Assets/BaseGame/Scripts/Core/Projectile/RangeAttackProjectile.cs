@@ -40,6 +40,11 @@ namespace Core
         {
             base.Setup(ownerHero, targetEnemy, damageType);
             
+            if (ownerHero == null || targetEnemy == null) 
+            {
+                this.Despawn();
+            }
+            
             Transform.localScale = Vector3.zero;
             StartPosition = Transform.position;
             CurrentPosition = StartPosition;

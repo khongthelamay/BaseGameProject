@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Core.SimplePool;
 using Manager;
 using Sirenix.OdinInspector;
+using TW.ACacheEverything;
 using TW.Utility.CustomComponent;
 using TW.Utility.DesignPattern;
 using TW.Utility.Extension;
 using UnityEngine;
-
+using UnityEngine.Rendering;
 using Object = UnityEngine.Object;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -44,7 +45,8 @@ namespace Core
         [field: SerializeField] public GameObject VisibleGroup {get; private set;}
         [field: SerializeField] public FieldSlot FieldSlot { get; private set; }
         [field: SerializeField] public HeroAnim HeroAnim {get; private set;}
-        
+        [field: SerializeField] public SortingGroup SortingGroup {get; private set;}
+
         
         private StateMachine StateMachine { get; set; }
         [field: SerializeField] public int AttackDamage { get; set; }
@@ -58,6 +60,8 @@ namespace Core
         private Vector3 MoveFromPosition { get; set; }
         private Vector3 MoveToPosition { get; set; }
         private Action OnMoveComplete { get; set; }
+        
+        [field: SerializeField] private bool IsCancelAbility {get; set;}
 
         public void OnDestroy()
         {
@@ -98,33 +102,43 @@ namespace Core
         {
             return StateMachine.IsCurrentState(state);
         }
+        public bool IsInBattleState()
+        {
+            return IsCurrentState(HeroBattleDecisionState) || IsCurrentState(HeroAttackState);
+        }
+
+        [ACacheMethod]
+        private bool IsCancelAbilityMethod()
+        {
+            return IsCancelAbility;
+        }
         public void ChangeToSleepState()
         {
             StateMachine.RequestTransition(HeroSleepState);
         }
         public void MoveToFieldSlot(FieldSlot fieldSlot)
         {
-            SetVisible(false);
+            SetCancelAbility(true);
             MoveFromPosition = Transform.position;
             MoveToPosition = fieldSlot.Transform.position;
             OnMoveComplete = MoveComplete;
-            
             FieldSlot = fieldSlot;
             Transform.SetParent(FieldSlot.Transform);
-            Transform.localPosition = Vector3.zero;
             
             StateMachine.RequestTransition(HeroMoveState);
             return;
             void MoveComplete()
             {
-                SetVisible(true);
+                SetCancelAbility(false);
+                Transform.localPosition = Vector3.zero;
+                UpdateLayer();
                 FieldSlot.FieldSlotChangedCallback?.Invoke();
                 StateMachine.RequestTransition(HeroBattleDecisionState);
             }
         }
         public void MoveToPositionAndSelfDespawn(Vector3 toPosition)
         {
-            SetVisible(false);
+            SetCancelAbility(true);
             MoveFromPosition = Transform.position;
             MoveToPosition = toPosition;
             OnMoveComplete = MoveComplete;
@@ -135,6 +149,7 @@ namespace Core
             return;
             void MoveComplete()
             {
+                SetCancelAbility(false);
                 SelfDespawn();
             }
         }
@@ -142,12 +157,15 @@ namespace Core
         {
             VisibleGroup.SetActive(isVisible);
         }
-
+        
         public void SelfDespawn()
         {
             Destroy(gameObject);
         }
-        
+        public void SetCancelAbility(bool isCancelAbility)
+        {
+            IsCancelAbility = isCancelAbility;
+        }
 
         public Hero WaitSlotInit(WaitSlot waitSlot)
         {
@@ -159,12 +177,18 @@ namespace Core
 
         public void ShowAttackRange()
         {
-            HeroAttackRange.ShowAttackRange();
+            HeroAttackRange.ShowAttackRange(HeroConfigData.BaseAttackRange);
         }
 
         public void HideAttackRange()
         {
             HeroAttackRange.HideAttackRange();
+        }
+
+        private Hero UpdateLayer()
+        {
+            SortingGroup.sortingOrder = -(int) (Transform.position.y * 100 + Transform.position.x);
+            return this;
         }
     }
 
@@ -187,6 +211,7 @@ namespace Core
             SpriteGraphic.sprite = HeroConfigData.HeroSprite;
             SpriteRarity.color = BaseHeroGenerateGlobalConfig.Instance.RarityColorArray[(int)HeroConfigData.HeroRarity];
             HeroAnim.Animator.runtimeAnimatorController = HeroConfigData.AnimatorController;
+            SortingGroup = GetComponent<SortingGroup>();
         }
     }
 #endif

@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Manager;
 using TW.UGUI.MVPPattern;
 using UnityEngine;
 using R3;
@@ -70,6 +71,7 @@ public class ScreensMatchContext
         {
             UIAnimation.BasicButton(View.btnReroll.transform);
             Debug.Log("Reroll");
+            BattleManager.Instance.ReRollWaitSlot();
         }
     }
 }

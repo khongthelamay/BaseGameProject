@@ -11,7 +11,6 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragH
 {
     public static Action FieldSlotChangedCallback { get; private set; }
     [Inject] private BattleManager BattleManager { get; set; }
-    [field: SerializeField] public Vector2 DefaultSize {get; private set;}
     [field: SerializeField] public int RowId {get; private set;}
     [field: SerializeField] public int ColumnId {get; private set;}
     [field: SerializeField] private GameObject UpgradeMark {get; set;}
@@ -65,14 +64,14 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragH
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!TryGetHero(out Hero hero)) return;
-        if (!hero.IsCurrentState(hero.HeroAttackState)) return;
+        if (!hero.IsInBattleState()) return;
         TempUIManager.Instance.ShowModalHeroInteract(this);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!TryGetHero(out Hero hero)) return;
-        if (!hero.IsCurrentState(hero.HeroAttackState)) return;
+        if (!hero.IsInBattleState()) return;
         InputManager.Instance.SetStartDragFieldSlot(this);
         InputManager.Instance.SetEndDragFieldSlot(this);
     }
@@ -92,7 +91,13 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragH
         if (InputManager.Instance.StartDragFieldSlot == null) return;
         InputManager.Instance.SetEndDragFieldSlot(this);
     }
-    
+
+    private void OnDrawGizmos()
+    {
+        if (!TryGetComponent(out BoxCollider2D boxCollider2D)) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + (Vector3)boxCollider2D.offset, boxCollider2D.size);
+    }
 
     #endregion
 }

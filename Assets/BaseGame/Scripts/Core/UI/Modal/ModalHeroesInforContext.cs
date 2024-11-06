@@ -54,6 +54,7 @@ public class ModalHeroesInforContext
         [field: SerializeField] public Button btnUpgrade {get; private set;}  
         [field: SerializeField] public MainContentAbility mainContentHeroAbility { get; private set;}  
         [field: SerializeField] public MainContentHeroJob mainContentHeroJob {get; private set;}
+        [field: SerializeField] public TextMeshProUGUI TextMeshProUGUI {get; private set;}
 
         List<Hero.Job> jobs;
 

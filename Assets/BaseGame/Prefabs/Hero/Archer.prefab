@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7384983590335155338}
   - component: {fileID: 3721749770764580112}
-  - component: {fileID: 5021398391421054308}
+  - component: {fileID: 8461631480621936769}
+  - component: {fileID: 9073571542304812977}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -47,7 +48,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 3884545697879349991}
---- !u!114 &5021398391421054308
+--- !u!210 &8461631480621936769
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148747281336159683}
+  m_Enabled: 1
+  m_SortingLayerID: -392905563
+  m_SortingLayer: 1
+  m_SortingOrder: 20
+  m_SortAtRoot: 0
+--- !u!114 &9073571542304812977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,9 +80,11 @@ MonoBehaviour:
   <VisibleGroup>k__BackingField: {fileID: 814512551710071622}
   <FieldSlot>k__BackingField: {fileID: 0}
   <HeroAnim>k__BackingField: {fileID: 3721749770764580112}
+  <SortingGroup>k__BackingField: {fileID: 8461631480621936769}
   <AttackDamage>k__BackingField: 0
   <AttackSpeed>k__BackingField: 0
   <AttackRange>k__BackingField: 0
+  <IsCancelAbility>k__BackingField: 0
   <ProjectileSpawnPosition>k__BackingField: {fileID: 5475983940262972240}
   <ArrowStormProjectile>k__BackingField: {fileID: 4236009647947967788, guid: 48ec4fb17f02c6f49825d22aa1fa285e, type: 3}
   <PiercingShotProjectile>k__BackingField: {fileID: 4236009647947967788, guid: 48ec4fb17f02c6f49825d22aa1fa285e, type: 3}

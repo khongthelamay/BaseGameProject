@@ -28,6 +28,7 @@ public class MapDrawer : MonoBehaviour
 
     private int[,] NewMapPositionDraw { get; set; }
 
+#if UNITY_EDITOR
     [Button]
     public void GenerateMap()
     {
@@ -198,6 +199,7 @@ public class MapDrawer : MonoBehaviour
 
         return null;
     }
+#endif
 }
 
 [System.Serializable]

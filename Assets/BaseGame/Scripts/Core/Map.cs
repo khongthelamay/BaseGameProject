@@ -24,7 +24,7 @@ public class Map : ACachedMonoBehaviour
     private DateTime WaveStartTime { get; set; }
     public async UniTask StartMap()
     {
-        await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
+        await UniTask.Delay(5000, cancellationToken: this.GetCancellationTokenOnDestroy());
         foreach (WaveData waveData in MapData.WaveDataList)
         {
             WaveStartTime = DateTime.Now;

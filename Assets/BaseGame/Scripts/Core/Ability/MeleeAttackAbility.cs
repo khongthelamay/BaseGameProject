@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using BaseGame.Scripts.Enum;
 using Cysharp.Threading.Tasks;
 using Manager;
@@ -40,8 +41,8 @@ namespace Core
         {
             EnemyTarget.TakeDamage(Owner.AttackDamage, DamageType);
             Owner.HeroAnim.PlayAttackAnimation(Owner.AttackSpeed);
-            int timeDelay = (int)(1000 / tickRate.ToValue() / Owner.AttackSpeed);
-            await UniTask.Delay(timeDelay, cancellationToken: ct);
+            await DelaySample(30, tickRate, ct);
+
         }
         
     }

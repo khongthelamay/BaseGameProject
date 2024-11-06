@@ -45,6 +45,7 @@ namespace Core
 
         public UniTask OnEnter(HeroMoveState state, CancellationToken ct)
         {
+            SetVisible(false);
             MoveProjectile.Spawn(Transform.position, Quaternion.identity)
                 .Init(MoveFromPosition, MoveToPosition, OnMoveComplete);
             return UniTask.CompletedTask;
@@ -57,6 +58,7 @@ namespace Core
 
         public UniTask OnExit(HeroMoveState state, CancellationToken ct)
         {
+            SetVisible(true);
             return UniTask.CompletedTask;
         }
     }

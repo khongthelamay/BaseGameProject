@@ -4,13 +4,13 @@ using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using System.Linq;
 using TW.Utility.Extension;
-using UnityEditor.Animations;
 using UnityEngine;
+using System;
+using UnityEngine.UI;
 
 #if UNITY_EDITOR
-using System;
+using UnityEditor.Animations;
 using UnityEditor;
-using UnityEngine.UI;
 #endif
 
 [CreateAssetMenu(fileName = "HeroConfigData", menuName = "ScriptableObjects/HeroConfigData")]
@@ -53,8 +53,8 @@ public class HeroConfigData : ScriptableObject
     [field: SerializeField]
     public float UpgradePercentage { get; set; }
 
-    [field: SerializeField] public AnimatorController AnimatorController { get; set; }
-    [field: SerializeField] public AnimatorController ImageAnimatorController { get; set; }
+    [field: SerializeField] public RuntimeAnimatorController AnimatorController { get; set; }
+    [field: SerializeField] public RuntimeAnimatorController ImageAnimatorController { get; set; }
     [field: SerializeField] public GameObject HeroGameObjectPrefab {get; private set;}
     [field: SerializeField] public Hero HeroPrefab {get; private set;}
     [field: SerializeReference] public List<Ability> HeroAbilities { get; set; }
@@ -65,14 +65,15 @@ public class HeroConfigData : ScriptableObject
     [Button]
     private async UniTask UpdateData()
     {
+        Animator a = new GameObject().AddComponent<Animator>();
         string sheetId = "1-HkinUwSW4A4SkuiLGtl0Tm8771jFPVZB5ZpLs5pxz4";
         EditorUtility.SetDirty(this);
         string result = await ABakingSheet.GetCsv(sheetId, "UnitAbility");
         List<Dictionary<string, string>> csvData = ACsvReader.ReadDataFromString(result)
-            .Select(value =>
-                value.ToDictionary(
-                    d => d.Key,
-                    d => d.Value.Replace(" ", "")))
+            // .Select(value =>
+            //     value.ToDictionary(
+            //         d => d.Key,
+            //         d => d.Value.Replace(" ", "")))
             .ToList();
 
         Dictionary<string, string> data = csvData.Find(x => x["Name"] == Name);
@@ -117,6 +118,10 @@ public class HeroConfigData : ScriptableObject
                 .FirstOrDefault(t => t.name == Name);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+            if (HeroGameObjectPrefab == null)
+            {
+                GenerateNewGameObjectPrefab(data);
+            }
         }
         catch (Exception _)
         {
@@ -137,7 +142,7 @@ public class HeroConfigData : ScriptableObject
             Hero hero = Instantiate(heroPrefab);
             hero.name = $"{Name}";
 
-            PrefabUtility.SaveAsPrefabAsset(hero.gameObject, $"Assets/BaseGame/Prefabs/Hero/{hero.name}.prefab");
+            PrefabUtility.SaveAsPrefabAsset(hero.gameObject, $"Assets/BaseGame/Prefabs/Hero/{Name}.prefab");
                 
                 
             AssetDatabase.SaveAssets();
@@ -180,13 +185,16 @@ public class HeroConfigData : ScriptableObject
             using PrefabUtility.EditPrefabContentsScope editorScope = new PrefabUtility.EditPrefabContentsScope(assetPath);
                 
             Hero[] heroes = editorScope.prefabContentsRoot.GetComponents<Hero>(); 
+            string typeName = $"Core.{Name.Replace(" ", "")}";
+            Type type = Type.GetType(typeName);
+            
             foreach (Hero hero in heroes)
             {
+                if (hero.GetType() == type) continue;
                 DestroyImmediate(hero);
             }
                 
-            string typeName = $"Core.{Name.Replace(" ", "")}";
-            Type type = Type.GetType(typeName);
+
             if (type == null)
             {
                 // create new script
@@ -204,6 +212,13 @@ public class HeroConfigData : ScriptableObject
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
                 Debug.Log("Add script failed. Create new script instead.");
+            }
+            else if (heroes.Any(hero => hero.GetType() == type))
+            {
+                Hero hero = editorScope.prefabContentsRoot.GetComponent<Hero>();
+                hero.EditorInit(this);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
             else
             {
@@ -234,8 +249,7 @@ public class HeroConfigData : ScriptableObject
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            Debug.LogError(e);
         }
 
     }
