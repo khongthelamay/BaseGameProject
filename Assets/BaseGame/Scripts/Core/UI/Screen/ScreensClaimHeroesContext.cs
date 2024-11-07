@@ -54,7 +54,7 @@ public class ScreensClaimHeroesContext
         public void InitData(List<RecruitReward> rewards)
         {
             mainContentHeroReward.InitData(rewards);
-            mainContentHeroReward.AnimOpen();
+            //mainContentHeroReward.AnimOpen();
         }
     }
 

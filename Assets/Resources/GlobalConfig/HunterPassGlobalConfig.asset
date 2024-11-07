@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b033554b0b1e1343980bf3db68344ee, type: 3}
+  m_Name: HunterPassGlobalConfig
+  m_EditorClassIdentifier: 
+  hunterPasses:
+  - level: 1
+    expRequire: 20
+    rType: 1
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 2
+    expRequire: 50
+    rType: 6
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 3
+    expRequire: 100
+    rType: 3
+    commonRewardAmount: 5
+    premiumRewardAmount: 15
+  - level: 4
+    expRequire: 300
+    rType: 4
+    commonRewardAmount: 1
+    premiumRewardAmount: 3
+  - level: 5
+    expRequire: 800
+    rType: 1
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 6
+    expRequire: 1500
+    rType: 6
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 7
+    expRequire: 2300
+    rType: 3
+    commonRewardAmount: 5
+    premiumRewardAmount: 15
+  - level: 8
+    expRequire: 3200
+    rType: 4
+    commonRewardAmount: 1
+    premiumRewardAmount: 3
+  - level: 9
+    expRequire: 4200
+    rType: 1
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 10
+    expRequire: 5300
+    rType: 6
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 11
+    expRequire: 6500
+    rType: 3
+    commonRewardAmount: 5
+    premiumRewardAmount: 15
+  - level: 12
+    expRequire: 7800
+    rType: 4
+    commonRewardAmount: 1
+    premiumRewardAmount: 3
+  - level: 13
+    expRequire: 9200
+    rType: 1
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 14
+    expRequire: 10700
+    rType: 6
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 15
+    expRequire: 12300
+    rType: 3
+    commonRewardAmount: 5
+    premiumRewardAmount: 15
+  - level: 16
+    expRequire: 14000
+    rType: 4
+    commonRewardAmount: 1
+    premiumRewardAmount: 3
+  - level: 17
+    expRequire: 15800
+    rType: 1
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 18
+    expRequire: 17700
+    rType: 6
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 19
+    expRequire: 19700
+    rType: 3
+    commonRewardAmount: 5
+    premiumRewardAmount: 15
+  - level: 20
+    expRequire: 21800
+    rType: 4
+    commonRewardAmount: 1
+    premiumRewardAmount: 3
+  - level: 21
+    expRequire: 24000
+    rType: 1
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 22
+    expRequire: 26300
+    rType: 6
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 23
+    expRequire: 28700
+    rType: 3
+    commonRewardAmount: 5
+    premiumRewardAmount: 15
+  - level: 24
+    expRequire: 31200
+    rType: 4
+    commonRewardAmount: 1
+    premiumRewardAmount: 3
+  - level: 25
+    expRequire: 33800
+    rType: 1
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 26
+    expRequire: 36500
+    rType: 6
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 27
+    expRequire: 39300
+    rType: 3
+    commonRewardAmount: 5
+    premiumRewardAmount: 15
+  - level: 28
+    expRequire: 42200
+    rType: 4
+    commonRewardAmount: 1
+    premiumRewardAmount: 3
+  - level: 29
+    expRequire: 45200
+    rType: 1
+    commonRewardAmount: 30
+    premiumRewardAmount: 90
+  - level: 30
+    expRequire: 48300
+    rType: 6
+    commonRewardAmount: 30
+    premiumRewardAmount: 90

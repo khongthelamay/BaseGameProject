@@ -12,7 +12,8 @@ public enum ResourceType {
     SummonRecipe = 2,
     EpicStone = 3,
     Key = 4,
-    Energy = 5
+    Energy = 5,
+    RecruitRecipe = 6
 }
 
 [System.Serializable]

@@ -43,11 +43,9 @@ public class SlotHeroesReward : SlotBase<RecruitReward>
 
     public override void AnimOpen()
     {
-        trsContent.gameObject.SetActive(false);
         if (mySequence != null)
             mySequence.Kill();
         mySequence = DOTween.Sequence();
-        //mySequence.Append(UIAnimation.AnimSlotHeroRewardShow(trsContent, transform.GetSiblingIndex()));
         mySequence.Append(UIAnimation.AnimSlotDrop(trsContent, transform.GetSiblingIndex()));
         mySequence.OnStart(() => {
             trsContent.gameObject.SetActive(true);
