@@ -16,7 +16,7 @@ MonoBehaviour:
   <Name>k__BackingField: Tiger
   <HeroRarity>k__BackingField: 4
   <HeroClass>k__BackingField: 1
-  <HeroJob>k__BackingField: 0200000001000000
+  <HeroJob>k__BackingField: 02000000
   <BaseAttackDamage>k__BackingField: 7800
   <BaseAttackSpeed>k__BackingField: 1.75
   <BaseAttackRange>k__BackingField: 2
@@ -34,4 +34,5 @@ MonoBehaviour:
       type: {class: MeleeAttackAbility, ns: Core, asm: Assembly-CSharp}
       data:
         <LevelUnlock>k__BackingField: 0
+        <SampleDelay>k__BackingField: 0
         <DamageType>k__BackingField: 0

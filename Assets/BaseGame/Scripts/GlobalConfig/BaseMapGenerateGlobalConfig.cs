@@ -7,9 +7,9 @@ using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BaseMapGenerateGlobalConfig", menuName = "GlobalConfigs/BaseMapGenerateGlobalConfig")]
-[GlobalConfig("Assets/Resources/GlobalConfig/")]
-public class BaseMapGenerateGlobalConfig : GlobalConfig<BaseMapGenerateGlobalConfig>
+public class BaseMapGenerateGlobalConfig : ScriptableObject
 {
+    [field: SerializeField] public string MapStyle {get; private set;}
     [field: SerializeField] public GameObject BaseMapObject {get; private set;}
     [field: SerializeField] public List<Sprite> TileSprites {get; private set;}
     [field: SerializeField] public List<Sprite> GroundSprites {get; private set;}
@@ -18,7 +18,7 @@ public class BaseMapGenerateGlobalConfig : GlobalConfig<BaseMapGenerateGlobalCon
     [field: SerializeField] public List<GameObject> GroundPrefabList {get; private set;}
     
 #if UNITY_EDITOR
-
+    [Button]
     private void GenerateAllPrefabMap()
     {
         EditorUtility.SetDirty(this);
@@ -34,7 +34,7 @@ public class BaseMapGenerateGlobalConfig : GlobalConfig<BaseMapGenerateGlobalCon
 
     private void GenerateTile()
     {
-        TilePrefabList = AssetDatabase.FindAssets("t:Prefab MapTile", new string[] {"Assets/BaseGame/Prefabs/MapTile"})
+        TilePrefabList = AssetDatabase.FindAssets("t:Prefab MapTile", new string[] {$"Assets/BaseGame/Prefabs/Map/{MapStyle}"})
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<GameObject>)
             .ToList();
@@ -46,20 +46,22 @@ public class BaseMapGenerateGlobalConfig : GlobalConfig<BaseMapGenerateGlobalCon
             newSprite.GetComponent<SpriteRenderer>().sprite = sprite;
             newSprite.name = sprite.name;
             
-            PrefabUtility.SaveAsPrefabAsset(newSprite, $"Assets/BaseGame/Prefabs/MapTile/MapTile_{sprite.name}.prefab");
+            PrefabUtility.SaveAsPrefabAsset(newSprite, $"Assets/BaseGame/Prefabs/Map/{MapStyle}/MapTile_{sprite.name}.prefab");
             AssetDatabase.SaveAssets();
             
             DestroyImmediate(newSprite.gameObject);
         });
 
-        TilePrefabList = AssetDatabase.FindAssets("t:Prefab MapTile", new string[] {"Assets/BaseGame/Prefabs/MapTile"})
+        TilePrefabList = AssetDatabase.FindAssets("t:Prefab MapTile", new string[] {$"Assets/BaseGame/Prefabs/Map/{MapStyle}"})
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<GameObject>)
             .ToList();
+        
     }
+
     private void GenerateGround()
     {
-        GroundPrefabList = AssetDatabase.FindAssets("t:Prefab MapGround", new string[] {"Assets/BaseGame/Prefabs/MapGround"})
+        GroundPrefabList = AssetDatabase.FindAssets("t:Prefab MapGround", new string[] {$"Assets/BaseGame/Prefabs/Map/{MapStyle}"})
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<GameObject>)
             .ToList();
@@ -71,13 +73,13 @@ public class BaseMapGenerateGlobalConfig : GlobalConfig<BaseMapGenerateGlobalCon
             newSprite.GetComponent<SpriteRenderer>().sprite = sprite;
             newSprite.name = sprite.name;
             
-            PrefabUtility.SaveAsPrefabAsset(newSprite, $"Assets/BaseGame/Prefabs/MapGround/MapGround_{sprite.name}.prefab");
+            PrefabUtility.SaveAsPrefabAsset(newSprite, $"Assets/BaseGame/Prefabs/Map/{MapStyle}/MapGround_{sprite.name}.prefab");
             AssetDatabase.SaveAssets();
             
             DestroyImmediate(newSprite.gameObject);
         });
 
-        GroundPrefabList = AssetDatabase.FindAssets("t:Prefab MapGround", new string[] {"Assets/BaseGame/Prefabs/MapGround"})
+        GroundPrefabList = AssetDatabase.FindAssets("t:Prefab MapGround", new string[] {$"Assets/BaseGame/Prefabs/Map/{MapStyle}"})
             .Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<GameObject>)
             .ToList();

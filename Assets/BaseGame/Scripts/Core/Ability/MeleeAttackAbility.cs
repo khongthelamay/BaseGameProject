@@ -9,14 +9,14 @@ namespace Core
 {
     public class MeleeAttackAbility : ActiveAbility
     {
-        [field: SerializeField] public DamageType DamageType {get; private set;}
-
-        private BattleManager BattleManagerCache { get; set; }
-        public BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        [field: SerializeField] private int SampleDelay {get; set;}
+        [field: SerializeField] private DamageType DamageType {get; set;}
+        
         private Enemy EnemyTarget { get; set; }
         
-        public MeleeAttackAbility(Hero owner, int levelUnlock, DamageType damageType) : base(owner, levelUnlock)
+        public MeleeAttackAbility(Hero owner, int levelUnlock, int sampleDelay,DamageType damageType) : base(owner, levelUnlock)
         {
+            SampleDelay = sampleDelay;
             DamageType = damageType;
         }
         public override bool CanUseAbility()
@@ -39,9 +39,10 @@ namespace Core
 
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            EnemyTarget.TakeDamage(Owner.AttackDamage, DamageType);
             Owner.HeroAnim.PlayAttackAnimation(Owner.AttackSpeed);
-            await DelaySample(30, tickRate, ct);
+            await DelaySample(SampleDelay, tickRate, ct);
+            EnemyTarget.TakeDamage(Owner.AttackDamage, DamageType);
+            await DelaySample(30 - SampleDelay, tickRate, ct);
 
         }
         

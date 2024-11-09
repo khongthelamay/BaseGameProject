@@ -1,36 +1,58 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core;
 using Core.SimplePool;
 using Cysharp.Threading.Tasks;
 using R3;
 using R3.Triggers;
+using Sirenix.OdinInspector;
 using TW.Utility.DesignPattern;
 using UnityEngine;
 
 namespace Manager
 {
-    public class BattleManager : Singleton<BattleManager>
+    public partial class BattleManager : Singleton<BattleManager>
     {
         [field: SerializeField] public Map CurrentMap { get; private set; }
         [field: SerializeField] public TickRate TickRate {get; private set;}
         [field: SerializeField] public WaitSlot[] WaitSlotArray {get; private set;}
-
+        private Dictionary<GlobalBuff.Type, GlobalBuff> GlobalBuffDictionary { get; set; } = new();
         private List<Enemy> EnemyList { get; set; } = new();
         private List<Hero> HeroList { get; set; } = new();
+        [ShowInInspector]
+        private List<GlobalBuff> GlobalBuffList => GlobalBuffDictionary.Values.ToList();
     
         private void Start()
         {
 #if !UNITY_EDITOR
             Application.targetFrameRate = 60;
 #endif
+            InitGlobalBuff();
             this.UpdateAsObservable()
                 .Where(_ => Input.GetKeyDown(KeyCode.C))
                 .Subscribe(_ => ReRollWaitSlot());
         }
+        private void InitGlobalBuff()
+        {
+            IEnumerable<GlobalBuff.Type> allGlobalBuffType = Enum.GetValues(typeof(GlobalBuff.Type)).Cast<GlobalBuff.Type>();
+            foreach (GlobalBuff.Type type in allGlobalBuffType)
+            {
+                GlobalBuffDictionary.Add(type, new GlobalBuff(type, 0));
+            }
+        }
+        private void ClearAllGlobalBuff()
+        {
+            foreach (var globalBuff in GlobalBuffDictionary.Values)
+            {
+                globalBuff.ChangeValue(0);
+            }
+        }
+        
         
         public void StartNewMatch()
         {
+            ClearAllGlobalBuff();
             CurrentMap.StartMap().Forget();
             ReRollWaitSlot();
         }
@@ -103,7 +125,6 @@ namespace Manager
 
             return false;
         }
-        
 
         public bool CanFusionHeroInFieldSlot(FieldSlot fieldSlot)
         {
@@ -200,6 +221,27 @@ namespace Manager
             }
             return false;
         }
-
+        public int GetEnemyAroundNonAlloc(Vector3 position, float radius, Enemy[] enemies)
+        {
+            int count = 0;
+            foreach (var e in EnemyList)
+            {
+                if (count >= enemies.Length) break;
+                if ((position - e.Transform.position).sqrMagnitude <= radius * radius)
+                {
+                    enemies[count] = e;
+                    count++;
+                }
+            }
+            return count;
+        }
+        public GlobalBuff GetGlobalBuff(GlobalBuff.Type type)
+        {
+            return GlobalBuffDictionary[type];
+        }
+        public void ChangeGlobalBuff(GlobalBuff.Type type, float value)
+        {
+            GlobalBuffDictionary[type].ChangeValue(value);
+        }
     }
 }

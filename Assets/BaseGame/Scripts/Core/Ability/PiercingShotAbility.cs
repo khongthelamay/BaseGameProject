@@ -16,12 +16,10 @@ namespace Core
         [field: SerializeField] public float ActiveRate {get; private set;} = 10f;
         [field: SerializeField] public float DamageScale {get; private set;} = 9;
         [field: SerializeField] public DamageType DamageType {get; private set;} = DamageType.Physical;
-
-        private BattleManager BattleManagerCache { get; set; }
-        public BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        
         private Enemy EnemyTarget { get; set; }
 
-        public PiercingShotAbility(Hero owner, int levelUnlock, Projectile projectile, Transform spawnPosition) : base(owner, levelUnlock)
+        public PiercingShotAbility(Archer owner, int levelUnlock, Projectile projectile, Transform spawnPosition) : base(owner, levelUnlock)
         {
             Projectile = projectile;
             SpawnPosition = spawnPosition;

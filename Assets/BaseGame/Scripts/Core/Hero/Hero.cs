@@ -16,7 +16,7 @@ using UnityEditor;
 
 namespace Core
 {
-    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero>
+    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero> 
     {
         [GUIColor("@TW.Utility.Extension.AColorExtension.GetColorInPalette(\"Job\", (int)$value)")]
         public enum Job
@@ -67,7 +67,7 @@ namespace Core
         {
             StateMachine.Stop();
         }
-        public Hero OnSpawn()
+        public virtual Hero OnSpawn()
         {
             InitStateMachine();
             InitStat();
@@ -77,7 +77,7 @@ namespace Core
             return BattleManager.Instance.RegisterHero(this);
         }
 
-        public void OnDespawn()
+        public virtual void OnDespawn()
         {
             BattleManager.Instance.UnregisterHero(this);
         }

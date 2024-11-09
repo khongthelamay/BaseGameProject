@@ -20,15 +20,15 @@ using UnityEditor;
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
 public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalConfig>
 {
-    [field: SerializeField] public List<HeroConfigData> SheetHeroStatDataList { get; private set; }
-    [field: SerializeField] public List<HeroConfigData> HeroStatDataList { get; private set; }
-    [field: SerializeField] public List<Hero> HeroPrefabList { get; private set; }
-    [field: SerializeField] public Hero BaseHero { get; private set; }
-    [field: SerializeField] public Projectile BaseProjectile { get; private set; }
-
-    [field: SerializeField] public Sprite[] GraphicArray { get; private set; }
-    [field: SerializeField] public Sprite[] RarityArray { get; private set; }
     [field: SerializeField] public Color[] RarityColorArray { get; private set; }
+    // [field: SerializeField] public Sprite[] RarityArray { get; private set; }
+    // [field: SerializeField] public List<HeroConfigData> SheetHeroStatDataList { get; private set; }
+    // [field: SerializeField] public List<HeroConfigData> HeroStatDataList { get; private set; }
+    // [field: SerializeField] public List<Hero> HeroPrefabList { get; private set; }
+    // [field: SerializeField] public Hero BaseHero { get; private set; }
+    // [field: SerializeField] public Projectile BaseProjectile { get; private set; }
+    //
+    // [field: SerializeField] public Sprite[] GraphicArray { get; private set; }
 
     // [Button]
     // public async UniTask GenerateHeroStatData()

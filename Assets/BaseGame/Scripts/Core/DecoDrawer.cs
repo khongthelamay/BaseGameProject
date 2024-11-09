@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using TW.Utility.CustomType;
 using UnityEngine;
 
 public class DecoDrawer : MonoBehaviour
@@ -8,7 +9,9 @@ public class DecoDrawer : MonoBehaviour
 
     [field: SerializeField] public BoxCollider2D[] TreeRange {get; private set;}
     [field: SerializeField] public List<GameObject> ListDeco {get; private set;}
-    [field: SerializeField] public float ScaleRange {get; private set;}
+    [field: SerializeField] public float SpawnRate {get; private set;}
+    [field: SerializeField] public FloatRange ScaleRange {get; private set;}
+
     [Button]
     private void GenerateTree()
     {
@@ -21,11 +24,11 @@ public class DecoDrawer : MonoBehaviour
         foreach (BoxCollider2D treeBox in TreeRange)
         {
             float acreage = treeBox.size.x * treeBox.size.y;
-            for (int i = 0; i < ScaleRange * acreage; i++)
+            for (int i = 0; i < SpawnRate * acreage; i++)
             {
                 float xPos = Random.Range(treeBox.bounds.min.x, treeBox.bounds.max.x);
                 float yPos = Random.Range(treeBox.bounds.min.y, treeBox.bounds.max.y);
-                float zPos = yPos;
+                float zPos = yPos/10f;
                 Vector3 treePosition = new Vector3(xPos, yPos, zPos);
                 bool isOverlap = false;
                 foreach (var deco in ListDeco)
@@ -37,7 +40,7 @@ public class DecoDrawer : MonoBehaviour
                     }
                 }
                 if (isOverlap) continue;
-                float scale = Random.Range(0.2f, 0.5f);
+                float scale = Random.Range(ScaleRange.m_Min, ScaleRange.m_Max);
                 GameObject tree = new GameObject
                 {
                     transform =

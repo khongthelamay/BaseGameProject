@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using BaseGame.Scripts.Enum;
 using LitMotion;
 using LitMotion.Extensions;
@@ -12,6 +13,7 @@ using Zenject;
 using Ease = LitMotion.Ease;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Core
 {
@@ -33,8 +35,24 @@ namespace Core
         [field: SerializeField] public int CurrentPoint { get; private set; }
         [field: SerializeField] public ReactiveValue<float> PlaybackSpeed { get; private set; }
         [field: SerializeField] public float Deep { get; private set; }
+        // [field: SerializeField] public int Damage {get; private set;}
+        // [field: SerializeField] public float DPS {get; private set;}
+
+
         private MotionHandle _movementMotionHandle;
         public bool WillBeDead => MarkLoseHealthPoint <= 0;
+
+        // private void Update()
+        // {
+        //     DelayTime += Time.deltaTime;
+        //     if (DelayTime >= 10)
+        //     {
+        //         DPS = Damage/10f;
+        //         Debug.Log("Damage per sec: " + DPS);
+        //         DelayTime = 0;
+        //         Damage = 0;
+        //     }
+        // }
 
         public Enemy SetupMovePoint(Transform[] movePoint)
         {
@@ -87,9 +105,19 @@ namespace Core
 
         public void TakeDamage(int attackDamage, DamageType damageType)
         {
-            // attackDamage = (int)(attackDamage * Random.Range(0.2f, 1.8f));
             FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage);
             CurrentHealthPoint -= attackDamage;
+            // Damage += attackDamage;
+            if (CurrentHealthPoint <= 0)
+            {
+                SelfDespawn();
+            }
+        }
+        public void TakeDamage(BigInteger attackDamage, DamageType damageType)
+        {
+            FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage);
+            CurrentHealthPoint -= (int)attackDamage;
+            // Damage += (int)attackDamage;
             if (CurrentHealthPoint <= 0)
             {
                 SelfDespawn();

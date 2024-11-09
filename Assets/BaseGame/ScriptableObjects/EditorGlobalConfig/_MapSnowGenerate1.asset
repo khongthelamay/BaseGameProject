@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90a7aeed97a4c8892cac10748189300, type: 3}
+  m_Name: _MapSnowGenerate1
+  m_EditorClassIdentifier: 
+  <MapStyle>k__BackingField: 
+  <BaseMapObject>k__BackingField: {fileID: 0}
+  <TileSprites>k__BackingField: []
+  <GroundSprites>k__BackingField: []
+  <TilePrefabList>k__BackingField: []
+  <GroundPrefabList>k__BackingField: []

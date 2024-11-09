@@ -248,6 +248,8 @@ MonoBehaviour:
   <AttackSpeed>k__BackingField: 0
   <AttackRange>k__BackingField: 0
   <IsCancelAbility>k__BackingField: 0
+  <FuryPoint>k__BackingField: 0
+  <SavageRoarEffect>k__BackingField: {fileID: 3447388117059416679, guid: b56f7e4110fb0674bb2963ff20a5f901, type: 3}
 --- !u!1 &5600566416368007558
 GameObject:
   m_ObjectHideFlags: 0

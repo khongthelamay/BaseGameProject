@@ -13,8 +13,7 @@ namespace Core
         [field: SerializeField] public DamageType DamageType { get; private set; } = DamageType.Physical;
         [field: SerializeField] public Projectile Projectile {get; private set;}
         [field: SerializeField] public Transform SpawnPosition {get; private set;}
-        private BattleManager BattleManagerCache { get; set; }
-        public BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+
         private Enemy EnemyTarget { get; set; }
     
         

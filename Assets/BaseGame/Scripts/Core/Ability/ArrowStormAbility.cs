@@ -19,13 +19,11 @@ namespace Core
         [field: SerializeField] public DamageType DamageType { get; private set; } = DamageType.Physical;
         [field: SerializeField] private bool IsOnCooldown { get; set; }
 
-        private BattleManager BattleManagerCache { get; set; }
-        public BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
         private Enemy EnemyTarget { get; set; }
         [field: SerializeField] private float CooldownTimer { get; set; }
         private MotionHandle CooldownHandle { get; set; }
 
-        public ArrowStormAbility(Hero owner, int levelUnlock, Projectile projectile, Transform spawnPosition) : base(
+        public ArrowStormAbility(Archer owner, int levelUnlock, Projectile projectile, Transform spawnPosition) : base(
             owner, levelUnlock)
         {
             Projectile = projectile;

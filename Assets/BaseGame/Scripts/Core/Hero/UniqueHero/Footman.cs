@@ -6,7 +6,7 @@ namespace Core
     {
         protected override void InitAbility()
         {
-            ActiveAbilities.Add(new MeleeAttackAbility(this, 0, DamageType.Physical));
+            // ActiveAbilities.Add(new MeleeAttackAbility(this, 0, DamageType.Physical));
         }
     }
 }
