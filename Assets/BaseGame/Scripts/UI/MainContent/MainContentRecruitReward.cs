@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MainRecruitRewardContent : MainContent<RecruitReward>
+public class MainContentRecruitReward : MainContent<RecruitReward>
 {
     [SerializeField] Transform pointStart;
     [SerializeField] Transform pointEnd;

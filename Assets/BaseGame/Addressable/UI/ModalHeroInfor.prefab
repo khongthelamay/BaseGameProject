@@ -2648,6 +2648,7 @@ MonoBehaviour:
       <btnUpgrade>k__BackingField: {fileID: 3585832438070968741}
       <mainContentHeroAbility>k__BackingField: {fileID: 6685356449212714745}
       <mainContentHeroJob>k__BackingField: {fileID: 2578421243869884833}
+      <TextMeshProUGUI>k__BackingField: {fileID: 0}
 --- !u!225 &2053755956499194827
 CanvasGroup:
   m_ObjectHideFlags: 0

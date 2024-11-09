@@ -346,53 +346,11 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!1 &1117244672
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1117244673}
-  - component: {fileID: 1117244674}
-  m_Layer: 0
-  m_Name: HunterPassManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1117244673
+--- !u!4 &1117244673 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+  m_PrefabInstance: {fileID: 6330138420270637795}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117244672}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1976557632}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1117244674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117244672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881d7e3b97bd9e647aec91b24581c4ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hunterPassDataSave:
-    <Value>k__BackingField: []
-  hunterPasses: []
 --- !u!4 &1247309177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4306414552951937607, guid: 7b35a9a599347b84ba97756dd33a987a, type: 3}
@@ -840,6 +798,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6d24a99b102ec84aa027f0d781ac570, type: 3}
+--- !u!1001 &6330138420270637795
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1976557632}
+    m_Modifications:
+    - target: {fileID: 2095709448869026731, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_Name
+      value: HunterPassManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
 --- !u!1001 &7558944045573352983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -858,11 +873,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<strLastDay>k__BackingField.m_Value
-      value: 11/2/2024 11:23:53 AM
+      value: 11/9/2024 6:23:00 PM
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<strLastWeek>k__BackingField.m_Value
-      value: 11/2/2024 3:59:30 PM
+      value: 11/9/2024 6:23:00 PM
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.size
@@ -874,7 +889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<currentDailyStreak>k__BackingField.m_Value
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<ArtifactData>k__BackingField.<ArtifactInfos>k__BackingField.Array.size
@@ -909,6 +924,10 @@ PrefabInstance:
       value: Mage
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<hunterPassDataSave>k__BackingField.hunterPassDataSave.<Value>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[0].m_Value.level.m_Value
       value: 1
       objectReference: {fileID: 0}
@@ -934,7 +953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<id>k__BackingField.m_Value
@@ -1006,7 +1025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<claimed>k__BackingField.m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<ArtifactData>k__BackingField.<ArtifactInfos>k__BackingField.Array.data[0].m_Value.<Id>k__BackingField.m_Value
@@ -1014,7 +1033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<progress>k__BackingField.m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[0].m_Value.<achievementType>k__BackingField.m_Value

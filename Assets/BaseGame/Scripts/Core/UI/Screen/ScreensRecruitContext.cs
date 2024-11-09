@@ -53,8 +53,8 @@ public class ScreensRecruitContext
         [field: SerializeField] public ButtonNotice btnRecruit { get; private set; }
         [field: SerializeField] public ButtonNotice btnRecruitX10 {get; private set;}  
         [field: SerializeField] public GameObject objButtonRecruit {get; private set;}  
-        [field: SerializeField] public MainRecruitRewardContent rewardMove {get; private set;}  
-        [field: SerializeField] public MainRecruitRewardContent rewardShow {get; private set;}  
+        [field: SerializeField] public MainContentRecruitReward rewardMove {get; private set;}  
+        [field: SerializeField] public MainContentRecruitReward rewardShow {get; private set;}  
         [field: SerializeField] public TextMeshProUGUI txtCountCurrentRewardGet {get; private set;}  
         
         public UniTask Initialize(Memory<object> args)

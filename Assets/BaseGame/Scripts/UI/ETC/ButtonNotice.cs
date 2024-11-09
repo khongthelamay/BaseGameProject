@@ -11,6 +11,7 @@ public class ButtonNotice : MonoBehaviour
     [Header("====== Button Notice ======")]
     [SerializeField] Button btnWithNotice;
     public GameObject objNotice;
+    bool needAnim = false;
     Sequence sequence;
     UnityAction actionCallBack;
 
@@ -20,12 +21,19 @@ public class ButtonNotice : MonoBehaviour
         btnWithNotice.onClick.AddListener(OnClick);
     }
 
-    public void SetButtonOnClick(UnityAction actionCall) { actionCallBack = actionCall; }
+    public void SetButtonOnClick(UnityAction actionCall, bool needAnim = true) { 
+        actionCallBack = actionCall;
+        this.needAnim = needAnim;
+    }
 
     public void OnClick()
     {
-        if (sequence != null) sequence.Kill();
-        sequence = UIAnimation.BasicButton(transform);
+        if (needAnim)
+        {
+            if (sequence != null) sequence.Kill();
+            sequence = UIAnimation.BasicButton(transform);
+        }
+      
         if (actionCallBack != null)
             actionCallBack();
     }

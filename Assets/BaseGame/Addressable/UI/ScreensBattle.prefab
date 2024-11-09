@@ -2001,6 +2001,7 @@ MonoBehaviour:
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 1835724710181177364}
       btnQuest: {fileID: 218042879258081968}
+      btnHuntPass: {fileID: 688029444452522865}
       btnRecruit: {fileID: 9010248819730287108}
       btnSpecialShop: {fileID: 0}
       btnMatch: {fileID: 7385710914702800371}
@@ -3118,7 +3119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3205222949268278028, guid: 352318875b0d23b43a70174b1640bae3, type: 3}
       propertyPath: m_Name
-      value: btnPrefWithNotice (1)
+      value: btnHuntPass
       objectReference: {fileID: 0}
     - target: {fileID: 7751475480952823588, guid: 352318875b0d23b43a70174b1640bae3, type: 3}
       propertyPath: m_text
@@ -3149,6 +3150,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 352318875b0d23b43a70174b1640bae3, type: 3}
+--- !u!114 &688029444452522865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7284405143124185959, guid: 352318875b0d23b43a70174b1640bae3, type: 3}
+  m_PrefabInstance: {fileID: 7825911176858437654}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66cb3cc3d7addf64f8f58a4484dba3af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &9066183888087711746 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1246009416105232404, guid: 352318875b0d23b43a70174b1640bae3, type: 3}

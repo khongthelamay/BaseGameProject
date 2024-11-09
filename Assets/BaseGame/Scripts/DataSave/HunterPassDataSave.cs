@@ -20,5 +20,6 @@ public partial class InGameData
 [MemoryPackable]
 public partial class HunterPassData {
     public int level;
-    public bool isClaimed;
+    public bool isClaimedCommond;
+    public bool isClaimedPremium;
 }
