@@ -11,12 +11,12 @@ public partial class HuntPassDataSave
     public static HuntPassDataSave Instance => InGameDataManager.Instance.InGameData.huntPassDataSave;
     public ReactiveValue<int> huntPassLevel = new(0);
     public ReactiveValue<int> huntPoint = new(0);
-    public ReactiveValue<bool> isPremium;
     public ReactiveList<HuntPassData> huntPassDatasSave = new();
     public ReactiveValue<string> timeOutHuntPass;
 }
 public partial class InGameData
 {
+    [MemoryPackOrder(104)]
     [field: SerializeField] public HuntPassDataSave huntPassDataSave { get; set; } = new();
 }
 

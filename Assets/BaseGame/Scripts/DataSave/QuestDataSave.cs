@@ -50,6 +50,7 @@ public partial class QuestDataSave
 }
 public partial class InGameData
 {
+    [MemoryPackOrder(106)]
     [field: SerializeField] public QuestDataSave QuestData { get; set; } = new();
 }
 

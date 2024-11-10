@@ -34,6 +34,7 @@ public partial class ArtifactDataSave
 
 public partial class InGameData
 {
+    [MemoryPackOrder(102)]
     [field: SerializeField] public ArtifactDataSave ArtifactData { get; set; } = new();
 }
 

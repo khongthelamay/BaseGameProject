@@ -11,6 +11,8 @@ public partial class PlayerResourceDataSave
 {
     public static PlayerResourceDataSave Instance => InGameDataManager.Instance.InGameData.playerResourceDataSave;
     [field: SerializeField] public ReactiveValue<int> level;
+    [field: SerializeField] public ReactiveValue<float> exp;
+    [field: SerializeField] public ReactiveValue<bool> premium;
     [field: SerializeField] public ReactiveList<Resource> resources { get; set; } = new();
 
     public ReactiveValue<BigNumber> GetResourceValue(ResourceType resourceType) 
@@ -63,6 +65,6 @@ public partial class PlayerResourceDataSave
 }
 public partial class InGameData
 {
-    [MemoryPackOrder(1)]
+    [MemoryPackOrder(105)]
     [field: SerializeField] public PlayerResourceDataSave playerResourceDataSave { get; set; } = new();
 }

@@ -18,13 +18,13 @@ public class HuntPassGlobalConfig : GlobalConfig<HuntPassGlobalConfig>
     string requestedData;
 
     [Button]
-    public void FetchQuestData()
+    public void FetchHunPassData()
     {
         if (string.IsNullOrEmpty(linkSheetId)) return;
-        FetchAchievement();
+        FetchHuntPass();
     }
 
-    async void FetchAchievement()
+    async void FetchHuntPass()
     {
         huntPasses.Clear();
 

@@ -14,6 +14,7 @@ public partial class HeroDataSave
 }
 public partial class InGameData
 {
+    [MemoryPackOrder(103)]
     [field: SerializeField] public HeroDataSave heroDataSave { get; set; } = new();
 }
 

@@ -30,7 +30,7 @@ public class HuntPassManager : Singleton<HuntPassManager>
         huntPasses = HuntPassGlobalConfig.Instance.huntPasses;
         huntPassDataSave = InGameDataManager.Instance.InGameData.huntPassDataSave.huntPassDatasSave;
       
-        isPremium = InGameDataManager.Instance.InGameData.huntPassDataSave.isPremium;
+        isPremium = InGameDataManager.Instance.InGameData.playerResourceDataSave.premium;
         timeHuntPassOut = InGameDataManager.Instance.InGameData.huntPassDataSave.timeOutHuntPass;
 
         huntLevel.ReactiveProperty.Subscribe(LevelUp).AddTo(this);

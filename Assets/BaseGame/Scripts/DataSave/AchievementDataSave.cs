@@ -25,6 +25,7 @@ public partial class AchievementDataSave
 
 public partial class InGameData
 {
+    [MemoryPackOrder(101)]
     [field: SerializeField] public AchievementDataSave achievementDataSave { get; set; } = new();
 }
 
