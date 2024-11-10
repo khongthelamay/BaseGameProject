@@ -13,7 +13,6 @@ public class Launcher : UnityScreenNavigatorLauncher
     {
         base.Start();
         ShowPanelTest();
-
     }
 
     async UniTaskVoid ShowPanelTest() {

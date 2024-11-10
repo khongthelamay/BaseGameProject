@@ -868,24 +868,32 @@ PrefabInstance:
       value: IngameDataManager
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPoint.m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassLevel.m_Value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.size
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<strLastDay>k__BackingField.m_Value
-      value: 11/9/2024 6:23:00 PM
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<strLastWeek>k__BackingField.m_Value
-      value: 11/9/2024 6:23:00 PM
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.size
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.size
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<currentDailyStreak>k__BackingField.m_Value
@@ -893,11 +901,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<ArtifactData>k__BackingField.<ArtifactInfos>k__BackingField.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<streakDailySaves>k__BackingField.Array.size
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[0].m_Value.heroName
@@ -953,7 +961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<id>k__BackingField.m_Value
@@ -1024,6 +1032,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.data[1].type
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<claimed>k__BackingField.m_Value
       value: 0
       objectReference: {fileID: 0}
@@ -1086,6 +1098,10 @@ PrefabInstance:
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[0].m_Value.<achievementLevel>k__BackingField.m_Value
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.data[1].value.m_Value.v
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8474258163414466772, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: m_LocalPosition.x

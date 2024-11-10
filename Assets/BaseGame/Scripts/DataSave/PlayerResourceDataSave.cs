@@ -37,8 +37,17 @@ public partial class PlayerResourceDataSave
         for (int i = 0; i < resources.ObservableList.Count; i++)
         {
             if (resources.ObservableList[i].type == type)
+            {
                 resources.ObservableList[i].Add(value);
+                InGameDataManager.Instance.SaveData();
+                return;
+            }
         }
+
+        Resource resource = new Resource();
+        resource.type = type;
+        resource.value.Value = value;
+        AddResource(resource);
         InGameDataManager.Instance.SaveData();
     }
 

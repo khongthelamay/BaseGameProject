@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
-public class SlotHuntPass : SlotBase<HunterPass>
+public class SlotHuntPass : SlotBase<HuntPass>
 {
     [Header("---- Slot Hunt Pass ----")]
     
@@ -18,16 +18,17 @@ public class SlotHuntPass : SlotBase<HunterPass>
     public GameObject objCommondLock;
     public GameObject objPremiumLock;
 
-    public UnityAction<SlotBase<HunterPass>> claimPremium;
+    public UnityAction<SlotBase<HuntPass>> claimPremium;
 
     public override void Awake()
     {
+        base.Awake();
         btnPremiumReward.onClick.AddListener(ClaimPremiumReward);
     }
 
-    public void SetActionClaimPremieum(UnityAction<SlotBase<HunterPass>> action) { claimPremium = action; }
+    public void SetActionClaimPremieum(UnityAction<SlotBase<HuntPass>> action) { claimPremium = action; }
 
-    public override void InitData(HunterPass data)
+    public override void InitData(HuntPass data)
     {
         base.InitData(data);
         // imgIcon.sprite = data.commond reward type
@@ -36,12 +37,12 @@ public class SlotHuntPass : SlotBase<HunterPass>
         txtAmountPremium.text = data.premiumRewardAmount.ToString();
         txtLevel.text = data.level.ToString();
 
-        objCommondClaimed.SetActive(HunterPassManager.Instance.IsClaimedComond(data.level));
-        objPremiumClaimed.SetActive(HunterPassManager.Instance.IsClaimedPremium(data.level));
+        objCommondClaimed.SetActive(HuntPassManager.Instance.IsClaimedComond(data.level));
+        objPremiumClaimed.SetActive(HuntPassManager.Instance.IsClaimedPremium(data.level));
 
-        objCommondLock.SetActive(HunterPassManager.Instance.IsLock(data.level));
+        objCommondLock.SetActive(HuntPassManager.Instance.IsLock(data.level));
 
-        if (HunterPassManager.Instance.isPremium)
+        if (HuntPassManager.Instance.isPremium)
         {
             if (!objCommondLock.activeSelf)
                 objPremiumLock.SetActive(false);
@@ -52,6 +53,11 @@ public class SlotHuntPass : SlotBase<HunterPass>
             objPremiumLock.SetActive(true);
 
         //HunterPassManager.Instance.IsCanClaim(data.level);
+    }
+
+    public override void OnChoose()
+    {
+        base.OnChoose();
     }
 
     void ClaimPremiumReward() {

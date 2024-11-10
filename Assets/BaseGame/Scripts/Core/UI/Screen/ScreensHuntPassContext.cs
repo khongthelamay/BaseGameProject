@@ -26,14 +26,14 @@ public class ScreensHuntPassContext
     {
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
-        [field: SerializeField] public List<HunterPass> hunterPassesConfig { get; private set; }
-        [field: SerializeField] public ReactiveList<HunterPassData> hunterPasses { get; private set; }
+        [field: SerializeField] public List<HuntPass> huntPassesConfig { get; private set; }
+        [field: SerializeField] public ReactiveList<HuntPassData> huntPasses { get; private set; }
 
 
         public UniTask Initialize(Memory<object> args)
         {
-            hunterPassesConfig = HunterPassGlobalConfig.Instance.hunterPasses;
-            hunterPasses = HunterPassManager.Instance.hunterPassDataSave;
+            huntPassesConfig = HuntPassGlobalConfig.Instance.huntPasses;
+            huntPasses = HuntPassManager.Instance.huntPassDataSave;
             return UniTask.CompletedTask;
         }
     }
@@ -52,14 +52,14 @@ public class ScreensHuntPassContext
             return UniTask.CompletedTask;
         }
 
-        public void InitData(List<HunterPass> hunterPasses) { mainContentHuntPass.InitData(hunterPasses); }
+        public void InitData(List<HuntPass> hunterPasses) { mainContentHuntPass.InitData(hunterPasses); }
 
-        public void SetActionClaimCommond(UnityAction<SlotBase<HunterPass>> claimCommond)
+        public void SetActionClaimCommond(UnityAction<SlotBase<HuntPass>> claimCommond)
         {
             mainContentHuntPass.SetActionSlotCallBack(claimCommond);
         }
 
-        public void SetActionClaimPremium(UnityAction<SlotBase<HunterPass>> claimPremieum)
+        public void SetActionClaimPremium(UnityAction<SlotBase<HuntPass>> claimPremieum)
         {
             mainContentHuntPass.SetActionClaimPremium(claimPremieum);
         }
@@ -77,27 +77,28 @@ public class ScreensHuntPassContext
             await Model.Initialize(args);
             await View.Initialize(args);
 
-            Model.hunterPasses.ObservableList.ObserveChanged().Subscribe(ChangeDataHunterPass).AddTo(View.MainView);
+            Model.huntPasses.ObservableList.ObserveChanged().Subscribe(ChangeDataHunterPass).AddTo(View.MainView);
 
             View.btnClose.onClick.AddListener(CloseScreen);
 
-            View.SetActionClaimCommond(ClaimCommond);
-            View.InitData(Model.hunterPassesConfig);
-            View.SetActionClaimPremium(SetActionClaimPremium);
+            View.SetActionClaimCommond(ActionClaimCommond);
+            View.InitData(Model.huntPassesConfig);
+            View.SetActionClaimPremium(ActionClaimPremium);
         }
 
-        void ChangeDataHunterPass(CollectionChangedEvent<HunterPassData> element)
+        void ChangeDataHunterPass(CollectionChangedEvent<HuntPassData> element)
         {
             Debug.Log(element.NewItem.level);
         }
 
-        void SetActionClaimPremium(SlotBase<HunterPass> slotBase)
+        void ActionClaimPremium(SlotBase<HuntPass> slotBase)
         {
-            HunterPassManager.Instance.ClaimHuntCommondPass(slotBase.slotData.level);
+            HuntPassManager.Instance.ClaimHuntPremieumPass(slotBase.slotData.level);
+
         }
 
-        void ClaimCommond(SlotBase<HunterPass> slotBase) {
-            HunterPassManager.Instance.ClaimHuntPremieumPass(slotBase.slotData.level);
+        void ActionClaimCommond(SlotBase<HuntPass> slotBase) {
+            HuntPassManager.Instance.ClaimHuntCommondPass(slotBase.slotData.level);
         }
 
         void CloseScreen()

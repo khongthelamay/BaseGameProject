@@ -6,11 +6,11 @@ using TW.Utility.Extension;
 using System;
 using UnityEditor;
 
-[CreateAssetMenu(fileName = "HunterPassGlobalConfig", menuName = "GlobalConfigs/HunterPassGlobalConfig")]
+[CreateAssetMenu(fileName = "HuntPassGlobalConfig", menuName = "GlobalConfigs/HuntPassGlobalConfig")]
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
-public class HunterPassGlobalConfig : GlobalConfig<HunterPassGlobalConfig>
+public class HuntPassGlobalConfig : GlobalConfig<HuntPassGlobalConfig>
 {
-    public List<HunterPass> hunterPasses = new();
+    public List<HuntPass> huntPasses = new();
 
 #if UNITY_EDITOR
     string linkSheetId = "1-HkinUwSW4A4SkuiLGtl0Tm8771jFPVZB5ZpLs5pxz4";
@@ -26,7 +26,7 @@ public class HunterPassGlobalConfig : GlobalConfig<HunterPassGlobalConfig>
 
     async void FetchAchievement()
     {
-        hunterPasses.Clear();
+        huntPasses.Clear();
 
         requestedData = await ABakingSheet.GetCsv(linkSheetId, "HunterPass");
 
@@ -39,14 +39,14 @@ public class HunterPassGlobalConfig : GlobalConfig<HunterPassGlobalConfig>
             int commonRewardAmount = int.Parse(data[i]["CommonRewardAmount"]);
             int premiumRewardAmount = int.Parse(data[i]["PremiumRewardAmount"]);
 
-            HunterPass hunterPass = new();
-            hunterPass.level = level;
-            hunterPass.expRequire = expRequire;
-            hunterPass.rType = rType;
-            hunterPass.commonRewardAmount = commonRewardAmount;
-            hunterPass.premiumRewardAmount = premiumRewardAmount;
+            HuntPass huntPass = new();
+            huntPass.level = level;
+            huntPass.expRequire = expRequire;
+            huntPass.rType = rType;
+            huntPass.commonRewardAmount = commonRewardAmount;
+            huntPass.premiumRewardAmount = premiumRewardAmount;
 
-            hunterPasses.Add(hunterPass);
+            huntPasses.Add(huntPass);
         }
 
         EditorUtility.SetDirty(this);
@@ -56,7 +56,7 @@ public class HunterPassGlobalConfig : GlobalConfig<HunterPassGlobalConfig>
 }
 
 [System.Serializable]
-public class HunterPass {
+public class HuntPass {
     public int level;
     public int expRequire;
     public ResourceType rType;

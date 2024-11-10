@@ -6,19 +6,23 @@ using UnityEngine;
 
 [System.Serializable]
 [MemoryPackable]
-public partial class HunterPassDataSave
+public partial class HuntPassDataSave
 {
-    public static HunterPassDataSave Instance => InGameDataManager.Instance.InGameData.hunterPassDataSave;
-    public ReactiveList<HunterPassData> hunterPassDataSave = new();
+    public static HuntPassDataSave Instance => InGameDataManager.Instance.InGameData.huntPassDataSave;
+    public ReactiveValue<int> huntPassLevel = new(0);
+    public ReactiveValue<int> huntPoint = new(0);
+    public ReactiveValue<bool> isPremium;
+    public ReactiveList<HuntPassData> huntPassDatasSave = new();
+    public ReactiveValue<string> timeOutHuntPass;
 }
 public partial class InGameData
 {
-    [field: SerializeField] public HunterPassDataSave hunterPassDataSave { get; set; } = new();
+    [field: SerializeField] public HuntPassDataSave huntPassDataSave { get; set; } = new();
 }
 
 [System.Serializable]
 [MemoryPackable]
-public partial class HunterPassData {
+public partial class HuntPassData {
     public int level;
     public bool isClaimedCommond;
     public bool isClaimedPremium;

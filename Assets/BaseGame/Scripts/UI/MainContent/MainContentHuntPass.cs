@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MainContentHuntPass : MainContent<HunterPass>
+public class MainContentHuntPass : MainContent<HuntPass>
 {
-    public void SetActionClaimPremium(UnityAction<SlotBase<HunterPass>> claimPremieum)
+    public void SetActionClaimPremium(UnityAction<SlotBase<HuntPass>> claimPremieum)
     {
         for (int i = 0; i < slots.Count; i++)
         {

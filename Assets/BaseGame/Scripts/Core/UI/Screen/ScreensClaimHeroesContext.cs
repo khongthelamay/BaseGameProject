@@ -28,7 +28,7 @@ public class ScreensClaimHeroesContext
         [field: SerializeField] public ReactiveList<RecruitReward> rewards { get;  set; } = new();
         public UniTask Initialize(Memory<object> args)
         {
-            rewards = RecruitManager.Instance.recruitRewardEarned;
+            rewards = RecruitManager.Instance.recruitHeroRewardEarned;
             return UniTask.CompletedTask;
         }
     }
@@ -75,8 +75,8 @@ public class ScreensClaimHeroesContext
         }
 
         void OnClose() {
-            RecruitManager.Instance.ClearRewardEarned();
-            ScreenContainer.Find(ContainerKey.MidleScreens).PopAsync(true);
+            RecruitManager.Instance.ClearHeroRewardEarned();
+            ScreenContainer.Find(ContainerKey.Screens).PopAsync(true);
             ViewOptions options = new ViewOptions(nameof(ScreensDefault));
             ScreenContainer.Find(ContainerKey.MidleScreens).PushAsync(options);
             

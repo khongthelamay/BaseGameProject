@@ -3,18 +3,31 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using TW.Reactive.CustomComponent;
+using TW.Utility.CustomType;
 using TW.Utility.DesignPattern;
 using UnityEngine;
 
 public class RecruitManager : Singleton<RecruitManager>
 {
     public ReactiveList<RecruitReward> recruitRewards = new();
-    public ReactiveList<RecruitReward> recruitRewardEarned = new();
+    public ReactiveList<RecruitReward> recruitHeroRewardEarned = new();
+    public ReactiveList<RecruitReward> recruitItemRewardEarned = new();
     public int currentTurn;
     public ReactiveValue<int> totalRewardNeedGetThisTurn = new(0);
     RecruitRewardType recruitRewardTypeTemp = RecruitRewardType.Hero;
     List<HeroConfigData> currentHeroHave = new();
     RecruitTurn currentRecruitTurn;
+
+    public ReactiveValue<BigNumber> recruitRecipe;
+
+    private void Start()
+    {
+        LoadData();
+    }
+
+    void LoadData() {
+        recruitRecipe = InGameDataManager.Instance.InGameData.playerResourceDataSave.GetResourceValue(ResourceType.RecruitRecipe);
+    }
 
     [Button]
     public void InitData(int recruitTotal) {
@@ -23,6 +36,8 @@ public class RecruitManager : Singleton<RecruitManager>
             currentTurn = 0;
             return;
         }
+
+        InGameDataManager.Instance.InGameData.playerResourceDataSave.ConsumeResourceValue(ResourceType.RecruitRecipe, (recruitTotal * 30));
         
         currentRecruitTurn = RecruitPersentGlobalConfig.Instance.GetRecruitTurn(currentTurn);
 
@@ -63,15 +78,22 @@ public class RecruitManager : Singleton<RecruitManager>
 
     void AddRewardEarned(RecruitReward recruitReward) {
         if (recruitReward.type == RecruitRewardType.Item)
-            return;
-
-        for (int i = 0; i < recruitRewardEarned.ObservableList.Count; i++)
         {
-            if (recruitRewardEarned.ObservableList[i].type == recruitReward.type)
+            AddItemReward(recruitReward);
+        }
+        else
+            AddHeroReward(recruitReward);
+    }
+
+    void AddItemReward(RecruitReward recruitReward)
+    {
+        for (int i = 0; i < recruitItemRewardEarned.ObservableList.Count; i++)
+        {
+            if (recruitItemRewardEarned.ObservableList[i].type == recruitReward.type)
             {
-                if (recruitRewardEarned.ObservableList[i].heroData.Name == recruitReward.heroData.Name)
+                if (recruitItemRewardEarned.ObservableList[i].heroData.Name == recruitReward.heroData.Name)
                 {
-                    recruitRewardEarned.ObservableList[i].amount += recruitReward.amount;
+                    recruitItemRewardEarned.ObservableList[i].amount += recruitReward.amount;
                     return;
                 }
             }
@@ -81,8 +103,27 @@ public class RecruitManager : Singleton<RecruitManager>
         newRecruitReward.heroData = recruitReward.heroData;
         newRecruitReward.resource = recruitReward.resource;
         newRecruitReward.amount = recruitReward.amount;
-        recruitRewardEarned.ObservableList.Add(newRecruitReward);
+        recruitItemRewardEarned.ObservableList.Add(newRecruitReward);
+    }
 
+    void AddHeroReward(RecruitReward recruitReward) {
+        for (int i = 0; i < recruitHeroRewardEarned.ObservableList.Count; i++)
+        {
+            if (recruitHeroRewardEarned.ObservableList[i].type == recruitReward.type)
+            {
+                if (recruitHeroRewardEarned.ObservableList[i].heroData.Name == recruitReward.heroData.Name)
+                {
+                    recruitHeroRewardEarned.ObservableList[i].amount += recruitReward.amount;
+                    return;
+                }
+            }
+        }
+        RecruitReward newRecruitReward = new();
+        newRecruitReward.type = recruitReward.type;
+        newRecruitReward.heroData = recruitReward.heroData;
+        newRecruitReward.resource = recruitReward.resource;
+        newRecruitReward.amount = recruitReward.amount;
+        recruitHeroRewardEarned.ObservableList.Add(newRecruitReward);
     }
 
     public void ResetTurn() { currentTurn = 0; }
@@ -124,8 +165,22 @@ public class RecruitManager : Singleton<RecruitManager>
         return currentHeroHave[Random.Range(0, currentHeroHave.Count)];
     }
 
-    public void ClearRewardEarned()
+    public void ClearHeroRewardEarned()
     {
-        recruitRewardEarned.ObservableList.Clear();
+        recruitHeroRewardEarned.ObservableList.Clear();
+    }
+
+    public void ClearItemRewardEarned() {
+        recruitItemRewardEarned.ObservableList.Clear();
+    }
+
+    public bool IsHaveHeroReward()
+    {
+        return recruitHeroRewardEarned.ObservableList.Count > 0;
+    }
+
+    public bool IsHaveItemReward()
+    {
+        return recruitItemRewardEarned.ObservableList.Count > 0;
     }
 }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b033554b0b1e1343980bf3db68344ee, type: 3}
-  m_Name: HunterPassGlobalConfig
+  m_Name: HuntPassGlobalConfig
   m_EditorClassIdentifier: 
-  hunterPasses:
+  huntPasses:
   - level: 1
     expRequire: 20
     rType: 1

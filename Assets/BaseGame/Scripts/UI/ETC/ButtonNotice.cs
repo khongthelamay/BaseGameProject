@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,5 +37,15 @@ public class ButtonNotice : MonoBehaviour
       
         if (actionCallBack != null)
             actionCallBack();
+    }
+
+    public void SetInteract(bool interactable)
+    {
+        btnWithNotice.interactable = interactable;
+    }
+
+    public void ChangeShowNotice(bool active)
+    {
+        objNotice.SetActive(active);
     }
 }

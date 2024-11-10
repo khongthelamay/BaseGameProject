@@ -12,6 +12,7 @@ using UnityEngine.UI;
 using TW.UGUI.Core.Views;
 using ObservableCollections;
 using TW.UGUI.Core.Modals;
+using TW.Utility.CustomType;
 
 [Serializable]
 public class ScreensRecruitContext 
@@ -30,6 +31,7 @@ public class ScreensRecruitContext
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public ReactiveList<RecruitReward> recruitRewards { get; private set; } = new();
         [field: SerializeField] public ReactiveValue<int> totalRewardCanGetThisTurn { get; private set; } = new();
+        [field: SerializeField] public ReactiveValue<BigNumber> recruitRecipe { get; private set; } = new();
         [field: SerializeField] public int currentRewardMoveDone;
 
         [field: SerializeField] public int lastRecruitAmount;
@@ -38,6 +40,7 @@ public class ScreensRecruitContext
         {
             recruitRewards = RecruitManager.Instance.recruitRewards;
             totalRewardCanGetThisTurn = RecruitManager.Instance.totalRewardNeedGetThisTurn;
+            recruitRecipe = RecruitManager.Instance.recruitRecipe;
             return UniTask.CompletedTask;
         }
     }
@@ -56,6 +59,8 @@ public class ScreensRecruitContext
         [field: SerializeField] public MainContentRecruitReward rewardMove {get; private set;}  
         [field: SerializeField] public MainContentRecruitReward rewardShow {get; private set;}  
         [field: SerializeField] public TextMeshProUGUI txtCountCurrentRewardGet {get; private set;}  
+        [field: SerializeField] public TextMeshProUGUI txtRecruitRecipe {get; private set;}  
+        [field: SerializeField] public TextMeshProUGUI txtRecruitRecipeX10 {get; private set;}  
         
         public UniTask Initialize(Memory<object> args)
         {
@@ -83,6 +88,17 @@ public class ScreensRecruitContext
         {
             rewardShow.ShowReward(slotIndex);
         }
+
+        public void ChangeRecruitRecipe(BigNumber amount)
+        {
+            txtRecruitRecipe.text = $"{amount}/30";
+            txtRecruitRecipeX10.text = $"{amount}/300";
+            btnRecruit.SetInteract(amount >= 30);
+            btnRecruitX10.SetInteract(amount >= 300);
+
+            btnRecruit.ChangeShowNotice(amount >= 30);
+            btnRecruitX10.ChangeShowNotice(amount >= 300);
+        }
     }
 
     [HideLabel]
@@ -96,15 +112,25 @@ public class ScreensRecruitContext
         {
             await Model.Initialize(args);
             await View.Initialize(args);
+
             View.btnExit.onClick.AddListener(OnClose);
             View.btnContinueRecruit.onClick.AddListener(ContinueRecruit);
+
             View.btnRecruit.SetButtonOnClick(Recruit);
             View.btnRecruitX10.SetButtonOnClick(RecruitX10);
+
             View.rewardMove.SetActionCallbackMoveDone(ActionCallbackMoveDone);
+
             View.btnContinueRecruit.gameObject.SetActive(false);
+
             Model.recruitRewards.ObservableList.ObserveChanged().Subscribe(ChangeListRewards).AddTo(View.MainView);
             Model.totalRewardCanGetThisTurn.ReactiveProperty.Subscribe(ChangeTotalRewardNeedEarn).AddTo(View.MainView);
+            Model.recruitRecipe.ReactiveProperty.Subscribe(ChangeRecruitRecipe).AddTo(View.MainView);
             Events.LastSlotMoveDone = LastSlotMoveDone;
+        }
+
+        void ChangeRecruitRecipe(BigNumber amount) {
+            View.ChangeRecruitRecipe(amount);
         }
 
         void ChangeTotalRewardNeedEarn(int totalRewardNeedEarn) {
@@ -131,8 +157,17 @@ public class ScreensRecruitContext
             View.rewardMove.CleanAnimation();
             View.rewardShow.CleanAnimation();
             ScreenContainer.Find(ContainerKey.Screens).PopAsync(true);
-            ViewOptions options = new ViewOptions(nameof(ScreensClaimHeroes));
-            ScreenContainer.Find(ContainerKey.MidleScreens).PushAsync(options);
+
+            if (RecruitManager.Instance.IsHaveHeroReward())
+            {
+                ViewOptions options = new ViewOptions(nameof(ScreensClaimHeroes));
+                ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+            }
+            else
+            {
+                ViewOptions options = new ViewOptions(nameof(ScreensDefault));
+                ScreenContainer.Find(ContainerKey.MidleScreens).PushAsync(options);
+            }
         }
 
         void Recruit() {
