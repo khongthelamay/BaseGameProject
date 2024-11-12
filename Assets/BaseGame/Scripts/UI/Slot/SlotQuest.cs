@@ -12,19 +12,22 @@ using TW.Utility.CustomType;
 public class SlotQuest : SlotBase<QuestDataConfig>
 {
     [Header("======= QuestSlot =======")]
+    [SerializeField] List<Sprite> sprBGSlot = new();
+    [SerializeField] List<Sprite> sprBGReward = new();
     [SerializeField] RectMask2D myMask;
     [SerializeField] TextMeshProUGUI txtDes;
     [SerializeField] TextMeshProUGUI txtProgress;
     [SerializeField] TextMeshProUGUI txtReward;
     [SerializeField] Image imgBG;
+    [SerializeField] Image imgBGStar;
     [SerializeField] ProgressBar progressBar;
     [SerializeField] LayoutElement myLayout;
 
     [SerializeField] GameObject objProgressDone;
     [SerializeField] GameObject objNotice;
     [SerializeField] GameObject objTextNotice;
-    [SerializeField] GameObject objBGCanClaim;
     [SerializeField] GameObject objLight;
+    [SerializeField] GameObject objProgress;
 
     [SerializeField] Transform trsProgressDone;
     [SerializeField] Transform trsIconProgressDone;
@@ -57,7 +60,9 @@ public class SlotQuest : SlotBase<QuestDataConfig>
 
         btnChoose.interactable = QuestManager.Instance.IsCanClaim(questSave.Value.id.Value);
 
-        objBGCanClaim.SetActive(btnChoose.interactable);
+        imgBG.sprite = btnChoose.interactable ? sprBGSlot[0] : sprBGSlot[1];
+        imgBGStar.sprite = btnChoose.interactable ? sprBGReward[0] : sprBGReward[2];
+
         objNotice.SetActive(btnChoose.interactable);
         objTextNotice.SetActive(btnChoose.interactable);
 
@@ -93,10 +98,11 @@ public class SlotQuest : SlotBase<QuestDataConfig>
         mySequence = DOTween.Sequence();
         mySequence.Append(trsLight.DOLocalMove(pointLightEnd.localPosition, .5f).From(pointLightStart.localPosition).OnComplete(() =>
         {
+            imgBG.sprite = sprBGSlot[1];
+            objProgress.SetActive(false);
             objProgressDone.SetActive(true);
             objTextNotice.SetActive(false);
             objLight.SetActive(false);
-            objBGCanClaim.SetActive(false);
         }));
 
         mySequence.Append(trsProgressDone.DOScale(Vector3.one * 2f, .15f));
@@ -113,9 +119,11 @@ public class SlotQuest : SlotBase<QuestDataConfig>
     }
 
     void ActionCallBackClaimed() {
+        objProgress.SetActive(false);
         objProgressDone.SetActive(true);
         myLayout.preferredHeight = heightDefault;
         transform.SetAsLastSibling();
+        imgBGStar.sprite = sprBGReward[1];
     }
 
     public override void ReloadData()
