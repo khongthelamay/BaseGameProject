@@ -352,7 +352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 683, y: -5}
+  m_AnchoredPosition: {x: 683, y: -0}
   m_SizeDelta: {x: 1366, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6267767047383573852
@@ -790,6 +790,7 @@ MonoBehaviour:
         m_Value:
           v: 0
           m: 0
+      <heroDataConfig>k__BackingField: {fileID: 0}
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 3928123826448132961}
       <mainContentHeroes>k__BackingField: {fileID: 6265932703980163829}
@@ -1469,7 +1470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 683, y: -65}
+  m_AnchoredPosition: {x: 683, y: -0}
   m_SizeDelta: {x: 1366, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8810962628664600599

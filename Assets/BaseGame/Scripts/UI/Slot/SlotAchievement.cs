@@ -32,6 +32,7 @@ public class SlotAchievement : SlotBase<AchievementDataConfig>
     [SerializeField] Transform trsLight;
     [SerializeField] Transform pointLightStart;
     [SerializeField] Transform pointLightEnd;
+
     [SerializeField] Vector3 vectorRotate;
 
     bool onClaim;
@@ -44,6 +45,7 @@ public class SlotAchievement : SlotBase<AchievementDataConfig>
     }
 
     public bool IsClaimed() { return objProgressDone.activeSelf; }
+
     public bool IsCanClaim() { return btnChoose.interactable; }
 
     public override void InitData(AchievementDataConfig data)
