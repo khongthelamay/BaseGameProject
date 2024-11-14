@@ -148,7 +148,7 @@ public class ScreensHeroesContext
 
         private void ChangeData((HeroSave heroData, int heroLevel, int heroPieces) data)
         {
-            Debug.Log("Change data");
+            //Debug.Log("Change data");
             Model.GetHeroDataConfig(data.heroData.heroName);
             View.ReloadData(Model.heroDataConfig);
         }

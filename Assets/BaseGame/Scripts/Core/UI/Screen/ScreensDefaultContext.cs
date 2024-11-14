@@ -26,17 +26,41 @@ public class ScreensDefaultContext
     {
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
-        
+        [field: SerializeField] public ReactiveValue<int> level { get; private set; }
+
+        public UniTask Initialize(Memory<object> args)
+        {
+            level = InGameDataManager.Instance.InGameData.playerResourceDataSave.level;
+            return UniTask.CompletedTask;
+        }
+
+    }
+    
+    [HideLabel]
+    [Serializable]
+    public class UIView : IAView
+    {
+        [field: Title(nameof(UIView))]
+        [field: SerializeField] public CanvasGroup MainView {get; private set;}
+
         public List<SlotTabMainMenu> tabs = new();
         SlotTabMainMenu currentTab;
+
         public UniTask Initialize(Memory<object> args)
         {
             for (int i = 0; i < tabs.Count; i++)
             {
                 tabs[i].InitData((TabType)i, OnChooseTab);
             }
-            
             return UniTask.CompletedTask;
+        }
+
+        public void ChangeLevel(int level)
+        {
+            for (int i = 0; i < tabs.Count; i++)
+            {
+                tabs[i].UnlockLevel(level);
+            }
         }
 
         public void OnChooseTab(SlotTabMainMenu tabChoose)
@@ -48,8 +72,8 @@ public class ScreensDefaultContext
                         ScreenContainer.Find(ContainerKey.Screens).Pop(true);
 
                 currentTab = tabChoose;
-                currentTab.AnimOnSelect();
-                
+                currentTab.SelectMode();
+
                 for (int i = 0; i < tabs.Count; i++)
                 {
                     if (currentTab != tabs[i])
@@ -102,19 +126,6 @@ public class ScreensDefaultContext
             Debug.Log("Comming Soon");
         }
     }
-    
-    [HideLabel]
-    [Serializable]
-    public class UIView : IAView
-    {
-        [field: Title(nameof(UIView))]
-        [field: SerializeField] public CanvasGroup MainView {get; private set;}  
-        
-        public UniTask Initialize(Memory<object> args)
-        {
-            return UniTask.CompletedTask;
-        }
-    }
 
     [HideLabel]
     [Serializable]
@@ -127,7 +138,12 @@ public class ScreensDefaultContext
         {
             await Model.Initialize(args);
             await View.Initialize(args);
-            Model.OnChooseTab(Model.tabs[2]);
-        }      
+            View.OnChooseTab(View.tabs[2]);
+            Model.level.ReactiveProperty.Subscribe(ChangeLevel).AddTo(View.MainView);
+        }
+
+        void ChangeLevel(int level) {
+            View.ChangeLevel(level);
+        }
     }
 }
