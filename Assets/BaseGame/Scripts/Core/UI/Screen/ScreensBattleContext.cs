@@ -6,7 +6,6 @@ using R3;
 using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
-using System.Collections.Generic;
 using Manager;
 using TW.UGUI.Core.Views;
 using UnityEngine.UI;

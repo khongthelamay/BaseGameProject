@@ -34,4 +34,5 @@ MonoBehaviour:
       type: {class: MeleeAttackAbility, ns: Core, asm: Assembly-CSharp}
       data:
         <LevelUnlock>k__BackingField: 0
+        <Owner>k__BackingField: {fileID: 0}
         <DamageType>k__BackingField: 0

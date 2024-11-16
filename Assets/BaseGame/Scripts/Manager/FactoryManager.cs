@@ -1,8 +1,5 @@
-﻿using System;
-using System.Numerics;
-using DamageNumbersPro;
-using R3;
-using R3.Triggers;
+﻿using DamageNumbersPro;
+using TW.Utility.CustomType;
 using TW.Utility.DesignPattern;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
@@ -24,9 +21,9 @@ namespace Manager
             //     });
         }
         
-        public void CreateDamageNumber(Vector3 position, BigInteger damage)
+        public void CreateDamageNumber(Vector3 position, BigNumber damage)
         {
-            DamageNumber damageNumber = DamageNumberMesh.Spawn(position, damage.ToSuffixString());
+            DamageNumber damageNumber = DamageNumberMesh.Spawn(position, damage.ToStringUI());
         }
     }
 }

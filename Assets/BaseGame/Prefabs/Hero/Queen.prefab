@@ -78,13 +78,17 @@ MonoBehaviour:
   <SpriteRarity>k__BackingField: {fileID: 5547620406308107847}
   <MoveProjectile>k__BackingField: {fileID: 4845609547942700330, guid: 84727164c6cf08646a00b92bf0e0b342, type: 3}
   <VisibleGroup>k__BackingField: {fileID: 4617695294381099367}
+  <GraphicGroupTransform>k__BackingField: {fileID: 8176968767992221013}
   <FieldSlot>k__BackingField: {fileID: 0}
   <HeroAnim>k__BackingField: {fileID: 70318635019368349}
   <SortingGroup>k__BackingField: {fileID: 3161537152092833894}
-  <AttackDamage>k__BackingField: 0
-  <AttackSpeed>k__BackingField: 0
-  <AttackRange>k__BackingField: 0
+  <BaseAttackDamage>k__BackingField: 0
+  <BaseAttackSpeed>k__BackingField: 0
+  <BaseAttackRange>k__BackingField: 0
   <IsCancelAbility>k__BackingField: 0
+  <ProjectileSpawnPosition>k__BackingField: {fileID: 3584122473376733458}
+  <NormalAttackProjectile>k__BackingField: {fileID: 6453086906235805925, guid: 38437d6b04f719c45bf53d0a3eac68ec, type: 3}
+  <QueenNormalAttackEffect>k__BackingField: {fileID: 8161184177320555622, guid: a7dc41cb51b3da84babf48286a3d7b90, type: 3}
 --- !u!1 &740400944487085344
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +367,7 @@ Transform:
   m_Children:
   - {fileID: 4081051071535281527}
   - {fileID: 1046458928544160384}
+  - {fileID: 3584122473376733458}
   m_Father: {fileID: 4401680011550373338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6687122054598497591
@@ -471,6 +476,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &7372278029447080810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3584122473376733458}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3584122473376733458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372278029447080810}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.8, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8176968767992221013}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8463103594886463047
 GameObject:
   m_ObjectHideFlags: 0

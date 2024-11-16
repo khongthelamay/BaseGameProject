@@ -5,12 +5,10 @@ using Cysharp.Threading.Tasks;
 using Manager;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
-using TW.Utility.Extension;
 using UnityEngine;
 using Zenject;
 
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 
 public class Map : ACachedMonoBehaviour

@@ -1,4 +1,3 @@
-using System;
 using Core;
 using R3;
 using R3.Triggers;

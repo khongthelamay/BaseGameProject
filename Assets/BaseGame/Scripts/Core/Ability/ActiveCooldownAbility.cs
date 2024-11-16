@@ -1,8 +1,4 @@
-﻿using System.Threading;
-using BaseGame.Scripts.Enum;
-using Cysharp.Threading.Tasks;
-using LitMotion;
-using Manager;
+﻿using LitMotion;
 using TW.ACacheEverything;
 using UnityEngine;
 

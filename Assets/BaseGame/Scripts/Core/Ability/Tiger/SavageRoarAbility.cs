@@ -1,11 +1,7 @@
-﻿using System.Numerics;
-using System.Threading;
-using BaseGame.Scripts.Enum;
+﻿using System.Threading;
 using Core.SimplePool;
 using Cysharp.Threading.Tasks;
-using LitMotion;
-using Manager;
-using TW.ACacheEverything;
+using TW.Utility.CustomType;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 
@@ -13,17 +9,15 @@ namespace Core
 {
     public partial class SavageRoarAbility : ActiveCooldownAbility
     {
-        [field: SerializeField] private int DamageScale { get; set; }
-        [field: SerializeField] private DamageType DamageType { get; set; }
+        [field: SerializeField] private int DamageScale { get; set; } = 100;
+        [field: SerializeField] private DamageType DamageType { get; set; } = DamageType.Physical; 
         [field: SerializeField] private VisualEffect VisualEffect { get; set; }
         private Enemy EnemyTarget { get; set; }
         private Enemy[] Enemies { get; set; } = new Enemy[30]; 
         private int EnemiesCount { get; set; }
         private Tiger OwnerTiger { get; set; }
-        public SavageRoarAbility(Hero owner, int levelUnlock, float cooldown, int damageScale, DamageType damageType, VisualEffect visualEffect) : base(owner, levelUnlock, cooldown)
+        public SavageRoarAbility(Hero owner, int levelUnlock, float cooldown, VisualEffect visualEffect) : base(owner, levelUnlock, cooldown)
         {
-            DamageScale = damageScale;
-            DamageType = damageType;
             VisualEffect = visualEffect;
             OwnerTiger = (Tiger) owner;
         }
@@ -50,16 +44,23 @@ namespace Core
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
             CooldownTimer = Cooldown;
-            Owner.HeroAnim.PlaySkillAnimation(Owner.AttackSpeed);
+            BigNumber damageDeal = Owner.AttackDamage * DamageScale;
+            float attackSpeed = Owner.AttackSpeed;
+            
+            for (int i = 0; i < EnemiesCount; i++)
+            {
+                Enemies[i].WillTakeDamage(damageDeal);
+            }
+            Owner.SetFacingPosition(EnemyTarget.Transform.position);
+            Owner.HeroAnim.PlaySkillAnimation(attackSpeed);
             OwnerTiger.AddFuryPoint(1);
             await DelaySample(17, tickRate, ct);
-            BigInteger attackDamage = (BigInteger)(Owner.AttackDamage * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value/100));
-            BigInteger damage = attackDamage * DamageScale;
+
             VisualEffect.Spawn(EnemyTarget.transform.position, Quaternion.identity);
             await DelaySample(2, tickRate, ct);
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].TakeDamage(damage, DamageType);
+                Enemies[i].TakeDamage(damageDeal, DamageType);
             }
             await DelaySample(11, tickRate, ct);
             StartCooldownHandle();

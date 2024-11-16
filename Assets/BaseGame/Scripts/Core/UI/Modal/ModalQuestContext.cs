@@ -9,7 +9,6 @@ using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
 using System.Collections.Generic;
 using UnityEngine.Events;
-using TW.UGUI.Core.Views;
 using TMPro;
 
 [Serializable]

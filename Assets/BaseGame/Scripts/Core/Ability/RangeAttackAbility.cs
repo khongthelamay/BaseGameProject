@@ -1,9 +1,8 @@
 ﻿using System.Threading;
-using BaseGame.Scripts.Enum;
 using Core.SimplePool;
 using Cysharp.Threading.Tasks;
-using Manager;
 using TW.ACacheEverything;
+using TW.Utility.CustomType;
 using UnityEngine;
 
 namespace Core
@@ -42,15 +41,19 @@ namespace Core
 
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            Owner.HeroAnim.PlayAttackAnimation(Owner.AttackSpeed);
-            Projectile.Spawn(SpawnPosition.position, Quaternion.identity).Setup(Owner, EnemyTarget, DamageType)
+            BigNumber damageDeal = Owner.AttackDamage;
+            float attackSpeed = Owner.AttackSpeed;
+            
+            Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
+            Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
+                .Setup(Owner, EnemyTarget, damageDeal, DamageType)
                 .WithComplete(OnProjectileMoveCompleteCache);
             await DelaySample(30, tickRate, ct);
         }
-        [ACacheMethod]
-        private void OnProjectileMoveComplete()
+        [ACacheMethod("TW.Utility.CustomType")]
+        private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, BigNumber damage, DamageType damageType)
         {
-            EnemyTarget.TakeDamage(Owner.AttackDamage, DamageType);
+            targetEnemy.TakeDamage(damage, damageType);
         }
         
     }

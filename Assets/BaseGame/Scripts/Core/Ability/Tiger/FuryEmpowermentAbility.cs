@@ -7,18 +7,15 @@ namespace Core
 {
     public partial class FuryEmpowermentAbility : PassiveAbility
     {
-        [field: SerializeField] private float AttackDamageScalePerFury { get; set; }
-        [field: SerializeField] private float CriticalDamageScalePerFury { get; set; }
+        [field: SerializeField] private float AttackDamageScalePerFury { get; set; } = 0.25f;
+        [field: SerializeField] private float CriticalDamageScalePerFury { get; set; } = 0.25f;
         [field: SerializeField] private float AttackDamageGain { get; set; }
         [field: SerializeField] private float CriticalDamageGain { get; set; }
         private IDisposable Disposable { get; set; }
         private Tiger OwnerTiger { get; set; }
 
-        public FuryEmpowermentAbility(Hero owner, int levelUnlock, float attackDamageScalePerFury,
-            float criticalDamageScalePerFury) : base(owner, levelUnlock)
+        public FuryEmpowermentAbility(Hero owner, int levelUnlock) : base(owner, levelUnlock)
         {
-            AttackDamageScalePerFury = attackDamageScalePerFury;
-            CriticalDamageScalePerFury = criticalDamageScalePerFury;
             OwnerTiger = (Tiger)owner;
         }
 

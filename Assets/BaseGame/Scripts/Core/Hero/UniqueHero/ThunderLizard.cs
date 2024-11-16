@@ -1,5 +1,3 @@
-using BaseGame.Scripts.Enum;
-
 namespace Core
 {
     public class ThunderLizard : Hero

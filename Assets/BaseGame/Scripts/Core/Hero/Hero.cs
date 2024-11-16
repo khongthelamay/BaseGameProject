@@ -5,11 +5,11 @@ using Manager;
 using Sirenix.OdinInspector;
 using TW.ACacheEverything;
 using TW.Utility.CustomComponent;
+using TW.Utility.CustomType;
 using TW.Utility.DesignPattern;
 using TW.Utility.Extension;
 using UnityEngine;
 using UnityEngine.Rendering;
-using Object = UnityEngine.Object;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -18,6 +18,12 @@ namespace Core
 {
     public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero> 
     {
+        private static Vector3[] VectorFacing { get; set; } = new Vector3[2]
+        {
+            new Vector3(1, 1, 1),
+            new Vector3(-1, 1, 1),
+        };
+        
         [GUIColor("@TW.Utility.Extension.AColorExtension.GetColorInPalette(\"Job\", (int)$value)")]
         public enum Job
         {
@@ -36,6 +42,9 @@ namespace Core
             Melee = 1,
             Range = 2,
         }
+        private BattleManager BattleManagerCache { get; set; }
+        private BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        
         [field: Title(nameof(Hero))]
         [field: SerializeField] public HeroConfigData HeroConfigData { get; set; }
         [field: SerializeField] public HeroAttackRange HeroAttackRange { get; set; }
@@ -43,15 +52,21 @@ namespace Core
         [field: SerializeField] public SpriteRenderer SpriteRarity { get; set; }
         [field: SerializeField] public MoveProjectile MoveProjectile { get; private set; }
         [field: SerializeField] public GameObject VisibleGroup {get; private set;}
+        [field: SerializeField] public Transform GraphicGroupTransform {get; private set;}
+
         [field: SerializeField] public FieldSlot FieldSlot { get; private set; }
         [field: SerializeField] public HeroAnim HeroAnim {get; private set;}
         [field: SerializeField] public SortingGroup SortingGroup {get; private set;}
 
         
         private StateMachine StateMachine { get; set; }
-        [field: SerializeField] public int AttackDamage { get; set; }
-        [field: SerializeField] public float AttackSpeed { get; set; }
-        [field: SerializeField] public float AttackRange { get; set; }
+        [field: SerializeField] private int BaseAttackDamage { get; set; }
+        [field: SerializeField] private float BaseAttackSpeed { get; set; }
+        [field: SerializeField] private float BaseAttackRange { get; set; }
+        
+        public BigNumber AttackDamage => BaseAttackDamage * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value/100);
+        public float AttackSpeed => BaseAttackSpeed * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackSpeed).Value/100);
+        public float AttackRange => BaseAttackRange;
         [ShowInInspector]
         protected List<ActiveAbility> ActiveAbilities { get; set; } = new();
         [ShowInInspector]
@@ -89,9 +104,9 @@ namespace Core
         }
         private void InitStat()
         {
-            AttackDamage = HeroConfigData.BaseAttackDamage;
-            AttackSpeed = HeroConfigData.BaseAttackSpeed;
-            AttackRange = HeroConfigData.BaseAttackRange;
+            BaseAttackDamage = HeroConfigData.BaseAttackDamage;
+            BaseAttackSpeed = HeroConfigData.BaseAttackSpeed;
+            BaseAttackRange = HeroConfigData.BaseAttackRange;
         }
 
         protected virtual void InitAbility()
@@ -157,7 +172,6 @@ namespace Core
         {
             VisibleGroup.SetActive(isVisible);
         }
-        
         public void SelfDespawn()
         {
             Destroy(gameObject);
@@ -166,7 +180,10 @@ namespace Core
         {
             IsCancelAbility = isCancelAbility;
         }
-
+        public void SetFacingPosition(Vector3 targetPosition)
+        {
+            GraphicGroupTransform.localScale = targetPosition.x < Transform.position.x ? VectorFacing[0] : VectorFacing[1];
+        }
         public Hero WaitSlotInit(WaitSlot waitSlot)
         {
             Transform.SetParent(waitSlot.Transform);
@@ -174,17 +191,14 @@ namespace Core
             StateMachine.RequestTransition(HeroIdleState);
             return this;
         }
-
         public void ShowAttackRange()
         {
             HeroAttackRange.ShowAttackRange(HeroConfigData.BaseAttackRange);
         }
-
         public void HideAttackRange()
         {
             HeroAttackRange.HideAttackRange();
         }
-
         private Hero UpdateLayer()
         {
             SortingGroup.sortingOrder = -(int) (Transform.position.y * 100 + Transform.position.x);
@@ -207,6 +221,7 @@ namespace Core
                 AssetDatabase.GUIDToAssetPath(
                     AssetDatabase.FindAssets("t:Prefab MoveProjectile")[0]));
             VisibleGroup = transform.FindChildOrCreate("VisibleGroup").gameObject;
+            GraphicGroupTransform = transform.FindChildOrCreate("HeroGraphic").transform;
             
             SpriteGraphic.sprite = HeroConfigData.HeroSprite;
             SpriteRarity.color = BaseHeroGenerateGlobalConfig.Instance.RarityColorArray[(int)HeroConfigData.HeroRarity];

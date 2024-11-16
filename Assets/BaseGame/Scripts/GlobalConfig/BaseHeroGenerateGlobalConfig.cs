@@ -1,19 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Core;
-using Cysharp.Threading.Tasks;
-using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using Spine.Unity;
-using TW.Utility.Extension;
 using UnityEngine;
-using UnityEngine.UI;
 
 #if UNITY_EDITOR
-using UnityEditor.Animations;
-using UnityEditor;
 #endif
 
 [CreateAssetMenu(fileName = "BaseHeroGenerateGlobalConfig", menuName = "GlobalConfigs/BaseHeroGenerateGlobalConfig")]
@@ -539,17 +527,17 @@ public class BaseHeroGenerateGlobalConfig : GlobalConfig<BaseHeroGenerateGlobalC
     //         heroConfigData.HeroRarity = (Hero.Rarity)(tier - 1);
     //     }
     //
-    //     if (int.TryParse(data["AttackDamage"], out int attackDamage))
+    //     if (int.TryParse(data["BaseAttackDamage"], out int attackDamage))
     //     {
     //         heroConfigData.BaseAttackDamage = attackDamage;
     //     }
     //
-    //     if (float.TryParse(data["AttackSpeed"], out float attackSpeed))
+    //     if (float.TryParse(data["BaseAttackSpeed"], out float attackSpeed))
     //     {
     //         heroConfigData.BaseAttackSpeed = attackSpeed;
     //     }
     //
-    //     if (float.TryParse(data["AttackRange"], out float attackRange))
+    //     if (float.TryParse(data["BaseAttackRange"], out float attackRange))
     //     {
     //         heroConfigData.BaseAttackRange = attackRange;
     //     }

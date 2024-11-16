@@ -1,7 +1,7 @@
-﻿using BaseGame.Scripts.Enum;
-using Core.SimplePool;
+﻿using Core.SimplePool;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using TW.Utility.CustomType;
 using UnityEngine;
 
 namespace Core
@@ -19,8 +19,7 @@ namespace Core
         [field: SerializeField] public AnimationCurve Velocity { get; private set; }
         [field: SerializeField] public AnimationCurve Scale { get; private set; }
         [field: SerializeField] public TrailRenderer TrailRenderer {get; private set;}
-
-        private int AttackDamage { get; set; }
+        
         private Vector3 StartPosition { get; set; }
         private Vector3 EndPosition { get; set; }
         private float CurrentMoveSpeed { get; set; }
@@ -36,9 +35,9 @@ namespace Core
             TrailRenderer.Clear();
         }
 
-        public override Projectile Setup(Hero ownerHero, Enemy targetEnemy, DamageType damageType)
+        public override Projectile Setup(Hero ownerHero, Enemy targetEnemy, BigNumber damage, DamageType damageType)
         {
-            base.Setup(ownerHero, targetEnemy, damageType);
+            base.Setup(ownerHero, targetEnemy, damage, damageType);
             
             if (ownerHero == null || targetEnemy == null) 
             {
@@ -48,7 +47,6 @@ namespace Core
             Transform.localScale = Vector3.zero;
             StartPosition = Transform.position;
             CurrentPosition = StartPosition;
-            AttackDamage = OwnerHero.HeroConfigData.BaseAttackDamage;
             CurrentMoveSpeed = MaxMoveSpeed;
             EndPosition = TargetEnemy.Transform.position;
             StartMoveToTarget().Forget();
@@ -64,7 +62,7 @@ namespace Core
                 TryUpdateEndPosition();
                 if (TryMoveToTarget()) continue;
                 
-                OnCompleteCallback?.Invoke();
+                OnCompleteCallback?.Invoke(OwnerHero, TargetEnemy, DamageDeal, DamageType);
                 this.Despawn();
                 break;
             }

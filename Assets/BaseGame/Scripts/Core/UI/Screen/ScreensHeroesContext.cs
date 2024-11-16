@@ -7,9 +7,7 @@ using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
 using System.Collections.Generic;
-using Core;
 using UnityEngine.UI;
-using TMPro;
 using TW.Utility.CustomType;
 
 [Serializable]

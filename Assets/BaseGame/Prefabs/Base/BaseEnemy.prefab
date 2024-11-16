@@ -151,8 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90d9ce92d63432e8cf90435ba7c2b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHealthPoint>k__BackingField: 100000
-  <MarkLoseHealthPoint>k__BackingField: 0
+  <CurrentHealthPoint>k__BackingField:
+    v: 20
+    m: 1
+  <FutureHealthPoint>k__BackingField:
+    v: 20
+    m: 1
   <MovementSpeed>k__BackingField: 1.5
   <MovePoint>k__BackingField: []
   <CurrentPoint>k__BackingField: 0

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Numerics;
-using BaseGame.Scripts.Enum;
 using LitMotion;
 using LitMotion.Extensions;
 using Manager;
@@ -8,6 +6,7 @@ using R3;
 using TW.ACacheEverything;
 using TW.Reactive.CustomComponent;
 using TW.Utility.CustomComponent;
+using TW.Utility.CustomType;
 using UnityEngine;
 using Zenject;
 using Ease = LitMotion.Ease;
@@ -28,8 +27,8 @@ namespace Core
         }
 
         [Inject] private BattleManager BattleManager { get; set; }
-        [field: SerializeField] public int CurrentHealthPoint { get; private set; }
-        [field: SerializeField] public int MarkLoseHealthPoint { get; private set; }
+        [field: SerializeField] public BigNumber CurrentHealthPoint { get; private set; }
+        [field: SerializeField] public BigNumber FutureHealthPoint { get; private set; }
         [field: SerializeField] private float MovementSpeed { get; set; }
         [field: SerializeField] public Transform[] MovePoint { get; private set; }
         [field: SerializeField] public int CurrentPoint { get; private set; }
@@ -40,7 +39,8 @@ namespace Core
 
 
         private MotionHandle _movementMotionHandle;
-        public bool WillBeDead => MarkLoseHealthPoint <= 0;
+        public bool WillBeDead => FutureHealthPoint <= 0;
+        public bool IsDead => CurrentHealthPoint <= 0;
 
         // private void Update()
         // {
@@ -98,26 +98,17 @@ namespace Core
             Destroy(gameObject);
         }
 
-        public void MarkLoseHealth(int attackDamage)
+        public void WillTakeDamage(BigNumber attackDamage)
         {
-            MarkLoseHealthPoint -= attackDamage;
+            if (WillBeDead) return;
+            FutureHealthPoint -= attackDamage;
         }
-
-        public void TakeDamage(int attackDamage, DamageType damageType)
+        
+        public void TakeDamage(BigNumber attackDamage, DamageType damageType)
         {
+            if (IsDead) return;
             FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage);
             CurrentHealthPoint -= attackDamage;
-            // Damage += attackDamage;
-            if (CurrentHealthPoint <= 0)
-            {
-                SelfDespawn();
-            }
-        }
-        public void TakeDamage(BigInteger attackDamage, DamageType damageType)
-        {
-            FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage);
-            CurrentHealthPoint -= (int)attackDamage;
-            // Damage += (int)attackDamage;
             if (CurrentHealthPoint <= 0)
             {
                 SelfDespawn();
