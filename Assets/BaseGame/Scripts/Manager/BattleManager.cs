@@ -119,7 +119,7 @@ namespace Manager
             Debug.Log("Sell Hero");
             if (fieldSlot.TryRemoveHero(out Hero hero))
             {
-                hero.SelfDespawn();
+                hero.Despawn();
                 return true;
             }
 
@@ -154,7 +154,7 @@ namespace Manager
             await UniTask.WaitUntil(AllHeroDespawn, cancellationToken: this.GetCancellationTokenOnDestroy());
             
             fieldSlot.TryRemoveHero(out _);
-            selectHero.SelfDespawn();
+            selectHero.Despawn();
             
             HeroConfigData newHeroConfigData = HeroPoolGlobalConfig.Instance.GetRandomHeroConfigDataUpgrade(heroConfigData.HeroRarity + 1);
             Hero newHero = newHeroConfigData.HeroPrefab.Spawn();
@@ -237,6 +237,20 @@ namespace Manager
                     count++;
                 }
             }
+            return count;
+        }
+        public int GetAlliesAroundNonAlloc(Hero hero, Hero[]  heroes)
+        {
+            int count = 0;
+            foreach (var h in HeroList)
+            {
+                if (count >= heroes.Length) break;
+                if (h == hero) continue;
+                if (!h.IsInBattleState()) continue; 
+                heroes[count] = h;
+                count++;
+            }
+
             return count;
         }
         public GlobalBuff GetGlobalBuff(GlobalBuff.Type type)

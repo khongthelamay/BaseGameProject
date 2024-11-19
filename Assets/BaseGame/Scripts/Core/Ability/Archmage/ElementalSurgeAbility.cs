@@ -65,7 +65,7 @@ namespace Core
                 Enemies[i].TakeDamage(damageDeal, DamageType);
             }
             await DelaySample(7, tickRate, ct);
-            StartCooldownHandle();
+            ResetCooldown();
         }
     }
 }

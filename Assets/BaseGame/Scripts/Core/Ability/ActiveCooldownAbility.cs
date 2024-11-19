@@ -1,15 +1,17 @@
-﻿using LitMotion;
-using TW.ACacheEverything;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using UnityEngine;
 
 namespace Core
 {
-    public abstract partial class ActiveCooldownAbility : ActiveAbility
+    [System.Serializable]
+    public abstract class ActiveCooldownAbility : ActiveAbility
     {
         [field: SerializeField] protected float Cooldown { get; set; }
         [field: SerializeField] protected bool IsOnCooldown { get; set; }
         [field: SerializeField] protected float CooldownTimer { get; set; }
-        private MotionHandle CooldownHandle { get; set; }
+        private CancellationTokenSource CooldownCancellationTokenSource { get; set; }
         protected ActiveCooldownAbility(Hero owner, int levelUnlock, float cooldown) : base(owner, levelUnlock)
         {
             Cooldown = cooldown;
@@ -21,26 +23,37 @@ namespace Core
         public void StartCooldownHandle()
         {
             IsOnCooldown = true;
-            CooldownHandle = LMotion.Create(CooldownTimer, 0, CooldownTimer)
-                .WithOnComplete(OnCooldownHandleCompleteCache)
-                .Bind(OnCooldownHandleUpdateCache);
+            CooldownCancellationTokenSource = new CancellationTokenSource();
+            ExecuteCooldown(CooldownCancellationTokenSource).Forget();
+        }
+        private async UniTask ExecuteCooldown(CancellationTokenSource cancellationTokenSource)
+        {
+            await foreach (AsyncUnit _ in UniTaskAsyncEnumerable.EveryUpdate()
+                               .WithCancellation(cancellationTokenSource.Token))
+            {
+                if (CooldownTimer <= 0)
+                {
+                    IsOnCooldown = false;
+                    continue;
+                }
+                CooldownTimer -= Time.deltaTime;
+            }
         }
 
         public void StopCooldownHandle()
         {
-            CooldownHandle.TryCancel();
-        }
-
-        [ACacheMethod]
-        private void OnCooldownHandleUpdate(float time)
-        {
-            CooldownTimer = time;
-        }
-
-        [ACacheMethod]
-        private void OnCooldownHandleComplete()
-        {
             IsOnCooldown = false;
+            CooldownCancellationTokenSource?.Cancel();
+            CooldownCancellationTokenSource?.Dispose();
+        }
+        public void ResetCooldown()
+        {
+            IsOnCooldown = true;
+            CooldownTimer = Cooldown;
+        }
+        public void ReduceCooldown(float rate)
+        {
+            CooldownTimer -= Cooldown * rate / 100;
         }
     }
 }

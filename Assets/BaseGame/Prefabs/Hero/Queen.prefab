@@ -88,7 +88,7 @@ MonoBehaviour:
   <IsCancelAbility>k__BackingField: 0
   <ProjectileSpawnPosition>k__BackingField: {fileID: 3584122473376733458}
   <NormalAttackProjectile>k__BackingField: {fileID: 6453086906235805925, guid: 38437d6b04f719c45bf53d0a3eac68ec, type: 3}
-  <QueenNormalAttackEffect>k__BackingField: {fileID: 8161184177320555622, guid: a7dc41cb51b3da84babf48286a3d7b90, type: 3}
+  <CooldownSurgeEffect>k__BackingField: {fileID: 7596605013753009645, guid: 9fbb4113277088c4bad74dbeff43fe45, type: 3}
 --- !u!1 &740400944487085344
 GameObject:
   m_ObjectHideFlags: 0

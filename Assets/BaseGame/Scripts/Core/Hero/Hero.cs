@@ -43,7 +43,7 @@ namespace Core
             Range = 2,
         }
         private BattleManager BattleManagerCache { get; set; }
-        private BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        protected BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
         
         [field: Title(nameof(Hero))]
         [field: SerializeField] public HeroConfigData HeroConfigData { get; set; }
@@ -165,16 +165,12 @@ namespace Core
             void MoveComplete()
             {
                 SetCancelAbility(false);
-                SelfDespawn();
+                this.Despawn();
             }
         }
         public void SetVisible(bool isVisible)
         {
             VisibleGroup.SetActive(isVisible);
-        }
-        public void SelfDespawn()
-        {
-            Destroy(gameObject);
         }
         public void SetCancelAbility(bool isCancelAbility)
         {
@@ -203,6 +199,19 @@ namespace Core
         {
             SortingGroup.sortingOrder = -(int) (Transform.position.y * 100 + Transform.position.x);
             return this;
+        }
+        public bool TryReduceCooldown(float rate)
+        {
+            int countCooldownAbility = 0;
+            foreach (ActiveAbility activeAbility in ActiveAbilities)
+            {
+                if (activeAbility is ActiveCooldownAbility activeCooldownAbility)
+                {
+                    activeCooldownAbility.ReduceCooldown(rate);
+                    countCooldownAbility++;
+                }
+            }
+            return countCooldownAbility > 0;
         }
     }
 

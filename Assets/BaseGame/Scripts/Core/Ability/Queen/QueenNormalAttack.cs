@@ -49,6 +49,10 @@ namespace Core
             await DelaySample(6, tickRate, ct);
             Projectile.Spawn(SpawnPosition.position, Quaternion.identity).Setup(Owner, EnemyTarget, damageDeal, DamageType)
                 .WithComplete(OnProjectileMoveCompleteCache);
+            if (Random.Range(0, 100) < OwnerQueen.CooldownSurgeRate)
+            {
+                OwnerQueen.ReduceCooldownAllHeroAround();
+            }
             await DelaySample(24, tickRate, ct);
         }
         [ACacheMethod("TW.Utility.CustomType")]

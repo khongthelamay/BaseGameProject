@@ -66,7 +66,7 @@ namespace Core
                 .WithComplete(OnProjectileMoveCompleteCache);
             await DelaySample(6, tickRate, ct);
             
-            StartCooldownHandle();
+            ResetCooldown();
         }
 
         [ACacheMethod("TW.Utility.CustomType")]

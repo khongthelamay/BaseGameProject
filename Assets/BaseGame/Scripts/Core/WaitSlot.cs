@@ -17,7 +17,7 @@ public class WaitSlot : ACachedMonoBehaviour, IPointerClickHandler
     {
         if (OwnerHero != null)
         {
-            Destroy(OwnerHero.gameObject);
+            OwnerHero.Despawn();
         }
         HeroConfigData heroConfigData = HeroPoolGlobalConfig.Instance.GetRandomHeroPrefab(1);
         OwnerHero = heroConfigData.HeroPrefab.Spawn()
