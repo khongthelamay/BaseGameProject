@@ -1,7 +1,4 @@
-﻿using Core;
-using Sirenix.OdinInspector;
-using System;
-using System.Collections;
+﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Modals;

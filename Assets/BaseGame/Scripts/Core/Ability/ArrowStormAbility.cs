@@ -1,37 +1,27 @@
 ﻿using System.Threading;
-using BaseGame.Scripts.Enum;
 using Core.SimplePool;
 using Cysharp.Threading.Tasks;
 using LitMotion;
-using Manager;
 using TW.ACacheEverything;
+using TW.Utility.CustomType;
 using UnityEngine;
 
 namespace Core
 {
-    public partial class ArrowStormAbility : ActiveAbility
+    public partial class ArrowStormAbility : ActiveCooldownAbility
     {
-        [field: SerializeField] public Projectile Projectile { get; private set; }
-        [field: SerializeField] public Transform SpawnPosition { get; private set; }
 
-        [field: SerializeField] public float Cooldown { get; private set; } = 3f;
-        [field: SerializeField] public float DamageScale { get; private set; } = 10f;
-        [field: SerializeField] public DamageType DamageType { get; private set; } = DamageType.Physical;
-        [field: SerializeField] private bool IsOnCooldown { get; set; }
-
-        private BattleManager BattleManagerCache { get; set; }
-        public BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        [field: SerializeField] private float DamageScale { get; set; } = 10f;
+        [field: SerializeField] private DamageType DamageType { get; set; } = DamageType.Physical;
+        [field: SerializeField] private Projectile Projectile { get; set; }
+        [field: SerializeField] private Transform SpawnPosition { get; set; }
         private Enemy EnemyTarget { get; set; }
-        [field: SerializeField] private float CooldownTimer { get; set; }
-        private MotionHandle CooldownHandle { get; set; }
 
-        public ArrowStormAbility(Hero owner, int levelUnlock, Projectile projectile, Transform spawnPosition) : base(
-            owner, levelUnlock)
+        public ArrowStormAbility(Archer owner, int levelUnlock, float cooldown, Projectile projectile, Transform spawnPosition) : base(
+            owner, levelUnlock, cooldown)
         {
             Projectile = projectile;
             SpawnPosition = spawnPosition;
-            CooldownTimer = Cooldown;
-            IsOnCooldown = true;
         }
 
         public override void OnEnterBattleField()
@@ -56,41 +46,35 @@ namespace Core
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
             CooldownTimer = Cooldown;
-            Owner.HeroAnim.PlaySkillAnimation(Owner.AttackSpeed);
+            BigNumber damageDeal = Owner.AttackDamage * DamageScale;
+            float attackSpeed = Owner.AttackSpeed;
+            
+            Owner.HeroAnim.PlaySkillAnimation(attackSpeed);
             await DelaySample(8, tickRate, ct);
-            Projectile.Spawn(SpawnPosition.position, Quaternion.identity).Setup(Owner, EnemyTarget, DamageType)
+            Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
+                .Setup(Owner, EnemyTarget, damageDeal, DamageType)
                 .WithComplete(OnProjectileMoveCompleteCache);
             await DelaySample(8, tickRate, ct);
             
-            Projectile.Spawn(SpawnPosition.position, Quaternion.identity).Setup(Owner, EnemyTarget, DamageType)
+            Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
+                .Setup(Owner, EnemyTarget, damageDeal, DamageType)
                 .WithComplete(OnProjectileMoveCompleteCache);
             await DelaySample(8, tickRate, ct);
             
-            Projectile.Spawn(SpawnPosition.position, Quaternion.identity).Setup(Owner, EnemyTarget, DamageType)
+            Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
+                .Setup(Owner, EnemyTarget, damageDeal, DamageType)
                 .WithComplete(OnProjectileMoveCompleteCache);
             await DelaySample(6, tickRate, ct);
             
             StartCooldownHandle();
         }
 
-        [ACacheMethod]
-        private void OnProjectileMoveComplete()
+        [ACacheMethod("TW.Utility.CustomType")]
+        private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, BigNumber damage, DamageType damageType)
         {
-            EnemyTarget.TakeDamage((int)(Owner.AttackDamage * DamageScale), DamageType);
+            targetEnemy.TakeDamage(damage, damageType);
         }
-
-        private void StartCooldownHandle()
-        {
-            IsOnCooldown = true;
-            CooldownHandle = LMotion.Create(CooldownTimer, 0, CooldownTimer)
-                .WithOnComplete(OnCooldownHandleCompleteCache)
-                .Bind(OnCooldownHandleUpdateCache);
-        }
-
-        private void StopCooldownHandle()
-        {
-            CooldownHandle.TryCancel();
-        }
+        
 
         [ACacheMethod]
         private void OnCooldownHandleUpdate(float time)

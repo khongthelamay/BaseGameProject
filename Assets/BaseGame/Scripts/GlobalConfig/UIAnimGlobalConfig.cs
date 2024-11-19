@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.Utilities;
-using DG.Tweening;
 
 [CreateAssetMenu(fileName = "UIAnimGlobalConfig", menuName = "GlobalConfigs/UIAnimGlobalConfig")]
 [GlobalConfig("Assets/Resources/GlobalConfig/")]

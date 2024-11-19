@@ -1,13 +1,10 @@
 using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using TW.Reactive.CustomComponent;
-using R3;
 using TW.Utility.CustomType;
+using System.Collections.Generic;
 
 public class SlotQuest : SlotBase<QuestDataConfig>
 {

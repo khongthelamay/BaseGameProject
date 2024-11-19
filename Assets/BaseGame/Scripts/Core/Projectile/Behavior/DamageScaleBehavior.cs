@@ -1,5 +1,4 @@
 ﻿using System;
-using BaseGame.Scripts.Enum;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -17,7 +16,6 @@ namespace Core
         {
             if (enemy == null) return;
             int attackDamage = (int)(hero.HeroConfigData.BaseAttackDamage * DamageScale);
-            enemy.MarkLoseHealth(attackDamage);
         }
 
         public override void EndBehavior(Hero hero, Enemy enemy)

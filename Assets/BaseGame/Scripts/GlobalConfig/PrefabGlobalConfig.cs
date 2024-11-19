@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Core;
 using UnityEngine;
 using Sirenix.Utilities;
-using System;
 
 [CreateAssetMenu(fileName = "PrefabGlobalConfig", menuName = "GlobalConfigs/PrefabGlobalConfig")]
 [GlobalConfig("Assets/Resources/GlobalConfig/")]

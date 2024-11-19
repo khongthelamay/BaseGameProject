@@ -9,7 +9,6 @@ using TMPro;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
 using Core;
-using Spine.Unity;
 using System.Collections.Generic;
 
 [Serializable]

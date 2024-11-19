@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90a7aeed97a4c8892cac10748189300, type: 3}
+  m_Name: MapVolcanoGenerate
+  m_EditorClassIdentifier: 
+  <MapStyle>k__BackingField: Volcano
+  <BaseMapObject>k__BackingField: {fileID: 16840536537986587, guid: c25770695a841f24286b5376061642f9, type: 3}
+  <TileSprites>k__BackingField:
+  - {fileID: -612240907, guid: 4e7d87014ca030f4e9e5cbc6b8e51037, type: 3}
+  - {fileID: 910817905, guid: 4e7d87014ca030f4e9e5cbc6b8e51037, type: 3}
+  - {fileID: 1583161288, guid: 4e7d87014ca030f4e9e5cbc6b8e51037, type: 3}
+  - {fileID: 1279432055, guid: 4e7d87014ca030f4e9e5cbc6b8e51037, type: 3}
+  - {fileID: -1038459916, guid: 4e7d87014ca030f4e9e5cbc6b8e51037, type: 3}
+  - {fileID: -478479109, guid: 4e7d87014ca030f4e9e5cbc6b8e51037, type: 3}
+  - {fileID: 1720161347, guid: 4e7d87014ca030f4e9e5cbc6b8e51037, type: 3}
+  - {fileID: 137936505, guid: 4e7d87014ca030f4e9e5cbc6b8e51037, type: 3}
+  - {fileID: 408611198, guid: 4e7d87014ca030f4e9e5cbc6b8e51037, type: 3}
+  <GroundSprites>k__BackingField:
+  - {fileID: 21300000, guid: a98c4e9d759580641b4d530dc2ddb20f, type: 3}
+  - {fileID: 21300000, guid: 637dcd36eee890f478f7f809cf40d8c2, type: 3}
+  - {fileID: 21300000, guid: 8fb50b0da8026a04bbebfa1b9244eabe, type: 3}
+  - {fileID: 21300000, guid: d50350a14dcb86046a17ddaceefbedd6, type: 3}
+  - {fileID: 21300000, guid: eef00f5afee8bab47b2f0e48c213105e, type: 3}
+  - {fileID: 21300000, guid: 359b84944c6f0fd42b9d1814dd82066b, type: 3}
+  - {fileID: 21300000, guid: ca18d2861de7da84eb50bd7a02db2570, type: 3}
+  - {fileID: 21300000, guid: ee8d08afec8d8d74680b0f0b41e869b7, type: 3}
+  - {fileID: 21300000, guid: f9bfdb1198e807f45b84caad3149d165, type: 3}
+  <TilePrefabList>k__BackingField:
+  - {fileID: 4306104728246011508, guid: 8aa62152584b0564685785dfe75b86a9, type: 3}
+  - {fileID: 2763389063460852875, guid: 46f3785e4fc2c314cbcb101946cb4fe1, type: 3}
+  - {fileID: 3799143685017802872, guid: 57cd36de00ece9c49ab0ea74931a4b8d, type: 3}
+  - {fileID: 5980379829618995190, guid: c9dbcdf8050b8f24ca938a036af4c3dc, type: 3}
+  - {fileID: 7635887790356679069, guid: 24c1aacfe24ec2a4d97c883e5ac73057, type: 3}
+  - {fileID: 581543168885065831, guid: a3cfc6d990d14b94dadde876c8fbc96c, type: 3}
+  - {fileID: 8956830802377221624, guid: 5406934d4781d734ebaa1abfeec74f40, type: 3}
+  - {fileID: 4650324798314559785, guid: 68f1ef4ffd2830847a6bedc8018f7580, type: 3}
+  - {fileID: 1406047523318293301, guid: 2e5ba17db848ab545920caedc5744f47, type: 3}
+  <GroundPrefabList>k__BackingField:
+  - {fileID: 4315048777504298852, guid: 198657d4c9192cf4e939e0b2612deafc, type: 3}
+  - {fileID: 2955050954530656622, guid: f0a52ee41ff0a62499807f52764c7221, type: 3}
+  - {fileID: 5697146023277583152, guid: 78055299243bd144fb030505b264a79d, type: 3}
+  - {fileID: 4990837400297623335, guid: dc8065554dfa6374fa6da7460cdf2e3a, type: 3}
+  - {fileID: 2789163369383117770, guid: cefd266e17f25984b81c34946d6fcae1, type: 3}
+  - {fileID: 759390559736483763, guid: 91d7b68e8cbdff245a72f3fab30cb2d9, type: 3}
+  - {fileID: 8460298012705529709, guid: 3e6bfcd4c7925a5409ea6df4aefb5063, type: 3}
+  - {fileID: 2593666255354754797, guid: 4655ffed83579784b8fd562056d5ebd0, type: 3}
+  - {fileID: 8980026225747494352, guid: 816e3f6075aa53e4383db5672334ee2d, type: 3}

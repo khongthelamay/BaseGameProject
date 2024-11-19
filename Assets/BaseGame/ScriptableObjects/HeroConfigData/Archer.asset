@@ -34,6 +34,7 @@ MonoBehaviour:
       type: {class: RangeAttackAbility, ns: Core, asm: Assembly-CSharp}
       data:
         <LevelUnlock>k__BackingField: 0
+        <Owner>k__BackingField: {fileID: 0}
         <DamageType>k__BackingField: 0
         <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: a51c8cc451ba520479ce9f265f00f716, type: 3}
         <SpawnPosition>k__BackingField: {fileID: 0}

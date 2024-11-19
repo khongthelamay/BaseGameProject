@@ -568,12 +568,13 @@ MonoBehaviour:
   <SpriteRarity>k__BackingField: {fileID: 5873847710842902321}
   <MoveProjectile>k__BackingField: {fileID: 4845609547942700330, guid: 84727164c6cf08646a00b92bf0e0b342, type: 3}
   <VisibleGroup>k__BackingField: {fileID: 9053168750423323896}
+  <GraphicGroupTransform>k__BackingField: {fileID: 6140330689265947462}
   <FieldSlot>k__BackingField: {fileID: 0}
   <HeroAnim>k__BackingField: {fileID: 4448426784002448921}
   <SortingGroup>k__BackingField: {fileID: 5939741944704813347}
-  <AttackDamage>k__BackingField: 0
-  <AttackSpeed>k__BackingField: 0
-  <AttackRange>k__BackingField: 0
+  <BaseAttackDamage>k__BackingField: 0
+  <BaseAttackSpeed>k__BackingField: 0
+  <BaseAttackRange>k__BackingField: 0
   <IsCancelAbility>k__BackingField: 0
 --- !u!1 &9053168750423323896
 GameObject:

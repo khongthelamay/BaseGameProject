@@ -3,8 +3,6 @@ using MemoryPack;
 using Sirenix.OdinInspector;
 using TW.Utility.DesignPattern;
 using UnityEngine;
-using R3;
-using System.Collections.Generic;
 
 public class InGameDataManager : Singleton<InGameDataManager>
 {

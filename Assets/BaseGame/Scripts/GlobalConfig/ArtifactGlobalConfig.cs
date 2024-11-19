@@ -2,7 +2,6 @@ using UnityEngine;
 using Sirenix.Utilities;
 using TW.Utility.CustomType;
 using System.Collections.Generic;
-using System;
 
 [CreateAssetMenu(fileName = "ArtifactGlobalConfig", menuName = "GlobalConfigs/ArtifactGlobalConfig")]
 [GlobalConfig("Assets/Resources/GlobalConfig/")]

@@ -1,4 +1,3 @@
-using System;
 using Core;
 using Core.SimplePool;
 using Manager;

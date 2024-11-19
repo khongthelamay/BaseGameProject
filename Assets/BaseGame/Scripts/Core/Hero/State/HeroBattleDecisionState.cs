@@ -2,7 +2,6 @@
 using Cysharp.Threading.Tasks;
 using Manager;
 using TW.Utility.DesignPattern;
-using UnityEngine;
 
 namespace Core
 {
