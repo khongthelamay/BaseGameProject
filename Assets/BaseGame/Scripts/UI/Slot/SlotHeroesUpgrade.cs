@@ -50,4 +50,10 @@ public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
         mySequence = DOTween.Sequence();
         mySequence = UIAnimation.AnimSlotPopUp(trsContent);
     }
+
+    public override void CleanAnimation()
+    {
+        base.CleanAnimation();
+        pieceProgress.ClearAnimation();
+    }
 }

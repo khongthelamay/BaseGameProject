@@ -139,4 +139,10 @@ public class SlotQuest : SlotBase<QuestDataConfig>
         if (actionChooseCallBack != null)
             actionChooseCallBack(this);
     }
+
+    public override void CleanAnimation()
+    {
+        base.CleanAnimation();
+        progressBar.ClearAnimation();
+    }
 }

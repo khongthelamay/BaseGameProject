@@ -41,7 +41,9 @@ public class ScreensDefaultContext
     public class UIView : IAView
     {
         [field: Title(nameof(UIView))]
-        [field: SerializeField] public CanvasGroup MainView {get; private set;}
+        [field: SerializeField] public CanvasGroup MainView {get; private set; }
+
+        [field: SerializeField] public ProgressBar levelBar;
 
         public List<SlotTabMainMenu> tabs = new();
         SlotTabMainMenu currentTab;
@@ -145,5 +147,12 @@ public class ScreensDefaultContext
         void ChangeLevel(int level) {
             View.ChangeLevel(level);
         }
+
+        UniTask IScreenLifecycleEvent.Cleanup(Memory<object> args)
+        {
+            View.levelBar.ClearAnimation();
+            return UniTask.CompletedTask;
+        }
+
     }
 }

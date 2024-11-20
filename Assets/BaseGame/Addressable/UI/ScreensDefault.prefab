@@ -173,6 +173,7 @@ MonoBehaviour:
         m_Value: 0
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 3254333212352249892}
+      levelBar: {fileID: 930668849976298727}
       tabs:
       - {fileID: 7367451403245191172}
       - {fileID: 8099970303115366214}
@@ -1286,6 +1287,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+--- !u!114 &930668849976298727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3280460442299403813, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+  m_PrefabInstance: {fileID: 2408562714560545474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ac3a70f49addf4a84ca107a223d2b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3708663070070780626 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1304705162166431760, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
