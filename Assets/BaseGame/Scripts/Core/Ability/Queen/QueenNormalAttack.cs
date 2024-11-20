@@ -51,7 +51,7 @@ namespace Core
                 .WithComplete(OnProjectileMoveCompleteCache);
             if (Random.Range(0, 100) < OwnerQueen.CooldownSurgeRate)
             {
-                OwnerQueen.ReduceCooldownAllHeroAround();
+                OwnerQueen.ReduceCooldownAllHeroAround(OwnerQueen.CooldownSurgeDecrease);
             }
             await DelaySample(24, tickRate, ct);
         }

@@ -15,7 +15,7 @@ namespace Core
         protected override void InitAbility()
         {
             base.InitAbility();
-            // ActiveAbilities.Add(new StarfallAbility(this, 0, 5f));
+            ActiveAbilities.Add(new StarfallAbility(this, 0, 5f));
             ActiveAbilities.Add(new QueenNormalAttack(this, 0, NormalAttackProjectile, ProjectileSpawnPosition));
             
             PassiveAbilities.Add(new AuraOfCelerityAbility(this, 0));
@@ -29,12 +29,12 @@ namespace Core
         {
             CooldownSurgeDecrease += rate;
         }
-        public void ReduceCooldownAllHeroAround()
+        public void ReduceCooldownAllHeroAround(float rate)
         {
             int count = BattleManager.GetAlliesAroundNonAlloc(this,  AlliesAround);
             for (int i = 0; i < count; i++)
             {
-                if (AlliesAround[i].TryReduceCooldown(CooldownSurgeDecrease))
+                if (AlliesAround[i].TryReduceCooldown(rate))
                 {
                     CooldownSurgeEffect.Spawn(AlliesAround[i].Transform.position, Quaternion.identity);
                 }
