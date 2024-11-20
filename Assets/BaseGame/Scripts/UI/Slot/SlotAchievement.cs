@@ -1,8 +1,4 @@
 using DG.Tweening;
-using Spine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Claims;
 using TMPro;
 using TW.Utility.CustomType;
 using UnityEngine;

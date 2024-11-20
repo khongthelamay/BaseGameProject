@@ -9,7 +9,6 @@ using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
 using System.Collections.Generic;
 using UnityEngine.Events;
-using TW.UGUI.Core.Views;
 using TMPro;
 
 [Serializable]
@@ -72,6 +71,12 @@ public class ModalQuestContext
 
         [field: SerializeField] public GameObject objDailyQuest { get; private set; }
         [field: SerializeField] public GameObject objAchievement { get; private set; }
+        [field: SerializeField] public GameObject objRewardChest { get; private set; }
+
+        [field: SerializeField] public Image imgTabAchievement { get; private set; }
+        [field: SerializeField] public Image imgTabRewardChest { get; private set; }
+
+        [field: SerializeField] public List<Sprite> sprTab { get; private set; }
 
         GameObject currentGameObjShow;
 
@@ -116,7 +121,12 @@ public class ModalQuestContext
                 return;
             currentGameObjShow = objDailyQuest;
             objDailyQuest.SetActive(true);
+            objRewardChest.SetActive(true);
             objAchievement.SetActive(false);
+
+            imgTabAchievement.sprite = sprTab[0];
+            imgTabRewardChest.sprite = sprTab[1];
+
             LoadQuestData(QuestGlobalConfig.Instance.questDataConfigs);
             LoadStreakData(QuestGlobalConfig.Instance.dailyStreaks);
         }
@@ -127,7 +137,12 @@ public class ModalQuestContext
                 return;
             currentGameObjShow = objAchievement;
             objDailyQuest.SetActive(false);
+            objRewardChest.SetActive(false);
             objAchievement.SetActive(true);
+
+            imgTabAchievement.sprite = sprTab[1];
+            imgTabRewardChest.sprite = sprTab[0];
+
             LoadAchievementData(AchievementManager.Instance.GetAchievements());
         }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Screen = TW.UGUI.Core.Screens.Screen;
 using UnityEngine;
 using Cysharp.Threading.Tasks;

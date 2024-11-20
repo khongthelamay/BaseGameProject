@@ -1,9 +1,6 @@
-﻿namespace BaseGame.Scripts.Enum
+﻿public enum DamageType
 {
-    public enum DamageType
-    {
-        Physical,
-        Magical,
-        Pure,
-    }
+    Physical,
+    Magical,
+    Pure,
 }

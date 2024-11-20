@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using Cysharp.Threading.Tasks;
-using Manager;
-using Spine.Unity;
+﻿using Manager;
 using UnityEngine;
 
 namespace Core

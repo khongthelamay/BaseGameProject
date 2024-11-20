@@ -16,15 +16,15 @@ public class MapDrawer : MonoBehaviour
 {
     [field: SerializeField] public Vector2 DefaultSize { get; private set; }
     [field: SerializeField] public MapPositionDraw MapPositionDraw { get; private set; }
-    [field: SerializeField] public Transform GroundContainer { get; private set; }
-    [field: SerializeField] public Transform TileContainer { get; private set; }
+    [field: SerializeField] public Transform LandTileContainer { get; private set; }
+    [field: SerializeField] public Transform GroundTileContainer { get; private set; }
     [field: SerializeField] public Transform FieldSlotContainer { get; private set; }
     [field: SerializeField] public Transform MovePointContainer { get; private set; }
-    [field: SerializeField] public List<MapDrawRule> TileList { get; private set; }
-    [field: SerializeField] public List<MapDrawRule> GroundList { get; private set; }
+    [field: SerializeField] public List<MapDrawRule> GroundTileList { get; private set; }
+    [field: SerializeField] public List<MapDrawRule> LandTileList { get; private set; }
     [field: SerializeField] public List<GameObject> TileGenerate { get; private set; }
     [field: SerializeField] public List<FieldSlot> FieldSlotGenerate { get; private set; }
-    [field: SerializeField] public List<GameObject> GroundGenerate { get; private set; }
+    [field: SerializeField] public List<GameObject> LandTileGenerate { get; private set; }
 
     private int[,] NewMapPositionDraw { get; set; }
 
@@ -42,7 +42,7 @@ public class MapDrawer : MonoBehaviour
             DestroyImmediate(fieldSlot.gameObject);
         }
 
-        foreach (GameObject obj in GroundGenerate)
+        foreach (GameObject obj in LandTileGenerate)
         {
             DestroyImmediate(obj);
         }
@@ -53,7 +53,7 @@ public class MapDrawer : MonoBehaviour
 
         TileGenerate.Clear();
         FieldSlotGenerate.Clear();
-        TileContainer = transform.FindChildOrCreate(nameof(TileContainer));
+        GroundTileContainer = transform.FindChildOrCreate(nameof(GroundTileContainer));
         FieldSlotContainer = transform.FindChildOrCreate(nameof(FieldSlotContainer));
         MovePointContainer = transform.FindChildOrCreate(nameof(MovePointContainer));
         FieldSlot fieldSlotPrefab = AssetDatabase.LoadAssetAtPath<FieldSlot>(
@@ -73,11 +73,11 @@ public class MapDrawer : MonoBehaviour
                 }
 
                 int[,] rule = GetMapTileRule(i, j);
-                GameObject mapObject = GetMapObject(TileList, rule);
+                GameObject mapObject = GetMapObject(GroundTileList, rule);
                 if (mapObject == null) continue;
                 GameObject tile = (GameObject)PrefabUtility.InstantiatePrefab(mapObject);
 
-                tile.transform.SetParent(TileContainer);
+                tile.transform.SetParent(GroundTileContainer);
                 tile.name = $"Tile_{i}_{j}";
                 tile.transform.localPosition = position;
                 TileGenerate.Add(tile);
@@ -97,22 +97,22 @@ public class MapDrawer : MonoBehaviour
             DefaultSize.x / 3f * (MapPositionDraw.Column * 3 + (MapPositionDraw.Column % 2 == 1 ? -1 : -0.5f)) / 2,
             -DefaultSize.y / 3f * (MapPositionDraw.Row * 3 + (MapPositionDraw.Row % 2 == 1 ? -1 : -0.5f)) / 2);
 
-        GroundGenerate.Clear();
-        GroundContainer = transform.FindChildOrCreate(nameof(GroundContainer));
+        LandTileGenerate.Clear();
+        LandTileContainer = transform.FindChildOrCreate(nameof(LandTileContainer));
         for (int i = 0; i < MapPositionDraw.Row * 3; i++)
         {
             for (int j = 0; j < MapPositionDraw.Column * 3; j++)
             {
                 int[,] rule = GetMapGroundRule(i, j);
-                GameObject mapObject = GetMapObject(GroundList, rule);
+                GameObject mapObject = GetMapObject(LandTileList, rule);
                 if (mapObject == null) continue;
                 Vector3 position = new Vector3(j * DefaultSize.x / 3, -i * DefaultSize.y / 3, 0) - offset2;
-                GameObject ground = (GameObject)PrefabUtility.InstantiatePrefab(mapObject);
+                GameObject land = (GameObject)PrefabUtility.InstantiatePrefab(mapObject);
 
-                ground.transform.SetParent(GroundContainer);
-                ground.name = $"Ground_{i}_{j}";
-                ground.transform.localPosition = position;
-                GroundGenerate.Add(ground);
+                land.transform.SetParent(LandTileContainer);
+                land.name = $"Ground_{i}_{j}";
+                land.transform.localPosition = position;
+                LandTileGenerate.Add(land);
             }
         }
     }

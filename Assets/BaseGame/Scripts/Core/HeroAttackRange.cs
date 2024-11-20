@@ -1,5 +1,4 @@
-﻿using System;
-using LitMotion;
+﻿using LitMotion;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using UnityEngine;
@@ -11,7 +10,7 @@ public class HeroAttackRange : ACachedMonoBehaviour
     private float OriginalScale {get; set;} = 0;
     // public void InitAttackRange(float attackRange)
     // {
-    //     AttackRange = attackRange;
+    //     BaseAttackRange = attackRange;
     //     OriginalScale = 0;
     //     Transform.localScale = Vector3.zero;
     // }

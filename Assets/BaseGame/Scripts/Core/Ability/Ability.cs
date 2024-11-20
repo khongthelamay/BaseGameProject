@@ -1,4 +1,5 @@
 ﻿using System;
+using Manager;
 using UnityEngine;
 
 namespace Core
@@ -6,8 +7,10 @@ namespace Core
     [Serializable]
     public abstract class Ability
     {
-        protected Hero Owner { get; set; }
+        private BattleManager BattleManagerCache { get; set; }
+        protected BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
         [field: SerializeField] public int LevelUnlock {get; private set;}
+        [field: SerializeField] public Hero Owner {get; private set;}
 
         protected Ability()
         {

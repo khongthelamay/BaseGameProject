@@ -1,21 +1,17 @@
-﻿using System;
-using System.Threading;
-using BaseGame.Scripts.Enum;
+﻿using System.Threading;
 using Cysharp.Threading.Tasks;
-using Manager;
+using TW.Utility.CustomType;
 using UnityEngine;
 
 namespace Core
 {
     public class MeleeAttackAbility : ActiveAbility
     {
-        [field: SerializeField] public DamageType DamageType {get; private set;}
-
-        private BattleManager BattleManagerCache { get; set; }
-        public BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        [field: SerializeField] private DamageType DamageType {get; set;}
+        
         private Enemy EnemyTarget { get; set; }
         
-        public MeleeAttackAbility(Hero owner, int levelUnlock, DamageType damageType) : base(owner, levelUnlock)
+        public MeleeAttackAbility(Hero owner, int levelUnlock,DamageType damageType) : base(owner, levelUnlock)
         {
             DamageType = damageType;
         }
@@ -39,8 +35,13 @@ namespace Core
 
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            EnemyTarget.TakeDamage(Owner.AttackDamage, DamageType);
-            Owner.HeroAnim.PlayAttackAnimation(Owner.AttackSpeed);
+            BigNumber damageDeal = Owner.AttackDamage;
+            float attackSpeed = Owner.AttackSpeed;
+            
+            Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
+            EnemyTarget.WillTakeDamage(damageDeal);
+            // delay if needed
+            EnemyTarget.TakeDamage(damageDeal, DamageType);
             await DelaySample(30, tickRate, ct);
 
         }

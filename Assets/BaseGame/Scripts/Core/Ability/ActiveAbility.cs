@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Core
 {
@@ -15,7 +14,8 @@ namespace Core
         public abstract void OnExitBattleField();
         public abstract bool CanUseAbility();
         public abstract UniTask UseAbility(TickRate tickRate, CancellationToken ct);
-        public UniTask DelaySample(int sample, TickRate tickRate, CancellationToken ct)
+
+        protected UniTask DelaySample(int sample, TickRate tickRate, CancellationToken ct)
         {
             int timeDelay = (int)(1000 / tickRate.ToValue() / Owner.AttackSpeed * sample / 30);
             return UniTask.WhenAny(UniTask.Delay(timeDelay, cancellationToken: ct),

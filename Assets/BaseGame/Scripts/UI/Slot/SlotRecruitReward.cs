@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
 public class SlotRecruitReward : SlotBase<RecruitReward>
 {
     public TextMeshProUGUI txtAmount;

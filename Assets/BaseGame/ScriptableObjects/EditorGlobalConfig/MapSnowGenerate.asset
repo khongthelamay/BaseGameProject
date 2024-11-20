@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90a7aeed97a4c8892cac10748189300, type: 3}
+  m_Name: MapSnowGenerate
+  m_EditorClassIdentifier: 
+  <MapStyle>k__BackingField: Snow
+  <BaseMapObject>k__BackingField: {fileID: 16840536537986587, guid: c25770695a841f24286b5376061642f9, type: 3}
+  <TileSprites>k__BackingField:
+  - {fileID: 175795046, guid: 362d310b27082654aa49f20ccd6a5ac6, type: 3}
+  - {fileID: 2022938683, guid: 362d310b27082654aa49f20ccd6a5ac6, type: 3}
+  - {fileID: -944972626, guid: 362d310b27082654aa49f20ccd6a5ac6, type: 3}
+  - {fileID: 977055593, guid: 362d310b27082654aa49f20ccd6a5ac6, type: 3}
+  - {fileID: 990872335, guid: 362d310b27082654aa49f20ccd6a5ac6, type: 3}
+  - {fileID: -805464586, guid: 362d310b27082654aa49f20ccd6a5ac6, type: 3}
+  - {fileID: 2015647976, guid: 362d310b27082654aa49f20ccd6a5ac6, type: 3}
+  - {fileID: 836345784, guid: 362d310b27082654aa49f20ccd6a5ac6, type: 3}
+  - {fileID: -2068774726, guid: 362d310b27082654aa49f20ccd6a5ac6, type: 3}
+  <GroundSprites>k__BackingField:
+  - {fileID: 21300000, guid: 1bfa7b229715a51419b6fd2a93a92606, type: 3}
+  - {fileID: 21300000, guid: 5cf2d87388af07b42b6ffa99485ec961, type: 3}
+  - {fileID: 21300000, guid: af2fe647561beca4e9110c771c56077c, type: 3}
+  - {fileID: 21300000, guid: 58ef2f1a53aaada42af2cb9f77e959fe, type: 3}
+  - {fileID: 21300000, guid: 5853ff2fb1da11b41b1f43bc3526d2a9, type: 3}
+  - {fileID: 21300000, guid: d4f2259a234c5974d87daf81dcd22953, type: 3}
+  - {fileID: 21300000, guid: 4dbedf687e879624498f740fbf72ff06, type: 3}
+  - {fileID: 21300000, guid: 5634c48c5112f9548892ea0072d951ec, type: 3}
+  - {fileID: 21300000, guid: e94f9040dae982749859429a6b97e86b, type: 3}
+  <TilePrefabList>k__BackingField: []
+  <GroundPrefabList>k__BackingField:
+  - {fileID: 8421530287491898363, guid: 6bd0f8806040fcc468ccc2aa3b77d373, type: 3}
+  - {fileID: 2148623160465617529, guid: 29b84b68c6f3ebd4c9ca4e5cb878501e, type: 3}
+  - {fileID: 1894756933374963989, guid: 493660479a7dc8641a41bf1ee8349bc6, type: 3}
+  - {fileID: 1882420045626582054, guid: 56f8fd7f55c10b24e9e87865b57cfaa5, type: 3}
+  - {fileID: 6753184710891294670, guid: b119523627f61f5439ce81ab67681a0e, type: 3}
+  - {fileID: 3598043324894607153, guid: 7dd25cb922208ed47ae4c3b54a6279b0, type: 3}
+  - {fileID: 9002225689461328345, guid: cf172f4001b13bc4aacf5f31295dea88, type: 3}
+  - {fileID: 2221208168136524713, guid: 52d198d80d2783442b3bd10fb5a68681, type: 3}
+  - {fileID: 4625144153328229111, guid: 3b510e84d9bba3643832a9fe1038258e, type: 3}
+  - {fileID: 2733356299757823174, guid: 97e7e153e037b6f4a95ce6bef84717c7, type: 3}
+  - {fileID: 958349614720193694, guid: c59f8dd43f9344d40bdf6a2c375bfa5d, type: 3}
+  - {fileID: 6171767686331458360, guid: 2a1e5c1bd2921e846a0462c48073a910, type: 3}
+  - {fileID: 4725833275313794806, guid: e152ad4ed25441745a6d8f82a7eb4a78, type: 3}
+  - {fileID: 3338455907000531552, guid: 547eec0294721cf4abab40fabbb90bf5, type: 3}
+  - {fileID: 4110178718822512394, guid: 7f007b287f36dfb4c8a9bdad0deae477, type: 3}
+  - {fileID: 4359860481995498523, guid: 16372e749bd2eac448d479f784ec2be9, type: 3}
+  - {fileID: 72255790022613280, guid: c2ea8095fc745e44bb11d9118d99c4d2, type: 3}
+  - {fileID: 3767991842075451605, guid: aecdd40be2654814fb036d2a046b112d, type: 3}

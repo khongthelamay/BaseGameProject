@@ -1,10 +1,7 @@
 ﻿using System;
-using BaseGame.Scripts.Enum;
 using Core.SimplePool;
-using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Linq;
 using TW.Utility.CustomComponent;
-using UnityEngine;
+using TW.Utility.CustomType;
 
 namespace Core
 {
@@ -12,17 +9,19 @@ namespace Core
     {
         protected Hero OwnerHero { get; private set; }
         protected Enemy TargetEnemy { get; private set; }
+        protected BigNumber DamageDeal { get; private set; }
         protected DamageType DamageType { get; private set; }
-        protected Action OnCompleteCallback { get; private set; }
-        public virtual Projectile Setup(Hero ownerHero, Enemy targetEnemy, DamageType damageType)
+        protected Action<Hero, Enemy, BigNumber, DamageType> OnCompleteCallback { get; private set; }
+        public virtual Projectile Setup(Hero ownerHero, Enemy targetEnemy, BigNumber damage, DamageType damageType)
         {
             OwnerHero = ownerHero;
             TargetEnemy = targetEnemy;
+            DamageDeal = damage;
             DamageType = damageType;
             return this;
         }
 
-        public Projectile WithComplete(Action onCompleteCallback)
+        public Projectile WithComplete(Action<Hero, Enemy, BigNumber, DamageType> onCompleteCallback)
         {
             OnCompleteCallback = onCompleteCallback;
             return this;

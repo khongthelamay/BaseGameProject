@@ -1,11 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TW.UGUI.Core.Modals;
 using UnityEngine;
-using R3;
-using DG.Tweening;
 
 public class ModalArtifactInfor : Modal
 {
