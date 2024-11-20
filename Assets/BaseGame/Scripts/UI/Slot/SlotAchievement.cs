@@ -139,4 +139,10 @@ public class SlotAchievement : SlotBase<AchievementDataConfig>
         if (actionChooseCallBack != null)
             actionChooseCallBack(this);
     }
+
+    public override void CleanAnimation()
+    {
+        base.CleanAnimation();
+        progressBar.ClearAnimation();
+    }
 }

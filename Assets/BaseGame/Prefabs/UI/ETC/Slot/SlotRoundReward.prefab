@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 7568490082622201066}
   - component: {fileID: 1711388212585557881}
   m_Layer: 5
-  m_Name: SlotLevelGrowth
+  m_Name: SlotRoundReward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -798,7 +798,6 @@ RectTransform:
   m_Children:
   - {fileID: 412246380}
   - {fileID: 880808317}
-  - {fileID: 1863011042}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -903,108 +902,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4306414552951937607, guid: 7b35a9a599347b84ba97756dd33a987a, type: 3}
   m_PrefabInstance: {fileID: 3664214419094897078}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1863011041
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 905482070}
-    m_Modifications:
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5889268299992944133, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-      propertyPath: m_Name
-      value: ModalHeroInfor
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
---- !u!224 &1863011042 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1623772613083304465, guid: c0d1e1cb903e6b94ea4acd827d1c39aa, type: 3}
-  m_PrefabInstance: {fileID: 1863011041}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1976557631
 GameObject:
@@ -1523,8 +1420,12 @@ PrefabInstance:
       value: 48300
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.level.m_Value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassLevel.m_Value
-      value: 41
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.timeOutHuntPass.m_Value
@@ -1532,63 +1433,91 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.size
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<strLastDay>k__BackingField.m_Value
-      value: 11/10/2024 10:10:07 PM
+      value: 11/20/2024 9:52:29 PM
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<strLastWeek>k__BackingField.m_Value
-      value: 11/10/2024 10:20:11 PM
+      value: 11/20/2024 9:52:29 PM
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.size
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.size
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<currentDailyStreak>k__BackingField.m_Value
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<ArtifactData>k__BackingField.<ArtifactInfos>k__BackingField.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<currentWeeklyStreak>k__BackingField.m_Value
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<streakDailySaves>k__BackingField.Array.size
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.size
-      value: 42
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[0].m_Value.heroName
-      value: 'Footman '
-      objectReference: {fileID: 0}
-    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
-      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[1].m_Value.heroName
-      value: Archer
-      objectReference: {fileID: 0}
-    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
-      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[2].m_Value.heroName
-      value: 'Mage '
-      objectReference: {fileID: 0}
-    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
-      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[3].m_Value.heroName
-      value: Queen
-      objectReference: {fileID: 0}
-    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
-      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[4].m_Value.heroName
       value: Footman
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
-      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[5].m_Value.heroName
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[1].m_Value.heroName
+      value: Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[2].m_Value.heroName
+      value: Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[3].m_Value.heroName
+      value: Boar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[4].m_Value.heroName
       value: Mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[5].m_Value.heroName
+      value: Bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[6].m_Value.heroName
+      value: Knight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[7].m_Value.heroName
+      value: Archmage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[8].m_Value.heroName
+      value: Queen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[9].m_Value.heroName
+      value: Thunder Lizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[10].m_Value.heroName
+      value: Griffin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[11].m_Value.heroName
+      value: Tiger
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<hunterPassDataSave>k__BackingField.hunterPassDataSave.<Value>k__BackingField.Array.size
@@ -1599,24 +1528,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
-      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[1].m_Value.level.m_Value
-      value: 4
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[0].m_Value.piece.m_Value
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
-      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[2].m_Value.level.m_Value
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[1].m_Value.level.m_Value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[2].m_Value.level.m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[3].m_Value.level.m_Value
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[4].m_Value.level.m_Value
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[5].m_Value.level.m_Value
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[1].level
@@ -1872,7 +1805,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<claimed>k__BackingField.m_Value
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[2].m_Value.<claimed>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[3].m_Value.<claimed>k__BackingField.m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<ArtifactData>k__BackingField.<ArtifactInfos>k__BackingField.Array.data[0].m_Value.<Id>k__BackingField.m_Value
@@ -1880,7 +1821,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<progress>k__BackingField.m_Value
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[1].m_Value.<progress>k__BackingField.m_Value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[2].m_Value.<progress>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[3].m_Value.<progress>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[4].m_Value.<progress>k__BackingField.m_Value
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[5].m_Value.<progress>k__BackingField.m_Value
+      value: 3624
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[0].m_Value.<achievementType>k__BackingField.m_Value
@@ -1888,7 +1849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[0].m_Value.<currentProgress>k__BackingField.m_Value
-      value: 9000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[1].m_Value.<achievementType>k__BackingField.m_Value
@@ -1932,7 +1893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[0].m_Value.<achievementLevel>k__BackingField.m_Value
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.data[1].value.m_Value.v

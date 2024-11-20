@@ -21,4 +21,10 @@ public class MainContentStreak : MainContent<StreakDataConfig>
             slots[i].GetComponent<RectTransform>().anchoredPosition = vectorTemp;
         }
     }
+
+    public override void CleanAnimation()
+    {
+        base.CleanAnimation();
+        progressBar.ClearAnimation();
+    }
 }
