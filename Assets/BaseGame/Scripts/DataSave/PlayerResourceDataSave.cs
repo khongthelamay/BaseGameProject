@@ -8,6 +8,9 @@ using UnityEngine;
 public partial class PlayerResourceDataSave
 {
     public static PlayerResourceDataSave Instance => InGameDataManager.Instance.InGameData.playerResourceDataSave;
+    [field: SerializeField] public ReactiveValue<int> level;
+    [field: SerializeField] public ReactiveValue<float> exp;
+    [field: SerializeField] public ReactiveValue<bool> premium;
     [field: SerializeField] public ReactiveList<Resource> resources { get; set; } = new();
 
     public ReactiveValue<BigNumber> GetResourceValue(ResourceType resourceType) 
@@ -34,8 +37,17 @@ public partial class PlayerResourceDataSave
         for (int i = 0; i < resources.ObservableList.Count; i++)
         {
             if (resources.ObservableList[i].type == type)
+            {
                 resources.ObservableList[i].Add(value);
+                InGameDataManager.Instance.SaveData();
+                return;
+            }
         }
+
+        Resource resource = new Resource();
+        resource.type = type;
+        resource.value.Value = value;
+        AddResource(resource);
         InGameDataManager.Instance.SaveData();
     }
 
@@ -51,5 +63,6 @@ public partial class PlayerResourceDataSave
 }
 public partial class InGameData
 {
+    [MemoryPackOrder(105)]
     [field: SerializeField] public PlayerResourceDataSave playerResourceDataSave { get; set; } = new();
 }

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SlotRecruitRewardRun : SlotRecruitReward
 {
@@ -13,8 +14,10 @@ public class SlotRecruitRewardRun : SlotRecruitReward
     
     public override void InitData(RecruitReward data)
     {
-        base.InitData(data);
+        slotData = data;
+        imgIcon.sprite = data.heroData.HeroSprite;
         transform.localPosition = Vector3.zero;
+
         looseRewardFuction = new LooseRewardByJump();
         (looseRewardFuction as LooseRewardByJump).trsJump = transform;
     }
@@ -26,19 +29,23 @@ public class SlotRecruitRewardRun : SlotRecruitReward
     }
 
     [Button]
-    public void RunNow()
+    public void RunNow(bool isLastMove)
     {
         if (mySequence != null)
             mySequence.Kill();
         mySequence = DOTween.Sequence();
         mySequence.Append(transform.DOMove(pointEnd.position, timeMove).From(pointStart.position).SetEase(Ease.Linear)).OnComplete(()=> {
             ActionCollect();
+            if (isLastMove)
+                ScreensRecruitContext.Events.LastSlotMoveDone?.Invoke();
         }).SetDelay(.25f * transform.GetSiblingIndex()).SetEase(Ease.Linear);
 
         if (slotData.isMiss)
             mySequence.OnUpdate(() => {
                 if (transform.position.x > pointLoose.position.x)
                 {
+                    if (isLastMove)
+                        ScreensRecruitContext.Events.LastSlotMoveDone?.Invoke();
                     LooseRewardFunction();
                     mySequence.Kill();
                 }
@@ -46,6 +53,7 @@ public class SlotRecruitRewardRun : SlotRecruitReward
     }
 
     void ActionCollect() {
+        callBackMoveDone(this);
         gameObject.SetActive(false);
     }
 
@@ -64,7 +72,6 @@ class LooseRewardByJump : ILooseRewardFunction
     public Transform trsJump;
     public void LooseRewardFunction()
     {
-        Debug.Log("Loose reward");
         trsJump.DOLocalMoveY(trsJump.localPosition.y + 100f, .25f).OnComplete(()=> {
             trsJump.gameObject.SetActive(false);
         });

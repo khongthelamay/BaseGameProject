@@ -143,6 +143,292 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2799662026610293895, guid: e6d24a99b102ec84aa027f0d781ac570, type: 3}
   m_PrefabInstance: {fileID: 4893199788612803520}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &412246379
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 905482070}
+    m_Modifications:
+    - target: {fileID: 812364726617613572, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 812364726617613572, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 812364726617613572, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 230.40001
+      objectReference: {fileID: 0}
+    - target: {fileID: 812364726617613572, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 189.3622
+      objectReference: {fileID: 0}
+    - target: {fileID: 812364726617613572, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1036.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 812364726617613572, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -94.6811
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346541139399278042, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346541139399278042, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346541139399278042, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 148.59103
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346541139399278042, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 227.88655
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346541139399278042, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549242342932668801, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549242342932668801, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549242342932668801, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 148.59103
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549242342932668801, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 381.4776
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549242342932668801, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301943079651994227, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_Name
+      value: ScreensDefault
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301943079651994227, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763755957931282664, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763755957931282664, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763755957931282664, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 148.59103
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763755957931282664, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 74.29552
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763755957931282664, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936171351990224591, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936171351990224591, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936171351990224591, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 230.40001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936171351990224591, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 189.3622
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936171351990224591, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 345.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936171351990224591, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -94.6811
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969063523229354381, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969063523229354381, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969063523229354381, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 230.40001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969063523229354381, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 189.3622
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969063523229354381, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 115.200005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969063523229354381, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -94.6811
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862747018294423798, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862747018294423798, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862747018294423798, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 230.40001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862747018294423798, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 189.3622
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862747018294423798, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 576
+      objectReference: {fileID: 0}
+    - target: {fileID: 6862747018294423798, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -94.6811
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836448250259263091, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836448250259263091, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836448250259263091, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 230.40001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836448250259263091, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 189.3622
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836448250259263091, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 806.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836448250259263091, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -94.6811
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+--- !u!224 &412246380 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3886510112085002152, guid: 617d61ec5d51f82488967fab003cc811, type: 3}
+  m_PrefabInstance: {fileID: 412246379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &594107566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1126933113430299472, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
@@ -216,6 +502,204 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &880808316
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 905482070}
+    m_Modifications:
+    - target: {fileID: 454228697345319812, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 849036394291974006, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.222
+      objectReference: {fileID: 0}
+    - target: {fileID: 849036394291974006, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 875123880879011023, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 875123880879011023, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 875123880879011023, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 347
+      objectReference: {fileID: 0}
+    - target: {fileID: 875123880879011023, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 875123880879011023, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 173.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 875123880879011023, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -42.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1916394467582719987, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.222
+      objectReference: {fileID: 0}
+    - target: {fileID: 1916394467582719987, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863729261814701160, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863729261814701160, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863729261814701160, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 347
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863729261814701160, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863729261814701160, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 520.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863729261814701160, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -42.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532224545723143032, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.222
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532224545723143032, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532224545723143032, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.222
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073004548916373826, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.222
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073004548916373826, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073004548916373826, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.222
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115177857255038122, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_Name
+      value: ModalQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 9115177857255038122, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+--- !u!224 &880808317 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4930878737233311511, guid: f3a213419dfefba4f9dc575899a68a91, type: 3}
+  m_PrefabInstance: {fileID: 880808316}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &905482066
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +795,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 412246380}
+  - {fileID: 880808317}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -346,6 +832,72 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &939859681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 939859682}
+  - component: {fileID: 939859683}
+  m_Layer: 0
+  m_Name: GrowthLevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &939859682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939859681}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1976557632}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &939859683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939859681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbb1c9df3426be4db6702e1372386ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLevel:
+    m_Value: 0
+  playerExp:
+    m_Value: 0
+  isPremium:
+    m_Value: 0
+  growthDataConfigs: []
+  currentGrowDataConfigs:
+    level: 0
+    expRequire: 0
+    rType: 0
+    commonRewardAmount:
+      v: 0
+      m: 0
+    premiumRewardAmount:
+      v: 0
+      m: 0
+--- !u!4 &1117244673 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+  m_PrefabInstance: {fileID: 6330138420270637795}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1247309177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4306414552951937607, guid: 7b35a9a599347b84ba97756dd33a987a, type: 3}
@@ -386,6 +938,8 @@ Transform:
   - {fileID: 252065395}
   - {fileID: 1247309177}
   - {fileID: 594107566}
+  - {fileID: 1117244673}
+  - {fileID: 939859682}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2056214802
@@ -545,6 +1099,90 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1976557632}
     m_Modifications:
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: currentTurn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[0].type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[0].isMiss
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[1].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[2].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[3].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[4].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[5].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[6].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[7].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[8].isMiss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[0].heroData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[1].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[2].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[3].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[4].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[5].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[6].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[7].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
+    - target: {fileID: 316466427127925068, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
+      propertyPath: recruitRewards.<Value>k__BackingField.Array.data[8].heroData
+      value: 
+      objectReference: {fileID: 11400000, guid: e6857d8e3fc70c743a50db642fffc129, type: 2}
     - target: {fileID: 1126933113430299472, guid: 35b22239af17da247a12a5c85aaad878, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -708,6 +1346,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6d24a99b102ec84aa027f0d781ac570, type: 3}
+--- !u!1001 &6330138420270637795
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1976557632}
+    m_Modifications:
+    - target: {fileID: 2095709448869026731, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_Name
+      value: HunterPassManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816358683401000336, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3a7a3f536fd13b40a43db10d9288582, type: 3}
 --- !u!1001 &7558944045573352983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -719,6 +1414,494 @@ PrefabInstance:
     - target: {fileID: 3236379470260525237, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: m_Name
       value: IngameDataManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPoint.m_Value
+      value: 48300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.level.m_Value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassLevel.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.timeOutHuntPass.m_Value
+      value: 12/10/2024 10:36:54 PM
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<strLastDay>k__BackingField.m_Value
+      value: 11/20/2024 9:52:29 PM
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<strLastWeek>k__BackingField.m_Value
+      value: 11/20/2024 9:52:29 PM
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<currentDailyStreak>k__BackingField.m_Value
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<ArtifactData>k__BackingField.<ArtifactInfos>k__BackingField.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<currentWeeklyStreak>k__BackingField.m_Value
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<streakDailySaves>k__BackingField.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[0].m_Value.heroName
+      value: Footman
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[1].m_Value.heroName
+      value: Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[2].m_Value.heroName
+      value: Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[3].m_Value.heroName
+      value: Boar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[4].m_Value.heroName
+      value: Mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[5].m_Value.heroName
+      value: Bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[6].m_Value.heroName
+      value: Knight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[7].m_Value.heroName
+      value: Archmage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[8].m_Value.heroName
+      value: Queen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[9].m_Value.heroName
+      value: Thunder Lizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[10].m_Value.heroName
+      value: Griffin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[11].m_Value.heroName
+      value: Tiger
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<hunterPassDataSave>k__BackingField.hunterPassDataSave.<Value>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[0].m_Value.level.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[0].m_Value.piece.m_Value
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[1].m_Value.level.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[2].m_Value.level.m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[3].m_Value.level.m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[4].m_Value.level.m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<heroDataSave>k__BackingField.<heroSaves>k__BackingField.Array.data[5].m_Value.level.m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[1].level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[2].level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[3].level
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[4].level
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[5].level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[6].level
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[7].level
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[8].level
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[9].level
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[10].level
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[11].level
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[12].level
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[13].level
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[14].level
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[15].level
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[16].level
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[17].level
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[18].level
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[19].level
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[20].level
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[21].level
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[22].level
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[23].level
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[24].level
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[25].level
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[26].level
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[27].level
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[28].level
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[29].level
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[30].level
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[31].level
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[32].level
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[33].level
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[34].level
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[35].level
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[36].level
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[37].level
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[38].level
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[39].level
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[40].level
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[41].level
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<id>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[1].m_Value.<id>k__BackingField.m_Value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[2].m_Value.<id>k__BackingField.m_Value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[3].m_Value.<id>k__BackingField.m_Value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[4].m_Value.<id>k__BackingField.m_Value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[5].m_Value.<id>k__BackingField.m_Value
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[6].m_Value.<id>k__BackingField.m_Value
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[7].m_Value.<id>k__BackingField.m_Value
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[8].m_Value.<id>k__BackingField.m_Value
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[9].m_Value.<id>k__BackingField.m_Value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[10].m_Value.<id>k__BackingField.m_Value
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[1].isClaimedCommond
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<huntPassDataSave>k__BackingField.huntPassDatasSave.<Value>k__BackingField.Array.data[2].isClaimedCommond
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<streakDailySaves>k__BackingField.Array.data[0].m_Value.<streak>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<streakDailySaves>k__BackingField.Array.data[1].m_Value.<streak>k__BackingField
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<streakDailySaves>k__BackingField.Array.data[2].m_Value.<streak>k__BackingField
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<streakDailySaves>k__BackingField.Array.data[3].m_Value.<streak>k__BackingField
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<streakDailySaves>k__BackingField.Array.data[4].m_Value.<streak>k__BackingField
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.data[0].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.data[1].type
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.data[2].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<claimed>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[2].m_Value.<claimed>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[3].m_Value.<claimed>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<ArtifactData>k__BackingField.<ArtifactInfos>k__BackingField.Array.data[0].m_Value.<Id>k__BackingField.m_Value
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[0].m_Value.<progress>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[1].m_Value.<progress>k__BackingField.m_Value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[2].m_Value.<progress>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[3].m_Value.<progress>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[4].m_Value.<progress>k__BackingField.m_Value
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<QuestData>k__BackingField.<questSaves>k__BackingField.Array.data[5].m_Value.<progress>k__BackingField.m_Value
+      value: 3624
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[0].m_Value.<achievementType>k__BackingField.m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[0].m_Value.<currentProgress>k__BackingField.m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[1].m_Value.<achievementType>k__BackingField.m_Value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[2].m_Value.<achievementType>k__BackingField.m_Value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[3].m_Value.<achievementType>k__BackingField.m_Value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[4].m_Value.<achievementType>k__BackingField.m_Value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[5].m_Value.<achievementType>k__BackingField.m_Value
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[6].m_Value.<achievementType>k__BackingField.m_Value
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[7].m_Value.<achievementType>k__BackingField.m_Value
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[8].m_Value.<achievementType>k__BackingField.m_Value
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[9].m_Value.<achievementType>k__BackingField.m_Value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<ArtifactData>k__BackingField.<ArtifactInfos>k__BackingField.Array.data[0].m_Value.<Level>k__BackingField.m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<achievementDataSave>k__BackingField.achievements.Array.data[0].m_Value.<achievementLevel>k__BackingField.m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.data[1].value.m_Value.v
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630527245044229299, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
+      propertyPath: <InGameData>k__BackingField.<playerResourceDataSave>k__BackingField.<resources>k__BackingField.<Value>k__BackingField.Array.data[2].value.m_Value.v
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8474258163414466772, guid: 1a14cd632ad857748a03af3a48a93826, type: 3}
       propertyPath: m_LocalPosition.x

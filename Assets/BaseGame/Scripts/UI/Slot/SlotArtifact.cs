@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using Sirenix.OdinInspector.Editor;
 
 public class SlotArtifact : SlotBase <ArtifactDataConfig>
 {
@@ -49,5 +50,10 @@ public class SlotArtifact : SlotBase <ArtifactDataConfig>
     public override void ReloadData()
     {
         InitData(slotData);
+    }
+    public override void CleanAnimation()
+    {
+        base.CleanAnimation();
+        progressBar.ClearAnimation();
     }
 }

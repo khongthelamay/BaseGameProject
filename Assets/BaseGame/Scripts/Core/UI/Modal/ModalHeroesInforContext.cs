@@ -51,7 +51,7 @@ public class ModalHeroesInforContext
         [field: SerializeField] public Animator heroAnimator {get; private set;}  
         [field: SerializeField] public Button btnExit {get; private set;}  
         [field: SerializeField] public Button btnUpgrade {get; private set;}  
-        [field: SerializeField] public MainContentAbility mainContentHeroAbility { get; private set;}  
+        //[field: SerializeField] public MainContentAbility mainContentHeroAbility { get; private set;}  
         [field: SerializeField] public MainContentHeroJob mainContentHeroJob {get; private set;}
         [field: SerializeField] public TextMeshProUGUI TextMeshProUGUI {get; private set;}
 
@@ -69,7 +69,7 @@ public class ModalHeroesInforContext
             txtSpeed.text = heroData.BaseAttackSpeed.ToString();
             piecesProgress.ChangeProgress(0);
             piecesProgress.ChangeTextProgress("0/0");
-            mainContentHeroAbility.InitData(heroData.HeroAbilities);
+            //mainContentHeroAbility.InitData(heroData.HeroAbilities);
             jobs = new(heroData.HeroJob);
             mainContentHeroJob.InitData(jobs);
         }

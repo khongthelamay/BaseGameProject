@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 23b4f1e745b8d524783127f2dfd7648f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 679ffe80451c0cc4e945f08e3f2a35cf, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -142,8 +142,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Increases ATK by 10%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -324,8 +324,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lv.3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

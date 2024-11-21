@@ -1,4 +1,8 @@
 ﻿using DG.Tweening;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -94,10 +98,10 @@ public static class UIAnimation
 
         myLayout.preferredHeight = 0;
 
-        sequence.Append(DOVirtual.Float(0, heighDefault, .1f, (value) =>
+        sequence.Append(DOVirtual.Float(0, heighDefault, .15f, (value) =>
             {
                 myLayout.preferredHeight = value;
-            }).SetDelay(.2f * myLayout.transform.GetSiblingIndex())
+            }).SetDelay(.15f * myLayout.transform.GetSiblingIndex())
         );
 
         if (actionCallBack != null)
@@ -166,6 +170,21 @@ public static class UIAnimation
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Append(trsContent.DOScale(Vector3.one * 1.2f, .25f).SetEase(Ease.InBack));
+        sequence.Append(trsContent.DOScale(Vector3.one, .25f).SetEase(Ease.OutBack));
+
+        if (actionCallBack != null)
+            sequence.OnComplete(() => {
+                actionCallBack();
+            });
+        sequence.SetDelay(index * .1f);
+        sequence.Play();
+
+        return sequence;
+    }
+
+    public static Sequence AnimSlotHeroRewardShow(Transform trsContent, int index, UnityAction actionCallBack = null) {
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(trsContent.DOScale(Vector3.one * 1.2f, .25f).From(0).SetEase(Ease.InBack));
         sequence.Append(trsContent.DOScale(Vector3.one, .25f).SetEase(Ease.OutBack));
 
         if (actionCallBack != null)

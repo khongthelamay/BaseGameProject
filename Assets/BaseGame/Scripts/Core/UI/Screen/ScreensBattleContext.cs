@@ -40,6 +40,7 @@ public class ScreensBattleContext
         [field: SerializeField] public CanvasGroup MainView { get; private set; }
 
         [field: SerializeField] public ButtonNotice btnQuest;
+        [field: SerializeField] public ButtonNotice btnHuntPass;
         [field: SerializeField] public Button btnRecruit;
         [field: SerializeField] public Button btnSpecialShop;
         [field: SerializeField] public Button btnMatch;
@@ -64,8 +65,16 @@ public class ScreensBattleContext
             await View.Initialize(args);
 
             View.btnQuest.SetButtonOnClick(ShowModalQuest);
+            View.btnHuntPass.SetButtonOnClick(ShowScreenHuntPass, false);
             View.btnMatch.onClick.AddListener(Match);
             View.btnRecruit.onClick.AddListener(Recruit);
+        }
+
+        void ShowScreenHuntPass() {
+            ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+            ViewOptions options = new ViewOptions(nameof(ScreensHuntPass));
+            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+            ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
         }
 
         void ShowModalQuest()

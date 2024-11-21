@@ -37,10 +37,13 @@ public class MainContentHeroes : MainContent<HeroConfigData>
         if (b > a) return -1;
         return 0;
     }
+
     public override void ReloadData(HeroConfigData data)
     {
         for (int i = 0; i < slots.Count; i++)
         {
+            if (!slots[i].gameObject.activeSelf || slots[i].slotData == null)
+                continue;
             if (slots[i].slotData.Name == data.Name)
             {
                 slots[i].InitData(data);

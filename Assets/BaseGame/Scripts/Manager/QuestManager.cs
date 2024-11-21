@@ -18,7 +18,6 @@ public class QuestManager : Singleton<QuestManager>
     [field: SerializeField] public ReactiveValue<float> currentWeeklyStreak { get; set; } = new();
 
     public ReactiveValue<float> timeDailyRemaining = new();
-    public float timeDailyRemainingf = new();
     public ReactiveValue<float> timeWeeklyRemaining = new();
 
     DateTime lastDailyDay;
@@ -51,14 +50,13 @@ public class QuestManager : Singleton<QuestManager>
 
     }
     
-    private void Update()
+    private void FixedUpdate()
     {
         if (showModalQuest)
         {
             if (canCountDailyDown)
             {
-                timeDailyRemainingf -= Time.deltaTime;
-                timeDailyRemaining.Value = timeDailyRemainingf;
+                timeDailyRemaining.Value -= Time.deltaTime;
                 //ModalQuestContext.Events.ChangeTextDaily?.Invoke();
                 //if (timeDailyRemaining.Value <= 0)
                 //{
@@ -71,7 +69,7 @@ public class QuestManager : Singleton<QuestManager>
 
             if (canCountWeeklyDown)
             {
-                //timeWeeklyRemaining.Value -= Time.deltaTime;
+                timeWeeklyRemaining.Value -= Time.deltaTime;
                 //if (timeWeeklyRemaining.Value <= 0)
                 //{
                 //    //strTimeWeeklyRemaining.Value = "0";
@@ -85,7 +83,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public void ShowModelQuest() {
         timeDailyRemaining.Value = (float)timeDailyEnd.Subtract(DateTime.Now).TotalSeconds;
-        timeDailyRemainingf = (float)timeDailyEnd.Subtract(DateTime.Now).TotalSeconds;
+
         timeWeeklyRemaining.Value = (float)timeWeelyEnd.Subtract(DateTime.Now).TotalSeconds;
         showModalQuest = true;
     }

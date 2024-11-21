@@ -94,4 +94,11 @@ public class HeroManager : Singleton<HeroManager>
         return true;
     }
 
+    public HeroConfigData GetHeroConfigData(string heroName) {
+        foreach (HeroConfigData hero in heroList)
+        {
+            if (hero.Name == heroName) return hero;
+        }
+        return null;
+    }
 }

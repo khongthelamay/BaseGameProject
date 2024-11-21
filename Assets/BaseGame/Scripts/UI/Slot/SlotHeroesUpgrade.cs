@@ -33,12 +33,11 @@ public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
         objUnLock.SetActive(true);
         objPurchase.SetActive(false);
         objRequire.SetActive(false);
-        pieceProgress.ChangeProgress(0);
 
         heroSave = HeroManager.Instance.GetHeroSaveData(data.Name);
         txtLevel.text = $"Lv. {heroSave.level.Value}";
-        pieceProgress.ChangeProgress(0);
-        pieceProgress.ChangeTextProgress("0/0");
+        pieceProgress.ChangeProgress(1);
+        pieceProgress.ChangeTextProgress($"{heroSave.piece.Value}/10");
     }
 
     public override void AnimOpen()
@@ -46,5 +45,11 @@ public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
         if (mySequence != null) mySequence.Kill();
         mySequence = DOTween.Sequence();
         mySequence = UIAnimation.AnimSlotPopUp(trsContent);
+    }
+
+    public override void CleanAnimation()
+    {
+        base.CleanAnimation();
+        pieceProgress.ClearAnimation();
     }
 }
