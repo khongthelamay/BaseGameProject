@@ -294,6 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7568490082622201066}
   - component: {fileID: 1711388212585557881}
+  - component: {fileID: 5516978348701364174}
   m_Layer: 5
   m_Name: SlotRoundReward
   m_TagString: Untagged
@@ -331,3 +332,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6517620243905681497}
   m_CullTransparentMesh: 1
+--- !u!114 &5516978348701364174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517620243905681497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd5e713fa985d646a6f2995f3e7b2d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotData:
+    level: 0
+    rewardType: 0
+    amount:
+      v: 0
+      m: 0
+  imgIcon: {fileID: 0}
+  btnChoose: {fileID: 0}
+  trsContent: {fileID: 0}
+  animOnSlot: {fileID: 0}

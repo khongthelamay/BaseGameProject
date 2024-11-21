@@ -10,6 +10,7 @@ using Manager;
 using TW.UGUI.Core.Views;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
+using System.Collections.Generic;
 
 [Serializable]
 public class ScreensBattleContext 
@@ -39,16 +40,24 @@ public class ScreensBattleContext
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView { get; private set; }
 
+        [field: SerializeField] public MainContentRoundReward mainContentRoundReward { get; private set; }
+        [field: SerializeField] public ScrollRect scrollRoundReward { get; private set; }
+
         [field: SerializeField] public ButtonNotice btnQuest;
         [field: SerializeField] public ButtonNotice btnHuntPass;
+
         [field: SerializeField] public Button btnRecruit;
         [field: SerializeField] public Button btnSpecialShop;
         [field: SerializeField] public Button btnMatch;
 
         public UniTask Initialize(Memory<object> args)
         {
-          
             return UniTask.CompletedTask;
+        }
+
+        public void LoadRoundRewardData(List<RoundRewardConfig> datas) {
+            mainContentRoundReward.InitData(datas);
+            scrollRoundReward.verticalNormalizedPosition = 0f;
         }
     }
 
@@ -68,6 +77,8 @@ public class ScreensBattleContext
             View.btnHuntPass.SetButtonOnClick(ShowScreenHuntPass, false);
             View.btnMatch.onClick.AddListener(Match);
             View.btnRecruit.onClick.AddListener(Recruit);
+
+            View.LoadRoundRewardData(RoundRewardGlobalConfig.Instance.roundRewardConfigs);
         }
 
         void ShowScreenHuntPass() {

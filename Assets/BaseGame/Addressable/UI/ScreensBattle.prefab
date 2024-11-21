@@ -771,7 +771,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 200
-    m_Bottom: 0
+    m_Bottom: 500
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -1107,6 +1107,7 @@ GameObject:
   - component: {fileID: 333734021706123156}
   - component: {fileID: 7442523310258039002}
   - component: {fileID: 3863073870176594231}
+  - component: {fileID: 5175285875851387672}
   m_Layer: 5
   m_Name: Center
   m_TagString: Untagged
@@ -1172,6 +1173,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5175285875851387672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4375766421113843672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd1f8f059320104a9eada1edc0fe7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trsContentParents: {fileID: 9178238935513914498}
+  slotPref: {fileID: 5516978348701364174, guid: f646732a10e6deb48821603990e77e0b, type: 3}
+  slotTemp: {fileID: 0}
+  slots: []
+  currentSlotOnChoose: {fileID: 0}
+  totalSlotUsing: 0
 --- !u!1 &4554236315567117988
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,7 +2225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 9178238935513914498}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -2508,6 +2527,8 @@ MonoBehaviour:
         m_Value: 0
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 1835724710181177364}
+      <mainContentRoundReward>k__BackingField: {fileID: 5175285875851387672}
+      <scrollRoundReward>k__BackingField: {fileID: 264683588205697103}
       btnQuest: {fileID: 218042879258081968}
       btnHuntPass: {fileID: 688029444452522865}
       btnRecruit: {fileID: 9010248819730287108}
@@ -3301,6 +3322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotRoundReward
       objectReference: {fileID: 0}
+    - target: {fileID: 6517620243905681497, guid: f646732a10e6deb48821603990e77e0b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568490082622201066, guid: f646732a10e6deb48821603990e77e0b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3384,28 +3409,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6517620243905681497, guid: f646732a10e6deb48821603990e77e0b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2377742608507534382}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f646732a10e6deb48821603990e77e0b, type: 3}
---- !u!1 &5083970651748191177 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6517620243905681497, guid: f646732a10e6deb48821603990e77e0b, type: 3}
-  m_PrefabInstance: {fileID: 2089346194686006160}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2377742608507534382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5083970651748191177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd5e713fa985d646a6f2995f3e7b2d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &8500109896150257530 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7568490082622201066, guid: f646732a10e6deb48821603990e77e0b, type: 3}
