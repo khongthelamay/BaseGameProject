@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Linq;
 using Core;
+using Core.SimplePool;
 using Cysharp.Threading.Tasks;
 using Manager;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using UnityEngine;
-using Zenject;
 
 #if UNITY_EDITOR
 #endif
 
 public class Map : ACachedMonoBehaviour
 {
-    [Inject] private BattleManager BattleManager { get; set; }
-    [Inject] private Enemy.Factory EnemyFactory { get; set; }
+    private BattleManager BattleManagerCache { get; set; }
+    private BattleManager BattleManager => BattleManagerCache ??= BattleManagerCache = BattleManager.Instance;
+    
     [field: SerializeField] public MapDrawer MapDrawer {get; private set;}
     [field: SerializeField] private MapData MapData {get; set;}
     [field: SerializeField] private Transform[] MovePoints {get; set;}
@@ -31,9 +32,11 @@ public class Map : ACachedMonoBehaviour
             Enemy enemyPrefab = PrefabGlobalConfig.Instance.GetEnemyPrefab(waveData.EnemyId);
             for (int i = 0; i < waveData.EnemyCount; i++)
             {
-                Enemy enemy = EnemyFactory.Create(enemyPrefab);
-                enemy.transform.position = MovePoints[0].position;
-                enemy.SetupMovePoint(MovePoints);
+                Enemy enemy = enemyPrefab
+                    .Spawn(MovePoints[0].position, Quaternion.identity)
+                    .SetupMovePoint(MovePoints)
+                    .InitStats(100000, 1.5f);
+                
                 enemy.StartMoveToNextPoint();
                 BattleManager.AddEnemy(enemy);
                 

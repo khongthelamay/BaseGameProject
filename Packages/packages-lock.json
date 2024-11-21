@@ -46,21 +46,21 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "5d63e2e47bb13a1b21f82415ecec0623b8627ad1"
+      "hash": "d1666826f9428ab26ade736a8cba75f3f5c714ad"
     },
     "com.tw.reactive": {
       "version": "https://github.com/thinhwar123/TW-CustomPackage.git?path=Packages/TW.Reactive",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "5d63e2e47bb13a1b21f82415ecec0623b8627ad1"
+      "hash": "d1666826f9428ab26ade736a8cba75f3f5c714ad"
     },
     "com.tw.ugui": {
       "version": "https://github.com/thinhwar123/TW-CustomPackage.git?path=Packages/TW.UGUI",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "5d63e2e47bb13a1b21f82415ecec0623b8627ad1"
+      "hash": "d1666826f9428ab26ade736a8cba75f3f5c714ad"
     },
     "com.tw.utility": {
       "version": "https://github.com/thinhwar123/TW-CustomPackage.git?path=Packages/TW.Utility",
@@ -69,7 +69,7 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "3bc42aac6e5cbda23c9599513419086ed2debcaf"
+      "hash": "d1666826f9428ab26ade736a8cba75f3f5c714ad"
     },
     "com.unity.2d.animation": {
       "version": "9.1.0",

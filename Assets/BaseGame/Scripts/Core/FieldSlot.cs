@@ -4,13 +4,13 @@ using Manager;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Zenject;
 
 [SelectionBase]
 public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler
 {
     public static Action FieldSlotChangedCallback { get; private set; }
-    [Inject] private BattleManager BattleManager { get; set; }
+    private BattleManager BattleManagerCache { get; set; }
+    private BattleManager BattleManager => BattleManagerCache ??= BattleManagerCache = BattleManager.Instance;
     [field: SerializeField] public int RowId {get; private set;}
     [field: SerializeField] public int ColumnId {get; private set;}
     [field: SerializeField] private GameObject UpgradeMark {get; set;}

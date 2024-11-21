@@ -252,7 +252,7 @@ MonoBehaviour:
   <FuryPoint>k__BackingField:
     m_Value: 0
   <BonusFuryRate>k__BackingField: 0
-  <SavageRoarEffect>k__BackingField: {fileID: 3447388117059416679, guid: b56f7e4110fb0674bb2963ff20a5f901, type: 3}
+  <SavageRoarEffect>k__BackingField: {fileID: 4901436539983598408, guid: b56f7e4110fb0674bb2963ff20a5f901, type: 3}
 --- !u!1 &5600566416368007558
 GameObject:
   m_ObjectHideFlags: 0

@@ -152,11 +152,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentHealthPoint>k__BackingField:
-    v: 20
-    m: 1
+    coefficient: 1
+    exponent: 1
   <FutureHealthPoint>k__BackingField:
-    v: 20
-    m: 1
+    coefficient: 1
+    exponent: 1
   <MovementSpeed>k__BackingField: 1.5
   <MovePoint>k__BackingField: []
   <CurrentPoint>k__BackingField: 0

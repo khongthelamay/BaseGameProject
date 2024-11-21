@@ -44,19 +44,20 @@ namespace Core
         {
             BigNumber damageDeal = Owner.AttackDamage;
             float attackSpeed = Owner.AttackSpeed;
-            
             EnemyTarget.WillTakeDamage(damageDeal);
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
+            
             await DelaySample(8, tickRate, ct);
-            Projectile.Spawn(SpawnPosition.position, Quaternion.identity).Setup(Owner, EnemyTarget, damageDeal, DamageType)
+            Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
+                .Setup(Owner, EnemyTarget, damageDeal, DamageType)
                 .WithComplete(OnProjectileMoveCompleteCache);
             if (Random.Range(0, 100) < OwnerArchmage.OrbSpawnRate)
             {
                 OwnerArchmage.SpawnRandomOrb();
             }
-            await DelaySample(22, tickRate, ct);
             
+            await DelaySample(22, tickRate, ct);
         }
         [ACacheMethod("TW.Utility.CustomType")]
         private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, BigNumber damage, DamageType damageType)

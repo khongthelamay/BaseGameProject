@@ -5,11 +5,11 @@ using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Zenject;
 
 public class WaitSlot : ACachedMonoBehaviour, IPointerClickHandler
 {
-    [Inject] private BattleManager BattleManager { get; set; }
+    private BattleManager BattleManagerCache { get; set; }
+    private BattleManager BattleManager => BattleManagerCache ??= BattleManagerCache = BattleManager.Instance;
     [field: SerializeField] public Hero OwnerHero {get; private set;}
     
     [Button]

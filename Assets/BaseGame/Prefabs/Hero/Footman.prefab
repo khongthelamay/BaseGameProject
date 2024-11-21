@@ -258,6 +258,7 @@ MonoBehaviour:
   <BaseAttackSpeed>k__BackingField: 0
   <BaseAttackRange>k__BackingField: 0
   <IsCancelAbility>k__BackingField: 0
+  <DevastatingStrikeEffect>k__BackingField: {fileID: 1465427960468532463, guid: 86babd54007bc37478ff3a04a3c4922b, type: 3}
 --- !u!1 &4712714671165513699
 GameObject:
   m_ObjectHideFlags: 0
