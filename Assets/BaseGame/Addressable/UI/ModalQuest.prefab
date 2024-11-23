@@ -185,8 +185,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -113}
-  m_SizeDelta: {x: 0, y: 80}
+  m_AnchoredPosition: {x: 0, y: -142.95947}
+  m_SizeDelta: {x: 0, y: 54.0811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5804793999128698054
 CanvasRenderer:
@@ -340,8 +340,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 148}
-  m_SizeDelta: {x: 648, y: 145}
+  m_AnchoredPosition: {x: 0, y: 161.52026}
+  m_SizeDelta: {x: 648, y: 172.0406}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5641426720832848893
 CanvasRenderer:
@@ -373,7 +373,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 725fb97288a0f3447ba56c0a921d030a, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1137,7 +1137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 324.569, y: 34.6946}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6859414614181585891
@@ -1330,7 +1330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7834350172421831972
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1352,7 +1352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 12.5}
+  m_AnchoredPosition: {x: 0, y: 22}
   m_SizeDelta: {x: 560, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3084918915020812285
@@ -1430,7 +1430,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1000
   m_WholeNumbers: 0
-  m_Value: 222
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1711,7 +1711,7 @@ RectTransform:
   m_Father: {fileID: 7834350172421831972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.222, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1805,7 +1805,7 @@ GameObject:
   - component: {fileID: 2666110820934635338}
   - component: {fileID: 653060646434431054}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Note
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1828,7 +1828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 119, y: 8.6}
+  m_AnchoredPosition: {x: 119, y: 0.000022888184}
   m_SizeDelta: {x: 262, y: 62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2666110820934635338
@@ -2422,8 +2422,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7834350172421831972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.222, y: 0}
-  m_AnchorMax: {x: 0.222, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3073,8 +3073,8 @@ MonoBehaviour:
         m_Value: 0
       <questSaves>k__BackingField: []
       <achievementSaves>k__BackingField: []
-      <dailyStreakSaves>k__BackingField: []
-      <weeklyStreakSaves>k__BackingField: []
+      <streakDailySaves>k__BackingField: []
+      <streakWeeklySaves>k__BackingField: []
       <timeDailyRemaining>k__BackingField:
         m_Value: 0
       <timeWeeklyRemaining>k__BackingField:
@@ -3088,12 +3088,13 @@ MonoBehaviour:
       <mainContentQuest>k__BackingField: {fileID: 6755556679573753871}
       <mainContentAchievement>k__BackingField: {fileID: 6657254029659482363}
       <mainContentDailyStreak>k__BackingField: {fileID: 8309905566285718858}
+      <mainContentWeeklyStreak>k__BackingField: {fileID: 4589486505938516838}
       <mainContent>k__BackingField: {fileID: 1847853541025306544}
       <btnClose>k__BackingField: {fileID: 1694198691296936254}
       <btnDailyQuest>k__BackingField: {fileID: 1177945861583663500}
       <btnAchievement>k__BackingField: {fileID: 3018342245283371307}
       <txtTimeDailyRemaining>k__BackingField: {fileID: 3249939628956983137}
-      <txtTimeWeeklyRemaining>k__BackingField: {fileID: 0}
+      <txtTimeWeeklyRemaining>k__BackingField: {fileID: 5489471448799793829}
       <objDailyQuest>k__BackingField: {fileID: 8719653130855697626}
       <objAchievement>k__BackingField: {fileID: 2716627159941188191}
       <objRewardChest>k__BackingField: {fileID: 3024737426254977989}

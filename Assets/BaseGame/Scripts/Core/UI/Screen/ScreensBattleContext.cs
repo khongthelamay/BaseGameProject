@@ -18,6 +18,7 @@ public class ScreensBattleContext
     public static class Events
     {
         public static Subject<Unit> SampleEvent { get; set; } = new();
+        public static Action<bool> ShowNoticeQuest { get; set; }
     }
     
     [HideLabel]
@@ -79,6 +80,10 @@ public class ScreensBattleContext
             View.btnRecruit.onClick.AddListener(Recruit);
 
             View.LoadRoundRewardData(RoundRewardGlobalConfig.Instance.roundRewardConfigs);
+
+            Events.ShowNoticeQuest = ShowNoticeQuestDone;
+
+            QuestManager.Instance.CheckShowNoticeQuest();
         }
 
         void ShowScreenHuntPass() {
@@ -110,6 +115,15 @@ public class ScreensBattleContext
             ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
 
             ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
+        }
+
+        void ShowNoticeQuestDone(bool active) {
+            View.btnQuest.ChangeShowNotice(active);
+        }
+
+        public async UniTask Cleanup(Memory<object> args)
+        {
+            Events.ShowNoticeQuest = null;
         }
 
     }

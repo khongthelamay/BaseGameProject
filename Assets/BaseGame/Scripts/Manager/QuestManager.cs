@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using TW.Reactive.CustomComponent;
@@ -36,8 +37,14 @@ public class QuestManager : Singleton<QuestManager>
     private void LoadData()
     {
         questSaves = InGameDataManager.Instance.InGameData.QuestData.questSaves;
+
         streakDailySaves = InGameDataManager.Instance.InGameData.QuestData.streakDailySaves;
+        if (streakDailySaves.Count == 0)
+            InitDailyStreak();
+
         streakWeeklySaves = InGameDataManager.Instance.InGameData.QuestData.streakWeeklySaves;
+        if (streakWeeklySaves.Count == 0)
+            InitWeeklyStreak();
 
         strLastDay = InGameDataManager.Instance.InGameData.QuestData.strLastDay;
         strLastWeek = InGameDataManager.Instance.InGameData.QuestData.strLastWeek;
@@ -57,26 +64,11 @@ public class QuestManager : Singleton<QuestManager>
             if (canCountDailyDown)
             {
                 timeDailyRemaining.Value -= Time.deltaTime;
-                //ModalQuestContext.Events.ChangeTextDaily?.Invoke();
-                //if (timeDailyRemaining.Value <= 0)
-                //{
-                //    //strTimeDailyRemaining.Value = "0";
-                //    canCountDailyDown = false;
-                //    ChangeDayOnGame();
-                //}
-                //else strTimeDailyRemaining.Value = TimeUtil.TimeToString(timeDailyRemaining, TimeFommat.Keyword);
             }
 
             if (canCountWeeklyDown)
             {
                 timeWeeklyRemaining.Value -= Time.deltaTime;
-                //if (timeWeeklyRemaining.Value <= 0)
-                //{
-                //    //strTimeWeeklyRemaining.Value = "0";
-                //    canCountWeeklyDown = false;
-                //    ChangeWeekOnGame();
-                //}
-                //else strTimeWeeklyRemaining.Value = TimeUtil.TimeToString(timeWeeklyRemaining, TimeFommat.Keyword);
             }
         }
     }
@@ -92,13 +84,17 @@ public class QuestManager : Singleton<QuestManager>
         if (string.IsNullOrEmpty(strLastDay))
         {
             InGameDataManager.Instance.InGameData.QuestData.SaveDailyDay();
+            AddQuestProgress(1,1);
         }
 
         lastDailyDay = DateTime.Parse(strLastDay, TimeUtil.cultureInfor);
         timeDailyEnd = lastDailyDay.AddDays(1);
         TimeSpan timeSpan = DateTime.Now.Subtract(lastDailyDay);
         if (timeSpan.TotalHours >= 24)
+        {
             InGameDataManager.Instance.InGameData.QuestData.SaveDailyDay();
+            AddQuestProgress(1, 1);
+        }
 
         canCountDailyDown = true;
     }
@@ -174,22 +170,29 @@ public class QuestManager : Singleton<QuestManager>
 
     public void AddDailyStreak(float amount) {
         currentDailyStreak.Value += amount;
+        for (int i = streakDailySaves.Count -1 ; i >=0 ; i--)
+        {
+            if (streakDailySaves[i].Value.streak <= currentDailyStreak.Value)
+            {
+                streakDailySaves[i].Value.canClaim.Value = true;
+                break;
+            }
+        }
         InGameDataManager.Instance.SaveData();
     }
 
+    [Button]
     public void AddWeeklyStreak(float amount) {
         currentWeeklyStreak.Value += amount;
-        InGameDataManager.Instance.SaveData();
-    }
-
-    public bool CheckStreakDone(float streak)
-    {
-        for (int i = 0; i < streakDailySaves.Count; i++)
+        for (int i = streakWeeklySaves.Count - 1; i >= 0; i--)
         {
-            if (streakDailySaves[i].Value.streak == streak)
-                return true;
+            if (streakWeeklySaves[i].Value.streak <= currentWeeklyStreak.Value)
+            {
+                streakWeeklySaves[i].Value.canClaim.Value = true;
+                break;
+            }
         }
-        return false;
+        InGameDataManager.Instance.SaveData();
     }
 
     public ReactiveValue<StreakSave> GetStreakSave(float streak)
@@ -200,15 +203,119 @@ public class QuestManager : Singleton<QuestManager>
                 return streakDailySaves[i];
         }
 
-        StreakSave newStreak = new();
-        newStreak.streak = streak;
-        newStreak.canClaim.Value = false;
-        newStreak.claimed.Value = false;
+        for (int i = 0; i < streakWeeklySaves.Count; i++)
+        {
+            if (streakWeeklySaves[i].Value.streak == streak)
+                return streakWeeklySaves[i];
+        }
+        return null;
+    }
 
-        ReactiveValue<StreakSave> newStreakSave = new(newStreak);
+    void InitDailyStreak() {
+        for (int i = 0; i < QuestGlobalConfig.Instance.dailyStreaks.Count; i++)
+        {
+            StreakSave newStreak = new();
+            newStreak.streak = QuestGlobalConfig.Instance.dailyStreaks[i].streak;
+            newStreak.canClaim.Value = false;
+            newStreak.claimed.Value = false;
 
-        streakDailySaves.Add(newStreakSave);
+            ReactiveValue<StreakSave> newStreakSave = new(newStreak);
 
-        return newStreakSave;
+            streakDailySaves.Add(newStreakSave);
+        }
+        InGameDataManager.Instance.SaveData();
+    }
+    void InitWeeklyStreak()
+    {
+        for (int i = 0; i < QuestGlobalConfig.Instance.weeklyStreaks.Count; i++)
+        {
+            StreakSave newStreak = new();
+            newStreak.streak = QuestGlobalConfig.Instance.weeklyStreaks[i].streak;
+            newStreak.canClaim.Value = false;
+            newStreak.claimed.Value = false;
+
+            ReactiveValue<StreakSave> newStreakSave = new(newStreak);
+
+            streakWeeklySaves.Add(newStreakSave);
+        }
+        InGameDataManager.Instance.SaveData();
+    }
+
+    public void AddQuestProgress(int questID, int progress) {
+        ReactiveValue<QuestSave> questSave = GetQuestSaveData(questID);
+        questSave.Value.progress.Value += progress;
+    }
+
+    public bool CheckQuestDone() {
+        for (int i = 0; i < questSaves.Count; i++)
+        {
+            if (!questSaves[i].Value.claimed.Value)
+            {
+                if (QuestGlobalConfig.Instance.CheckQuestDone(questSaves[i].Value))
+                    return true;
+            }
+           
+        }
+        return false;
+    }
+
+    bool IsHaveStreakCanClaim() {
+        for (int i = 0; i < streakDailySaves.Count; i++)
+        {
+            if (streakDailySaves[i].Value.canClaim.Value && !streakDailySaves[i].Value.claimed.Value)
+                return true;
+        }
+
+        for (int i = 0; i < streakWeeklySaves.Count; i++)
+        {
+            if (streakWeeklySaves[i].Value.canClaim.Value && !streakWeeklySaves[i].Value.claimed.Value)
+                return true;
+        }
+
+        return false;
+    }
+
+    public void CheckShowNoticeQuest() {
+        if (CheckQuestDone())
+        {
+            Debug.Log("Is have quest done");
+            ScreensBattleContext.Events.ShowNoticeQuest?.Invoke(true);
+            return;
+        }
+
+        if (IsHaveStreakCanClaim())
+        {
+            Debug.Log("Is have streak done");
+            ScreensBattleContext.Events.ShowNoticeQuest?.Invoke(true);
+            return;
+        }
+
+        ScreensBattleContext.Events.ShowNoticeQuest?.Invoke(false);
+    }
+
+    public void ClaimDailyStreak(float streak)
+    {
+        for (int i = 0; i < streakDailySaves.Count; i++)
+        {
+            if (streakDailySaves[i].Value.streak == streak)
+            {
+                streakDailySaves[i].Value.claimed.Value = true;
+                InGameDataManager.Instance.SaveData();
+                return;
+            }
+        }
+    }
+
+    public void ClaimWeeklyStreak(float streak)
+    {
+        for (int i = 0; i < streakWeeklySaves.Count; i++)
+        {
+            if (streakWeeklySaves[i].Value.streak == streak)
+            {
+                streakWeeklySaves[i].Value.claimed.Value = true;
+                InGameDataManager.Instance.SaveData();
+                return;
+            }
+        }
     }
 }

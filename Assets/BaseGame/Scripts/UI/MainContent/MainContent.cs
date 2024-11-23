@@ -65,6 +65,8 @@ public class MainContent<Data> : MonoBehaviour
 
     }
 
+    public virtual void ReloadData() { }
+
     public virtual void ActionSlotCallBack(SlotBase<Data> slotBase) {
         currentSlotOnChoose = slotBase;
         if (actionSlotCallBack != null)
