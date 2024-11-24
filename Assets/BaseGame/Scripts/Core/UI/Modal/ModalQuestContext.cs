@@ -80,8 +80,7 @@ public class ModalQuestContext
 
         [field: SerializeField] public Image imgTabAchievement { get; private set; }
         [field: SerializeField] public Image imgTabRewardChest { get; private set; }
-
-        [field: SerializeField] public List<Sprite> sprTab { get; private set; }
+        [field: SerializeField] public Transform trsTabSpite { get; private set; }
 
         GameObject currentGameObjShow;
 
@@ -119,7 +118,9 @@ public class ModalQuestContext
             mainContentWeeklyStreak.AnimOpen();
         }
 
-        public void OnOpen() { UIAnimation.ModalOpen(MainView, mainContent); }
+        public void OnOpen() { UIAnimation.ModalOpen(MainView, mainContent, () => {
+            trsTabSpite.position = btnAchievement.transform.position;
+        }); }
 
         public void OnClose() {
             mainContentQuest.CleanAnimation();
@@ -136,10 +137,7 @@ public class ModalQuestContext
             objDailyQuest.SetActive(true);
             objRewardChest.SetActive(true);
             objAchievement.SetActive(false);
-
-            imgTabAchievement.sprite = sprTab[0];
-            imgTabRewardChest.sprite = sprTab[1];
-
+            trsTabSpite.position = btnAchievement.transform.position;
             LoadQuestData(QuestGlobalConfig.Instance.questDataConfigs);
             LoadStreakData(QuestGlobalConfig.Instance.dailyStreaks);
             LoadWeeklyStreakData(QuestGlobalConfig.Instance.weeklyStreaks);
@@ -153,10 +151,7 @@ public class ModalQuestContext
             objDailyQuest.SetActive(false);
             objRewardChest.SetActive(false);
             objAchievement.SetActive(true);
-
-            imgTabAchievement.sprite = sprTab[1];
-            imgTabRewardChest.sprite = sprTab[0];
-
+            trsTabSpite.position = btnDailyQuest.transform.position;
             LoadAchievementData(AchievementManager.Instance.GetAchievements());
         }
 

@@ -63,12 +63,24 @@ public class QuestManager : Singleton<QuestManager>
         {
             if (canCountDailyDown)
             {
-                timeDailyRemaining.Value -= Time.deltaTime;
+                if (timeDailyRemaining.Value > 0)
+                    timeDailyRemaining.Value -= Time.deltaTime;
+                else {
+                    canCountDailyDown = false;
+                    CheckDailyDay();
+                } 
+                    
             }
 
             if (canCountWeeklyDown)
             {
-                timeWeeklyRemaining.Value -= Time.deltaTime;
+                if (timeWeeklyRemaining.Value > 0)
+                    timeWeeklyRemaining.Value -= Time.deltaTime;
+                else
+                {
+                    canCountWeeklyDown = false;
+                    CheckWeeklyDay();
+                }
             }
         }
     }
@@ -95,7 +107,6 @@ public class QuestManager : Singleton<QuestManager>
             InGameDataManager.Instance.InGameData.QuestData.SaveDailyDay();
             AddQuestProgress(1, 1);
         }
-
         canCountDailyDown = true;
     }
 
@@ -112,16 +123,6 @@ public class QuestManager : Singleton<QuestManager>
             InGameDataManager.Instance.InGameData.QuestData.SaveWeeklyDay();
         
         canCountWeeklyDown = true;
-    }
-
-    void ChangeWeekOnGame() {
-        InGameDataManager.Instance.InGameData.QuestData.SaveWeeklyDay();
-        CheckWeeklyDay();
-    }
-
-    void ChangeDayOnGame() {
-        InGameDataManager.Instance.InGameData.QuestData.SaveDailyDay();
-        CheckDailyDay();
     }
 
     public ReactiveValue<QuestSave> GetQuestSaveData(int questID) {
