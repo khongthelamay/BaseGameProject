@@ -11,6 +11,7 @@ using TW.UGUI.Core.Views;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
 using System.Collections.Generic;
+using TMPro;
 
 [Serializable]
 public class ScreensBattleContext 
@@ -50,6 +51,8 @@ public class ScreensBattleContext
         [field: SerializeField] public Button btnRecruit;
         [field: SerializeField] public Button btnSpecialShop;
         [field: SerializeField] public Button btnMatch;
+
+
 
         public UniTask Initialize(Memory<object> args)
         {

@@ -12,7 +12,7 @@ public partial class PlayerResourceDataSave
     [field: SerializeField] public ReactiveValue<float> exp;
     [field: SerializeField] public ReactiveValue<bool> premium;
     [field: SerializeField] public ReactiveList<Resource> resources { get; set; } = new();
-    [field: SerializeField] public ReactiveList<string> lastTimeEnergy { get; set; } = new();
+    [field: SerializeField] public ReactiveValue<string> lastTimeEnergy { get; set; } = new();
 
     public ReactiveValue<BigNumber> GetResourceValue(ResourceType resourceType) 
     {

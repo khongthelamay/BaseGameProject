@@ -68,6 +68,7 @@ public class QuestManager : Singleton<QuestManager>
                 else {
                     canCountDailyDown = false;
                     CheckDailyDay();
+                    ShowModelQuest();
                 } 
                     
             }
@@ -80,6 +81,7 @@ public class QuestManager : Singleton<QuestManager>
                 {
                     canCountWeeklyDown = false;
                     CheckWeeklyDay();
+                    ShowModelQuest();
                 }
             }
         }

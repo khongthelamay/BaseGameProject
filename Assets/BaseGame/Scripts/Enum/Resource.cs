@@ -1,4 +1,5 @@
 using MemoryPack;
+using System;
 using TW.Reactive.CustomComponent;
 using TW.Utility.CustomType;
 
@@ -22,6 +23,8 @@ public partial class Resource
     public void Add(BigNumber amount) { value.Value += amount; }
 
     public void Consume(BigNumber amount) { value.Value -= amount; }
+
+    public void ChangeValue(BigNumber amount) { value.Value += amount; }
 }
 
 

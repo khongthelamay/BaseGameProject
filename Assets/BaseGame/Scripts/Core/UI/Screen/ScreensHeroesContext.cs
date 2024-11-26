@@ -70,7 +70,7 @@ public class ScreensHeroesContext
             mainContentHeroes.ReloadData(heroData);
         }
 
-        public void ChangeUpgradeMysthicPieces(string value) { resourceMythicPieces.ChangeValue(value); }
+        public void ChangeUpgradeMysthicPieces(BigNumber value) { resourceMythicPieces.ChangeValue(value); }
 
         public void FilterLevel()
         {
@@ -157,7 +157,7 @@ public class ScreensHeroesContext
         }
 
         void ChangeUpgradeMysthicPieces(BigNumber value) {
-            View.ChangeUpgradeMysthicPieces(value.ToString());
+            View.ChangeUpgradeMysthicPieces(value);
         }
 
         public async UniTask Cleanup(Memory<object> args)
