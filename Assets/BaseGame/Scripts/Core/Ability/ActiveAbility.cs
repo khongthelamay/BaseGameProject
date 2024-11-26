@@ -3,9 +3,14 @@ using Cysharp.Threading.Tasks;
 
 namespace Core
 {
+    [System.Serializable]
     public abstract class ActiveAbility : Ability
     {
-        protected ActiveAbility(Hero owner, int levelUnlock) : base(owner, levelUnlock)
+        protected ActiveAbility()
+        {
+            
+        }
+        protected ActiveAbility(Hero owner) : base(owner)
         {
 
         }

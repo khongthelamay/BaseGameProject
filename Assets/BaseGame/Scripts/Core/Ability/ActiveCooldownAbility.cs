@@ -12,9 +12,13 @@ namespace Core
         [field: SerializeField] protected bool IsOnCooldown { get; set; }
         [field: SerializeField] protected float CooldownTimer { get; set; }
         private CancellationTokenSource CooldownCancellationTokenSource { get; set; }
-        protected ActiveCooldownAbility(Hero owner, int levelUnlock, float cooldown) : base(owner, levelUnlock)
+
+        protected ActiveCooldownAbility()
         {
-            Cooldown = cooldown;
+            
+        }
+        protected ActiveCooldownAbility(Hero owner) : base(owner)
+        {
             CooldownTimer = Cooldown;
             IsOnCooldown = true;
         }

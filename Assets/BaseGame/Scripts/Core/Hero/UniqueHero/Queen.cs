@@ -15,11 +15,11 @@ namespace Core
         protected override void InitAbility()
         {
             base.InitAbility();
-            ActiveAbilities.Add(new StarfallAbility(this, 0, 5f));
-            ActiveAbilities.Add(new QueenNormalAttack(this, 0, NormalAttackProjectile, ProjectileSpawnPosition));
-            
-            PassiveAbilities.Add(new AuraOfCelerityAbility(this, 0));
-            PassiveAbilities.Add(new CooldownSurgeAbility(this, 0));
+            // ActiveAbilities.Add(new StarfallAbility(this, 5f));
+            // ActiveAbilities.Add(new QueenNormalAttack(this, NormalAttackProjectile, ProjectileSpawnPosition));
+            //
+            // PassiveAbilities.Add(new AuraOfCelerityAbility(this));
+            // PassiveAbilities.Add(new CooldownSurgeAbility(this));
         }
         public void ChangeCooldownSurgeRate(float rate)
         {

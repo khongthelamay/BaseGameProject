@@ -59,7 +59,6 @@ public class HeroConfigData : ScriptableObject
     [field: SerializeField] public Hero HeroPrefab {get; private set;}
     [field: SerializeReference] public List<Ability> HeroAbilities { get; set; }
     
-    
 
 #if UNITY_EDITOR
     [Button]

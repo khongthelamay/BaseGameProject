@@ -23,10 +23,10 @@ namespace Core
         protected override void InitAbility()
         {
             base.InitAbility();
-            ActiveAbilities.Add(new ElementalSurgeAbility(this, 0, 5, ElementalSurgeEffect));
-            ActiveAbilities.Add(new ArchmageNormalAttack(this, 0, NormalAttackProjectile, ProjectileSpawnPosition));
-            
-            PassiveAbilities.Add(new OrbCatalystAbility(this, 0));
+            // ActiveAbilities.Add(new ElementalSurgeAbility(this, 5, ElementalSurgeEffect));
+            // ActiveAbilities.Add(new ArchmageNormalAttack(this, NormalAttackProjectile, ProjectileSpawnPosition));
+            //
+            // PassiveAbilities.Add(new OrbCatalystAbility(this));
         }
         public void AddOrbSpawnRate(int value)
         {

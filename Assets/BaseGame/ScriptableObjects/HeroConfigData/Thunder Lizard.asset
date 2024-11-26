@@ -25,14 +25,7 @@ MonoBehaviour:
   <ImageAnimatorController>k__BackingField: {fileID: 9100000, guid: 84ba39f8dab95214a89331bba74e8b78, type: 2}
   <HeroGameObjectPrefab>k__BackingField: {fileID: 4309200923862507661, guid: 2b2826815d2b84744af7cf9e8db3e8f3, type: 3}
   <HeroPrefab>k__BackingField: {fileID: 5385597266803653101, guid: 2b2826815d2b84744af7cf9e8db3e8f3, type: 3}
-  <HeroAbilities>k__BackingField:
-  - rid: 7889111977268346892
+  <HeroAbilities>k__BackingField: []
   references:
     version: 2
-    RefIds:
-    - rid: 7889111977268346892
-      type: {class: MeleeAttackAbility, ns: Core, asm: Assembly-CSharp}
-      data:
-        <LevelUnlock>k__BackingField: 0
-        <Owner>k__BackingField: {fileID: 0}
-        <DamageType>k__BackingField: 0
+    RefIds: []

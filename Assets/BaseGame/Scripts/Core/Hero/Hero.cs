@@ -111,7 +111,19 @@ namespace Core
 
         protected virtual void InitAbility()
         {
-
+            ActiveAbilities.Clear();
+            PassiveAbilities.Clear();
+            foreach (Ability heroAbility in HeroConfigData.HeroAbilities)
+            {
+                if (heroAbility is ActiveAbility)
+                {
+                    ActiveAbilities.Add(heroAbility.Clone(this) as ActiveAbility);
+                }
+                else
+                {
+                    PassiveAbilities.Add(heroAbility.Clone(this) as PassiveAbility);
+                }
+            }
         }
         public bool IsCurrentState(IState state)
         {

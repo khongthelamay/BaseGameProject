@@ -140,7 +140,7 @@ public class ScreensDefaultContext
             await Model.Initialize(args);
             await View.Initialize(args);
             View.OnChooseTab(View.tabs[2]);
-            Model.level.ReactiveProperty.Subscribe(ChangeLevel).AddTo(View.MainView);
+            // Model.level.ReactiveProperty.Subscribe(ChangeLevel).AddTo(View.MainView);
         }
 
         void ChangeLevel(int level) {

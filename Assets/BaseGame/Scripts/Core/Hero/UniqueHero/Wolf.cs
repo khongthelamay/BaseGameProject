@@ -1,10 +1,7 @@
 namespace Core
 {
-    public class Wolf : Hero
+    public partial class Wolf : Hero
     {
-        protected override void InitAbility()
-        {
-            // ActiveAbilities.Add(new MeleeAttackAbility(this, 0, DamageType.Physical));
-        }
+        
     }
 }

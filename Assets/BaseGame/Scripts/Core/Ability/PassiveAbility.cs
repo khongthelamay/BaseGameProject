@@ -2,7 +2,11 @@
 {
     public abstract class PassiveAbility : Ability
     {
-        protected PassiveAbility(Hero owner, int levelUnlock) : base(owner, levelUnlock)
+        protected PassiveAbility()
+        {
+            
+        }
+        protected PassiveAbility(Hero owner) : base(owner)
         {
             
         }

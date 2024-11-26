@@ -1,27 +1,40 @@
-﻿using System.Threading;
-using Cysharp.Threading.Tasks;
-using TW.Utility.CustomType;
-using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using UnityEngine;
 
-namespace Core
+namespace Core.TigerAbility
 {
+    [System.Serializable]
     public class FuryStrikeAbility : PassiveAbility
     {
+        [field: SerializeField] public int FuryRate {get; private set;} = 5;
+
         private Tiger OwnerTiger { get; set; }
-        public FuryStrikeAbility(Hero owner, int levelUnlock) : base(owner, levelUnlock)
+
+        public FuryStrikeAbility()
+        {
+            
+        }
+        public FuryStrikeAbility(Hero owner) : base(owner)
         {
             OwnerTiger = (Tiger) owner;
         }
         
         public override void OnEnterBattleField()
         {
-            OwnerTiger.AddFuryRate(10);
+            OwnerTiger.ChangeFuryRate(FuryRate);
         }
-
+    
         public override void OnExitBattleField()
         {
-            OwnerTiger.AddFuryRate(-10);
+            OwnerTiger.ChangeFuryRate(-FuryRate);
+        }
+
+        public override Ability Clone(Hero owner)
+        {
+            return new FuryStrikeAbility(owner)
+            {
+                LevelUnlock = LevelUnlock,
+                Description = Description,
+            };
         }
     }
 }

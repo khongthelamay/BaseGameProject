@@ -1,23 +1,40 @@
 ﻿using UnityEngine;
 
-namespace Core
+namespace Core.TigerAbility
 {
+    [System.Serializable]
     public class FuryMasteryAbility : PassiveAbility
     {
+        [field: SerializeField] public int FuryRate {get; private set;} = 10;
+
         private Tiger OwnerTiger { get; set; }
-        public FuryMasteryAbility(Hero owner, int levelUnlock) : base(owner, levelUnlock)
+        public FuryMasteryAbility() 
         {
-            OwnerTiger = (Tiger) owner;
+            
+        }
+        public FuryMasteryAbility(Hero owner) : base(owner)
+        {
+            OwnerTiger = owner as Tiger;
         }
         
         public override void OnEnterBattleField()
         {
-            OwnerTiger.AddFuryRate(10);
+            OwnerTiger.ChangeFuryRate(FuryRate);
         }
-
+    
         public override void OnExitBattleField()
         {
-            OwnerTiger.AddFuryRate(-10);
+            OwnerTiger.ChangeFuryRate(-FuryRate);
+        }
+
+        public override Ability Clone(Hero owner)
+        {
+            return new FuryMasteryAbility(owner)
+            {
+                LevelUnlock = LevelUnlock,
+                Description = Description,
+                FuryRate = FuryRate,
+            };
         }
     }
 }

@@ -7,54 +7,39 @@ using UnityEngine;
 
 namespace Core
 {
-    public partial class RangeAttackAbility : ActiveAbility
+    [System.Serializable]
+    public abstract partial class RangeAttackAbility : NormalAttackAbility
     {
-        [field: SerializeField] public DamageType DamageType { get; private set; } = DamageType.Physical;
         [field: SerializeField] public Projectile Projectile {get; private set;}
-        [field: SerializeField] public Transform SpawnPosition {get; private set;}
+        private Transform SpawnPosition {get; set;}
 
-        private Enemy EnemyTarget { get; set; }
-    
-        
-        public RangeAttackAbility(Hero owner, int levelUnlock, Projectile projectile, Transform spawnPosition) : base(owner, levelUnlock)
+        protected RangeAttackAbility()
         {
-            Projectile = projectile;
+            
+        }
+        protected RangeAttackAbility(Hero owner, Transform spawnPosition) : base(owner)
+        {
             SpawnPosition = spawnPosition;
         }
-
-        public override void OnEnterBattleField()
-        {
-            
-        }
-
-        public override void OnExitBattleField()
-        {
-            
-        }
-
-        public override bool CanUseAbility()
-        {
-            if (!BattleManager.TryGetEnemyInAttackRange(Owner, out Enemy target)) return false;
-            EnemyTarget = target;
-            return true;
-        }
-
+        
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
             BigNumber damageDeal = Owner.AttackDamage;
             float attackSpeed = Owner.AttackSpeed;
             
+            EnemyTarget.WillTakeDamage(damageDeal);
+            Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
-            Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
-                .Setup(Owner, EnemyTarget, damageDeal, DamageType)
+            await DelaySample(DelayFrame, tickRate, ct);
+            Projectile.Spawn(SpawnPosition.position, Quaternion.identity).Setup(Owner, EnemyTarget, damageDeal, DamageType)
                 .WithComplete(OnProjectileMoveCompleteCache);
-            await DelaySample(30, tickRate, ct);
+            OnAttackComplete();
+            await DelaySample(30 - DelayFrame, tickRate, ct);
         }
         [ACacheMethod("TW.Utility.CustomType")]
         private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, BigNumber damage, DamageType damageType)
         {
             targetEnemy.TakeDamage(damage, damageType);
         }
-        
     }
 }
