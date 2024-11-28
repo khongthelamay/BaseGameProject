@@ -17,16 +17,6 @@ namespace Core.TigerAbility
         private Enemy[] Enemies { get; set; } = new Enemy[30]; 
         private int EnemiesCount { get; set; }
         private Tiger OwnerTiger { get; set; }
-
-        public SavageRoarAbility()
-        {
-            
-        }
-        public SavageRoarAbility(Hero owner) : base(owner)
-        {
-            OwnerTiger = (Tiger) owner;
-            VisualEffect = OwnerTiger.SavageRoarEffect;
-        }
     
         public override void OnEnterBattleField()
         {
@@ -37,7 +27,12 @@ namespace Core.TigerAbility
         {
             StopCooldownHandle();
         }
-    
+
+        // public override Ability Create()
+        // {
+        //     return ScriptableObject.CreateInstance<SavageRoarAbility>();
+        // }
+
         public override bool CanUseAbility()
         {
             if (IsOnCooldown) return false;
@@ -70,17 +65,6 @@ namespace Core.TigerAbility
             }
             await DelaySample(11, tickRate, ct);
             ResetCooldown();
-        }
-
-        public override Ability Clone(Hero owner)
-        {
-            return new SavageRoarAbility(owner)
-            {
-                LevelUnlock = LevelUnlock,
-                Description = Description,
-                DamageScale = DamageScale,
-                DamageType = DamageType,
-            };
         }
     }
 }

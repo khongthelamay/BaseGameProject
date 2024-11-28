@@ -11,16 +11,7 @@ namespace Core
     public abstract partial class RangeAttackAbility : NormalAttackAbility
     {
         [field: SerializeField] public Projectile Projectile {get; private set;}
-        private Transform SpawnPosition {get; set;}
-
-        protected RangeAttackAbility()
-        {
-            
-        }
-        protected RangeAttackAbility(Hero owner, Transform spawnPosition) : base(owner)
-        {
-            SpawnPosition = spawnPosition;
-        }
+        protected Transform SpawnPosition {get; set;}
         
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
@@ -41,5 +32,12 @@ namespace Core
         {
             targetEnemy.TakeDamage(damage, damageType);
         }
+
+        // public override void Clone(Ability ability)
+        // {
+        //     base.Clone(ability);
+        //     if (ability is not RangeAttackAbility rangeAttackAbility) return;
+        //     Projectile = rangeAttackAbility.Projectile;
+        // }
     }
 }

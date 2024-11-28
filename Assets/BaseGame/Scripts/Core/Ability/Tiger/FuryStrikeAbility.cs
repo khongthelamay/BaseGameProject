@@ -9,15 +9,7 @@ namespace Core.TigerAbility
 
         private Tiger OwnerTiger { get; set; }
 
-        public FuryStrikeAbility()
-        {
-            
-        }
-        public FuryStrikeAbility(Hero owner) : base(owner)
-        {
-            OwnerTiger = (Tiger) owner;
-        }
-        
+       
         public override void OnEnterBattleField()
         {
             OwnerTiger.ChangeFuryRate(FuryRate);
@@ -28,13 +20,9 @@ namespace Core.TigerAbility
             OwnerTiger.ChangeFuryRate(-FuryRate);
         }
 
-        public override Ability Clone(Hero owner)
-        {
-            return new FuryStrikeAbility(owner)
-            {
-                LevelUnlock = LevelUnlock,
-                Description = Description,
-            };
-        }
+        // public override Ability Create()
+        // {
+        //     return ScriptableObject.CreateInstance<FuryStrikeAbility>();
+        // }
     }
 }

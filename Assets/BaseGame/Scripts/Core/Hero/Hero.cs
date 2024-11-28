@@ -67,10 +67,7 @@ namespace Core
         public BigNumber AttackDamage => BaseAttackDamage * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value/100);
         public float AttackSpeed => BaseAttackSpeed * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackSpeed).Value/100);
         public float AttackRange => BaseAttackRange;
-        [ShowInInspector]
-        protected List<ActiveAbility> ActiveAbilities { get; set; } = new();
-        [ShowInInspector]
-        protected List<PassiveAbility> PassiveAbilities { get; set; } = new();
+        [ShowInInspector, InlineEditor] protected List<Ability> Abilities { get; set; } = new();
         
         private Vector3 MoveFromPosition { get; set; }
         private Vector3 MoveToPosition { get; set; }
@@ -78,17 +75,21 @@ namespace Core
         
         [field: SerializeField] private bool IsCancelAbility {get; set;}
 
+        private void Awake()
+        {
+            InitAbility();
+        }
+
         public void OnDestroy()
         {
             StateMachine.Stop();
         }
+        
         public virtual Hero OnSpawn()
         {
             InitStateMachine();
             InitStat();
-            InitAbility();
-            
-            
+            ResetAbility();
             return BattleManager.Instance.RegisterHero(this);
         }
 
@@ -111,18 +112,16 @@ namespace Core
 
         protected virtual void InitAbility()
         {
-            ActiveAbilities.Clear();
-            PassiveAbilities.Clear();
             foreach (Ability heroAbility in HeroConfigData.HeroAbilities)
             {
-                if (heroAbility is ActiveAbility)
-                {
-                    ActiveAbilities.Add(heroAbility.Clone(this) as ActiveAbility);
-                }
-                else
-                {
-                    PassiveAbilities.Add(heroAbility.Clone(this) as PassiveAbility);
-                }
+                Abilities.Add(heroAbility.Initialize(this));
+            }
+        }
+        private void ResetAbility()
+        {
+            foreach (Ability ability in Abilities)
+            {
+                ability.ResetAbility();
             }
         }
         public bool IsCurrentState(IState state)
@@ -215,9 +214,9 @@ namespace Core
         public bool TryReduceCooldown(float rate)
         {
             int countCooldownAbility = 0;
-            foreach (ActiveAbility activeAbility in ActiveAbilities)
+            foreach (Ability ability in Abilities)
             {
-                if (activeAbility is ActiveCooldownAbility activeCooldownAbility)
+                if (ability is ActiveCooldownAbility activeCooldownAbility)
                 {
                     activeCooldownAbility.ReduceCooldown(rate);
                     countCooldownAbility++;

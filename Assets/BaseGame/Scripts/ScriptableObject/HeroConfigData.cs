@@ -57,7 +57,7 @@ public class HeroConfigData : ScriptableObject
     [field: SerializeField] public RuntimeAnimatorController ImageAnimatorController { get; set; }
     [field: SerializeField] public GameObject HeroGameObjectPrefab {get; private set;}
     [field: SerializeField] public Hero HeroPrefab {get; private set;}
-    [field: SerializeReference] public List<Ability> HeroAbilities { get; set; }
+    [field: SerializeField, InlineEditor] public List<Ability> HeroAbilities { get; private set; }
     
 
 #if UNITY_EDITOR

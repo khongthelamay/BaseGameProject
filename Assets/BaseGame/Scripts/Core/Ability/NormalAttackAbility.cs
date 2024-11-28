@@ -7,17 +7,10 @@ namespace Core
     [System.Serializable]
     public abstract class NormalAttackAbility : ActiveAbility
     {
-        [field: SerializeField] public DamageType DamageType {get; set;} = DamageType.Physical;
+        [field: SerializeField] public DamageType DamageType {get; set;}
         [field: SerializeField] public int DelayFrame {get; set;}
         protected Enemy EnemyTarget { get; set; }
-        protected NormalAttackAbility()
-        {
-            
-        }
-        protected NormalAttackAbility(Hero owner) : base(owner)
-        {
 
-        }
         public override bool CanUseAbility()
         {
             if (!BattleManager.TryGetEnemyInAttackRange(Owner, out Enemy target)) return false;
@@ -45,6 +38,13 @@ namespace Core
         {
 
         }
-        
+
+        // public override void Clone(Ability ability)
+        // {
+        //     base.Clone(ability);
+        //     if (ability is not NormalAttackAbility normalAttackAbility) return;
+        //     DamageType = normalAttackAbility.DamageType;
+        //     DelayFrame = normalAttackAbility.DelayFrame;
+        // }
     }
 }

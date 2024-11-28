@@ -13,16 +13,12 @@ namespace Core
         [field: SerializeField] protected float CooldownTimer { get; set; }
         private CancellationTokenSource CooldownCancellationTokenSource { get; set; }
 
-        protected ActiveCooldownAbility()
+        public override Ability ResetAbility()
         {
-            
-        }
-        protected ActiveCooldownAbility(Hero owner) : base(owner)
-        {
-            CooldownTimer = Cooldown;
             IsOnCooldown = true;
+            CooldownTimer = Cooldown;
+            return base.ResetAbility();
         }
-        
 
         public void StartCooldownHandle()
         {

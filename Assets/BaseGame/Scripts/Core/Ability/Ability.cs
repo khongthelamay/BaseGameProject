@@ -13,16 +13,28 @@ namespace Core
         [field: SerializeField] public int LevelUnlock {get; set;}
         [field: SerializeField] public string Description {get; set;}
         public Hero Owner {get; private set;}
-
-        protected Ability()
-        {
-            
-        }
-        protected Ability(Hero owner)
+        
+        public virtual Ability WithOwnerHero(Hero owner)
         {
             Owner = owner;
+            return this;
+        }
+        public virtual Ability ResetAbility()
+        {
+            return this;
         }
         public bool IsUnlocked(int level) => level >= LevelUnlock;
-        public abstract Ability Clone(Hero owner);
+        
+        public abstract void OnEnterBattleField();
+        public abstract void OnExitBattleField();
+        public Ability Create()
+        {
+            return Instantiate(this);
+        }
+
+        public Ability Initialize(Hero owner)
+        {
+            return Create().WithOwnerHero(owner);
+        }
     }
 }

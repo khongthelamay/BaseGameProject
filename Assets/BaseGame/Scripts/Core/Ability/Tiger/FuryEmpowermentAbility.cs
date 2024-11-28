@@ -15,13 +15,10 @@ namespace Core.TigerAbility
         private IDisposable Disposable { get; set; }
         private Tiger OwnerTiger { get; set; }
 
-        public FuryEmpowermentAbility()
+        public FuryEmpowermentAbility WithOwnerTiger(Tiger owner)
         {
-            
-        }
-        public FuryEmpowermentAbility(Hero owner) : base(owner)
-        {
-            OwnerTiger = owner as Tiger;
+            OwnerTiger = owner;
+            return this;
         }
     
         public override void OnEnterBattleField()
@@ -43,7 +40,12 @@ namespace Core.TigerAbility
             Disposable.Dispose();
             Disposable = null;
         }
-    
+
+        // public override Ability Create()
+        // {
+        //     return ScriptableObject.CreateInstance<FuryEmpowermentAbility>();
+        // }
+
         [ACacheMethod]
         private void OnFuryPointChange((int last, int cur) pair)
         {
@@ -55,15 +57,13 @@ namespace Core.TigerAbility
                 (pair.cur - pair.last) * CriticalDamageScalePerFury);
         }
 
-        public override Ability Clone(Hero owner)
-        {
-            return new FuryEmpowermentAbility(owner)
-            {
-                LevelUnlock = LevelUnlock,
-                Description = Description,
-                AttackDamageScalePerFury = AttackDamageScalePerFury,
-                CriticalDamageScalePerFury = CriticalDamageScalePerFury,
-            };
-        }
+
+        // public override void Clone(Ability ability)
+        // {
+        //     base.Clone(ability);
+        //     if (ability is not FuryEmpowermentAbility furyEmpowermentAbility) return;
+        //     AttackDamageScalePerFury = furyEmpowermentAbility.AttackDamageScalePerFury;
+        //     CriticalDamageScalePerFury = furyEmpowermentAbility.CriticalDamageScalePerFury;
+        // }
     }
 }

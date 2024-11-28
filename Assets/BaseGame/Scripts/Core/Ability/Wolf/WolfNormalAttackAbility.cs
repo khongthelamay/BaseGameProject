@@ -2,29 +2,16 @@
 
 namespace Core.WolfAbility
 {
-    [System.Serializable]
+    [CreateAssetMenu(fileName = "WolfNormalAttackAbility", menuName = "Ability/Wolf/WolfNormalAttackAbility")]
     public class WolfNormalAttackAbility : MeleeAttackAbility
     {
         private Wolf OwnerWolf { get; set; }
 
-        public WolfNormalAttackAbility()
+        public override Ability WithOwnerHero(Hero owner)
         {
-            
-        }
-        public WolfNormalAttackAbility(Hero owner) : base(owner)
-        {
+            base.WithOwnerHero(owner);
             OwnerWolf = owner as Wolf;
-        }
-
-        public override Ability Clone(Hero owner)
-        {
-            return new WolfNormalAttackAbility(owner)
-            {
-                DamageType = DamageType,
-                DelayFrame = DelayFrame,
-                Description = Description,
-                LevelUnlock = LevelUnlock
-            };
+            return this;
         }
     }
 }

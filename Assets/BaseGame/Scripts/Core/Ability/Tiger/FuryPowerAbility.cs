@@ -15,14 +15,6 @@ namespace Core.TigerAbility
         private IDisposable Disposable { get; set; }
         private Tiger OwnerTiger { get; set; }
 
-        public FuryPowerAbility()
-        {
-            
-        }
-        public FuryPowerAbility(Hero owner) : base(owner)
-        {
-            OwnerTiger = (Tiger) owner;
-        }
     
         public override void OnEnterBattleField()
         {
@@ -42,6 +34,12 @@ namespace Core.TigerAbility
             Disposable.Dispose();
             Disposable = null;
         }
+
+        // public override Ability Create()
+        // {
+        //     return ScriptableObject.CreateInstance<FuryPowerAbility>();
+        // }
+
         [ACacheMethod]
         private void OnFuryPointChange((int last, int cur) pair)
         {
@@ -49,17 +47,6 @@ namespace Core.TigerAbility
             CriticalDamageGain = CriticalDamageScalePerFury * pair.cur;
             BattleManager.ChangeGlobalBuff(GlobalBuff.Type.AttackDamage, (pair.cur - pair.last) * AttackDamageScalePerFury);
             BattleManager.ChangeGlobalBuff(GlobalBuff.Type.CriticalDamage, (pair.cur - pair.last) * CriticalDamageScalePerFury);
-        }
-
-        public override Ability Clone(Hero owner)
-        {
-            return new FuryPowerAbility(owner)
-            {
-                LevelUnlock = LevelUnlock,
-                Description = Description,
-                AttackDamageScalePerFury = AttackDamageScalePerFury,
-                CriticalDamageScalePerFury = CriticalDamageScalePerFury,
-            };
         }
     }
 }

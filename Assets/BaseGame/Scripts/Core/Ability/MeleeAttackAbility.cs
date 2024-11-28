@@ -7,14 +7,6 @@ namespace Core
 {
     public abstract class MeleeAttackAbility : NormalAttackAbility
     {
-        protected MeleeAttackAbility()
-        {
-            
-        }
-        protected MeleeAttackAbility(Hero owner) : base(owner)
-        {
-            
-        }
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
             BigNumber damageDeal = Owner.AttackDamage;
