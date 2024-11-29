@@ -10,6 +10,7 @@ using TW.Utility.DesignPattern;
 using TW.Utility.Extension;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Random = UnityEngine.Random;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -63,10 +64,23 @@ namespace Core
         [field: SerializeField] private int BaseAttackDamage { get; set; }
         [field: SerializeField] private float BaseAttackSpeed { get; set; }
         [field: SerializeField] private float BaseAttackRange { get; set; }
-        
-        public BigNumber AttackDamage => BaseAttackDamage * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value/100);
+        [ShowInInspector] private int BaseCriticalRate {get; set;} = 0;
+        [ShowInInspector] private int BaseCriticalDamage { get; set; } = 150;
+        public BigNumber AttackDamage(out bool isCritical)
+        {
+            BigNumber attackDamage = BaseAttackDamage * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value / 100);
+            isCritical = Random.Range(0, 100) < CriticalRate;
+            if (isCritical)
+            {
+                attackDamage *= (CriticalDamage/100f);
+            }
+            return attackDamage;
+        }
+
         public float AttackSpeed => BaseAttackSpeed * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackSpeed).Value/100);
         public float AttackRange => BaseAttackRange;
+        public float CriticalRate => BaseCriticalRate + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalRate).Value;
+        public float CriticalDamage => BaseCriticalDamage + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalDamage).Value;
         [ShowInInspector, InlineEditor] protected List<Ability> Abilities { get; set; } = new();
         
         private Vector3 MoveFromPosition { get; set; }
@@ -123,6 +137,19 @@ namespace Core
             {
                 ability.ResetAbility();
             }
+        }
+        public bool TryGetAbility<T>(out T ability) where T : Ability
+        {
+            foreach (Ability heroAbility in Abilities)
+            {
+                if (heroAbility is T tAbility)
+                {
+                    ability = tAbility;
+                    return true;
+                }
+            }
+            ability = null;
+            return false;
         }
         public bool IsCurrentState(IState state)
         {
@@ -224,6 +251,11 @@ namespace Core
             }
             return countCooldownAbility > 0;
         }
+        public void ChangeCriticalRate(int rate)
+        {
+            BaseCriticalRate += rate;
+        }
+        
     }
 
 #if UNITY_EDITOR

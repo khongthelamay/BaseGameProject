@@ -3,32 +3,27 @@ using Cysharp.Threading.Tasks;
 using TW.Utility.CustomType;
 using UnityEngine;
 
-namespace Core.TigerAbility
+namespace Core.WolfAbility
 {
-    [CreateAssetMenu(fileName = "FuryStrikeAbility", menuName = "Ability/Tiger/FuryStrikeAbility")]
-    public class FuryStrikeAbility : ActiveAbility, IAbilityTargetAnEnemy 
+    [CreateAssetMenu(fileName = "FeralStrikeAbility", menuName = "Ability/Wolf/FeralStrikeAbility")]
+    public class FeralStrikeAbility : ActiveAbility, IAbilityTargetAnEnemy
     {
-        [field: SerializeField] public int FuryStrikeRate {get; private set;}
+        [field: SerializeField] public int FeralStrikeRate {get; private set;}
         [field: SerializeField] public DamageType DamageType {get; private set;}
         [field: SerializeField] public int DelayFrame {get; private set;}
+        [field: SerializeField] public float DamageScale {get; private set;}
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
-        public Tiger OwnerTiger { get; set; }
 
-        public override Ability WithOwnerHero(Hero owner)
-        {
-            OwnerTiger = owner as Tiger;
-            return base.WithOwnerHero(owner);
-        }
         public override bool CanUseAbility()
         {
-            if (Random.Range(0, 100) >= FuryStrikeRate) return false;
+            if (Random.Range(0, 100) >= FeralStrikeRate) return false;
             return this.IsFindAnyEnemyTarget();
         }
 
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical);
+            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical) * DamageScale;
             float attackSpeed = Owner.AttackSpeed;
             
             if (!EnemyTarget.WillTakeDamage(EnemyTargetId, damageDeal)) return;
@@ -36,7 +31,6 @@ namespace Core.TigerAbility
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
             if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, isCritical)) return;
-            OwnerTiger.ChangeFuryPoint(1);
             await DelaySample(30 - DelayFrame, tickRate, ct);
         }
         
@@ -49,9 +43,7 @@ namespace Core.TigerAbility
         {
 
         }
-        public void ChangeFuryStrikeRate(int value)
-        {
-            FuryStrikeRate += value;
-        }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Manager;
+using Sirenix.OdinInspector;
 using TW.UGUI.Core.Activities;
 using UnityEngine;
 
@@ -9,10 +10,22 @@ namespace Core
     public abstract class Ability : ScriptableObject
     {
         private BattleManager BattleManagerCache { get; set; }
-        protected BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        public BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        [field: PreviewField(98, ObjectFieldAlignment.Left), HorizontalGroup(nameof(Ability), 100), HideLabel]
+        [field: HideIf("@this is NormalAttackAbility")]
+        [field: SerializeField] public Sprite Icon {get; set;}
+        [field: VerticalGroup(nameof(Ability) + "/Info")]
+        [field: HideIf("@this is NormalAttackAbility")]
         [field: SerializeField] public int LevelUnlock {get; set;}
+        [field: VerticalGroup(nameof(Ability) + "/Info")]
+        [field: HideIf("@this is NormalAttackAbility")]
+        [field: SerializeField] public string Name {get; set;}
+        [field: VerticalGroup(nameof(Ability) + "/Info"), TextArea]
+        [field: HideIf("@this is NormalAttackAbility")]
         [field: SerializeField] public string Description {get; set;}
+
         public Hero Owner {get; private set;}
+
         
         public virtual Ability WithOwnerHero(Hero owner)
         {
@@ -31,10 +44,11 @@ namespace Core
         {
             return Instantiate(this);
         }
-
         public Ability Initialize(Hero owner)
         {
             return Create().WithOwnerHero(owner);
         }
+        
+        
     }
 }

@@ -18,9 +18,10 @@ namespace Core
 {
     public partial class Enemy : ACachedMonoBehaviour, IAbilityTargetAble , IPoolAble<Enemy>
     {
+        private static int EnemyIdCounter { get; set; } = 0;
         private BattleManager BattleManagerCache { get; set; }
         private BattleManager BattleManager => BattleManagerCache ??= BattleManagerCache = BattleManager.Instance;
-        
+        [field: SerializeField] public int Id {get; private set;}
         [field: SerializeField] public BigNumber CurrentHealthPoint { get; private set; }
         [field: SerializeField] public BigNumber FutureHealthPoint { get; private set; }
         [field: SerializeField] private float MovementSpeed { get; set; }
@@ -28,8 +29,6 @@ namespace Core
         [field: SerializeField] public int CurrentPoint { get; private set; }
         [field: SerializeField] public ReactiveValue<float> PlaybackSpeed { get; private set; }
         [field: SerializeField] public float Deep { get; private set; }
-        // [field: SerializeField] public int Damage {get; private set;}
-        // [field: SerializeField] public float DPS {get; private set;}
 
 
         private MotionHandle MovementMotionHandle;
@@ -78,26 +77,35 @@ namespace Core
             if (!MovementMotionHandle.IsActive()) return;
             MovementMotionHandle.PlaybackSpeed = speed;
         }
-        public void WillTakeDamage(BigNumber attackDamage)
+        public bool WillTakeDamage(int id, BigNumber attackDamage)
         {
-            if (WillBeDead) return;
+            if (id != Id) return false;
+            if (WillBeDead) return false;
             FutureHealthPoint -= attackDamage;
+            return true;
         }
         
-        public void TakeDamage(BigNumber attackDamage, DamageType damageType)
+        public bool TakeDamage(int id, BigNumber attackDamage, DamageType damageType, bool isCritical)
         {
-            if (IsDead) return;
+            if (id != Id) return false;
+            if (IsDead) return false;
             FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage);
             CurrentHealthPoint -= attackDamage;
             if (CurrentHealthPoint <= 0)
             {
                 this.Despawn();
             }
+            return true;
         }
         
 
         public Enemy OnSpawn()
         {
+            Id = EnemyIdCounter++;
+            if (EnemyIdCounter >= 10000)
+            {   
+                EnemyIdCounter = 0;
+            }
             BattleManager.AddEnemy(this);
             return this;
         }

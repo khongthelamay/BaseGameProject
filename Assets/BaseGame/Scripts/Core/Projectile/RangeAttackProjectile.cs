@@ -35,9 +35,9 @@ namespace Core
             TrailRenderer.Clear();
         }
 
-        public override Projectile Setup(Hero ownerHero, Enemy targetEnemy, BigNumber damage, DamageType damageType)
+        public override Projectile Setup(Hero ownerHero, Enemy targetEnemy, int targetEnemyId, BigNumber damage, DamageType damageType, bool isCritical)
         {
-            base.Setup(ownerHero, targetEnemy, damage, damageType);
+            base.Setup(ownerHero, targetEnemy, targetEnemyId, damage, damageType, isCritical);
             
             if (ownerHero == null || targetEnemy == null) 
             {
@@ -62,7 +62,7 @@ namespace Core
                 TryUpdateEndPosition();
                 if (TryMoveToTarget()) continue;
                 
-                OnCompleteCallback?.Invoke(OwnerHero, TargetEnemy, DamageDeal, DamageType);
+                OnCompleteCallback?.Invoke(OwnerHero, TargetEnemy, TargetEnemyId, DamageDeal, DamageType, IsCritical);
                 this.Despawn();
                 break;
             }

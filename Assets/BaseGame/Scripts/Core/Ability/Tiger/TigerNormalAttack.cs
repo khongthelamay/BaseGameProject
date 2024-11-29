@@ -5,15 +5,9 @@ using UnityEngine;
 
 namespace Core.TigerAbility
 {
+    [CreateAssetMenu(fileName = "TigerNormalAttack", menuName = "Ability/Tiger/TigerNormalAttack")]
     public class TigerNormalAttack : MeleeAttackAbility
     {
-        private Tiger OwnerTiger { get; set; }
 
-        public override Ability WithOwnerHero(Hero owner)
-        {
-            base.WithOwnerHero(owner);
-            OwnerTiger = owner as Tiger;
-            return this;
-        }
     }
 }

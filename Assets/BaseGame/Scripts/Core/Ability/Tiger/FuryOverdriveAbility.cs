@@ -5,22 +5,22 @@ using UnityEngine;
 
 namespace Core.TigerAbility
 {
-    [System.Serializable]
-    public partial class FuryEmpowermentAbility : PassiveAbility
+    [CreateAssetMenu(fileName = "FuryOverdriveAbility", menuName = "Ability/Tiger/FuryOverdriveAbility")]
+    public partial class FuryOverdriveAbility : PassiveAbility
     {
-        [field: SerializeField] private float AttackDamageScalePerFury { get; set; } = 0.25f;
-        [field: SerializeField] private float CriticalDamageScalePerFury { get; set; } = 0.25f;
+        [field: SerializeField] public float AttackDamageScalePerFury { get; private set; } = 0.25f;
+        [field: SerializeField] public float CriticalDamageScalePerFury { get; private set; } = 0.25f;
         private float AttackDamageGain { get; set; }
         private float CriticalDamageGain { get; set; }
         private IDisposable Disposable { get; set; }
         private Tiger OwnerTiger { get; set; }
 
-        public FuryEmpowermentAbility WithOwnerTiger(Tiger owner)
+        public override Ability WithOwnerHero(Hero owner)
         {
-            OwnerTiger = owner;
-            return this;
+            OwnerTiger = owner as Tiger;
+            return base.WithOwnerHero(owner);
         }
-    
+
         public override void OnEnterBattleField()
         {
             AttackDamageGain = AttackDamageScalePerFury * OwnerTiger.FuryPoint.Value;
@@ -40,12 +40,6 @@ namespace Core.TigerAbility
             Disposable.Dispose();
             Disposable = null;
         }
-
-        // public override Ability Create()
-        // {
-        //     return ScriptableObject.CreateInstance<FuryEmpowermentAbility>();
-        // }
-
         [ACacheMethod]
         private void OnFuryPointChange((int last, int cur) pair)
         {
@@ -56,14 +50,5 @@ namespace Core.TigerAbility
             BattleManager.ChangeGlobalBuff(GlobalBuff.Type.CriticalDamage,
                 (pair.cur - pair.last) * CriticalDamageScalePerFury);
         }
-
-
-        // public override void Clone(Ability ability)
-        // {
-        //     base.Clone(ability);
-        //     if (ability is not FuryEmpowermentAbility furyEmpowermentAbility) return;
-        //     AttackDamageScalePerFury = furyEmpowermentAbility.AttackDamageScalePerFury;
-        //     CriticalDamageScalePerFury = furyEmpowermentAbility.CriticalDamageScalePerFury;
-        // }
     }
 }

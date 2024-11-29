@@ -9,7 +9,7 @@ namespace Core
         {
             AttackDamage,
             AttackSpeed,
-            CriticalChance,
+            CriticalRate,
             CriticalDamage,
             ArmorReduction,
             MagicResistanceReduction,

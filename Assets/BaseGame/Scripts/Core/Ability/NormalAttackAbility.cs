@@ -1,21 +1,21 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
+using Manager;
 using UnityEngine;
 
 namespace Core
 {
     [System.Serializable]
-    public abstract class NormalAttackAbility : ActiveAbility
+    public class NormalAttackAbility : ActiveAbility, IAbilityTargetAnEnemy
     {
         [field: SerializeField] public DamageType DamageType {get; set;}
         [field: SerializeField] public int DelayFrame {get; set;}
-        protected Enemy EnemyTarget { get; set; }
+        public Enemy EnemyTarget { get; set; }
+        public int EnemyTargetId { get; set; }
 
         public override bool CanUseAbility()
         {
-            if (!BattleManager.TryGetEnemyInAttackRange(Owner, out Enemy target)) return false;
-            EnemyTarget = target;
-            return true;
+            return this.IsFindAnyEnemyTarget();
         }
 
         public override void OnEnterBattleField()
@@ -38,13 +38,5 @@ namespace Core
         {
 
         }
-
-        // public override void Clone(Ability ability)
-        // {
-        //     base.Clone(ability);
-        //     if (ability is not NormalAttackAbility normalAttackAbility) return;
-        //     DamageType = normalAttackAbility.DamageType;
-        //     DelayFrame = normalAttackAbility.DelayFrame;
-        // }
     }
 }

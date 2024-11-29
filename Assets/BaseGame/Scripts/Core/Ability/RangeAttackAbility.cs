@@ -15,29 +15,23 @@ namespace Core
         
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            BigNumber damageDeal = Owner.AttackDamage;
+            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical);
             float attackSpeed = Owner.AttackSpeed;
-            
-            EnemyTarget.WillTakeDamage(damageDeal);
+
+            if (!EnemyTarget.WillTakeDamage(EnemyTargetId,damageDeal)) return;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
-            Projectile.Spawn(SpawnPosition.position, Quaternion.identity).Setup(Owner, EnemyTarget, damageDeal, DamageType)
+            Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
+                .Setup(Owner, EnemyTarget, EnemyTargetId, damageDeal, DamageType, isCritical)
                 .WithComplete(OnProjectileMoveCompleteCache);
             OnAttackComplete();
             await DelaySample(30 - DelayFrame, tickRate, ct);
         }
         [ACacheMethod("TW.Utility.CustomType")]
-        private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, BigNumber damage, DamageType damageType)
+        private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, int targetEnemyId, BigNumber damage, DamageType damageType, bool isCritical)
         {
-            targetEnemy.TakeDamage(damage, damageType);
+            if (!targetEnemy.TakeDamage(targetEnemyId, damage, damageType, isCritical)) return;
         }
-
-        // public override void Clone(Ability ability)
-        // {
-        //     base.Clone(ability);
-        //     if (ability is not RangeAttackAbility rangeAttackAbility) return;
-        //     Projectile = rangeAttackAbility.Projectile;
-        // }
     }
 }

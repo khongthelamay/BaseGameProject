@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Core
@@ -8,9 +9,9 @@ namespace Core
     [System.Serializable]
     public abstract class ActiveCooldownAbility : ActiveAbility
     {
-        [field: SerializeField] protected float Cooldown { get; set; }
-        [field: SerializeField] protected bool IsOnCooldown { get; set; }
-        [field: SerializeField] protected float CooldownTimer { get; set; }
+        [field: SerializeField] public float Cooldown { get; set; }
+        [ShowInInspector, ReadOnly] public bool IsOnCooldown { get; set; }
+        [ShowInInspector, ReadOnly] public float CooldownTimer { get; set; }
         private CancellationTokenSource CooldownCancellationTokenSource { get; set; }
 
         public override Ability ResetAbility()

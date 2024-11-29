@@ -2,26 +2,25 @@
 
 namespace Core.TigerAbility
 {
-    [System.Serializable]
+    [CreateAssetMenu(fileName = "FuryMasteryAbility", menuName = "Ability/Tiger/FuryMasteryAbility")]
     public class FuryMasteryAbility : PassiveAbility
     {
-        [field: SerializeField] public int FuryRate {get; private set;} = 10;
-
-        private Tiger OwnerTiger { get; set; }
+        [field: SerializeField] public int FuryStrikeRateBonus {get; private set;}
         
         public override void OnEnterBattleField()
         {
-            OwnerTiger.ChangeFuryRate(FuryRate);
+            if (Owner.TryGetAbility(out FuryStrikeAbility furyStrikeAbility))
+            {
+                furyStrikeAbility.ChangeFuryStrikeRate(FuryStrikeRateBonus);
+            }
         }
     
         public override void OnExitBattleField()
         {
-            OwnerTiger.ChangeFuryRate(-FuryRate);
+            if (Owner.TryGetAbility(out FuryStrikeAbility furyStrikeAbility))
+            {
+                furyStrikeAbility.ChangeFuryStrikeRate(-FuryStrikeRateBonus);
+            }
         }
-
-        // public override Ability Create()
-        // {
-        //     return ScriptableObject.CreateInstance<FuryMasteryAbility>();
-        // }
     }
 }
