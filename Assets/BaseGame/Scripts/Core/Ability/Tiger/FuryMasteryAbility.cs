@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
-namespace Core
+namespace Core.TigerAbility
 {
+    [CreateAssetMenu(fileName = "FuryMasteryAbility", menuName = "Ability/Tiger/FuryMasteryAbility")]
     public class FuryMasteryAbility : PassiveAbility
     {
-        private Tiger OwnerTiger { get; set; }
-        public FuryMasteryAbility(Hero owner, int levelUnlock) : base(owner, levelUnlock)
-        {
-            OwnerTiger = (Tiger) owner;
-        }
+        [field: SerializeField] public int FuryStrikeRateBonus {get; private set;}
         
         public override void OnEnterBattleField()
         {
-            OwnerTiger.AddFuryRate(10);
+            if (Owner.TryGetAbility(out FuryStrikeAbility furyStrikeAbility))
+            {
+                furyStrikeAbility.ChangeFuryStrikeRate(FuryStrikeRateBonus);
+            }
         }
-
+    
         public override void OnExitBattleField()
         {
-            OwnerTiger.AddFuryRate(-10);
+            if (Owner.TryGetAbility(out FuryStrikeAbility furyStrikeAbility))
+            {
+                furyStrikeAbility.ChangeFuryStrikeRate(-FuryStrikeRateBonus);
+            }
         }
     }
 }

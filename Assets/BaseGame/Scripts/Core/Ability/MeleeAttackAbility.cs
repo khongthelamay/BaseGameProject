@@ -1,50 +1,23 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using TW.Utility.CustomType;
-using UnityEngine;
+
 
 namespace Core
 {
-    public class MeleeAttackAbility : ActiveAbility
+    public abstract class MeleeAttackAbility : NormalAttackAbility
     {
-        [field: SerializeField] private DamageType DamageType {get; set;}
-        
-        private Enemy EnemyTarget { get; set; }
-        
-        public MeleeAttackAbility(Hero owner, int levelUnlock,DamageType damageType) : base(owner, levelUnlock)
-        {
-            DamageType = damageType;
-        }
-        public override bool CanUseAbility()
-        {
-            if (!BattleManager.TryGetEnemyInAttackRange(Owner, out Enemy target)) return false;
-            EnemyTarget = target;
-            return true;
-        }
-
-        public override void OnEnterBattleField()
-        {
-            
-        }
-
-        public override void OnExitBattleField()
-        {
-            
-        }
-
-
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            BigNumber damageDeal = Owner.AttackDamage;
+            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical);
             float attackSpeed = Owner.AttackSpeed;
-            
+            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, damageDeal)) return;
+            Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
-            EnemyTarget.WillTakeDamage(damageDeal);
-            // delay if needed
-            EnemyTarget.TakeDamage(damageDeal, DamageType);
-            await DelaySample(30, tickRate, ct);
-
+            await DelaySample(DelayFrame, tickRate, ct);
+            if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, isCritical)) return;
+            OnAttackComplete();
+            await DelaySample(30 - DelayFrame, tickRate, ct);
         }
-        
     }
 }

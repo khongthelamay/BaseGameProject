@@ -5,28 +5,33 @@ using TW.Utility.CustomType;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 
-namespace Core
+namespace Core.TigerAbility
 {
-    public partial class SavageRoarAbility : ActiveCooldownAbility
+    [CreateAssetMenu(fileName = "SavageRoarAbility", menuName = "Ability/Tiger/SavageRoarAbility")]
+    public class SavageRoarAbility : ActiveCooldownAbility, IAbilityTargetAroundEnemy
     {
-        [field: SerializeField] private int DamageScale { get; set; } = 100;
-        [field: SerializeField] private DamageType DamageType { get; set; } = DamageType.Physical; 
-        [field: SerializeField] private VisualEffect VisualEffect { get; set; }
-        private Enemy EnemyTarget { get; set; }
-        private Enemy[] Enemies { get; set; } = new Enemy[30]; 
-        private int EnemiesCount { get; set; }
-        private Tiger OwnerTiger { get; set; }
-        public SavageRoarAbility(Hero owner, int levelUnlock, float cooldown, VisualEffect visualEffect) : base(owner, levelUnlock, cooldown)
+        [field: SerializeField] public DamageType DamageType { get; private set; } 
+        [field: SerializeField] public int DamageScale { get; private set; }
+        [field: SerializeField] public VisualEffect VisualEffect { get; private set; }
+        
+        public Enemy EnemyTarget { get; set; }
+        public Enemy[] Enemies { get; set; } = new Enemy[30];
+        public int[] EnemiesTargetId { get; set; } = new int[30];
+        public int EnemiesCount { get; set; }
+        public Tiger OwnerTiger { get; set; }
+
+        public override Ability WithOwnerHero(Hero owner)
         {
-            VisualEffect = visualEffect;
-            OwnerTiger = (Tiger) owner;
+            OwnerTiger = owner as Tiger;
+            return base.WithOwnerHero(owner);
         }
+
 
         public override void OnEnterBattleField()
         {
             StartCooldownHandle();
         }
-
+    
         public override void OnExitBattleField()
         {
             StopCooldownHandle();
@@ -35,35 +40,34 @@ namespace Core
         public override bool CanUseAbility()
         {
             if (IsOnCooldown) return false;
-            if (!BattleManager.TryGetEnemyInAttackRange(Owner, out Enemy target)) return false;
-            EnemyTarget = target;
-            EnemiesCount = BattleManager.GetEnemyAroundNonAlloc(EnemyTarget.Transform.position, 2, Enemies);
-            return true;
+            return this.IsFindAnyEnemyTarget();
         }
-
+    
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            CooldownTimer = Cooldown;
-            BigNumber damageDeal = Owner.AttackDamage * DamageScale;
+            ResetCooldown();
+            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical) * DamageScale;
             float attackSpeed = Owner.AttackSpeed;
             
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].WillTakeDamage(damageDeal);
+                Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal);
             }
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkillAnimation(attackSpeed);
-            OwnerTiger.AddFuryPoint(1);
+            OwnerTiger.ChangeFuryPoint(1);
             await DelaySample(17, tickRate, ct);
-
+            
             VisualEffect.Spawn(EnemyTarget.transform.position, Quaternion.identity);
             await DelaySample(2, tickRate, ct);
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].TakeDamage(damageDeal, DamageType);
+                Enemies[i].TakeDamage(EnemiesTargetId[i], damageDeal, DamageType ,isCritical);
             }
             await DelaySample(11, tickRate, ct);
-            StartCooldownHandle();
+
         }
+
+
     }
 }

@@ -12,9 +12,9 @@ namespace Core
         [field: SerializeField] public Projectile RangeAttackProjectile {get; private set;}
         protected override void InitAbility()
         {
-            ActiveAbilities.Add(new ArrowStormAbility(this, 0, 10, ArrowStormProjectile, ProjectileSpawnPosition ));
-            ActiveAbilities.Add(new PiercingShotAbility(this, 0, PiercingShotProjectile, ProjectileSpawnPosition));
-            ActiveAbilities.Add(new RangeAttackAbility(this, 0, RangeAttackProjectile, ProjectileSpawnPosition));
+            // ActiveAbilities.Add(new ArrowStormAbility(this, 10, ArrowStormProjectile, ProjectileSpawnPosition ));
+            // ActiveAbilities.Add(new PiercingShotAbility(this, PiercingShotProjectile, ProjectileSpawnPosition));
+            // ActiveAbilities.Add(new RangeAttackAbility(this, ProjectileSpawnPosition));
         }
         
     }

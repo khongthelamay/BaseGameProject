@@ -7,54 +7,31 @@ using UnityEngine;
 
 namespace Core
 {
-    public partial class RangeAttackAbility : ActiveAbility
+    [System.Serializable]
+    public abstract partial class RangeAttackAbility : NormalAttackAbility
     {
-        [field: SerializeField] public DamageType DamageType { get; private set; } = DamageType.Physical;
         [field: SerializeField] public Projectile Projectile {get; private set;}
-        [field: SerializeField] public Transform SpawnPosition {get; private set;}
-
-        private Enemy EnemyTarget { get; set; }
-    
+        protected Transform SpawnPosition {get; set;}
         
-        public RangeAttackAbility(Hero owner, int levelUnlock, Projectile projectile, Transform spawnPosition) : base(owner, levelUnlock)
-        {
-            Projectile = projectile;
-            SpawnPosition = spawnPosition;
-        }
-
-        public override void OnEnterBattleField()
-        {
-            
-        }
-
-        public override void OnExitBattleField()
-        {
-            
-        }
-
-        public override bool CanUseAbility()
-        {
-            if (!BattleManager.TryGetEnemyInAttackRange(Owner, out Enemy target)) return false;
-            EnemyTarget = target;
-            return true;
-        }
-
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            BigNumber damageDeal = Owner.AttackDamage;
+            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical);
             float attackSpeed = Owner.AttackSpeed;
-            
+
+            if (!EnemyTarget.WillTakeDamage(EnemyTargetId,damageDeal)) return;
+            Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
+            await DelaySample(DelayFrame, tickRate, ct);
             Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
-                .Setup(Owner, EnemyTarget, damageDeal, DamageType)
+                .Setup(Owner, EnemyTarget, EnemyTargetId, damageDeal, DamageType, isCritical)
                 .WithComplete(OnProjectileMoveCompleteCache);
-            await DelaySample(30, tickRate, ct);
+            OnAttackComplete();
+            await DelaySample(30 - DelayFrame, tickRate, ct);
         }
         [ACacheMethod("TW.Utility.CustomType")]
-        private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, BigNumber damage, DamageType damageType)
+        private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, int targetEnemyId, BigNumber damage, DamageType damageType, bool isCritical)
         {
-            targetEnemy.TakeDamage(damage, damageType);
+            if (!targetEnemy.TakeDamage(targetEnemyId, damage, damageType, isCritical)) return;
         }
-        
     }
 }

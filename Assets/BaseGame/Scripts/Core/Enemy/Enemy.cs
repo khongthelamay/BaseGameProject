@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.SimplePool;
 using LitMotion;
 using LitMotion.Extensions;
 using Manager;
@@ -7,26 +8,20 @@ using TW.ACacheEverything;
 using TW.Reactive.CustomComponent;
 using TW.Utility.CustomComponent;
 using TW.Utility.CustomType;
+using TW.Utility.Extension;
 using UnityEngine;
-using Zenject;
 using Ease = LitMotion.Ease;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Core
 {
-    public partial class Enemy : ACachedMonoBehaviour, IAbilityTargetAble
+    public partial class Enemy : ACachedMonoBehaviour, IAbilityTargetAble , IPoolAble<Enemy>
     {
-        public class Factory : PlaceholderFactory<Object, Enemy>
-        {
-            public static Factory CreateInstance()
-            {
-                return new Factory();
-            }
-        }
-
-        [Inject] private BattleManager BattleManager { get; set; }
+        private static int EnemyIdCounter { get; set; } = 0;
+        private BattleManager BattleManagerCache { get; set; }
+        private BattleManager BattleManager => BattleManagerCache ??= BattleManagerCache = BattleManager.Instance;
+        [field: SerializeField] public int Id {get; private set;}
         [field: SerializeField] public BigNumber CurrentHealthPoint { get; private set; }
         [field: SerializeField] public BigNumber FutureHealthPoint { get; private set; }
         [field: SerializeField] private float MovementSpeed { get; set; }
@@ -34,34 +29,26 @@ namespace Core
         [field: SerializeField] public int CurrentPoint { get; private set; }
         [field: SerializeField] public ReactiveValue<float> PlaybackSpeed { get; private set; }
         [field: SerializeField] public float Deep { get; private set; }
-        // [field: SerializeField] public int Damage {get; private set;}
-        // [field: SerializeField] public float DPS {get; private set;}
 
 
-        private MotionHandle _movementMotionHandle;
+        private MotionHandle MovementMotionHandle;
         public bool WillBeDead => FutureHealthPoint <= 0;
         public bool IsDead => CurrentHealthPoint <= 0;
-
-        // private void Update()
-        // {
-        //     DelayTime += Time.deltaTime;
-        //     if (DelayTime >= 10)
-        //     {
-        //         DPS = Damage/10f;
-        //         Debug.Log("Damage per sec: " + DPS);
-        //         DelayTime = 0;
-        //         Damage = 0;
-        //     }
-        // }
-
+        
+        public Enemy InitStats(BigNumber healthPoint, float movementSpeed)
+        {
+            CurrentHealthPoint = healthPoint;
+            FutureHealthPoint = healthPoint;
+            MovementSpeed = movementSpeed;
+            return this;
+        }
         public Enemy SetupMovePoint(Transform[] movePoint)
         {
             Deep = Random.Range(0f, 1f);
             MovePoint = movePoint;
             CurrentPoint = 0;
-            Transform.position = MovePoint[CurrentPoint].position;
+            Transform.position = MovePoint[0].position;
             PlaybackSpeed.Value = 1;
-
 
             return this;
         }
@@ -74,11 +61,11 @@ namespace Core
             float distance = Vector3.Distance(currentPosition, targetPosition);
             float duration = distance / MovementSpeed;
             Transform.localScale = currentPosition.x < targetPosition.x ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
-            _movementMotionHandle = LMotion.Create(currentPosition, targetPosition, duration)
+            MovementMotionHandle = LMotion.Create(currentPosition, targetPosition, duration)
                 .WithEase(Ease.Linear)
                 .WithOnComplete(StartMoveToNextPointCache)
                 .BindToPosition(Transform);
-            _movementMotionHandle.PlaybackSpeed = PlaybackSpeed.Value;
+            MovementMotionHandle.PlaybackSpeed = PlaybackSpeed.Value;
             PlaybackSpeed.ReactiveProperty.Subscribe(OnPlaybackSpeedChangedCache).AddTo(this);
         
         }
@@ -87,32 +74,46 @@ namespace Core
         [ACacheMethod]
         private void OnPlaybackSpeedChanged(float speed)
         {
-            if (!_movementMotionHandle.IsActive()) return;
-            _movementMotionHandle.PlaybackSpeed = speed;
+            if (!MovementMotionHandle.IsActive()) return;
+            MovementMotionHandle.PlaybackSpeed = speed;
         }
-
-        private void SelfDespawn()
+        public bool WillTakeDamage(int id, BigNumber attackDamage)
         {
-            _movementMotionHandle.TryCancel();
-            BattleManager.RemoveEnemy(this);
-            Destroy(gameObject);
-        }
-
-        public void WillTakeDamage(BigNumber attackDamage)
-        {
-            if (WillBeDead) return;
+            if (id != Id) return false;
+            if (WillBeDead) return false;
             FutureHealthPoint -= attackDamage;
+            return true;
         }
         
-        public void TakeDamage(BigNumber attackDamage, DamageType damageType)
+        public bool TakeDamage(int id, BigNumber attackDamage, DamageType damageType, bool isCritical)
         {
-            if (IsDead) return;
+            if (id != Id) return false;
+            if (IsDead) return false;
             FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage);
             CurrentHealthPoint -= attackDamage;
             if (CurrentHealthPoint <= 0)
             {
-                SelfDespawn();
+                this.Despawn();
             }
+            return true;
+        }
+        
+
+        public Enemy OnSpawn()
+        {
+            Id = EnemyIdCounter++;
+            if (EnemyIdCounter >= 10000)
+            {   
+                EnemyIdCounter = 0;
+            }
+            BattleManager.AddEnemy(this);
+            return this;
+        }
+
+        public void OnDespawn()
+        {
+            MovementMotionHandle.TryCancel();
+            BattleManager.RemoveEnemy(this);
         }
     }
     

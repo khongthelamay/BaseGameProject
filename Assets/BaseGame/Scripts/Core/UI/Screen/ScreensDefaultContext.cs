@@ -176,6 +176,7 @@ public class ScreensDefaultContext
         void ChangeExp(float value)
         {
             View.ChangeExp(value);
+            // Model.level.ReactiveProperty.Subscribe(ChangeLevel).AddTo(View.MainView);
         }
 
         void ChangeLevel(int level) {

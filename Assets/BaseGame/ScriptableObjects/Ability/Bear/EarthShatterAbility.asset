@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe772de20e2a44d09886f90f9463a38b, type: 3}
+  m_Name: EarthShatterAbility
+  m_EditorClassIdentifier: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: 5bab41b997e291749897d25f55015b5f, type: 3}
+  <LevelUnlock>k__BackingField: 0
+  <Name>k__BackingField: Earth Shatter
+  <Description>k__BackingField: Unleashes an attack dealing 1000% AOE damage and
+    reducing enemy armor by 10 for 3 seconds
+  <Cooldown>k__BackingField: 10

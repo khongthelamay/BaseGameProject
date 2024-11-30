@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c205cdd0c4ef4b65a663265e296ce3bc, type: 3}
+  m_Name: RallyingFuryAbility
+  m_EditorClassIdentifier: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: 2f1b14b53e22d19438b3a7dc1372d043, type: 3}
+  <LevelUnlock>k__BackingField: 0
+  <Name>k__BackingField: Rallying Fury
+  <Description>k__BackingField: Attacks that hit the target have 10% chance to increase
+    the Attack Speed of all nearby allies by 15% for 3 seconds

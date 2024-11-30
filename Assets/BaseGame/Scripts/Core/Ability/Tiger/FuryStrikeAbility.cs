@@ -2,26 +2,56 @@
 using Cysharp.Threading.Tasks;
 using TW.Utility.CustomType;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace Core
+namespace Core.TigerAbility
 {
-    public class FuryStrikeAbility : PassiveAbility
+    [CreateAssetMenu(fileName = "FuryStrikeAbility", menuName = "Ability/Tiger/FuryStrikeAbility")]
+    public class FuryStrikeAbility : ActiveAbility, IAbilityTargetAnEnemy 
     {
-        private Tiger OwnerTiger { get; set; }
-        public FuryStrikeAbility(Hero owner, int levelUnlock) : base(owner, levelUnlock)
+        [field: SerializeField] public int FuryStrikeRate {get; private set;}
+        [field: SerializeField] public DamageType DamageType {get; private set;}
+        [field: SerializeField] public int DelayFrame {get; private set;}
+        public Enemy EnemyTarget { get; set; }
+        public int EnemyTargetId { get; set; }
+        public Tiger OwnerTiger { get; set; }
+
+        public override Ability WithOwnerHero(Hero owner)
         {
-            OwnerTiger = (Tiger) owner;
+            OwnerTiger = owner as Tiger;
+            return base.WithOwnerHero(owner);
+        }
+        public override bool CanUseAbility()
+        {
+            if (Random.Range(0, 100) >= FuryStrikeRate) return false;
+            return this.IsFindAnyEnemyTarget();
+        }
+
+        public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
+        {
+            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical);
+            float attackSpeed = Owner.AttackSpeed;
+            
+            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, damageDeal)) return;
+            Owner.SetFacingPosition(EnemyTarget.Transform.position);
+            Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
+            await DelaySample(DelayFrame, tickRate, ct);
+            if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, isCritical)) return;
+            OwnerTiger.ChangeFuryPoint(1);
+            await DelaySample(30 - DelayFrame, tickRate, ct);
         }
         
         public override void OnEnterBattleField()
         {
-            OwnerTiger.AddFuryRate(10);
+
         }
 
         public override void OnExitBattleField()
         {
-            OwnerTiger.AddFuryRate(-10);
+
+        }
+        public void ChangeFuryStrikeRate(int value)
+        {
+            FuryStrikeRate += value;
         }
     }
 }

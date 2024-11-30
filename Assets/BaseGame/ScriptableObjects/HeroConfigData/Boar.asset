@@ -26,13 +26,7 @@ MonoBehaviour:
   <HeroGameObjectPrefab>k__BackingField: {fileID: 6476618016385687551, guid: 2db961d06da399d4c9510c8f5b1af27d, type: 3}
   <HeroPrefab>k__BackingField: {fileID: 3494841372097278568, guid: 2db961d06da399d4c9510c8f5b1af27d, type: 3}
   <HeroAbilities>k__BackingField:
-  - rid: 7889111977268346887
-  references:
-    version: 2
-    RefIds:
-    - rid: 7889111977268346887
-      type: {class: MeleeAttackAbility, ns: Core, asm: Assembly-CSharp}
-      data:
-        <LevelUnlock>k__BackingField: 0
-        <Owner>k__BackingField: {fileID: 0}
-        <DamageType>k__BackingField: 0
+  - {fileID: 11400000, guid: 7be095349e9ea484b9771fb3f8252b04, type: 2}
+  - {fileID: 11400000, guid: 4e8475ba07d05dd4b9af9ba8f43a9baf, type: 2}
+  - {fileID: 11400000, guid: 7626f0583af08ca4ba5e7ae9ef8703af, type: 2}
+  - {fileID: 11400000, guid: 2a3e262317d69c844ac653aa31646965, type: 2}

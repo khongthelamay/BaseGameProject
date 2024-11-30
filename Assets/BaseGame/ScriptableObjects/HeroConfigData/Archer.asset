@@ -25,16 +25,7 @@ MonoBehaviour:
   <ImageAnimatorController>k__BackingField: {fileID: 9100000, guid: cd6f999ee7ea84246b5bf456e05fcde3, type: 2}
   <HeroGameObjectPrefab>k__BackingField: {fileID: 148747281336159683, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
   <HeroPrefab>k__BackingField: {fileID: 9073571542304812977, guid: 4cfa82252851a9d43b6ecab3b39d06ca, type: 3}
-  <HeroAbilities>k__BackingField:
-  - rid: 7889111977268346884
+  <HeroAbilities>k__BackingField: []
   references:
     version: 2
-    RefIds:
-    - rid: 7889111977268346884
-      type: {class: RangeAttackAbility, ns: Core, asm: Assembly-CSharp}
-      data:
-        <LevelUnlock>k__BackingField: 0
-        <Owner>k__BackingField: {fileID: 0}
-        <DamageType>k__BackingField: 0
-        <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: a51c8cc451ba520479ce9f265f00f716, type: 3}
-        <SpawnPosition>k__BackingField: {fileID: 0}
+    RefIds: []

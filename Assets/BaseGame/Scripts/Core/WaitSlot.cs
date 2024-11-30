@@ -5,11 +5,11 @@ using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Zenject;
 
 public class WaitSlot : ACachedMonoBehaviour, IPointerClickHandler
 {
-    [Inject] private BattleManager BattleManager { get; set; }
+    private BattleManager BattleManagerCache { get; set; }
+    private BattleManager BattleManager => BattleManagerCache ??= BattleManagerCache = BattleManager.Instance;
     [field: SerializeField] public Hero OwnerHero {get; private set;}
     
     [Button]
@@ -17,7 +17,7 @@ public class WaitSlot : ACachedMonoBehaviour, IPointerClickHandler
     {
         if (OwnerHero != null)
         {
-            Destroy(OwnerHero.gameObject);
+            OwnerHero.Despawn();
         }
         HeroConfigData heroConfigData = HeroPoolGlobalConfig.Instance.GetRandomHeroPrefab(1);
         OwnerHero = heroConfigData.HeroPrefab.Spawn()

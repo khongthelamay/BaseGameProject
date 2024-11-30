@@ -1,10 +1,15 @@
+using UnityEngine;
+
 namespace Core
 {
     public class Footman : Hero
     {
+        [field: SerializeField] private VisualEffect DevastatingStrikeEffect {get; set;}
         protected override void InitAbility()
         {
-            // ActiveAbilities.Add(new MeleeAttackAbility(this, 0, DamageType.Physical));
+            // ActiveAbilities.Add(new DevastatingStrikeAbility(this, DevastatingStrikeEffect));
+            // ActiveAbilities.Add(new FootmanNormalAttack(this));
+            
         }
     }
 }

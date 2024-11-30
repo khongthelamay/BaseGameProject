@@ -46,13 +46,9 @@ namespace Core
 
         public UniTask OnEnter(HeroBattleDecisionState state, CancellationToken ct)
         {
-            foreach (var passiveAbility in PassiveAbilities)
+            foreach (var ability in Abilities)
             {
-                passiveAbility.OnEnterBattleField();
-            }
-            foreach (var activeAbility in ActiveAbilities)
-            {
-                activeAbility.OnEnterBattleField();
+                ability.OnEnterBattleField();
             }
 
             return UniTask.CompletedTask;
@@ -60,8 +56,9 @@ namespace Core
 
         public async UniTask OnUpdate(HeroBattleDecisionState state, CancellationToken ct)
         {
-            foreach (var activeAbility in ActiveAbilities)
+            foreach (var ability in Abilities)
             {
+                if (ability is not ActiveAbility activeAbility) continue;
                 if (!activeAbility.CanUseAbility()) continue;
                 await activeAbility.UseAbility(BattleManager.Instance.TickRate, ct);
                 break;
@@ -71,13 +68,9 @@ namespace Core
 
         public UniTask OnExit(HeroBattleDecisionState state, CancellationToken ct)
         {
-            foreach (var passiveAbility in PassiveAbilities)
+            foreach (var ability in Abilities)
             {
-                passiveAbility.OnExitBattleField();
-            }
-            foreach (var activeAbility in ActiveAbilities)
-            {
-                activeAbility.OnExitBattleField();
+                ability.OnExitBattleField();
             }
             return UniTask.CompletedTask;
         }

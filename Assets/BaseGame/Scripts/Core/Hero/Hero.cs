@@ -10,6 +10,7 @@ using TW.Utility.DesignPattern;
 using TW.Utility.Extension;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Random = UnityEngine.Random;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -43,7 +44,7 @@ namespace Core
             Range = 2,
         }
         private BattleManager BattleManagerCache { get; set; }
-        private BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        protected BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
         
         [field: Title(nameof(Hero))]
         [field: SerializeField] public HeroConfigData HeroConfigData { get; set; }
@@ -63,14 +64,24 @@ namespace Core
         [field: SerializeField] private int BaseAttackDamage { get; set; }
         [field: SerializeField] private float BaseAttackSpeed { get; set; }
         [field: SerializeField] private float BaseAttackRange { get; set; }
-        
-        public BigNumber AttackDamage => BaseAttackDamage * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value/100);
+        [ShowInInspector, ReadOnly] private int BaseCriticalRate {get; set;} = 0;
+        [ShowInInspector, ReadOnly] private int BaseCriticalDamage { get; set; } = 150;
+        public BigNumber AttackDamage(out bool isCritical)
+        {
+            BigNumber attackDamage = BaseAttackDamage * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value / 100);
+            isCritical = Random.Range(0, 100) < CriticalRate;
+            if (isCritical)
+            {
+                attackDamage *= (CriticalDamage/100f);
+            }
+            return attackDamage;
+        }
+
         public float AttackSpeed => BaseAttackSpeed * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackSpeed).Value/100);
         public float AttackRange => BaseAttackRange;
-        [ShowInInspector]
-        protected List<ActiveAbility> ActiveAbilities { get; set; } = new();
-        [ShowInInspector]
-        protected List<PassiveAbility> PassiveAbilities { get; set; } = new();
+        public float CriticalRate => BaseCriticalRate + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalRate).Value;
+        public float CriticalDamage => BaseCriticalDamage + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalDamage).Value;
+        [ShowInInspector, InlineEditor] protected List<Ability> Abilities { get; set; } = new();
         
         private Vector3 MoveFromPosition { get; set; }
         private Vector3 MoveToPosition { get; set; }
@@ -78,17 +89,21 @@ namespace Core
         
         [field: SerializeField] private bool IsCancelAbility {get; set;}
 
+        private void Awake()
+        {
+            InitAbility();
+        }
+
         public void OnDestroy()
         {
             StateMachine.Stop();
         }
+        
         public virtual Hero OnSpawn()
         {
             InitStateMachine();
             InitStat();
-            InitAbility();
-            
-            
+            ResetAbility();
             return BattleManager.Instance.RegisterHero(this);
         }
 
@@ -111,7 +126,30 @@ namespace Core
 
         protected virtual void InitAbility()
         {
-
+            foreach (Ability heroAbility in HeroConfigData.HeroAbilities)
+            {
+                Abilities.Add(heroAbility.Initialize(this));
+            }
+        }
+        private void ResetAbility()
+        {
+            foreach (Ability ability in Abilities)
+            {
+                ability.ResetAbility();
+            }
+        }
+        public bool TryGetAbility<T>(out T ability) where T : Ability
+        {
+            foreach (Ability heroAbility in Abilities)
+            {
+                if (heroAbility is T tAbility)
+                {
+                    ability = tAbility;
+                    return true;
+                }
+            }
+            ability = null;
+            return false;
         }
         public bool IsCurrentState(IState state)
         {
@@ -165,16 +203,12 @@ namespace Core
             void MoveComplete()
             {
                 SetCancelAbility(false);
-                SelfDespawn();
+                this.Despawn();
             }
         }
         public void SetVisible(bool isVisible)
         {
             VisibleGroup.SetActive(isVisible);
-        }
-        public void SelfDespawn()
-        {
-            Destroy(gameObject);
         }
         public void SetCancelAbility(bool isCancelAbility)
         {
@@ -204,6 +238,24 @@ namespace Core
             SortingGroup.sortingOrder = -(int) (Transform.position.y * 100 + Transform.position.x);
             return this;
         }
+        public bool TryReduceCooldown(float rate)
+        {
+            int countCooldownAbility = 0;
+            foreach (Ability ability in Abilities)
+            {
+                if (ability is ActiveCooldownAbility activeCooldownAbility)
+                {
+                    activeCooldownAbility.ReduceCooldown(rate);
+                    countCooldownAbility++;
+                }
+            }
+            return countCooldownAbility > 0;
+        }
+        public void ChangeCriticalRate(int rate)
+        {
+            BaseCriticalRate += rate;
+        }
+        
     }
 
 #if UNITY_EDITOR
