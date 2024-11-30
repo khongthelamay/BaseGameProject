@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9ee8d5935a48678703bf723d6f9f21, type: 3}
   m_Name: FuryPowerAbility
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 0ff039ee4dfd88a44852323113531bc8, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 4455a7a585745c54c9fdd2e7f1cfc518, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Fury Power
   <Description>k__BackingField: Each Fury Point gives all allies +0.25% attack damage

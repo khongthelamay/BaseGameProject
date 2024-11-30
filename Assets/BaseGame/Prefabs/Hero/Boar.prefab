@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 3059237990665394196}
   - {fileID: 6659250667249046145}
+  - {fileID: 4835786389892054553}
   m_Father: {fileID: 5819342139689653833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2578845623860639556
@@ -609,3 +610,35 @@ MonoBehaviour:
   <BaseAttackSpeed>k__BackingField: 0
   <BaseAttackRange>k__BackingField: 0
   <IsCancelAbility>k__BackingField: 0
+  <ProjectileSpawnPosition>k__BackingField: {fileID: 4835786389892054553}
+--- !u!1 &8846810967052007716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4835786389892054553}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4835786389892054553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846810967052007716}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.45, y: 0.6, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2708320698396729910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

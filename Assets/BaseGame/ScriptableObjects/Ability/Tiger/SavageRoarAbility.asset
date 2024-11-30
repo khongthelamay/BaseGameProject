@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e0b58f8a1f4908b2a4abebb5dd64ce, type: 3}
   m_Name: SavageRoarAbility
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 7ce45291ca7f7d644b3c8d25586f3fca, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7f68fbef86b763c4baccacdee8b7cb2c, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Savage Roar
   <Description>k__BackingField: Unleashes an attack that deals 10000% AOE damage

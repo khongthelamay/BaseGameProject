@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c196367b81043c5a1d7ad176fa438d3, type: 3}
   m_Name: FuryOverdriveAbility
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: a9a5e5a77fd4b3c46b530dfd77a5cb56, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 30850b7f6c0e49b40980e1a514e2beca, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Fury Overdrive
   <Description>k__BackingField: Doubles all effects of Fury Power

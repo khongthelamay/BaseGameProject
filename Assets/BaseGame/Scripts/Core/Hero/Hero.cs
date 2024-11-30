@@ -64,8 +64,8 @@ namespace Core
         [field: SerializeField] private int BaseAttackDamage { get; set; }
         [field: SerializeField] private float BaseAttackSpeed { get; set; }
         [field: SerializeField] private float BaseAttackRange { get; set; }
-        [ShowInInspector] private int BaseCriticalRate {get; set;} = 0;
-        [ShowInInspector] private int BaseCriticalDamage { get; set; } = 150;
+        [ShowInInspector, ReadOnly] private int BaseCriticalRate {get; set;} = 0;
+        [ShowInInspector, ReadOnly] private int BaseCriticalDamage { get; set; } = 150;
         public BigNumber AttackDamage(out bool isCritical)
         {
             BigNumber attackDamage = BaseAttackDamage * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value / 100);

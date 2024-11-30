@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae20e59fb2a4e7f96298d75ac7fa8e1, type: 3}
   m_Name: FuryMasteryAbility
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 6283e90769bcbbc4f8f2a004a693982e, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: f45f81bcd8fb6d045ac89cfed3eb12b1, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Furry Master
   <Description>k__BackingField: Fury Strike increases Fury Point gain rate by 10%

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d588e0fae944299c66bb6db0df76e2, type: 3}
+  m_Name: BoarNormalAttack
+  m_EditorClassIdentifier: 
+  <Icon>k__BackingField: {fileID: 0}
+  <LevelUnlock>k__BackingField: 0
+  <Name>k__BackingField: 
+  <Description>k__BackingField: 
+  <DamageType>k__BackingField: 0
+  <DelayFrame>k__BackingField: 10
+  <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: bfa3804993eb82e49b2938d60b3b1404, type: 3}

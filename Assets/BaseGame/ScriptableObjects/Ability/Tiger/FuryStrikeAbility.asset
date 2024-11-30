@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412a2a9d1164424688f404bdab84cdfd, type: 3}
   m_Name: FuryStrikeAbility
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 6ab6b4f8898e9c049addb2a1e621cfab, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: dc11dd6b3fa3ece46ac8cadaa7a50686, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Fury Strike
   <Description>k__BackingField: Attacks that hit the target have a 5% chance of gaining
