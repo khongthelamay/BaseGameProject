@@ -10,7 +10,7 @@ namespace Core
         public override Ability WithOwnerHero(Hero owner)
         {
             OwnerBoar = owner as Boar;
-            SpawnPosition = OwnerBoar.ProjectileSpawnPosition;
+            SpawnPosition = OwnerBoar?.ProjectileSpawnPosition;
 
             return base.WithOwnerHero(owner);
         }

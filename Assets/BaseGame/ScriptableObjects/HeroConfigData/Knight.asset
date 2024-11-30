@@ -25,7 +25,8 @@ MonoBehaviour:
   <ImageAnimatorController>k__BackingField: {fileID: 9100000, guid: 625b9d58b20f5da4bb62db6bf23a829b, type: 2}
   <HeroGameObjectPrefab>k__BackingField: {fileID: 8733889794953265145, guid: d52e6479226ebb54f8c54db116c31276, type: 3}
   <HeroPrefab>k__BackingField: {fileID: 8313008562234110279, guid: d52e6479226ebb54f8c54db116c31276, type: 3}
-  <HeroAbilities>k__BackingField: []
-  references:
-    version: 2
-    RefIds: []
+  <HeroAbilities>k__BackingField:
+  - {fileID: 11400000, guid: 360a2035ee2c766429a9d4e7d3f5015b, type: 2}
+  - {fileID: 11400000, guid: 7326c023086d57a4c82cc3f4523ddff0, type: 2}
+  - {fileID: 11400000, guid: 2b40eaf16ab9dcd47890f64c71ae0fc2, type: 2}
+  - {fileID: 11400000, guid: 7bacec77f4908ea44a209cdecdd23e2b, type: 2}

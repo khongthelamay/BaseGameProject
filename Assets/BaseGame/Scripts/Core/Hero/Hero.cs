@@ -17,6 +17,7 @@ using UnityEditor;
 
 namespace Core
 {
+    [SelectionBase]
     public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero> 
     {
         private static Vector3[] VectorFacing { get; set; } = new Vector3[2]
