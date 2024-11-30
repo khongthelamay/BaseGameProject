@@ -12,7 +12,7 @@ public class GrowthLevelManager : Singleton<GrowthLevelManager>
     public ReactiveValue<float> playerExp = new(0);
     public ReactiveValue<bool> isPremium = new();
     public List<GrowthDataConfig> growthDataConfigs = new();
-    public GrowthDataConfig currentGrowDataConfigs;
+    public GrowthDataConfig currentGrowDataConfigs = new();
     private void Start()
     {
         LoadData();
@@ -23,10 +23,11 @@ public class GrowthLevelManager : Singleton<GrowthLevelManager>
         playerLevel = InGameDataManager.Instance.InGameData.playerResourceDataSave.level;
         playerExp = InGameDataManager.Instance.InGameData.playerResourceDataSave.exp;
         isPremium = InGameDataManager.Instance.InGameData.playerResourceDataSave.premium;
-        currentGrowDataConfigs = GetGrowGlobalConfig(playerLevel + 1);
+        //currentGrowDataConfigs = GetGrowGlobalConfig(playerLevel.Value + 1);
     }
 
-    public GrowthDataConfig GetGrowGlobalConfig(int level) { 
+    public GrowthDataConfig GetGrowGlobalConfig(int level) {
+        Debug.Log($"Get grow level {level}");
         foreach (GrowthDataConfig config in growthDataConfigs) {
             if (config.level == level) return config;
         }

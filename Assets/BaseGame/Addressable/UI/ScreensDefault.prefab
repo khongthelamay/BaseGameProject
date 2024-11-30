@@ -182,6 +182,7 @@ MonoBehaviour:
       - {fileID: 6352474094656456698}
       - {fileID: 4588663106076961933}
       txtLevel: {fileID: 4338333088713329740}
+      txtTimeRemaining: {fileID: 2501430898806536417}
       progressLevel: {fileID: 930668849976298727}
       coinResource: {fileID: 2177572405835681289}
       energyResource: {fileID: 4083681305497281339}
@@ -262,7 +263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7129478638302118722
 RectTransform:
   m_ObjectHideFlags: 0

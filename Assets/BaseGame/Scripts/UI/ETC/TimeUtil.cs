@@ -19,7 +19,6 @@ public class TimeUtil : MonoBehaviour {
     public static string TimeToString(float inputTime, TimeFommat timeFommat = TimeFommat.Symbol)
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(inputTime);
-        return string.Format("{0:D2}h {1:D2}m {2:D2}s", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
         if (timeFommat == TimeFommat.Keyword)
         {
             if (timeSpan.TotalDays >= 1)

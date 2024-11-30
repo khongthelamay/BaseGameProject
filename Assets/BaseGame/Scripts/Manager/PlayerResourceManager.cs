@@ -13,6 +13,10 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     [field: SerializeField] public ReactiveValue<float> exp { get; set; } = new(0);
     [field: SerializeField] public ReactiveList<Resource> resources { get; set; } = new();
     [field: SerializeField] public ReactiveValue<string> timeEneryDone { get; set; } = new();
+    [field: SerializeField] public ReactiveValue<string> timeEnegyAddOne { get; set; } = new();
+
+    public bool coolDown = false;
+    [ReadOnly] public float timeCoolDown = -1;
 
     private void Start()
     {
@@ -21,18 +25,39 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
 
     private void LoadData()
     {
+        timeCoolDown = -1;
         level = PlayerResourceDataSave.Instance.level;
         exp = PlayerResourceDataSave.Instance.exp;
         resources = PlayerResourceDataSave.Instance.resources;
-        timeEneryDone = PlayerResourceDataSave.Instance.lastTimeEnergy;
+        timeEneryDone = PlayerResourceDataSave.Instance.timeEnergyDone;
+        timeEnegyAddOne = PlayerResourceDataSave.Instance.timeEnegyAddOne;
         CheckTimeEnergy();
+    }
+
+    private void FixedUpdate()
+    {
+        if (coolDown)
+        {
+            if (timeCoolDown >= 0)
+            {
+                timeCoolDown -= Time.deltaTime;
+
+            }
+            else {
+                coolDown = false;
+                ChangeResource(ResourceType.Energy, 1);
+                CheckTimeToGetOneEnergy();
+            }
+
+            ScreensDefaultContext.Events.ChangeTimeRemaining?.Invoke(timeCoolDown);
+        }
     }
 
     void CheckTimeEnergy() {
         Resource resource = GetResource(ResourceType.Energy);
         if (string.IsNullOrEmpty(timeEneryDone.Value))
         {
-            if (resource.value.Value == 0) ChangeResource(ResourceType.Energy, 30);
+            if (resource.value.Value == 0) SetResource(ResourceType.Energy, 30);
             return;
         }
 
@@ -40,12 +65,42 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
         DateTime timeConvert = DateTime.Parse(timeEneryDone.Value, TimeUtil.GetCultureInfo());
         if (timeConvert.Subtract(DateTime.Now).TotalSeconds < 0)
         {
-            //if (resource.value.Value == 0) SetResource(ResourceType.Energy, 30);
+            if (resource.value.Value < 30) SetResource(ResourceType.Energy, 30);
+        }
+        CheckTimeToGetOneEnergy();
+    }
+
+    void CheckTimeToGetOneEnergy() {
+        if (string.IsNullOrEmpty(timeEnegyAddOne.Value))
+            return;
+        DateTime timeConvert = DateTime.Parse(timeEnegyAddOne.Value, TimeUtil.GetCultureInfo());
+        if (timeConvert.Subtract(DateTime.Now).TotalSeconds > 0)
+        {
+            timeCoolDown = (float)timeConvert.Subtract(DateTime.Now).TotalSeconds;
+            coolDown = true;
+        }
+        else 
+        {
+            Resource resource = GetResource(ResourceType.Energy);
+            if (resource.value.Value < 30)
+            {
+                timeEnegyAddOne.Value = DateTime.Now.AddMinutes(.5f).ToString(TimeUtil.GetCultureInfo());
+                timeConvert = DateTime.Parse(timeEnegyAddOne.Value, TimeUtil.GetCultureInfo());
+                timeCoolDown = (float)timeConvert.Subtract(DateTime.Now).TotalSeconds;
+                coolDown = true;
+            }
+            else
+            {
+                timeEneryDone.Value = "";
+                ScreensDefaultContext.Events.TurnOffTimeRemaining?.Invoke();
+            }
         }
     }
 
     [Button]
     public void ChangeResource(ResourceType rType, BigNumber amount) {
+        Debug.Log(coolDown);
+        Debug.Log($"Change resource {rType} amount: {amount}");
         for (int i = 0; i < resources.ObservableList.Count; i++)
         {
             if (resources.ObservableList[i].type == rType)
@@ -68,12 +123,16 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     public void ComsumeEnery(BigNumber amount) {
         Resource resource = GetResource(ResourceType.Energy);
         resource.Consume(amount);
-        timeEneryDone.Value = DateTime.Now.AddMinutes(10f).ToString(TimeUtil.GetCultureInfo());
+        DateTime timeConvert = string.IsNullOrEmpty(timeEneryDone.Value) ? DateTime.Now : DateTime.Parse(timeEneryDone.Value, TimeUtil.GetCultureInfo());
+        timeEneryDone.Value = timeConvert.AddMinutes(.5f * amount.ToFloat()).ToString(TimeUtil.GetCultureInfo());
+        timeEnegyAddOne.Value = timeConvert.AddMinutes(.5f).ToString(TimeUtil.GetCultureInfo());
+        CheckTimeToGetOneEnergy();
         InGameDataManager.Instance.SaveData();
     }
 
     public void SetResource(ResourceType rType, BigNumber amount)
     {
+        Debug.Log($"set resource: {rType} amout: {amount}");
         Resource resource = GetResource(rType);
         resource.value.Value = amount;
         InGameDataManager.Instance.SaveData();

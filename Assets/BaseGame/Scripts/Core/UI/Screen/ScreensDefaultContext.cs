@@ -19,6 +19,7 @@ public class ScreensDefaultContext
         public static Event OpenModal { get; set; } = new();
         public static Event CloseModal { get; set; } = new();
         public static Action<float> ChangeTimeRemaining { get; set; }
+        public static Action TurnOffTimeRemaining { get; set; }
     }
 
     [HideLabel]
@@ -149,6 +150,8 @@ public class ScreensDefaultContext
         }
 
         public void ChangeTimeRemaining(string timeRemaining) {
+            if (!txtTimeRemaining.gameObject.activeSelf)
+                txtTimeRemaining.gameObject.SetActive(true);
             txtTimeRemaining.text = timeRemaining;
         }
     }
@@ -169,9 +172,18 @@ public class ScreensDefaultContext
             Model.exp.ReactiveProperty.Subscribe(ChangeExp).AddTo(View.MainView);
 
             Events.ChangeTimeRemaining = ChangeTimeRemaining;
+            Events.TurnOffTimeRemaining = TurnOffTimeRemaining;
         }
 
-        void ChangeTimeRemaining(float timeRemaining) { View.ChangeTimeRemaining(TimeUtil.ConvertFloatToString(timeRemaining)); }
+        void TurnOffTimeRemaining()
+        {
+            View.txtTimeRemaining.gameObject.SetActive(false);
+        }
+
+        void ChangeTimeRemaining(float timeRemaining) {
+            if (timeRemaining > 0)
+                View.ChangeTimeRemaining(TimeUtil.TimeToString(timeRemaining));
+        }
 
         void ChangeExp(float value)
         {
@@ -187,6 +199,7 @@ public class ScreensDefaultContext
         {
             View.progressLevel.ClearAnimation();
             Events.ChangeTimeRemaining = null;
+            Events.TurnOffTimeRemaining = null;
             return UniTask.CompletedTask;
         }
 
