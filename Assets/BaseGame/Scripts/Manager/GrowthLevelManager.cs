@@ -23,7 +23,7 @@ public class GrowthLevelManager : Singleton<GrowthLevelManager>
         playerLevel = InGameDataManager.Instance.InGameData.playerResourceDataSave.level;
         playerExp = InGameDataManager.Instance.InGameData.playerResourceDataSave.exp;
         isPremium = InGameDataManager.Instance.InGameData.playerResourceDataSave.premium;
-        //currentGrowDataConfigs = GetGrowGlobalConfig(playerLevel.Value + 1);
+        currentGrowDataConfigs = GetGrowGlobalConfig(playerLevel.Value + 1);
     }
 
     public GrowthDataConfig GetGrowGlobalConfig(int level) {

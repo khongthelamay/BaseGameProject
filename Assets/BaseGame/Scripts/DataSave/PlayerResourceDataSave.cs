@@ -8,8 +8,8 @@ using UnityEngine;
 public partial class PlayerResourceDataSave
 {
     public static PlayerResourceDataSave Instance => InGameDataManager.Instance.InGameData.playerResourceDataSave;
-    [field: SerializeField] public ReactiveValue<int> level;
-    [field: SerializeField] public ReactiveValue<float> exp;
+    [field: SerializeField] public ReactiveValue<int> level = new(0);
+    [field: SerializeField] public ReactiveValue<float> exp = new(0);
     [field: SerializeField] public ReactiveValue<bool> premium;
     [field: SerializeField] public ReactiveList<Resource> resources { get; set; } = new();
     [field: SerializeField] public ReactiveValue<string> timeEnergyDone { get; set; } = new();

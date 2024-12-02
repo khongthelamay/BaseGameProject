@@ -27,9 +27,9 @@ public class ScreensDefaultContext
     public class UIModel : IAModel
     {
         [field: Title(nameof(UIModel))]
-        [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
-        [field: SerializeField] public ReactiveValue<int> level { get; private set; }
-        [field: SerializeField] public ReactiveValue<float> exp { get; private set; }
+        [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; } = new(0);
+        [field: SerializeField] public ReactiveValue<int> level { get; private set; } = new(0);
+        [field: SerializeField] public ReactiveValue<float> exp { get; private set; } = new(0);
 
         public UniTask Initialize(Memory<object> args)
         {

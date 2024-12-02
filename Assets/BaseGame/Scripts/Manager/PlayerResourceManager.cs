@@ -74,7 +74,7 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
         if (string.IsNullOrEmpty(timeEnegyAddOne.Value))
             return;
         DateTime timeConvert = DateTime.Parse(timeEnegyAddOne.Value, TimeUtil.GetCultureInfo());
-        if (timeConvert.Subtract(DateTime.Now).TotalSeconds > 0)
+        if (timeConvert.Subtract(DateTime.Now).TotalSeconds > 0 && !coolDown)
         {
             timeCoolDown = (float)timeConvert.Subtract(DateTime.Now).TotalSeconds;
             coolDown = true;
@@ -82,12 +82,16 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
         else 
         {
             Resource resource = GetResource(ResourceType.Energy);
-            if (resource.value.Value < 30)
+            if (resource.value.Value < 30 )
             {
-                timeEnegyAddOne.Value = DateTime.Now.AddMinutes(.5f).ToString(TimeUtil.GetCultureInfo());
-                timeConvert = DateTime.Parse(timeEnegyAddOne.Value, TimeUtil.GetCultureInfo());
-                timeCoolDown = (float)timeConvert.Subtract(DateTime.Now).TotalSeconds;
-                coolDown = true;
+                if (!coolDown)
+                {
+                    timeConvert = DateTime.Parse(timeEnegyAddOne.Value, TimeUtil.GetCultureInfo());
+                    timeEnegyAddOne.Value = timeConvert.AddMinutes(.5f).ToString(TimeUtil.GetCultureInfo());
+                    timeConvert = DateTime.Parse(timeEnegyAddOne.Value, TimeUtil.GetCultureInfo());
+                    timeCoolDown = (float)timeConvert.Subtract(DateTime.Now).TotalSeconds;
+                    coolDown = true;
+                }
             }
             else
             {
@@ -125,7 +129,8 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
         resource.Consume(amount);
         DateTime timeConvert = string.IsNullOrEmpty(timeEneryDone.Value) ? DateTime.Now : DateTime.Parse(timeEneryDone.Value, TimeUtil.GetCultureInfo());
         timeEneryDone.Value = timeConvert.AddMinutes(.5f * amount.ToFloat()).ToString(TimeUtil.GetCultureInfo());
-        timeEnegyAddOne.Value = timeConvert.AddMinutes(.5f).ToString(TimeUtil.GetCultureInfo());
+        if (!coolDown)
+            timeEnegyAddOne.Value = timeConvert.AddMinutes(.5f).ToString(TimeUtil.GetCultureInfo());
         CheckTimeToGetOneEnergy();
         InGameDataManager.Instance.SaveData();
     }
