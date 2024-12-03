@@ -89,7 +89,7 @@ namespace Core
         {
             if (id != Id) return false;
             if (IsDead) return false;
-            FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage);
+            FactoryManager.Instance.CreateDamageNumber(Transform.position, attackDamage, damageType, isCritical);
             CurrentHealthPoint -= attackDamage;
             if (CurrentHealthPoint <= 0)
             {

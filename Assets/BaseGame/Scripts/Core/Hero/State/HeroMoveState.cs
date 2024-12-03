@@ -59,6 +59,7 @@ namespace Core
         public UniTask OnExit(HeroMoveState state, CancellationToken ct)
         {
             SetVisible(true);
+            FactoryManager.CreateSpawnEffect(Transform.position);
             return UniTask.CompletedTask;
         }
     }

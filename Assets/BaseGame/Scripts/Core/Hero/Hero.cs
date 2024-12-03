@@ -46,6 +46,8 @@ namespace Core
         }
         private BattleManager BattleManagerCache { get; set; }
         protected BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
+        private FactoryManager FactoryManagerCache { get; set; }
+        protected FactoryManager FactoryManager => FactoryManagerCache ??= FactoryManager.Instance;
         
         [field: Title(nameof(Hero))]
         [field: SerializeField] public HeroConfigData HeroConfigData { get; set; }

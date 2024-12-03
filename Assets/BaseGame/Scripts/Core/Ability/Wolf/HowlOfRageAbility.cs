@@ -25,6 +25,10 @@ namespace Core.WolfAbility
 
         public override void OnExitBattleField()
         {
+            if (DurationMotionHandle.IsActive())
+            {
+                Owner.ChangeCriticalRate(-CriticalRateBonus);
+            }
             DurationMotionHandle.TryCancel();
         }
 

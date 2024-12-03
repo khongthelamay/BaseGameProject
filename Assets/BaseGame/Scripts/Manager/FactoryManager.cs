@@ -1,4 +1,9 @@
-﻿using DamageNumbersPro;
+﻿using Core;
+using Core.SimplePool;
+using DamageNumbersPro;
+using R3;
+using R3.Triggers;
+using Sirenix.OdinInspector;
 using TW.Utility.CustomType;
 using TW.Utility.DesignPattern;
 using UnityEngine;
@@ -8,22 +13,34 @@ namespace Manager
 {
     public class FactoryManager : Singleton<FactoryManager>
     {
-        [field: SerializeField] public DamageNumber DamageNumberMesh {get; private set;}
-
-        private void Start()
+        [field: Title("Damage Number")]
+        [field: SerializeField] private DamageNumber DamageNumberMesh {get; set;}
+        [field: SerializeField] private Color[] TextColor {get; set;}
+        [field: SerializeField] private int[] TextSize {get; set;}
+        
+        [field: Title("SpawnEffect")]
+        [field: SerializeField] private VisualEffect SpawnEffect {get; set;}
+        
+        [field: Title("UpgradeEffect")]
+        [field: SerializeField] private VisualEffect UpgradeEffect {get; set;}
+        public void CreateDamageNumber(Vector3 position, BigNumber damage, DamageType damageType, bool isCritical = false)
         {
-            // this.UpdateAsObservable().Where(_ => Input.GetKeyDown(KeyCode.Mouse0))
-            //     .Subscribe(_ =>
-            //     {
-            //         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //         position.z = 0;
-            //         CreateDamageNumber(position, 100);
-            //     });
+            Color textColor = TextColor[(int)damageType * 2 + (isCritical ? 1 : 0)];
+            string damageText = $"{damage.ToStringUI()}{(isCritical ? "!" : "")}";
+            int textSize = TextSize[isCritical ? 1 : 0];
+            DamageNumber damageNumber = DamageNumberMesh.Spawn(position, damageText);
+            damageNumber.SetColor(textColor);
+            damageNumber.GetTextMesh().fontSize = textSize;
         }
         
-        public void CreateDamageNumber(Vector3 position, BigNumber damage)
+        public void CreateSpawnEffect(Vector3 position)
         {
-            DamageNumber damageNumber = DamageNumberMesh.Spawn(position, damage.ToStringUI());
+            SpawnEffect.Spawn(position, Quaternion.identity);
+        }
+
+        public void CreateUpgradeEffect(Vector3 position)
+        {
+            UpgradeEffect.Spawn(position, Quaternion.identity);
         }
     }
 }

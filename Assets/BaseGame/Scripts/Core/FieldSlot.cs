@@ -65,7 +65,9 @@ public class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBeginDragH
     {
         if (!TryGetHero(out Hero hero)) return;
         if (!hero.IsInBattleState()) return;
-        TempUIManager.Instance.ShowModalHeroInteract(this);
+        ActivityHeroInfoContext.Events.ShowFieldSlotInteract?.Invoke(this);
+        
+        // TempUIManager.Instance.ShowModalHeroInteract(this);
     }
 
     public void OnBeginDrag(PointerEventData eventData)

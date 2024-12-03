@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7290f079e1854f4c9fc17f36a2db5e87, type: 3}
   m_Name: WolfNormalAttackAbility
   m_EditorClassIdentifier: 
+  <Icon>k__BackingField: {fileID: 0}
   <LevelUnlock>k__BackingField: 0
+  <Name>k__BackingField: 
   <Description>k__BackingField: 
   <DamageType>k__BackingField: 0
   <DelayFrame>k__BackingField: 8
