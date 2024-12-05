@@ -4,13 +4,14 @@ using TW.Reactive.CustomComponent;
 using TW.Utility.CustomType;
 
 public enum ResourceType { 
-    Coin = 0,
-    Gem = 1,
-    SummonRecipe = 2,
-    EpicStone = 3,
-    Key = 4,
-    Energy = 5,
-    RecruitRecipe = 6
+    None = 0,
+    Coin = 1,
+    Gem = 2,
+    SummonRecipe = 3,
+    EpicStone = 4,
+    Key = 5,
+    Energy = 6,
+    RecruitRecipe = 7
 }
 
 [System.Serializable]

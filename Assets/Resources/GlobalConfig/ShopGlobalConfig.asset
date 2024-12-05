@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaebeaee62e405c4fa8860e5502f53c2, type: 3}
+  m_Name: ShopGlobalConfig
+  m_EditorClassIdentifier: 
+  shopPackDatas:
+  - <PackageId>k__BackingField: 1
+    <PackageName>k__BackingField: Starter's Deal
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 4.99
+          exponent: 0
+    <rewards>k__BackingField:
+    - type: 4
+      value:
+        m_Value:
+          coefficient: 6
+          exponent: 0
+    - type: 1
+      value:
+        m_Value:
+          coefficient: 1
+          exponent: 1
+    - type: 0
+      value:
+        m_Value:
+          coefficient: 30
+          exponent: 1
+    <heroRewards>k__BackingField: 
+  - <PackageId>k__BackingField: 2
+    <PackageName>k__BackingField: Bomba Pack
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 7.99
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  - <PackageId>k__BackingField: 3
+    <PackageName>k__BackingField: Coldy Pack
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 7.99
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  goldPack:
+  - <PackageId>k__BackingField: 4
+    <PackageName>k__BackingField: 
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  - <PackageId>k__BackingField: 5
+    <PackageName>k__BackingField: 
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  - <PackageId>k__BackingField: 6
+    <PackageName>k__BackingField: 
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  mysthicStonePack:
+  - <PackageId>k__BackingField: 7
+    <PackageName>k__BackingField: 
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  - <PackageId>k__BackingField: 8
+    <PackageName>k__BackingField: 
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  - <PackageId>k__BackingField: 9
+    <PackageName>k__BackingField: 
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  diamondPack:
+  - <PackageId>k__BackingField: 10
+    <PackageName>k__BackingField: 
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  - <PackageId>k__BackingField: 11
+    <PackageName>k__BackingField: 
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
+  - <PackageId>k__BackingField: 12
+    <PackageName>k__BackingField: 
+    <PackIcon>k__BackingField: {fileID: 0}
+    <PurchaseType>k__BackingField: 2
+    <PaymentAmount>k__BackingField:
+      type: 0
+      value:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+    <rewards>k__BackingField: []
+    <heroRewards>k__BackingField: 
