@@ -73,7 +73,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5033648688732336873}
@@ -119,7 +119,7 @@ SpriteRenderer:
   m_SortingLayerID: -392905563
   m_SortingLayer: 1
   m_SortingOrder: 18
-  m_Sprite: {fileID: 21300000, guid: 7beb6d523fc8c384da58f4ca1b9e3056, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86966988f49afb649b6ca49c3a8a1bdd, type: 3}
   m_Color: {r: 0, g: 1, b: 0.65917397, a: 0.47058824}
   m_FlipX: 0
   m_FlipY: 0
@@ -492,11 +492,13 @@ MonoBehaviour:
   <SpriteRarity>k__BackingField: {fileID: 3436596701766725801}
   <MoveProjectile>k__BackingField: {fileID: 4845609547942700330, guid: 84727164c6cf08646a00b92bf0e0b342, type: 3}
   <VisibleGroup>k__BackingField: {fileID: 3939723023185029925}
+  <GraphicGroupTransform>k__BackingField: {fileID: 0}
   <FieldSlot>k__BackingField: {fileID: 0}
   <HeroAnim>k__BackingField: {fileID: 619450188916677119}
-  <AttackDamage>k__BackingField: 0
-  <AttackSpeed>k__BackingField: 0
-  <AttackRange>k__BackingField: 0
+  <SortingGroup>k__BackingField: {fileID: 0}
+  <BaseAttackDamage>k__BackingField: 0
+  <BaseAttackSpeed>k__BackingField: 0
+  <BaseAttackRange>k__BackingField: 0
   <IsCancelAbility>k__BackingField: 0
 --- !u!114 &619450188916677119
 MonoBehaviour:

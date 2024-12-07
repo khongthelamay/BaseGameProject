@@ -64,7 +64,6 @@ public class HeroConfigData : ScriptableObject
     [Button]
     private async UniTask UpdateData()
     {
-        Animator a = new GameObject().AddComponent<Animator>();
         string sheetId = "1-HkinUwSW4A4SkuiLGtl0Tm8771jFPVZB5ZpLs5pxz4";
         EditorUtility.SetDirty(this);
         string result = await ABakingSheet.GetCsv(sheetId, "UnitAbility");
@@ -74,28 +73,35 @@ public class HeroConfigData : ScriptableObject
             //         d => d.Key,
             //         d => d.Value.Replace(" ", "")))
             .ToList();
+        try
+        {
+            Dictionary<string, string> data = csvData.Find(x => x["Name"] == Name);
+            GenerateHeroSprite(data);
+            GenerateBaseStat(data);
+            GenerateHeroJob(data);
+            GenerateHeroClass(data);
+        
+        
+            // generate sprite animation
+            GenerateIdleAnimData(data);
+            GenerateAttackAnimData(data);
+            GenerateSkillAnimData(data);
+            GenerateAnimatorData(data);
+        
+            // generate image animation
+            GenerateIdleImageAnimData(data);
+            GenerateImageAnimatorData(data);
+        
+            GenerateHeroGameObjectPrefab(data);
+            AddUniqueHeroScript();
+        
+            GenerateHeroPrefab(data);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
 
-        Dictionary<string, string> data = csvData.Find(x => x["Name"] == Name);
-        GenerateHeroSprite(data);
-        GenerateBaseStat(data);
-        GenerateHeroJob(data);
-        GenerateHeroClass(data);
-        
-        
-        // generate sprite animation
-        GenerateIdleAnimData(data);
-        GenerateAttackAnimData(data);
-        GenerateSkillAnimData(data);
-        GenerateAnimatorData(data);
-        
-        // generate image animation
-        GenerateIdleImageAnimData(data);
-        GenerateImageAnimatorData(data);
-        
-        GenerateHeroGameObjectPrefab(data);
-        AddUniqueHeroScript();
-        
-        GenerateHeroPrefab(data);
         
         string newName = $"{Name}.asset";
         string assetPath = AssetDatabase.GetAssetPath(this);

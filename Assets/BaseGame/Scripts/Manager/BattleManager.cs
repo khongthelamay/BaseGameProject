@@ -88,17 +88,6 @@ namespace Manager
             EnemyList.Remove(enemy);
             return enemy;
         }
-        public void RemoveEnemy(Enemy enemy)
-        {
-            if (!EnemyList.Contains(enemy)) return;
-            EnemyList.Remove(enemy);
-        }
-
-        public void AddEnemy(Enemy enemy)
-        {
-            if (EnemyList.Contains(enemy)) return;
-            EnemyList.Add(enemy);
-        }
 
         public bool TryAddNewHero(Hero hero)
         {
@@ -131,7 +120,6 @@ namespace Manager
             if (fieldSlot.TryGetHero(out Hero selectHero) && selectHero.HeroConfigData.HeroRarity.IsMaxRarity()) return false;
             return HasSame2HeroInOtherFieldSlot(fieldSlot);
         }
-
         public async UniTask FusionHeroInFieldSlot(FieldSlot fieldSlot)
         {
             if (!fieldSlot.TryGetHero(out Hero selectHero)) return;
@@ -168,8 +156,6 @@ namespace Manager
                 return sameHeroList.All(hero => hero == null);
             }
         }
-
-
         public bool HasSame2HeroInOtherFieldSlot(FieldSlot fieldSlot)
         {
             if (!fieldSlot.TryGetHero(out Hero hero)) return false;
@@ -184,7 +170,6 @@ namespace Manager
 
             return count == 2;
         }
-
         public bool TryGetSameHeroInFieldSlot(FieldSlot fieldSlot, out List<FieldSlot> sameHeroFieldSlotList)
         {
             sameHeroFieldSlotList = new List<FieldSlot>();
@@ -203,7 +188,6 @@ namespace Manager
 
             return sameHeroFieldSlotList.Count == 2;
         }
-
         private bool IsFieldSlotHasSameHeroData(FieldSlot fieldSlot, Hero hero)
         {
             return fieldSlot.TryGetHero(out Hero otherHero) && otherHero.HeroConfigData == hero.HeroConfigData;
@@ -260,6 +244,23 @@ namespace Manager
         public void ChangeGlobalBuff(GlobalBuff.Type type, float value)
         {
             GlobalBuffDictionary[type].ChangeValue(value);
+        }
+        public int GetFieldSlotHasSameHeroData(FieldSlot fieldSlot, FieldSlot[] fieldSlots, Hero[] heroes)
+        {
+            int count = 0;
+            foreach (FieldSlot slot in CurrentMap.FieldSlotArray)
+            {
+                if (count == fieldSlots.Length) break;
+                if (slot == fieldSlot) continue;
+                if (slot.TryGetHero(out Hero hero) && hero.HeroConfigData == fieldSlot.Hero.HeroConfigData)
+                {
+                    fieldSlots[count] = slot;
+                    heroes[count] = hero;
+                    count++;
+
+                }
+            }
+            return count;
         }
     }
 }

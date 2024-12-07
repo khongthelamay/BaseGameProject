@@ -16,7 +16,6 @@ public class ActivityHeroInfoContext
     public static class Events
     {
         public static Action<FieldSlot> ShowFieldSlotInteract { get; set; }
-        // public static Subject<Unit> SampleEvent { get; set; } = new();
     }
     
     [HideLabel]
@@ -45,7 +44,6 @@ public class ActivityHeroInfoContext
         [field: SerializeField] public Transform InteractGroup { get; private set; }
         [field: SerializeField] public Button ButtonMerge { get; private set; }
         [field: SerializeField] public Button ButtonSell { get; private set; }
-        [field: SerializeField] public Button ButtonHide { get; private set; }
         public UniTask Initialize(Memory<object> args)
         {
             Root.SetActive(false);
@@ -69,45 +67,43 @@ public class ActivityHeroInfoContext
             
             View.ButtonMerge.SetOnClickDestination(OnButtonMergeClick);
             View.ButtonSell.SetOnClickDestination(OnButtonSellClick);
-            View.ButtonHide.SetOnClickDestination(OnButtonHideClick);
-            
             Events.ShowFieldSlotInteract = ShowFieldSlotInteract;
         }     
         private void ShowFieldSlotInteract(FieldSlot fieldSlot)
         {
-            View.Root.SetActive(true);
-            if (Model.FieldSlot != null && Model.FieldSlot.TryGetHero(out Hero hero))
+            if (Model.FieldSlot != null && Model.FieldSlot.TryGetHero(out Hero oldHero))
             {
-                hero.HideAttackRange();
+                oldHero.HideAttackRange();
             }
 
             Model.FieldSlot = fieldSlot;
 
+            if (Model.FieldSlot == null || !Model.FieldSlot.TryGetHero(out Hero newHero))
+            {
+                Model.OwnHero = null;
+                View.Root.SetActive(false);
+                return;
+            }
+            
+            View.Root.SetActive(true);
             Model.OwnHero = Model.FieldSlot.Hero;
             Model.OwnHero.ShowAttackRange();
+            View.ButtonMerge.interactable = Model.FieldSlot.CanFusionHero();
+            
             View.InteractGroup.position = CameraManager.WorldToScreenPoint(Model.OwnHero.Transform.position);
         }
-        private void OnButtonMergeClick(Unit _)
+        private async UniTask OnButtonMergeClick()
         {
-            // if (!BattleManager.Instance.CanFusionHeroInFieldSlot(FieldSlot)) return;
-            // BattleManager.Instance.FusionHeroInFieldSlot(FieldSlot).Forget();
-            // OnHide();
+            View.Root.SetActive(false);
+            await Model.FieldSlot.TryFusionHero();
         }
 
         private void OnButtonSellClick(Unit _)
         {
-            // if (BattleManager.Instance.TrySellHero(FieldSlot))
-            // {
-            //     Debug.Log("Sell");
-            //     OnHide();
-            // }
+            View.Root.SetActive(false);
+            Model.FieldSlot.TrySellHero();
         }
-
-        private void OnButtonHideClick(Unit _)
-        {
-            OnHide();
-        }
-
+        
         private void OnHide()
         {
             Model.OwnHero?.HideAttackRange();

@@ -37,9 +37,16 @@ public class HeroAttackRange : ACachedMonoBehaviour
             .WithEase(Ease.InBack)
             .Bind(UpdateAttackRange);
     }
+    public void ResetAttackRange()
+    {
+        UpdateAttackMotion.TryCancel();
+        OriginalScale = 0;
+        Transform.localScale = Vector3.one * OriginalScale;
+    }
     private void UpdateAttackRange(float value)
     {
         OriginalScale = value;
         Transform.localScale = Vector3.one * value;
     }
+
 }

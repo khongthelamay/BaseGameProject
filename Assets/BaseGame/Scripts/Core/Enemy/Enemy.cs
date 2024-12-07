@@ -106,14 +106,14 @@ namespace Core
             {   
                 EnemyIdCounter = 0;
             }
-            BattleManager.AddEnemy(this);
+            BattleManager.RegisterEnemy(this);
             return this;
         }
 
         public void OnDespawn()
         {
             MovementMotionHandle.TryCancel();
-            BattleManager.RemoveEnemy(this);
+            BattleManager.UnregisterEnemy(this);
         }
     }
     

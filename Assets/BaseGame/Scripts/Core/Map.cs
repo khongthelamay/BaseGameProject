@@ -38,7 +38,6 @@ public class Map : ACachedMonoBehaviour
                     .InitStats(100000, 1.5f);
                 
                 enemy.StartMoveToNextPoint();
-                BattleManager.AddEnemy(enemy);
                 
                 await UniTask.Delay(spawnInterval, cancellationToken: this.GetCancellationTokenOnDestroy());
             }
