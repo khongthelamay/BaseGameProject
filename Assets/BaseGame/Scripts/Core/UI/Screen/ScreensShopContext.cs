@@ -8,7 +8,7 @@ using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
 
 [Serializable]
-public class ScreenShopContext 
+public class ScreensShopContext 
 {
     public static class Events
     {

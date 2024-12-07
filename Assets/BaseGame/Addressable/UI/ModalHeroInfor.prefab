@@ -264,7 +264,7 @@ MonoBehaviour:
   m_text: Recipe
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_text: ATK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1554,7 +1554,7 @@ MonoBehaviour:
   m_text: ATK SPEED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1897,7 +1897,7 @@ MonoBehaviour:
   m_text: Lv.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2838,7 +2838,6 @@ MonoBehaviour:
       <btnExit>k__BackingField: {fileID: 5295942640483710212}
       <btnUpgrade>k__BackingField: {fileID: 3585832438070968741}
       <mainContentHeroJob>k__BackingField: {fileID: 2578421243869884833}
-      <TextMeshProUGUI>k__BackingField: {fileID: 0}
 --- !u!225 &2053755956499194827
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3844,7 +3843,7 @@ PrefabInstance:
     - target: {fileID: 4726443535919244568, guid: 3dadaecdd796ae047b801683b3f5081a, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     - target: {fileID: 6084490011719385312, guid: 3dadaecdd796ae047b801683b3f5081a, type: 3}
       propertyPath: m_Name
       value: SlotHeroJob (1)
@@ -3878,7 +3877,7 @@ PrefabInstance:
     - target: {fileID: 647512095841302653, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     - target: {fileID: 1201300306412660803, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3970,7 +3969,7 @@ PrefabInstance:
     - target: {fileID: 6824376450569844485, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4176986480836164103, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
@@ -4078,7 +4077,7 @@ PrefabInstance:
     - target: {fileID: 4726443535919244568, guid: 3dadaecdd796ae047b801683b3f5081a, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     - target: {fileID: 6084490011719385312, guid: 3dadaecdd796ae047b801683b3f5081a, type: 3}
       propertyPath: m_Name
       value: SlotHeroJob
@@ -4218,7 +4217,7 @@ PrefabInstance:
     - target: {fileID: 647512095841302653, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     - target: {fileID: 1201300306412660803, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4310,7 +4309,7 @@ PrefabInstance:
     - target: {fileID: 6824376450569844485, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4176986480836164103, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
@@ -4338,7 +4337,7 @@ PrefabInstance:
     - target: {fileID: 647512095841302653, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     - target: {fileID: 1201300306412660803, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4430,7 +4429,7 @@ PrefabInstance:
     - target: {fileID: 6824376450569844485, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4176986480836164103, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
@@ -4770,7 +4769,7 @@ PrefabInstance:
     - target: {fileID: 4726443535919244568, guid: 3dadaecdd796ae047b801683b3f5081a, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     - target: {fileID: 6084490011719385312, guid: 3dadaecdd796ae047b801683b3f5081a, type: 3}
       propertyPath: m_Name
       value: SlotHeroJob (2)
@@ -4909,6 +4908,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7093442004318346353, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     - target: {fileID: 7093442004318346353, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -5062,7 +5065,7 @@ PrefabInstance:
     - target: {fileID: 647512095841302653, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     - target: {fileID: 1201300306412660803, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5154,7 +5157,7 @@ PrefabInstance:
     - target: {fileID: 6824376450569844485, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5282,7 +5285,7 @@ PrefabInstance:
     - target: {fileID: 647512095841302653, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     - target: {fileID: 1201300306412660803, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5374,7 +5377,7 @@ PrefabInstance:
     - target: {fileID: 6824376450569844485, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4176986480836164103, guid: 496a8e69c1d153b49af284e3682a571e, type: 3}

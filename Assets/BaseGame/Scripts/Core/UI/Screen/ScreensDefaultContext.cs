@@ -120,7 +120,7 @@ public class ScreensDefaultContext
 
         void TabShop()
         {
-            ViewOptions options = new ViewOptions(nameof(ScreensArtifact));
+            ViewOptions options = new ViewOptions(nameof(ScreensShop));
             ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
         }
         void TabHeroes()

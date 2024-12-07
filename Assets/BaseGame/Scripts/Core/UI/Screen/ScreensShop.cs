@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Screen = TW.UGUI.Core.Screens.Screen;
 
-public class ScreenShop : Screen
+public class ScreensShop : Screen
 {
-    [field: SerializeField] public ScreenShopContext.UIPresenter UIPresenter { get; private set; }
+    [field: SerializeField] public ScreensShopContext.UIPresenter UIPresenter { get; private set; }
 
     protected override void Awake()
     {
