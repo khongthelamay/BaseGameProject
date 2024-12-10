@@ -54,7 +54,7 @@ namespace Core.TigerAbility
                 Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal);
             }
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
-            Owner.HeroAnim.PlaySkillAnimation(attackSpeed);
+            Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
             OwnerTiger.ChangeFuryPoint(1);
             await DelaySample(17, tickRate, ct);
             

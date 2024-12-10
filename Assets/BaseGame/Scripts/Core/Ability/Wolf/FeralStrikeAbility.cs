@@ -28,7 +28,7 @@ namespace Core.WolfAbility
             
             if (!EnemyTarget.WillTakeDamage(EnemyTargetId, damageDeal)) return;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
-            Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
+            Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
             if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, isCritical)) return;
             await DelaySample(30 - DelayFrame, tickRate, ct);

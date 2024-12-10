@@ -1,5 +1,7 @@
-﻿using Core;
+﻿using System.Threading;
+using Core;
 using Core.SimplePool;
+using Cysharp.Threading.Tasks;
 using DamageNumbersPro;
 using R3;
 using R3.Triggers;
@@ -41,6 +43,17 @@ namespace Manager
         public void CreateUpgradeEffect(Vector3 position)
         {
             UpgradeEffect.Spawn(position, Quaternion.identity);
+        }
+        public async UniTask CreateUpgradeEffect(Vector3 position, CancellationToken ct)
+        {
+            UpgradeEffect.Spawn(position, Quaternion.identity);
+            await DelaySample(7, ct);
+        }
+
+        private UniTask DelaySample(int sample, CancellationToken ct)
+        {
+            int timeDelay = 1000 * sample / 30;
+            return UniTask.Delay(timeDelay, cancellationToken: ct);
         }
     }
 }

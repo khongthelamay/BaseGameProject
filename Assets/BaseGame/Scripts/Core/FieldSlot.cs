@@ -93,17 +93,16 @@ public partial class FieldSlot : ACachedMonoBehaviour, IPointerClickHandler, IBe
         Hero.ChangeToSleepState();
         Hero.HideAttackRange();
         await UniTask.WaitUntil(AllHeroDespawnCache, cancellationToken: this.GetCancellationTokenOnDestroy());
+        await FactoryManager.CreateUpgradeEffect(Transform.position, this.GetCancellationTokenOnDestroy());
         TryRemoveHero(out Hero ownerHero);
         Hero.Rarity nextRarity = ownerHero.HeroConfigData.HeroRarity + 1;
-
         ownerHero.Despawn();
         
-
         HeroConfigData newHeroConfigData = HeroPoolGlobalConfig.Instance.GetRandomHeroConfigDataUpgrade(nextRarity);
         Hero newHero = newHeroConfigData.HeroPrefab.Spawn();
         newHero.SetPosition(Transform.position);
         ForceMoveToFieldSlotAfterFusion(newHero);
-        FactoryManager.CreateUpgradeEffect(Transform.position);
+
         FieldSlotChangedCallback?.Invoke();
     }
     [ACacheMethod]

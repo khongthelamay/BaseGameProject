@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2237fc6c84688654d89812c5ae2271c0, type: 3}
   m_Name: Footman
   m_EditorClassIdentifier: 
-  <HeroSprite>k__BackingField: {fileID: 21300000, guid: 5a199f553cc06db4baf2d1a8a2fd615b, type: 3}
+  <HeroSprite>k__BackingField: {fileID: 21300000, guid: 5b9c2313c669d1b44b22875810a7f305, type: 3}
   <Name>k__BackingField: Footman
   <HeroRarity>k__BackingField: 0
   <HeroClass>k__BackingField: 1

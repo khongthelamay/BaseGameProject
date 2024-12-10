@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -392905563
   m_SortingLayer: 1
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: 5a199f553cc06db4baf2d1a8a2fd615b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b9c2313c669d1b44b22875810a7f305, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -136,7 +136,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4999037218948512326}
-  - {fileID: 5088640231217120737}
+  - {fileID: 7969225103856890809}
   m_Father: {fileID: 448070652479883419}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4074007562630816591
@@ -247,7 +247,7 @@ MonoBehaviour:
   <HeroConfigData>k__BackingField: {fileID: 11400000, guid: e56fe3ad825f8f44b99e578acbd1bf07, type: 2}
   <HeroAttackRange>k__BackingField: {fileID: 3025194230130457174}
   <SpriteGraphic>k__BackingField: {fileID: 4479777205524347097}
-  <SpriteRarity>k__BackingField: {fileID: 5676061978529325015}
+  <SpriteRarity>k__BackingField: {fileID: 7131928876652994544}
   <MoveProjectile>k__BackingField: {fileID: 4845609547942700330, guid: 84727164c6cf08646a00b92bf0e0b342, type: 3}
   <VisibleGroup>k__BackingField: {fileID: 4074007562630816591}
   <GraphicGroupTransform>k__BackingField: {fileID: 4623169270923809019}
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <AttackRange>k__BackingField: 0
---- !u!1 &7592962609427980099
+--- !u!1 &8181133309982241546
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -533,8 +533,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5088640231217120737}
-  - component: {fileID: 5676061978529325015}
+  - component: {fileID: 7969225103856890809}
+  - component: {fileID: 7131928876652994544}
   m_Layer: 0
   m_Name: SpriteRarity
   m_TagString: Untagged
@@ -542,13 +542,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5088640231217120737
+--- !u!4 &7969225103856890809
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7592962609427980099}
+  m_GameObject: {fileID: 8181133309982241546}
   serializedVersion: 2
   m_LocalRotation: {x: 0.53729963, y: -0, z: -0, w: 0.8433914}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -557,13 +557,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4623169270923809019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5676061978529325015
+--- !u!212 &7131928876652994544
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7592962609427980099}
+  m_GameObject: {fileID: 8181133309982241546}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

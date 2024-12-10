@@ -256,7 +256,6 @@ namespace Core
             Transform.localPosition = Vector3.zero;
             UpdateLayer();
             FieldSlot.FieldSlotChangedCallback?.Invoke();
-            FactoryManager.CreateUpgradeEffect(Transform.position);
             StateMachine.RequestTransition(HeroBattleDecisionState);
         }
 

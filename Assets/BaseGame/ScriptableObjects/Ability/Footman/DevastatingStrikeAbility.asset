@@ -17,3 +17,9 @@ MonoBehaviour:
   <Name>k__BackingField: DevastatingStrike
   <Description>k__BackingField: Attacks that hit the target have a 10% chance of
     dealing 500% attack damage
+  <DevastatingStrikeRate>k__BackingField: 10
+  <DamageType>k__BackingField: 0
+  <DamageDelayFrame>k__BackingField: 12
+  <VisualDelayFrame>k__BackingField: 3
+  <DamageScale>k__BackingField: 50
+  <VisualEffect>k__BackingField: {fileID: 8492937274167069282, guid: 842ea55bf7f24524e9b9f007fdc5a509, type: 3}
