@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -277,8 +277,8 @@ MonoBehaviour:
       type: 0
       value:
         m_Value:
-          v: 0
-          m: 0
+          coefficient: 0
+          exponent: 0
   imgIcon: {fileID: 6682369394069897937}
   btnChoose: {fileID: 8199720485905382124}
   trsContent: {fileID: 7018230273296558999}

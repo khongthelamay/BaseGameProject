@@ -10,7 +10,7 @@ public class ShopGlobalConfig : GlobalConfig<ShopGlobalConfig>
     public List<ShopPackData> goldPack = new();
     public List<ShopPackData> mysthicStonePack = new();
     public List<ShopPackData> diamondPack = new();
-
+    void reset() { }
     public ShopPackData GetShopPackData(PackID packID) {
         if ((int)packID < 100)
             return GetShopPack(packID);
@@ -104,5 +104,11 @@ public class ShopPackData
     [field: SerializeField] public PurchaseType PurchaseType { get; set; }
     [field: SerializeField] public Resource PaymentAmount { get; set; }
     [field: SerializeField] public List<Resource> rewards { get; set; }
-    [field: SerializeField] public List<int> heroRewards { get; set; }
+    [field: SerializeField] public List<HeroReward> heroRewards { get; set; }
+}
+
+[System.Serializable]
+public class HeroReward {
+    public string heroID;
+    public int amount;
 }

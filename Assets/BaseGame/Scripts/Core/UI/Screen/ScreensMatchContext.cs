@@ -9,6 +9,9 @@ using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
 using UnityEngine.UI;
 using TMPro;
+using TW.UGUI.Core.Views;
+using TW.UGUI.Core.Activities;
+
 [Serializable]
 public class ScreensMatchContext 
 {
@@ -65,6 +68,7 @@ public class ScreensMatchContext
             await View.Initialize(args);
 
             View.btnReroll.onClick.AddListener(Reroll);
+            View.btnUpgrade.onClick.AddListener(ShowUpgrade);
         }
 
         void Reroll()
@@ -72,6 +76,11 @@ public class ScreensMatchContext
             UIAnimation.BasicButton(View.btnReroll.transform);
             Debug.Log("Reroll");
             BattleManager.Instance.ReRollWaitSlot();
+        }
+
+        void ShowUpgrade() {
+            ViewOptions options = new ViewOptions(nameof(ActivityUpgradeInMatch));
+            ActivityContainer.Find(ContainerKey.Activities).Show(options);
         }
     }
 }

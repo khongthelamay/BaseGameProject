@@ -11,7 +11,8 @@ public enum ResourceType {
     EpicStone = 4,
     Key = 5,
     Energy = 6,
-    RecruitRecipe = 7
+    RecruitRecipe = 7,
+    CoinInMatch = 8
 }
 
 [System.Serializable]
@@ -26,6 +27,8 @@ public partial class Resource
     public void Consume(BigNumber amount) { value.Value -= amount; }
 
     public void ChangeValue(BigNumber amount) { value.Value += amount; }
+
+    public bool IsEnough(BigNumber amount) { return value.Value >= amount; }
 }
 
 

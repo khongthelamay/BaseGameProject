@@ -34,12 +34,16 @@ MonoBehaviour:
         m_Value:
           coefficient: 1
           exponent: 1
-    - type: 0
+    - type: 1
       value:
         m_Value:
           coefficient: 30
           exponent: 1
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField:
+    - heroID: Bear
+      amount: 30
+    - heroID: Griffin
+      amount: 50
   - <packID>k__BackingField: 2
     <PackageName>k__BackingField: Bomba Pack
     <PackIcon>k__BackingField: {fileID: 0}
@@ -50,8 +54,23 @@ MonoBehaviour:
         m_Value:
           coefficient: 7.99
           exponent: 0
-    <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <rewards>k__BackingField:
+    - type: 4
+      value:
+        m_Value:
+          coefficient: 6
+          exponent: 0
+    - type: 1
+      value:
+        m_Value:
+          coefficient: 1
+          exponent: 1
+    - type: 1
+      value:
+        m_Value:
+          coefficient: 30
+          exponent: 1
+    <heroRewards>k__BackingField: []
   - <packID>k__BackingField: 3
     <PackageName>k__BackingField: Coldy Pack
     <PackIcon>k__BackingField: {fileID: 0}
@@ -63,7 +82,7 @@ MonoBehaviour:
           coefficient: 7.99
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
   goldPack:
   - <packID>k__BackingField: 100
     <PackageName>k__BackingField: 
@@ -76,7 +95,7 @@ MonoBehaviour:
           coefficient: 7.99
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
   - <packID>k__BackingField: 101
     <PackageName>k__BackingField: 
     <PackIcon>k__BackingField: {fileID: 0}
@@ -88,7 +107,7 @@ MonoBehaviour:
           coefficient: 17.99
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
   - <packID>k__BackingField: 102
     <PackageName>k__BackingField: 
     <PackIcon>k__BackingField: {fileID: 0}
@@ -100,7 +119,7 @@ MonoBehaviour:
           coefficient: 27.99
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
   mysthicStonePack:
   - <packID>k__BackingField: 200
     <PackageName>k__BackingField: 
@@ -113,7 +132,7 @@ MonoBehaviour:
           coefficient: 0
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
   - <packID>k__BackingField: 201
     <PackageName>k__BackingField: 
     <PackIcon>k__BackingField: {fileID: 0}
@@ -125,7 +144,7 @@ MonoBehaviour:
           coefficient: 0
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
   - <packID>k__BackingField: 202
     <PackageName>k__BackingField: 
     <PackIcon>k__BackingField: {fileID: 0}
@@ -137,7 +156,7 @@ MonoBehaviour:
           coefficient: 0
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
   diamondPack:
   - <packID>k__BackingField: 300
     <PackageName>k__BackingField: 
@@ -150,7 +169,7 @@ MonoBehaviour:
           coefficient: 0
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
   - <packID>k__BackingField: 301
     <PackageName>k__BackingField: 
     <PackIcon>k__BackingField: {fileID: 0}
@@ -162,7 +181,7 @@ MonoBehaviour:
           coefficient: 0
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
   - <packID>k__BackingField: 302
     <PackageName>k__BackingField: 
     <PackIcon>k__BackingField: {fileID: 0}
@@ -174,4 +193,4 @@ MonoBehaviour:
           coefficient: 0
           exponent: 0
     <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: 
+    <heroRewards>k__BackingField: []
