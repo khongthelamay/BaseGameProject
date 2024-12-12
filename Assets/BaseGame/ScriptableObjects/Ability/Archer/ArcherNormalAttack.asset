@@ -17,5 +17,5 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <Description>k__BackingField: 
   <DamageType>k__BackingField: 0
-  <DelayFrame>k__BackingField: 6
+  <DelayFrame>k__BackingField: 5
   <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: e503714862c17f448b5e95ad68ece666, type: 3}
