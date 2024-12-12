@@ -24,14 +24,14 @@ public class SlotUpgradeInMatch : MonoBehaviour
     public ResourceType rType;
 
     public Button btnUpgrade;
-    public int currentLevelUpgrade;
+    public UpgradeInMatchLevel upgradeLevel;
     public UpgradeInMatchData uInMatch;
     ReactiveValue<Resource> resource;
 
     private void Awake()
     {
         btnUpgrade.onClick.AddListener(OnUpgrade);
-        currentLevelUpgrade = 0;
+        upgradeLevel = ResourceInMatchManager.Instance.GetUpgradeInMatchLevel(type);
     }
 
     private void Start()
@@ -46,10 +46,10 @@ public class SlotUpgradeInMatch : MonoBehaviour
     }
 
     void InitData() {
-        uInMatch = ResourceInMatchManager.Instance.GetUpgradeInMatchConfig(currentLevelUpgrade, type);
+        uInMatch = ResourceInMatchManager.Instance.GetUpgradeInMatchConfig(upgradeLevel.level, type);
         txtPrice.text = uInMatch != null ? uInMatch.resource.value.Value.ToString() : "Max";
         btnUpgrade.interactable = uInMatch != null ? ResourceInMatchManager.Instance.IsEnough(rType, uInMatch.resource.value.Value) : false;
-        txtLevel.text = $"Lev.{currentLevelUpgrade}";
+        txtLevel.text = $"Lev.{upgradeLevel.level.Value}";
     }
 
     void OnUpgrade() {
@@ -68,7 +68,7 @@ public class SlotUpgradeInMatch : MonoBehaviour
                 break;
         }
         ResourceInMatchManager.Instance.ConsumeResource(rType, uInMatch.resource.value.Value);
-        currentLevelUpgrade++;
+        upgradeLevel.level.Value++;
         InitData();
     }
 }
