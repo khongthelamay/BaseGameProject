@@ -141,6 +141,21 @@ public class QuestGlobalConfig : GlobalConfig<QuestGlobalConfig>
     {
         return dailyStreaks[dailyStreaks.Count - 1].streak;
     }
+
+    public float GetMaxValueWeeklyStreak()
+    {
+        return weeklyStreaks[weeklyStreaks.Count - 1].streak;
+    }
+
+    public bool CheckQuestDone(QuestSave questSave)
+    {
+        for (int i = 0; i < questDataConfigs.Count; i++)
+        {
+            if (questDataConfigs[i].questID == questSave.id)
+                return questSave.progress >= questDataConfigs[i].questRequire;
+        }
+        return false;
+    }
 }
 
 [System.Serializable]

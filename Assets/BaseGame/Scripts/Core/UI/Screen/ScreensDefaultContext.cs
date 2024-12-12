@@ -8,6 +8,7 @@ using TW.Reactive.CustomComponent;
 using System.Collections.Generic;
 using TW.UGUI.Core.Screens;
 using TW.UGUI.Core.Views;
+using TMPro;
 
 [Serializable]
 public class ScreensDefaultContext 
@@ -17,6 +18,8 @@ public class ScreensDefaultContext
         public static Subject<Unit> SampleEvent { get; set; } = new();
         public static Event OpenModal { get; set; } = new();
         public static Event CloseModal { get; set; } = new();
+        public static Action<float> ChangeTimeRemaining { get; set; }
+        public static Action TurnOffTimeRemaining { get; set; }
     }
 
     [HideLabel]
@@ -24,12 +27,14 @@ public class ScreensDefaultContext
     public class UIModel : IAModel
     {
         [field: Title(nameof(UIModel))]
-        [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
-        [field: SerializeField] public ReactiveValue<int> level { get; private set; }
+        [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; } = new(0);
+        [field: SerializeField] public ReactiveValue<int> level { get; private set; } = new(0);
+        [field: SerializeField] public ReactiveValue<float> exp { get; private set; } = new(0);
 
         public UniTask Initialize(Memory<object> args)
         {
-            level = InGameDataManager.Instance.InGameData.playerResourceDataSave.level;
+            level = PlayerResourceManager.Instance.level;
+            exp = PlayerResourceManager.Instance.exp;
             return UniTask.CompletedTask;
         }
 
@@ -42,10 +47,16 @@ public class ScreensDefaultContext
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView {get; private set; }
 
-        [field: SerializeField] public ProgressBar levelBar;
-
         public List<SlotTabMainMenu> tabs = new();
         SlotTabMainMenu currentTab;
+
+        [field: SerializeField] public TextMeshProUGUI txtLevel;
+        [field: SerializeField] public TextMeshProUGUI txtTimeRemaining;
+        [field: SerializeField] public ProgressBar progressLevel;
+
+        [field: SerializeField] public UIResource coinResource;
+        [field: SerializeField] public UIResource energyResource;
+        [field: SerializeField] public UIResource gemResource;
 
         public UniTask Initialize(Memory<object> args)
         {
@@ -53,6 +64,11 @@ public class ScreensDefaultContext
             {
                 tabs[i].InitData((TabType)i, OnChooseTab);
             }
+
+            coinResource.SetResourceType(ResourceType.Coin);
+            energyResource.SetResourceType(ResourceType.Energy);
+            gemResource.SetResourceType(ResourceType.Gem);
+
             return UniTask.CompletedTask;
         }
 
@@ -62,6 +78,7 @@ public class ScreensDefaultContext
             {
                 tabs[i].UnlockLevel(level);
             }
+            txtLevel.text = level.ToString();
         }
 
         public void OnChooseTab(SlotTabMainMenu tabChoose)
@@ -103,7 +120,7 @@ public class ScreensDefaultContext
 
         void TabShop()
         {
-            ViewOptions options = new ViewOptions(nameof(ScreensArtifact));
+            ViewOptions options = new ViewOptions(nameof(ScreensShop));
             ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
         }
         void TabHeroes()
@@ -126,6 +143,17 @@ public class ScreensDefaultContext
         {
             Debug.Log("Comming Soon");
         }
+
+        public void ChangeExp(float value)
+        {
+            progressLevel.ChangeProgress(value / 100);
+        }
+
+        public void ChangeTimeRemaining(string timeRemaining) {
+            if (!txtTimeRemaining.gameObject.activeSelf)
+                txtTimeRemaining.gameObject.SetActive(true);
+            txtTimeRemaining.text = timeRemaining;
+        }
     }
 
     [HideLabel]
@@ -140,6 +168,26 @@ public class ScreensDefaultContext
             await Model.Initialize(args);
             await View.Initialize(args);
             View.OnChooseTab(View.tabs[2]);
+            Model.level.ReactiveProperty.Subscribe(ChangeLevel).AddTo(View.MainView);
+            Model.exp.ReactiveProperty.Subscribe(ChangeExp).AddTo(View.MainView);
+
+            Events.ChangeTimeRemaining = ChangeTimeRemaining;
+            Events.TurnOffTimeRemaining = TurnOffTimeRemaining;
+        }
+
+        void TurnOffTimeRemaining()
+        {
+            View.txtTimeRemaining.gameObject.SetActive(false);
+        }
+
+        void ChangeTimeRemaining(float timeRemaining) {
+            if (timeRemaining > 0)
+                View.ChangeTimeRemaining(TimeUtil.TimeToString(timeRemaining));
+        }
+
+        void ChangeExp(float value)
+        {
+            View.ChangeExp(value);
             // Model.level.ReactiveProperty.Subscribe(ChangeLevel).AddTo(View.MainView);
         }
 
@@ -149,7 +197,9 @@ public class ScreensDefaultContext
 
         UniTask IScreenLifecycleEvent.Cleanup(Memory<object> args)
         {
-            View.levelBar.ClearAnimation();
+            View.progressLevel.ClearAnimation();
+            Events.ChangeTimeRemaining = null;
+            Events.TurnOffTimeRemaining = null;
             return UniTask.CompletedTask;
         }
 

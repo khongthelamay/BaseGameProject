@@ -1,4 +1,5 @@
 using R3;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Modals;
@@ -65,6 +66,7 @@ public class ArtifactManager : Singleton<ArtifactManager>
         InGameDataManager.Instance.SaveData();
     }
 
+    [Button]
     public void AddPieceArtifact(ArtifactType artifactType, int amount) {
         currentArtifactTemp = GetArtifactInfo(artifactType);
         if (currentArtifactTemp.Value.Level.Value == 0)

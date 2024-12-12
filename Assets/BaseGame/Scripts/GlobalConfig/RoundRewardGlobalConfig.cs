@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Sirenix.OdinInspector;
 using TW.Utility.Extension;
 using Sirenix.Utilities;
 using TW.Utility.CustomType;
 
-[CreateAssetMenu(fileName = "RecruitPersentGlobalConfig", menuName = "GlobalConfigs/RecruitPersentGlobalConfig")]
+[CreateAssetMenu(fileName = "RoundRewardGlobalConfig", menuName = "GlobalConfigs/RoundRewardGlobalConfig")]
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
 public class RoundRewardGlobalConfig :GlobalConfig<RoundRewardGlobalConfig>
 {
+    public List<RoundRewardConfig> roundRewardConfigs = new();
+
 #if UNITY_EDITOR
     string linkSheetId = "1-HkinUwSW4A4SkuiLGtl0Tm8771jFPVZB5ZpLs5pxz4";
 

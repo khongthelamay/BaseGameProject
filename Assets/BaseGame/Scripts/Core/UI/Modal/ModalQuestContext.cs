@@ -28,8 +28,8 @@ public class ModalQuestContext
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
         [field: SerializeField] public List<ReactiveValue<QuestSave>> questSaves { get; set; } = new();
         [field: SerializeField] public List<ReactiveValue<AchievementSave>> achievementSaves { get; set; } = new();
-        [field: SerializeField] public List<ReactiveValue<QuestSave>> dailyStreakSaves { get; set; } = new();
-        [field: SerializeField] public List<ReactiveValue<QuestSave>> weeklyStreakSaves { get; set; } = new();
+        [field: SerializeField] public List<ReactiveValue<StreakSave>> streakDailySaves { get; set; } = new();
+        [field: SerializeField] public List<ReactiveValue<StreakSave>> streakWeeklySaves { get; set; } = new();
         [field: SerializeField] public ReactiveValue<float> timeDailyRemaining { get; set; } = new();
         [field: SerializeField] public ReactiveValue<float> timeWeeklyRemaining { get; set; } = new();
         [field: SerializeField] public ReactiveValue<float> currentDailyStreak { get; set; } = new();
@@ -44,6 +44,10 @@ public class ModalQuestContext
             timeWeeklyRemaining = QuestManager.Instance.timeWeeklyRemaining;
             currentDailyStreak = QuestManager.Instance.currentDailyStreak;
             currentWeeklyStreak = QuestManager.Instance.currentWeeklyStreak;
+
+            streakDailySaves = QuestManager.Instance.streakDailySaves;
+            streakWeeklySaves = QuestManager.Instance.streakWeeklySaves;
+
             return UniTask.CompletedTask;
         }
     }
@@ -58,6 +62,7 @@ public class ModalQuestContext
         [field: SerializeField] public MainContentQuest mainContentQuest {get; private set;}
         [field: SerializeField] public MainContentAchievement mainContentAchievement {get; private set;}
         [field: SerializeField] public MainContentStreak mainContentDailyStreak {get; private set;}
+        [field: SerializeField] public MainContentStreak mainContentWeeklyStreak {get; private set;}
 
         [field: SerializeField] public Transform mainContent { get; private set; }
 
@@ -75,8 +80,7 @@ public class ModalQuestContext
 
         [field: SerializeField] public Image imgTabAchievement { get; private set; }
         [field: SerializeField] public Image imgTabRewardChest { get; private set; }
-
-        [field: SerializeField] public List<Sprite> sprTab { get; private set; }
+        [field: SerializeField] public Transform trsTabSpite { get; private set; }
 
         GameObject currentGameObjShow;
 
@@ -106,7 +110,17 @@ public class ModalQuestContext
             mainContentDailyStreak.AnimOpen();
         }
 
-        public void OnOpen() { UIAnimation.ModalOpen(MainView, mainContent); }
+        void LoadWeeklyStreakData(List<StreakDataConfig> weeklyStreaks)
+        {
+            mainContentWeeklyStreak.DeActiveSlotOut(0);
+            mainContentWeeklyStreak.InitData(weeklyStreaks);
+            mainContentWeeklyStreak.SetPositionStreak();
+            mainContentWeeklyStreak.AnimOpen();
+        }
+
+        public void OnOpen() { UIAnimation.ModalOpen(MainView, mainContent, () => {
+            trsTabSpite.position = btnAchievement.transform.position;
+        }); }
 
         public void OnClose() {
             mainContentQuest.CleanAnimation();
@@ -123,12 +137,10 @@ public class ModalQuestContext
             objDailyQuest.SetActive(true);
             objRewardChest.SetActive(true);
             objAchievement.SetActive(false);
-
-            imgTabAchievement.sprite = sprTab[0];
-            imgTabRewardChest.sprite = sprTab[1];
-
+            trsTabSpite.position = btnAchievement.transform.position;
             LoadQuestData(QuestGlobalConfig.Instance.questDataConfigs);
             LoadStreakData(QuestGlobalConfig.Instance.dailyStreaks);
+            LoadWeeklyStreakData(QuestGlobalConfig.Instance.weeklyStreaks);
         }
 
         public void OnAchievementShow()
@@ -139,10 +151,7 @@ public class ModalQuestContext
             objDailyQuest.SetActive(false);
             objRewardChest.SetActive(false);
             objAchievement.SetActive(true);
-
-            imgTabAchievement.sprite = sprTab[1];
-            imgTabRewardChest.sprite = sprTab[0];
-
+            trsTabSpite.position = btnDailyQuest.transform.position;
             LoadAchievementData(AchievementManager.Instance.GetAchievements());
         }
 
@@ -170,9 +179,24 @@ public class ModalQuestContext
             mainContentDailyStreak.ChangeCurrentProgress(value / QuestGlobalConfig.Instance.GetMaxValueDailyStreak());
         }
 
+        public void ChangeWeeklyProgress(float value)
+        {
+            mainContentWeeklyStreak.ChangeCurrentProgress(value / QuestGlobalConfig.Instance.GetMaxValueWeeklyStreak());
+        }
+
         public void ChangeAchievementData(ReactiveValue<int> achievementType)
         {
             mainContentAchievement.ReloadData(achievementType.Value);
+        }
+
+        public void ChangeDailyStreakData((StreakSave streakDaily, bool canClaim, bool claimed) value)
+        {
+            mainContentDailyStreak.ChangeStreakData(value);
+        }
+
+        public void ChangeWeeklyStreakData((StreakSave streakDaily, bool canClaim, bool claimed) value)
+        {
+            mainContentWeeklyStreak.ChangeStreakData(value);
         }
     }
 
@@ -189,6 +213,9 @@ public class ModalQuestContext
             await View.Initialize(args);
 
             QuestManager.Instance.ShowModelQuest();
+
+            View.mainContentDailyStreak.SetActionSlotCallBack(SlotDailyStreakCallBack);
+            View.mainContentWeeklyStreak.SetActionSlotCallBack(SlotWeeklyStreakCallBack);
 
             View.OnOpen();
             View.SetActionCallBackOnQuestSlot(ActionQuestSlotCallBack);
@@ -212,16 +239,55 @@ public class ModalQuestContext
                     .Subscribe(ChangeAchievementData)
                     .AddTo(View.MainView);
             }
+
+            for (int i = 0; i < Model.streakDailySaves.Count; i++)
+            {
+                Model.streakDailySaves[i].ReactiveProperty
+                    .CombineLatest(Model.streakDailySaves[i].Value.canClaim.ReactiveProperty, (streakDaily, canClaim) => (streakDaily, canClaim))
+                    .CombineLatest(Model.streakDailySaves[i].Value.claimed.ReactiveProperty, (canClaim, claimed) => (canClaim.streakDaily, canClaim.canClaim , claimed))
+                    .Subscribe(ChangeDailyStreakData)
+                    .AddTo(View.MainView);
+            }
+
+            for (int i = 0; i < Model.streakWeeklySaves.Count; i++)
+            {
+                Model.streakWeeklySaves[i].ReactiveProperty
+                    .CombineLatest(Model.streakWeeklySaves[i].Value.canClaim.ReactiveProperty, (streakDaily, canClaim) => (streakDaily, canClaim))
+                    .CombineLatest(Model.streakWeeklySaves[i].Value.claimed.ReactiveProperty, (canClaim, claimed) => (canClaim.streakDaily, canClaim.canClaim, claimed))
+                    .Subscribe(ChangeWeeklyStreakData)
+                    .AddTo(View.MainView);
+            }
+
             //Events.ChangeTextDaily = View.ChangeTextTimeRemaining;
             Model.timeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
             //Model.strTimeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
             Model.currentDailyStreak.ReactiveProperty.Subscribe(View.ChangeDailyProgress).AddTo(View.MainView);
-            //Model.strTimeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
+            Model.currentWeeklyStreak.ReactiveProperty.Subscribe(View.ChangeWeeklyProgress).AddTo(View.MainView);
 
             View.OnDailyQuestShow();
         }
 
-        private void ChangeAchievementData((AchievementSave achievement, float currentProgress) value)
+        private void SlotDailyStreakCallBack(SlotBase<StreakDataConfig> slotBase)
+        {
+            QuestManager.Instance.ClaimDailyStreak(slotBase.slotData.streak);
+        }
+
+        private void SlotWeeklyStreakCallBack(SlotBase<StreakDataConfig> slotBase)
+        {
+            QuestManager.Instance.ClaimWeeklyStreak(slotBase.slotData.streak);
+        }
+
+        void ChangeDailyStreakData((StreakSave streakDaily, bool canClaim, bool claimed) value)
+        {
+            View.ChangeDailyStreakData(value);
+        }
+
+        void ChangeWeeklyStreakData((StreakSave streakDaily, bool canClaim, bool claimed) value)
+        {
+            View.ChangeWeeklyStreakData(value);
+        }
+
+        void ChangeAchievementData((AchievementSave achievement, float currentProgress) value)
         {
             View.ChangeAchievementData(value.achievement.achievementType);
         }
@@ -244,8 +310,10 @@ public class ModalQuestContext
             View.mainContentAchievement.CleanAnimation();
             View.mainContentQuest.CleanAnimation();
             View.mainContentDailyStreak.CleanAnimation();
+            View.mainContentWeeklyStreak.CleanAnimation();
             QuestManager.Instance.showModalQuest = false;
             Events.ChangeTextDaily = null;
+            QuestManager.Instance.CheckShowNoticeQuest();
             return UniTask.CompletedTask;
         }
     }

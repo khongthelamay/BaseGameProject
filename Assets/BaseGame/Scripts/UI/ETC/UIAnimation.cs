@@ -138,7 +138,7 @@ public static class UIAnimation
     public static Sequence SlotZoomLoop(Transform trsZoom, UnityAction actionCallBack = null) {
         Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(trsZoom.DOScale(Vector3.one * 1.1f, .25f).SetLoops(-1, LoopType.Yoyo));
+        sequence.Append(trsZoom.DOScale(Vector3.one * 1.1f, .25f));
 
         if (actionCallBack != null)
             sequence.OnComplete(() => {

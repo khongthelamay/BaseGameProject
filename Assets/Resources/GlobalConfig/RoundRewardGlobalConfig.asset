@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce591dee9e044b45bca57e39b0b2eca, type: 3}
+  m_Name: RoundRewardGlobalConfig
+  m_EditorClassIdentifier: 
+  roundRewardConfigs:
+  - level: 1
+    rewardType: 0
+    amount:
+      v: 10
+      m: 0
+  - level: 2
+    rewardType: 0
+    amount:
+      v: 20
+      m: 0
+  - level: 3
+    rewardType: 0
+    amount:
+      v: 30
+      m: 0
+  - level: 4
+    rewardType: 0
+    amount:
+      v: 40
+      m: 0
+  - level: 5
+    rewardType: 0
+    amount:
+      v: 50
+      m: 0
+  - level: 6
+    rewardType: 0
+    amount:
+      v: 30
+      m: 0
+  - level: 7
+    rewardType: 0
+    amount:
+      v: 70
+      m: 0

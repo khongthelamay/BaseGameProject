@@ -1,15 +1,18 @@
 using MemoryPack;
+using System;
 using TW.Reactive.CustomComponent;
 using TW.Utility.CustomType;
 
 public enum ResourceType { 
-    Coin = 0,
-    Gem = 1,
-    SummonRecipe = 2,
-    EpicStone = 3,
-    Key = 4,
-    Energy = 5,
-    RecruitRecipe = 6
+    None = 0,
+    Coin = 1,
+    Gem = 2,
+    SummonRecipe = 3,
+    EpicStone = 4,
+    Key = 5,
+    Energy = 6,
+    RecruitRecipe = 7,
+    CoinInMatch = 8
 }
 
 [System.Serializable]
@@ -22,6 +25,10 @@ public partial class Resource
     public void Add(BigNumber amount) { value.Value += amount; }
 
     public void Consume(BigNumber amount) { value.Value -= amount; }
+
+    public void ChangeValue(BigNumber amount) { value.Value += amount; }
+
+    public bool IsEnough(BigNumber amount) { return value.Value >= amount; }
 }
 
 

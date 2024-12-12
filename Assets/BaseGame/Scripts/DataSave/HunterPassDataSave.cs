@@ -12,7 +12,7 @@ public partial class HuntPassDataSave
     public ReactiveValue<int> huntPassLevel = new(0);
     public ReactiveValue<int> huntPoint = new(0);
     public ReactiveList<HuntPassData> huntPassDatasSave = new();
-    public ReactiveValue<string> timeOutHuntPass;
+    public ReactiveValue<string> timeOutHuntPass = new("");
 }
 public partial class InGameData
 {

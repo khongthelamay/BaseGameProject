@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class SlotRoundReward : MonoBehaviour
+public class SlotRoundReward : SlotBase<RoundRewardConfig>
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("---- Slot Round Reward ----")]
+    public TextMeshProUGUI txtLevel;
+    public override void InitData(RoundRewardConfig data)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.InitData(data);
+        txtLevel.text = data.level.ToString();
     }
 }
