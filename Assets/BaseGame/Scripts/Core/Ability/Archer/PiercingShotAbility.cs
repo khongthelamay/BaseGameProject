@@ -14,8 +14,8 @@ namespace Core
         [field: SerializeField] public DamageType DamageType {get; private set;}
         [field: SerializeField] public int DelayFrame {get; private set;}
         [field: SerializeField] public float DamageScale {get; private set;}
-
         [field: SerializeField] public Projectile Projectile {get; private set;}
+        [field: SerializeField] public VisualEffect VisualEffect {get; private set;}
 
         private Transform SpawnPosition {get; set;}
         public Enemy EnemyTarget { get; set; }
@@ -53,6 +53,8 @@ namespace Core
             if (!EnemyTarget.WillTakeDamage(EnemyTargetId,damageDeal)) return;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill2Animation(attackSpeed);
+            VisualEffect visualEffect = VisualEffect.Spawn(Owner.Transform.position, Quaternion.identity, Owner.GraphicGroupTransform);
+            visualEffect.Transform.localScale = Vector3.one;
             await DelaySample(DelayFrame, tickRate, ct);
             Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
                 .Setup(Owner, EnemyTarget, EnemyTargetId, damageDeal, DamageType, isCritical)

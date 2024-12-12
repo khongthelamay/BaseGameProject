@@ -47,7 +47,7 @@ namespace Manager
         public async UniTask CreateUpgradeEffect(Vector3 position, CancellationToken ct)
         {
             UpgradeEffect.Spawn(position, Quaternion.identity);
-            await DelaySample(7, ct);
+            await DelaySample(3, ct);
         }
 
         private UniTask DelaySample(int sample, CancellationToken ct)

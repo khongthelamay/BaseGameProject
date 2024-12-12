@@ -42,13 +42,13 @@ public class SlotUpgradeInMatch : MonoBehaviour
     }
 
     void ChangeResource(BigNumber amount) {
-        btnUpgrade.interactable = uInMatch != null ? ResourceInMatchManager.Instance.IsEnough(rType, uInMatch.resource.value.Value) : false;
+        btnUpgrade.interactable = uInMatch != null && ResourceInMatchManager.Instance.IsEnough(rType, uInMatch.resource.value.Value);
     }
 
     void InitData() {
         uInMatch = ResourceInMatchManager.Instance.GetUpgradeInMatchConfig(upgradeLevel.level, type);
         txtPrice.text = uInMatch != null ? uInMatch.resource.value.Value.ToString() : "Max";
-        btnUpgrade.interactable = uInMatch != null ? ResourceInMatchManager.Instance.IsEnough(rType, uInMatch.resource.value.Value) : false;
+        btnUpgrade.interactable = uInMatch != null && ResourceInMatchManager.Instance.IsEnough(rType, uInMatch.resource.value.Value);
         txtLevel.text = $"Lev.{upgradeLevel.level.Value}";
     }
 

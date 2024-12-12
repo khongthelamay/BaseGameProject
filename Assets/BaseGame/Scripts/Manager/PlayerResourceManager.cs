@@ -124,7 +124,7 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     }
 
     [Button]
-    public void ComsumeEnery(BigNumber amount) {
+    public void ConsumeEnergy(BigNumber amount) {
         Resource resource = GetResource(ResourceType.Energy);
         resource.Consume(amount);
         DateTime timeConvert = string.IsNullOrEmpty(timeEneryDone.Value) ? DateTime.Now : DateTime.Parse(timeEneryDone.Value, TimeUtil.GetCultureInfo());
@@ -153,6 +153,6 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
         }
 
         ChangeResource(rType, 0);
-        return resources.ObservableList[resources.ObservableList.Count - 1];
+        return resources.ObservableList[^1];
     }
 }

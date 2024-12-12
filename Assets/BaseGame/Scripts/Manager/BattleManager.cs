@@ -7,6 +7,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using R3.Triggers;
 using Sirenix.OdinInspector;
+using TW.Reactive.CustomComponent;
 using TW.Utility.DesignPattern;
 using UnityEngine;
 
@@ -16,8 +17,19 @@ namespace Manager
     {
         [field: SerializeField] public Map CurrentMap { get; private set; }
         [field: SerializeField] public TickRate TickRate {get; private set;}
+        [field: SerializeField] public int MaxHeroInField {get; private set;}
+        [field: SerializeField] public GameResource CoinResource {get; private set;}
+        [field: SerializeField] public GameResource StoneResource {get; private set;}
+
+        [field: SerializeField] public ReactiveValue<int> CommonRareLevel {get; private set;}
+        [field: SerializeField] public ReactiveValue<int> EpicLevel {get; private set;}
+        [field: SerializeField] public ReactiveValue<int> LegendaryMythicLevel {get; private set;}
+        [field: SerializeField] public ReactiveValue<int> ShopLevel {get; private set;}
+
         [field: SerializeField] public WaitSlot[] WaitSlotArray {get; private set;}
+        
         private Dictionary<GlobalBuff.Type, GlobalBuff> GlobalBuffDictionary { get; set; } = new();
+        
         private List<Enemy> EnemyList { get; set; } = new();
         private List<Hero> HeroList { get; set; } = new();
         [ShowInInspector]
@@ -48,11 +60,18 @@ namespace Manager
                 globalBuff.ChangeValue(0);
             }
         }
-        
+        private void ClearUpgradeBuff()
+        {
+            CommonRareLevel.Value = 1;
+            EpicLevel.Value = 1;
+            LegendaryMythicLevel.Value = 1;
+            ShopLevel.Value = 1;
+        }
         
         public void StartNewMatch()
         {
             ClearAllGlobalBuff();
+            ClearUpgradeBuff();
             CurrentMap.StartMap().Forget();
             ReRollWaitSlot();
         }

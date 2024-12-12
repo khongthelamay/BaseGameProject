@@ -17,8 +17,9 @@ MonoBehaviour:
   <Name>k__BackingField: Piercing Shot
   <Description>k__BackingField: Attacks that hit the target have 10% chance of dealing
     900% Attack Damage
-  <PiercingShotRate>k__BackingField: 10
+  <PiercingShotRate>k__BackingField: 20
   <DamageType>k__BackingField: 0
   <DelayFrame>k__BackingField: 16
   <DamageScale>k__BackingField: 9
   <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: 2204e1d69d94e5648a78a3d74a31ab21, type: 3}
+  <VisualEffect>k__BackingField: {fileID: 1160092100160092222, guid: 389e496cbe1a1f04abf710ffa2e7279d, type: 3}

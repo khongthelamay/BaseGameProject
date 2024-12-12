@@ -9,11 +9,16 @@ using UnityEngine;
 namespace Core
 {
     [CreateAssetMenu(fileName = "ArrowStormAbility", menuName = "Ability/Archer/ArrowStormAbility")]
-    public class ArrowStormAbility : ActiveCooldownAbility, IAbilityTargetAnEnemy
+    public partial class ArrowStormAbility : ActiveCooldownAbility, IAbilityTargetAnEnemy
     {
-        [field: SerializeField] public int DevastatingStrikeRate {get; private set;}
+        [field: SerializeField] public int PiercingShotRate {get; private set;}
         [field: SerializeField] public DamageType DamageType {get; private set;}
-        [field: SerializeField] public int DamageDelayFrame {get; private set;}
+        [field: SerializeField] public int DelayFrame {get; private set;}
+        [field: SerializeField] public float DamageScale {get; private set;}
+
+        [field: SerializeField] public Projectile Projectile {get; private set;}
+        [field: SerializeField] public VisualEffect VisualEffect {get; private set;}
+
         private Transform SpawnPosition {get; set;}
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
@@ -38,14 +43,29 @@ namespace Core
 
         public override bool CanUseAbility()
         {
-            // if (Random.Range(0, 100) >= DevastatingStrikeRate) return false;
-            // return this.IsFindAnyEnemyTarget();
-            return false;
+            if (Random.Range(0, 100) >= PiercingShotRate) return false;
+            return this.IsFindAnyEnemyTarget();
         }
 
-        public override UniTask UseAbility(TickRate tickRate, CancellationToken ct)
+        public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            return UniTask.CompletedTask;
+            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical) * DamageScale;
+            float attackSpeed = Owner.AttackSpeed;
+
+            if (!EnemyTarget.WillTakeDamage(EnemyTargetId,damageDeal)) return;
+            Owner.SetFacingPosition(EnemyTarget.Transform.position);
+            Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
+            await DelaySample(DelayFrame, tickRate, ct);
+            VisualEffect.Spawn(EnemyTarget.Transform.position, Quaternion.identity);
+            // Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
+            //     .Setup(Owner, EnemyTarget, EnemyTargetId, damageDeal, DamageType, isCritical)
+            //     .WithComplete(OnProjectileMoveCompleteCache);
+            await DelaySample(30 - DelayFrame, tickRate, ct);
+        }
+        [ACacheMethod("TW.Utility.CustomType")]
+        private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, int targetEnemyId, BigNumber damage, DamageType damageType, bool isCritical)
+        {
+            if (!targetEnemy.TakeDamage(targetEnemyId, damage, damageType, isCritical)) return;
         }
 
 

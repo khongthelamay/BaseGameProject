@@ -18,3 +18,9 @@ MonoBehaviour:
   <Description>k__BackingField: Attacks that hit the target have a 20% chance to
     summon a rain of arrows that deal 1000% attack damage
   <Cooldown>k__BackingField: 10
+  <PiercingShotRate>k__BackingField: 20
+  <DamageType>k__BackingField: 0
+  <DelayFrame>k__BackingField: 9
+  <DamageScale>k__BackingField: 1
+  <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: 2204e1d69d94e5648a78a3d74a31ab21, type: 3}
+  <VisualEffect>k__BackingField: {fileID: 1269208306258414625, guid: 6dfd646a434a1a14cb52c16fc7b446dc, type: 3}

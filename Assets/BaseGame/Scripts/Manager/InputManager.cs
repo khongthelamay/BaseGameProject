@@ -68,9 +68,11 @@ public class InputManager : Singleton<InputManager>
         }
 
         ArrowDirection.gameObject.SetActive(StartDragFieldSlot != EndDragFieldSlot);
-        ArrowDirection.rotation =
-            Quaternion.LookRotation(EndDragFieldSlot.Transform.position - StartDragFieldSlot.Transform.position,
-                Vector3.forward) * Quaternion.Euler(90, 90, 90);
+        Vector3 arrowDirection = EndDragFieldSlot.Transform.position - StartDragFieldSlot.Transform.position;
+        if (arrowDirection != Vector3.zero)
+        {
+            ArrowDirection.rotation = Quaternion.LookRotation(arrowDirection, Vector3.forward) * Quaternion.Euler(90, 90, 90);
+        }
         LineRenderer.positionCount = 2;
         LineRenderer.SetPosition(0, StartDragFieldSlot.Transform.position);
         LineRenderer.SetPosition(1, EndDragFieldSlot.Transform.position);

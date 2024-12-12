@@ -26,7 +26,7 @@ public partial class PlayerResourceDataSave
         newResource.type = resourceType;
         newResource.value = new(0);
         AddResource(newResource);
-        return null;
+        return newResource.value;
     }
 
     public void AddResource(Resource resource) {
