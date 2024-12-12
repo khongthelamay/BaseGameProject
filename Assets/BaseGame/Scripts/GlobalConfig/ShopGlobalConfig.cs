@@ -98,6 +98,7 @@ public enum PurchaseType
 [System.Serializable]
 public class ShopPackData
 {
+    [field: SerializeField] public bool isShow;
     [field: SerializeField] public PackID packID { get; set; }
     [field: SerializeField] public string PackageName { get; set; }
     [field: SerializeField] public Sprite PackIcon { get; set; }

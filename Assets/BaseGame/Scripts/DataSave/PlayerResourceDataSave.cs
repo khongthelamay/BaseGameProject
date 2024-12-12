@@ -1,4 +1,5 @@
 using MemoryPack;
+using System;
 using TW.Reactive.CustomComponent;
 using TW.Utility.CustomType;
 using UnityEngine;
@@ -12,8 +13,8 @@ public partial class PlayerResourceDataSave
     [field: SerializeField] public ReactiveValue<float> exp = new(0);
     [field: SerializeField] public ReactiveValue<bool> premium;
     [field: SerializeField] public ReactiveList<Resource> resources { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<string> timeEnergyDone { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<string> timeEnegyAddOne { get; set; } = new();
+    public ReactiveValue<DateTime> timeEnergyDone { get; set; } = new(default(DateTime));
+    public ReactiveValue<DateTime> timeEnegyAddOne { get; set; } = new(default(DateTime));
 
     public ReactiveValue<BigNumber> GetResourceValue(ResourceType resourceType) 
     {

@@ -2,30 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ShopPack : MonoBehaviour
+public class ShopPack : SlotBase<ShopPackData>
 {
-    public PackID packID;
     public ShopPackData shopPackData;
     public TextMeshProUGUI txtPrice;
     public TextMeshProUGUI txtPacName;
     public List<ShopDealReward> shopDealRewards = new();
-
     int rewardIndex = 0;
 
-    private void Awake()
-    {
-        InitData();
-    }
-
-    public void InitData() {
-        shopPackData = ShopGlobalConfig.Instance.GetShopPackData(packID);
-        if (shopPackData == null)
+    public override void InitData(ShopPackData shopPackData) {
+        slotData = shopPackData;
+        
+        if (slotData == null)
             return;
+        if (!slotData.isShow)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        txtPacName.text = slotData.PackageName;
+
         if (txtPrice != null)
-            txtPrice.text = shopPackData.PaymentAmount.value.Value.ToString();
+            txtPrice.text = slotData.PaymentAmount.value.Value.ToString();
         rewardIndex = 0;
-        for (int i = 0; i < shopPackData.rewards.Count; i++)
+        for (int i = 0; i < slotData.rewards.Count; i++)
         {
             if (rewardIndex < shopDealRewards.Count)
             {

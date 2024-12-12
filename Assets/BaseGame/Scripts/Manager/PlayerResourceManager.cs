@@ -12,8 +12,8 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     [field: SerializeField] public ReactiveValue<int> level { get; set; } = new(0);
     [field: SerializeField] public ReactiveValue<float> exp { get; set; } = new(0);
     [field: SerializeField] public ReactiveList<Resource> resources { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<string> timeEneryDone { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<string> timeEnegyAddOne { get; set; } = new();
+    public ReactiveValue<DateTime> timeEneryDone { get; set; } = new(default(DateTime));
+    public ReactiveValue<DateTime> timeEnegyAddOne { get; set; } = new(default(DateTime));
 
     public bool coolDown = false;
     [ReadOnly] public float timeCoolDown = -1;
@@ -26,11 +26,12 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     private void LoadData()
     {
         timeCoolDown = -1;
-        level = PlayerResourceDataSave.Instance.level;
-        exp = PlayerResourceDataSave.Instance.exp;
-        resources = PlayerResourceDataSave.Instance.resources;
-        timeEneryDone = PlayerResourceDataSave.Instance.timeEnergyDone;
-        timeEnegyAddOne = PlayerResourceDataSave.Instance.timeEnegyAddOne;
+        level = InGameDataManager.Instance.InGameData.playerResourceDataSave.level;
+        exp = InGameDataManager.Instance.InGameData.playerResourceDataSave.exp;
+        resources = InGameDataManager.Instance.InGameData.playerResourceDataSave.resources;
+        timeEneryDone = InGameDataManager.Instance.InGameData.playerResourceDataSave.timeEnergyDone;
+        timeEnegyAddOne = InGameDataManager.Instance.InGameData.playerResourceDataSave.timeEnegyAddOne;
+        Debug.Log(timeEneryDone.Value);
         CheckTimeEnergy();
     }
 
@@ -40,8 +41,7 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
         {
             if (timeCoolDown >= 0)
             {
-                timeCoolDown -= Time.deltaTime;
-
+                timeCoolDown = (float)timeEnegyAddOne.Value.Subtract(DateTime.Now).TotalSeconds;
             }
             else {
                 coolDown = false;
@@ -55,15 +55,13 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
 
     void CheckTimeEnergy() {
         Resource resource = GetResource(ResourceType.Energy);
-        if (string.IsNullOrEmpty(timeEneryDone.Value))
+        if (timeEneryDone == null)
         {
             if (resource.value.Value == 0) SetResource(ResourceType.Energy, 30);
             return;
         }
-
-
-        DateTime timeConvert = DateTime.Parse(timeEneryDone.Value, TimeUtil.GetCultureInfo());
-        if (timeConvert.Subtract(DateTime.Now).TotalSeconds < 0)
+        
+        if (timeEneryDone.Value.Subtract(DateTime.Now).TotalSeconds < 0)
         {
             if (resource.value.Value < 30) SetResource(ResourceType.Energy, 30);
         }
@@ -71,12 +69,11 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     }
 
     void CheckTimeToGetOneEnergy() {
-        if (string.IsNullOrEmpty(timeEnegyAddOne.Value))
+        if (timeEnegyAddOne == null)
             return;
-        DateTime timeConvert = DateTime.Parse(timeEnegyAddOne.Value, TimeUtil.GetCultureInfo());
-        if (timeConvert.Subtract(DateTime.Now).TotalSeconds > 0 && !coolDown)
+        if (timeEnegyAddOne.Value.Subtract(DateTime.Now).TotalSeconds > 0 && !coolDown)
         {
-            timeCoolDown = (float)timeConvert.Subtract(DateTime.Now).TotalSeconds;
+            timeCoolDown = (float)timeEnegyAddOne.Value.Subtract(DateTime.Now).TotalSeconds;
             coolDown = true;
         }
         else 
@@ -86,16 +83,14 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
             {
                 if (!coolDown)
                 {
-                    timeConvert = DateTime.Parse(timeEnegyAddOne.Value, TimeUtil.GetCultureInfo());
-                    timeEnegyAddOne.Value = timeConvert.AddMinutes(.5f).ToString(TimeUtil.GetCultureInfo());
-                    timeConvert = DateTime.Parse(timeEnegyAddOne.Value, TimeUtil.GetCultureInfo());
-                    timeCoolDown = (float)timeConvert.Subtract(DateTime.Now).TotalSeconds;
+                    timeEnegyAddOne.Value = timeEnegyAddOne.Value.AddMinutes(.5f);
+                    timeCoolDown = (float)timeEnegyAddOne.Value.Subtract(DateTime.Now).TotalSeconds;
                     coolDown = true;
                 }
             }
             else
             {
-                timeEneryDone.Value = "";
+                timeEneryDone.Value = default(DateTime);
                 ScreensDefaultContext.Events.TurnOffTimeRemaining?.Invoke();
             }
         }
@@ -103,8 +98,6 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
 
     [Button]
     public void ChangeResource(ResourceType rType, BigNumber amount) {
-        Debug.Log(coolDown);
-        Debug.Log($"Change resource {rType} amount: {amount}");
         for (int i = 0; i < resources.ObservableList.Count; i++)
         {
             if (resources.ObservableList[i].type == rType)
@@ -126,18 +119,19 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     [Button]
     public void ComsumeEnery(BigNumber amount) {
         Resource resource = GetResource(ResourceType.Energy);
+
         resource.Consume(amount);
-        DateTime timeConvert = string.IsNullOrEmpty(timeEneryDone.Value) ? DateTime.Now : DateTime.Parse(timeEneryDone.Value, TimeUtil.GetCultureInfo());
-        timeEneryDone.Value = timeConvert.AddMinutes(.5f * amount.ToFloat()).ToString(TimeUtil.GetCultureInfo());
+        if (timeEneryDone.Value == default(DateTime))
+            timeEneryDone.Value = DateTime.Now;
+        timeEneryDone.Value = timeEneryDone.Value.AddMinutes(.5f * amount.ToFloat());
         if (!coolDown)
-            timeEnegyAddOne.Value = timeConvert.AddMinutes(.5f).ToString(TimeUtil.GetCultureInfo());
+            timeEnegyAddOne.Value = DateTime.Now.AddMinutes(.5f);
         CheckTimeToGetOneEnergy();
         InGameDataManager.Instance.SaveData();
     }
 
     public void SetResource(ResourceType rType, BigNumber amount)
     {
-        Debug.Log($"set resource: {rType} amout: {amount}");
         Resource resource = GetResource(rType);
         resource.value.Value = amount;
         InGameDataManager.Instance.SaveData();
