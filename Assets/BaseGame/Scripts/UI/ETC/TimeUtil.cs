@@ -16,7 +16,7 @@ public class TimeUtil : MonoBehaviour {
         TimeSpan timeSpan = TimeSpan.FromSeconds(remainTime);
         return string.Format("{0:D1}h{1:D2}m", timeSpan.Hours, timeSpan.Minutes);
     }
-    public static string TimeToString(float inputTime, TimeFommat timeFommat = TimeFommat.Symbol)
+    public static string TimeToString(double inputTime, TimeFommat timeFommat = TimeFommat.Symbol)
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(inputTime);
         if (timeFommat == TimeFommat.Keyword)

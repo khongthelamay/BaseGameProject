@@ -3210,7 +3210,7 @@ GameObject:
   - component: {fileID: 3072547433424477092}
   - component: {fileID: 5489471448799793829}
   m_Layer: 5
-  m_Name: txtTimeLeft
+  m_Name: txtWeeklyTimeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

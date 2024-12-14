@@ -25,7 +25,7 @@ public class RecruitManager : Singleton<RecruitManager>
     }
 
     void LoadData() {
-        recruitRecipe = InGameDataManager.Instance.InGameData.playerResourceDataSave.GetResourceValue(ResourceType.RecruitRecipe);
+        //recruitRecipe = InGameDataManager.Instance.InGameData.playerResourceDataSave.GetResourceValue(ResourceType.RecruitRecipe);
     }
 
     [Button]
@@ -36,7 +36,7 @@ public class RecruitManager : Singleton<RecruitManager>
             return;
         }
 
-        InGameDataManager.Instance.InGameData.playerResourceDataSave.ConsumeResourceValue(ResourceType.RecruitRecipe, (recruitTotal * 30));
+        //InGameDataManager.Instance.InGameData.playerResourceDataSave.ConsumeResourceValue(ResourceType.RecruitRecipe, (recruitTotal * 30));
         
         currentRecruitTurn = RecruitPersentGlobalConfig.Instance.GetRecruitTurn(currentTurn);
 

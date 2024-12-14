@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
 using Core;
 using System.Collections.Generic;
+using TW.UGUI.Core.Views;
 
 [Serializable]
 public class ModalHeroesInforContext 
@@ -51,6 +52,8 @@ public class ModalHeroesInforContext
         [field: SerializeField] public Animator heroAnimator {get; private set;}  
         [field: SerializeField] public Button btnExit {get; private set;}  
         [field: SerializeField] public Button btnUpgrade {get; private set;}  
+        [field: SerializeField] public GameObject objUpgrade {get; private set;}  
+        [field: SerializeField] public GameObject objSummondRecipe {get; private set;}  
         //[field: SerializeField] public MainContentAbility mainContentHeroAbility { get; private set;}  
         [field: SerializeField] public MainContentHeroJob mainContentHeroJob {get; private set;}
 
@@ -66,8 +69,10 @@ public class ModalHeroesInforContext
             txtName.text = heroData.Name;
             txtAtk.text = heroData.BaseAttackDamage.ToString();
             txtSpeed.text = heroData.BaseAttackSpeed.ToString();
-            piecesProgress.ChangeProgress(0);
-            piecesProgress.ChangeTextProgress("0/0");
+            piecesProgress.ChangeProgress(heroDataSave.piece.Value/10f);
+            piecesProgress.ChangeTextProgress($"{heroDataSave.piece.Value}/10");
+            objUpgrade.SetActive(heroDataSave.piece.Value / 10f == 1f);
+            objSummondRecipe.SetActive(heroData.HeroRarity == Hero.Rarity.Mythic);
             //mainContentHeroAbility.InitData(heroData.HeroAbilities);
             jobs = new(heroData.HeroJob);
             mainContentHeroJob.InitData(jobs);
@@ -104,7 +109,7 @@ public class ModalHeroesInforContext
                 .CombineLatest(Model.currentHeroSave.Value.piece.ReactiveProperty, (herosave, piece) => (herosave, piece))
                 .Subscribe(ChangeData)
                 .AddTo(View.MainView);
-
+            View.btnUpgrade.interactable = HeroManager.Instance.IsCanUpgradeHero(Model.currentHeroSave.Value.heroName);
             View.btnExit.onClick.AddListener(Exit);
             View.btnUpgrade.onClick.AddListener(Upgrade);
 
@@ -123,6 +128,12 @@ public class ModalHeroesInforContext
         void Upgrade() {
             UIAnimation.BasicButton(View.btnUpgrade.transform);
             HeroManager.Instance.UpgradeHero();
+        }
+
+        UniTask IModalLifecycleEvent.Cleanup(Memory<object> args)
+        {
+            View.piecesProgress.ClearAnimation();
+            return UniTask.CompletedTask;
         }
     }
 }

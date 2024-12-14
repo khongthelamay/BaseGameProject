@@ -8,7 +8,7 @@ using TMPro;
 public class SlotHuntPass : SlotBase<HuntPass>
 {
     [Header("---- Slot Hunt Pass ----")]
-    
+    public Image imgBGLevel;
     public Button btnPremiumReward;
     public TextMeshProUGUI txtAmountCommond;
     public TextMeshProUGUI txtAmountPremium;
@@ -17,6 +17,8 @@ public class SlotHuntPass : SlotBase<HuntPass>
     public GameObject objPremiumClaimed;
     public GameObject objCommondLock;
     public GameObject objPremiumLock;
+    public GameObject objCanClaim;
+    public List<Sprite> sprIcon;
 
     public UnityAction<SlotBase<HuntPass>> claimPremium;
 
@@ -36,18 +38,19 @@ public class SlotHuntPass : SlotBase<HuntPass>
         txtAmountCommond.text = data.commonRewardAmount.ToString();
         txtAmountPremium.text = data.premiumRewardAmount.ToString();
         txtLevel.text = data.level.ToString();
-
         objCommondClaimed.SetActive(HuntPassManager.Instance.IsClaimedComond(data.level));
         objPremiumClaimed.SetActive(HuntPassManager.Instance.IsClaimedPremium(data.level));
-
+       
         objCommondLock.SetActive(HuntPassManager.Instance.IsLock(data.level));
+
+        bool isCanClaim = objCommondLock.activeSelf;
+        objCanClaim.SetActive(data.level == HuntPassManager.Instance.huntLevel);
+        imgBGLevel.sprite = !isCanClaim ? sprIcon[1] : sprIcon[0];
 
         if (HuntPassManager.Instance.isPremium)
         {
-            if (!objCommondLock.activeSelf)
-                objPremiumLock.SetActive(false);
-            else
-                objPremiumLock.SetActive(true);
+           
+            objPremiumLock.SetActive(isCanClaim);
         }
         else 
             objPremiumLock.SetActive(true);

@@ -11,7 +11,8 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
 {
     [field: SerializeField] public ReactiveValue<int> level { get; set; } = new(0);
     [field: SerializeField] public ReactiveValue<float> exp { get; set; } = new(0);
-    [field: SerializeField] public ReactiveList<Resource> resources { get; set; } = new();
+    [field: SerializeField] public List<Resource> resources { get; set; } = new();
+    [field: SerializeField] public List<ResourceSave> resourceSave { get; set; } = new();
     public ReactiveValue<DateTime> timeEneryDone { get; set; } = new(default(DateTime));
     public ReactiveValue<DateTime> timeEnegyAddOne { get; set; } = new(default(DateTime));
 
@@ -26,12 +27,22 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     private void LoadData()
     {
         timeCoolDown = -1;
+
+        resourceSave = InGameDataManager.Instance.InGameData.playerResourceDataSave.resourceSaves;
+
+        for (int i = 0; i < resourceSave.Count; i++)
+        {
+            Resource resource = new();
+            resource.type = resourceSave[i].type;
+            resource.value.Value = new(resourceSave[i].coefficient, resourceSave[i].exp);
+            resources.Add(resource);
+        }   
+
         level = InGameDataManager.Instance.InGameData.playerResourceDataSave.level;
         exp = InGameDataManager.Instance.InGameData.playerResourceDataSave.exp;
-        resources = InGameDataManager.Instance.InGameData.playerResourceDataSave.resources;
+
         timeEneryDone = InGameDataManager.Instance.InGameData.playerResourceDataSave.timeEnergyDone;
         timeEnegyAddOne = InGameDataManager.Instance.InGameData.playerResourceDataSave.timeEnegyAddOne;
-        Debug.Log(timeEneryDone.Value);
         CheckTimeEnergy();
     }
 
@@ -98,11 +109,13 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
 
     [Button]
     public void ChangeResource(ResourceType rType, BigNumber amount) {
-        for (int i = 0; i < resources.ObservableList.Count; i++)
+        for (int i = 0; i < resources.Count; i++)
         {
-            if (resources.ObservableList[i].type == rType)
+            if (resources[i].type == rType)
             {
-                resources.ObservableList[i].ChangeValue(amount);
+                resources[i].ChangeValue(amount);
+                resourceSave[i].coefficient = resources[i].value.Value.coefficient;
+                resourceSave[i].exp = resources[i].value.Value.exponent;
                 InGameDataManager.Instance.SaveData();
                 return;
             }
@@ -112,7 +125,14 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
         resource.type = rType;
         resource.value.Value = amount;
 
-        resources.ObservableList.Add(resource);
+        ResourceSave newResourceSave = new();
+        newResourceSave.type = rType;
+        newResourceSave.coefficient = amount.coefficient;
+        newResourceSave.exp = amount.exponent;
+
+        resources.Add(resource);
+        resourceSave.Add(newResourceSave);
+
         InGameDataManager.Instance.SaveData();
     }
 
@@ -138,15 +158,15 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     }
 
     public Resource GetResource(ResourceType rType) {
-        for (int i = 0; i < resources.ObservableList.Count; i++)
+        for (int i = 0; i < resources.Count; i++)
         {
-            if (resources.ObservableList[i].type == rType)
+            if (resources[i].type == rType)
             {
-                return resources.ObservableList[i];
+                return resources[i];
             }
         }
 
         ChangeResource(rType, 0);
-        return resources.ObservableList[resources.ObservableList.Count - 1];
+        return resources[^1];
     }
 }

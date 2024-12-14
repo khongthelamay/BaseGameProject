@@ -20,5 +20,5 @@ public class UIResource : MonoBehaviour
         resourceValue.value.ReactiveProperty.Subscribe(ChangeValue).AddTo(this);
     }
 
-    public void ChangeValue(BigNumber value) { txtResource.text = value.ToString(); }
+    public void ChangeValue(BigNumber value) { txtResource.text = value.ToStringUIFloor(); }
 }

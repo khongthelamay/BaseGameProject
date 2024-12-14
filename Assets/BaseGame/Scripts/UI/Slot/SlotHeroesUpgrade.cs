@@ -16,6 +16,7 @@ public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
     public GameObject objUnLock;
     public GameObject objPurchase;
     public GameObject objRequire;
+    public GameObject objUpgrade;
 
     public HeroSave heroSave;
     private void Start()
@@ -36,8 +37,9 @@ public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
 
         heroSave = HeroManager.Instance.GetHeroSaveData(data.Name);
         txtLevel.text = $"Lv. {heroSave.level.Value}";
-        pieceProgress.ChangeProgress(1);
+        pieceProgress.ChangeProgress(heroSave.piece.Value/10f);
         pieceProgress.ChangeTextProgress($"{heroSave.piece.Value}/10");
+        objUpgrade.SetActive(heroSave.piece.Value / 10f == 1f);
     }
 
     public override void AnimOpen()

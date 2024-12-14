@@ -142,6 +142,7 @@ public class ModalArtifactInforContext
         }
 
         public UniTask Cleanup(Memory<object> args) {
+            View.piecesProgress.ClearAnimation();
             Events.SampleEvent = null;
             return UniTask.CompletedTask;
         }

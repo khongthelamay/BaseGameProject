@@ -908,7 +908,7 @@ MonoBehaviour:
   m_text: Lv. 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1127,6 +1127,7 @@ MonoBehaviour:
   objUnLock: {fileID: 4508935550472544398}
   objPurchase: {fileID: 9143687000653702789}
   objRequire: {fileID: 6561259325861816452}
+  objUpgrade: {fileID: 4663993802638271866}
   heroSave:
     heroName: 
     level:
@@ -1333,7 +1334,7 @@ MonoBehaviour:
   m_text: Water Elemental
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1769,6 +1770,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7093442004318346353, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+    - target: {fileID: 7093442004318346353, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -1778,7 +1783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7499766972118226391, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

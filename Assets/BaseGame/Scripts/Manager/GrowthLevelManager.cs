@@ -52,9 +52,9 @@ public class GrowthLevelManager : Singleton<GrowthLevelManager>
     }
 
     void ClaimReward() {
-        if (isPremium)
-            InGameDataManager.Instance.InGameData.playerResourceDataSave.AddResourceValue(currentGrowDataConfigs.rType, currentGrowDataConfigs.premiumRewardAmount);
-        else
-            InGameDataManager.Instance.InGameData.playerResourceDataSave.AddResourceValue(currentGrowDataConfigs.rType, currentGrowDataConfigs.commonRewardAmount);
+        //if (isPremium)
+        //    InGameDataManager.Instance.InGameData.playerResourceDataSave.AddResourceValue(currentGrowDataConfigs.rType, currentGrowDataConfigs.premiumRewardAmount);
+        //else
+        //    InGameDataManager.Instance.InGameData.playerResourceDataSave.AddResourceValue(currentGrowDataConfigs.rType, currentGrowDataConfigs.commonRewardAmount);
     }
 }

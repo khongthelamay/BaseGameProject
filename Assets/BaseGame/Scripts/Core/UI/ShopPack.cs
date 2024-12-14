@@ -8,13 +8,14 @@ public class ShopPack : SlotBase<ShopPackData>
 {
     public ShopPackData shopPackData;
     public TextMeshProUGUI txtPrice;
-    public TextMeshProUGUI txtPacName;
+    public TextMeshProUGUI txtPackName;
     public List<ShopDealReward> shopDealRewards = new();
     int rewardIndex = 0;
 
-    public override void InitData(ShopPackData shopPackData) {
+    public override void InitData(ShopPackData shopPackData)
+    {
         slotData = shopPackData;
-        
+
         if (slotData == null)
             return;
         if (!slotData.isShow)
@@ -23,7 +24,8 @@ public class ShopPack : SlotBase<ShopPackData>
             return;
         }
 
-        txtPacName.text = slotData.PackageName;
+        if (txtPackName != null)
+            txtPackName.text = slotData.PackageName;
 
         if (txtPrice != null)
             txtPrice.text = slotData.PaymentAmount.value.Value.ToString();

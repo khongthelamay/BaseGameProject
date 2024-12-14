@@ -13,15 +13,15 @@ public partial class QuestDataSave
     [field: SerializeField] public List<ReactiveValue<StreakSave>> streakDailySaves { get; set; } = new();
     [field: SerializeField] public List<ReactiveValue<StreakSave>> streakWeeklySaves { get; set; } = new();
 
-    [field: SerializeField] public ReactiveValue<string> strLastDay { get; set; } = new("");
-    [field: SerializeField] public ReactiveValue<string> strLastWeek { get; set; } = new("");
+    public ReactiveValue<DateTime> strLastDay { get; set; } = new();
+    public ReactiveValue<DateTime> strLastWeek { get; set; } = new();
 
     [field: SerializeField] public ReactiveValue<float> currentDailyStreak { get; set; } = new();
     [field: SerializeField] public ReactiveValue<float> currentWeeklyStreak { get; set; } = new();
 
     public void SaveDailyDay()
     {
-        strLastDay.Value = DateTime.Now.ToString(TimeUtil.GetCultureInfo());
+        strLastDay.Value = DateTime.Now;
 
         for (int i = 0; i < questSaves.Count; i++)
         {
@@ -38,7 +38,7 @@ public partial class QuestDataSave
 
     public void SaveWeeklyDay()
     {
-        strLastWeek.Value = DateTime.Now.ToString(TimeUtil.GetCultureInfo());
+        strLastWeek.Value = DateTime.Now;
         for (int i = 0; i < streakWeeklySaves.Count; i++)
         {
             streakWeeklySaves[i].Value.ResetStreak();

@@ -31,7 +31,7 @@ public class ModalQuestContext
         [field: SerializeField] public List<ReactiveValue<StreakSave>> streakDailySaves { get; set; } = new();
         [field: SerializeField] public List<ReactiveValue<StreakSave>> streakWeeklySaves { get; set; } = new();
         [field: SerializeField] public ReactiveValue<float> timeDailyRemaining { get; set; } = new();
-        [field: SerializeField] public ReactiveValue<float> timeWeeklyRemaining { get; set; } = new();
+        [field: SerializeField] public ReactiveValue<double> timeWeeklyRemaining { get; set; } = new();
         [field: SerializeField] public ReactiveValue<float> currentDailyStreak { get; set; } = new();
         [field: SerializeField] public ReactiveValue<float> currentWeeklyStreak { get; set; } = new();
 
@@ -174,6 +174,11 @@ public class ModalQuestContext
             txtTimeDailyRemaining.text = TimeUtil.TimeToString(time);
         }
 
+        public void ChangeTextTimeWeeklyRemaining(double time)
+        {
+            txtTimeWeeklyRemaining.text = TimeUtil.TimeToString(time, TimeFommat.Keyword);
+        }
+
         public void ChangeDailyProgress(float value)
         {
             mainContentDailyStreak.ChangeCurrentProgress(value / QuestGlobalConfig.Instance.GetMaxValueDailyStreak());
@@ -260,7 +265,8 @@ public class ModalQuestContext
 
             //Events.ChangeTextDaily = View.ChangeTextTimeRemaining;
             Model.timeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
-            //Model.strTimeDailyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeRemaining).AddTo(View.MainView);
+            Model.timeWeeklyRemaining.ReactiveProperty.Subscribe(View.ChangeTextTimeWeeklyRemaining).AddTo(View.MainView);
+
             Model.currentDailyStreak.ReactiveProperty.Subscribe(View.ChangeDailyProgress).AddTo(View.MainView);
             Model.currentWeeklyStreak.ReactiveProperty.Subscribe(View.ChangeWeeklyProgress).AddTo(View.MainView);
 

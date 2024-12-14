@@ -16,18 +16,10 @@ public enum ResourceType {
 }
 
 [System.Serializable]
-[MemoryPackable]
-public partial class Resource
+public class Resource
 {
     public ResourceType type;
     public ReactiveValue<BigNumber> value = new(0);
-    public int coefficient;
-    public int exp;
-
-    public void ChangeValue(int coefficient, int exp) {
-        this.coefficient = coefficient;
-        this.exp = exp;
-    }
 
     public void Add(BigNumber amount) {
         value.Value += amount;

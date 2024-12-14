@@ -23,7 +23,7 @@ public class HeroManager : Singleton<HeroManager>
     void LoadData() {
         heroSaves = InGameDataManager.Instance.InGameData.heroDataSave.heroSaves;
         heroList = HeroPoolGlobalConfig.Instance.HeroConfigDataList;
-        summonRecipe = InGameDataManager.Instance.InGameData.playerResourceDataSave.GetResourceValue(ResourceType.SummonRecipe);
+        //summonRecipe = InGameDataManager.Instance.InGameData.playerResourceDataSave.GetResourceValue(ResourceType.SummonRecipe);
     }
 
     public bool IsHaveHero(string heroName)
@@ -46,7 +46,7 @@ public class HeroManager : Singleton<HeroManager>
 
 
     public void UpgradeHero() {
-        currentHeroSave.Value.UpgradeHero();
+        currentHeroSave.Value.UpgradeHero(10);
         InGameDataManager.Instance.SaveData();
     }
 
@@ -91,7 +91,7 @@ public class HeroManager : Singleton<HeroManager>
     }
 
     public bool IsEnoughPieces(string heroName, int pieces, int level) {
-        return true;
+        return pieces >= 10;
     }
 
     public HeroConfigData GetHeroConfigData(string heroName) {

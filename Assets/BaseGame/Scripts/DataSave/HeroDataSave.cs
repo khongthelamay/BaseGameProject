@@ -24,6 +24,9 @@ public partial class HeroSave {
     public ReactiveValue<int> level;
     public ReactiveValue<int> piece;
 
-    public void UpgradeHero() { level.Value++; }
+    public void UpgradeHero(int pieceRequire) { 
+        level.Value++; 
+        piece.Value -= pieceRequire;
+    }
 }
 

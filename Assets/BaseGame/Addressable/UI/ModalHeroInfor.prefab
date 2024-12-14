@@ -1459,13 +1459,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2835,6 +2835,8 @@ MonoBehaviour:
       <heroAnimator>k__BackingField: {fileID: 3068151271760643147}
       <btnExit>k__BackingField: {fileID: 5295942640483710212}
       <btnUpgrade>k__BackingField: {fileID: 3585832438070968741}
+      <objUpgrade>k__BackingField: {fileID: 4329250474811664151}
+      <objSummondRecipe>k__BackingField: {fileID: 1637590187434210127}
       <mainContentHeroJob>k__BackingField: {fileID: 2578421243869884833}
 --- !u!225 &2053755956499194827
 CanvasGroup:
@@ -4702,6 +4704,11 @@ PrefabInstance:
       addedObject: {fileID: 3949965643544586119}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+--- !u!1 &1637590187434210127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4779205113032752080, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+  m_PrefabInstance: {fileID: 6118920901634443423}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5112140063000377487 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1304705162166431760, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}

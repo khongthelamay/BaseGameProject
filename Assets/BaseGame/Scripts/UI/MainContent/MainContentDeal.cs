@@ -36,7 +36,8 @@ public class MainContentDeal : MainContent<ShopPackData>
         else {
             for (int i = 0; i < slots.Count; i++)
             {
-                slots[i].InitData(datas[i]);
+                if (i < packIDs.Count)
+                    slots[i].InitData(datas[i]);
             }
         }
     }
