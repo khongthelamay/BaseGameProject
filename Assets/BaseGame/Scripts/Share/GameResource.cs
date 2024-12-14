@@ -19,7 +19,8 @@ public partial class GameResource
         Key = 5,
         Energy = 6,
         RecruitRecipe = 7,
-        CoinInMatch = 8
+        CoinInMatch = 8,
+        StoneInMatch = 9,
     }
     
     [MemoryPackIgnore]

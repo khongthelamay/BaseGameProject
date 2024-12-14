@@ -74,11 +74,18 @@ namespace Core
         [field: SerializeField] private float BaseAttackRange { get; set; }
         [ShowInInspector, ReadOnly] private int BaseCriticalRate { get; set; } = 0;
         [ShowInInspector, ReadOnly] private int BaseCriticalDamage { get; set; } = 150;
+        public Rarity HeroRarity => HeroConfigData.HeroRarity;
+
+        public BigNumber AttackDamageBuff()
+        {
+            var rarityUpgrade = BattleManager.GetHeroRarityUpgrade(HeroRarity);
+            var globalBuff = 1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value / 100;
+            return BaseAttackDamage * rarityUpgrade * globalBuff - BaseAttackDamage;
+        }
 
         public BigNumber AttackDamage(out bool isCritical)
         {
-            BigNumber attackDamage = BaseAttackDamage *
-                                     (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value / 100);
+            BigNumber attackDamage = BaseAttackDamage + AttackDamageBuff();
             isCritical = Random.Range(0, 100) < CriticalRate;
             if (isCritical)
             {
@@ -249,6 +256,7 @@ namespace Core
                 this.Despawn();
             }
         }
+
         public void ForceMoveToFieldSlotAfterFusion(FieldSlot fieldSlot)
         {
             FieldSlot = fieldSlot;
@@ -274,6 +282,7 @@ namespace Core
             GraphicGroupTransform.localScale =
                 targetPosition.x < Transform.position.x ? VectorFacing[0] : VectorFacing[1];
         }
+
         public void ResetFacingPosition()
         {
             GraphicGroupTransform.localScale = VectorFacing[0];
@@ -296,6 +305,7 @@ namespace Core
         {
             HeroAttackRange.HideAttackRange();
         }
+
         public void ResetAttackRange()
         {
             HeroAttackRange.ResetAttackRange();
@@ -339,7 +349,6 @@ namespace Core
             SpriteGraphic = transform.FindChildOrCreate("SpriteGraphic").GetComponentInChildren<SpriteRenderer>();
 
 
-
             HeroAnim = GetComponentInChildren<HeroAnim>();
             MoveProjectile = AssetDatabase.LoadAssetAtPath<MoveProjectile>(
                 AssetDatabase.GUIDToAssetPath(
@@ -348,7 +357,7 @@ namespace Core
             GraphicGroupTransform = transform.FindChildOrCreate("HeroGraphic").transform;
 
             SpriteGraphic.sprite = HeroConfigData.HeroSprite;
-            
+
             Transform spriteRarity = GraphicGroupTransform.FindChildOrCreate("SpriteRarity");
             DestroyImmediate(spriteRarity.gameObject);
             if (HeroConfigData.HeroRarity == Rarity.Mythic)
@@ -361,7 +370,8 @@ namespace Core
             }
             else
             {
-                SpriteRarity = GraphicGroupTransform.FindChildOrCreate("SpriteRarity").GetOrAddComponent<SpriteRenderer>();
+                SpriteRarity = GraphicGroupTransform.FindChildOrCreate("SpriteRarity")
+                    .GetOrAddComponent<SpriteRenderer>();
                 SpriteRarity.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(
                     AssetDatabase.GUIDToAssetPath(
                         AssetDatabase.FindAssets("t:Sprite Shadow Circle")[0]));

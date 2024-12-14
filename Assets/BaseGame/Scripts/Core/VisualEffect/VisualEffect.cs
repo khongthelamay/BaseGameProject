@@ -10,7 +10,11 @@ namespace Core
     {
         [field: SerializeField, SuffixLabel("millisecond ", true)]
         public int SelfDespawnTime { get; private set; }
-
+        public virtual VisualEffect WithSpeed(float speed)
+        {
+            
+            return this;
+        }
         public virtual VisualEffect OnSpawn()
         {
             SelfDespawn().Forget();

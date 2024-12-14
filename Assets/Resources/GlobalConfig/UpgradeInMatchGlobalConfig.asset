@@ -12,175 +12,357 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2950ba8ac8d41409ae6f18d8a12d3a, type: 3}
   m_Name: UpgradeInMatchGlobalConfig
   m_EditorClassIdentifier: 
-  upgradeRareInMatchDatas:
-  - level: 0
-    resource:
-      type: 8
-      value:
+  <UpgradeRareConfig>k__BackingField:
+  - <Level>k__BackingField: 0
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+  - <Level>k__BackingField: 1
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 100
           exponent: 0
-  - level: 1
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 2
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 200
           exponent: 0
-  - level: 2
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 3
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 300
           exponent: 0
-  - level: 3
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 4
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 400
           exponent: 0
-  - level: 4
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 5
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 500
           exponent: 0
-  - level: 5
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 6
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 600
           exponent: 0
-  upgradeEpicInMatchDatas:
-  - level: 0
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 7
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 700
+          exponent: 0
+  - <Level>k__BackingField: 8
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 800
+          exponent: 0
+  - <Level>k__BackingField: 9
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 900
+          exponent: 0
+  - <Level>k__BackingField: 10
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 100
           exponent: 0
-  - level: 1
-    resource:
-      type: 8
-      value:
+  <UpgradeEpicConfig>k__BackingField:
+  - <Level>k__BackingField: 0
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+  - <Level>k__BackingField: 1
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 100
+          exponent: 0
+  - <Level>k__BackingField: 2
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 200
           exponent: 0
-  - level: 2
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 3
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 300
           exponent: 0
-  - level: 3
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 4
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 400
           exponent: 0
-  - level: 4
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 5
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 500
           exponent: 0
-  - level: 5
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 6
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 600
           exponent: 0
-  upgradeLegendaryInMatchDatas:
-  - level: 0
-    resource:
-      type: 4
-      value:
+  - <Level>k__BackingField: 7
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 700
+          exponent: 0
+  - <Level>k__BackingField: 8
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 800
+          exponent: 0
+  - <Level>k__BackingField: 9
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 900
+          exponent: 0
+  - <Level>k__BackingField: 10
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 100
+          exponent: 0
+  <UpgradeLegendaryConfig>k__BackingField:
+  - <Level>k__BackingField: 0
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+  - <Level>k__BackingField: 1
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 1
+          exponent: 0
+  - <Level>k__BackingField: 2
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 2
           exponent: 0
-  - level: 1
-    resource:
-      type: 4
-      value:
+  - <Level>k__BackingField: 3
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 3
+          exponent: 0
+  - <Level>k__BackingField: 4
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 4
           exponent: 0
-  - level: 2
-    resource:
-      type: 4
-      value:
+  - <Level>k__BackingField: 5
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 5
+          exponent: 0
+  - <Level>k__BackingField: 6
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 6
           exponent: 0
-  - level: 3
-    resource:
-      type: 4
-      value:
+  - <Level>k__BackingField: 7
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 7
+          exponent: 0
+  - <Level>k__BackingField: 8
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 8
           exponent: 0
-  - level: 4
-    resource:
-      type: 4
-      value:
+  - <Level>k__BackingField: 9
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 9
+          exponent: 0
+  - <Level>k__BackingField: 10
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 10
           exponent: 0
-  - level: 5
-    resource:
-      type: 4
-      value:
+  - <Level>k__BackingField: 11
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 11
+          exponent: 0
+  - <Level>k__BackingField: 12
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 12
           exponent: 0
-  upgradePersentInMatchDatas:
-  - level: 0
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 13
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 13
+          exponent: 0
+  - <Level>k__BackingField: 14
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 14
+          exponent: 0
+  - <Level>k__BackingField: 15
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 15
+          exponent: 0
+  - <Level>k__BackingField: 16
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 16
+          exponent: 0
+  <UpgradePercentConfig>k__BackingField:
+  - <Level>k__BackingField: 0
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 0
+          exponent: 0
+  - <Level>k__BackingField: 1
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 100
           exponent: 0
-  - level: 1
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 2
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 200
           exponent: 0
-  - level: 2
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 3
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 300
           exponent: 0
-  - level: 3
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 4
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 400
           exponent: 0
-  - level: 4
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 5
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 500
           exponent: 0
-  - level: 5
-    resource:
-      type: 8
-      value:
+  - <Level>k__BackingField: 6
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
         m_Value:
           coefficient: 600
+          exponent: 0
+  - <Level>k__BackingField: 7
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 700
+          exponent: 0
+  - <Level>k__BackingField: 8
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 800
+          exponent: 0
+  - <Level>k__BackingField: 9
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 900
+          exponent: 0
+  - <Level>k__BackingField: 10
+    <Resource>k__BackingField:
+      <ResourceType>k__BackingField: 8
+      <ReactiveAmount>k__BackingField:
+        m_Value:
+          coefficient: 100
           exponent: 0

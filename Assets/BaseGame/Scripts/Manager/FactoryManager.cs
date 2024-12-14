@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Core;
 using Core.SimplePool;
 using Cysharp.Threading.Tasks;
@@ -24,7 +25,12 @@ namespace Manager
         [field: SerializeField] private VisualEffect SpawnEffect {get; set;}
         
         [field: Title("UpgradeEffect")]
-        [field: SerializeField] private VisualEffect UpgradeEffect {get; set;}
+        [field: SerializeField] private VisualEffect UpgradeCommonRareEffect {get; set;}
+        [field: SerializeField] private VisualEffect UpgradeEpicEffect {get; set;}
+        [field: SerializeField] private VisualEffect UpgradeLegendaryMythicEffect {get; set;}
+        
+        [field: Title("FusionEffect")]
+        [field: SerializeField] private VisualEffect FusionEffect {get; set;}
         public void CreateDamageNumber(Vector3 position, BigNumber damage, DamageType damageType, bool isCritical = false)
         {
             Color textColor = TextColor[(int)damageType * 2 + (isCritical ? 1 : 0)];
@@ -39,17 +45,26 @@ namespace Manager
         {
             SpawnEffect.Spawn(position, Quaternion.identity);
         }
-
-        public void CreateUpgradeEffect(Vector3 position)
+        
+        public async UniTask CreateFusionEffect(Vector3 position, CancellationToken ct)
         {
-            UpgradeEffect.Spawn(position, Quaternion.identity);
-        }
-        public async UniTask CreateUpgradeEffect(Vector3 position, CancellationToken ct)
-        {
-            UpgradeEffect.Spawn(position, Quaternion.identity);
+            FusionEffect.Spawn(position, Quaternion.identity);
             await DelaySample(3, ct);
         }
-
+        public void CreateUpgradeEffect(Vector3 position, Hero.Rarity rarity)
+        {
+            VisualEffect upgradeEffect = rarity switch
+            {
+                Hero.Rarity.Common => UpgradeCommonRareEffect,
+                Hero.Rarity.Rare => UpgradeCommonRareEffect,
+                Hero.Rarity.Epic => UpgradeEpicEffect,
+                Hero.Rarity.Legendary => UpgradeLegendaryMythicEffect,
+                Hero.Rarity.Mythic => UpgradeLegendaryMythicEffect,
+                _ => null
+            };
+            upgradeEffect.Spawn(position, Quaternion.identity);
+        }
+        
         private UniTask DelaySample(int sample, CancellationToken ct)
         {
             int timeDelay = 1000 * sample / 30;
