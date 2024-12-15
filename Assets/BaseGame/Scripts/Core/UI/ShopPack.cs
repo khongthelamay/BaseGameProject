@@ -28,7 +28,7 @@ public class ShopPack : SlotBase<ShopPackData>
             txtPackName.text = slotData.PackageName;
 
         if (txtPrice != null)
-            txtPrice.text = slotData.PaymentAmount.value.Value.ToString();
+            txtPrice.text = slotData.PaymentAmount.value.Value.ToString() + (slotData.PaymentAmount.type == ResourceType.None ? "$" : "");
         rewardIndex = 0;
         for (int i = 0; i < slotData.rewards.Count; i++)
         {

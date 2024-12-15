@@ -89,7 +89,7 @@ MonoBehaviour:
   goldPack:
   - isShow: 1
     <packID>k__BackingField: 100
-    <PackageName>k__BackingField: 
+    <PackageName>k__BackingField: Handful Golds
     <PackIcon>k__BackingField: {fileID: 0}
     <PurchaseType>k__BackingField: 2
     <PaymentAmount>k__BackingField:
@@ -102,7 +102,7 @@ MonoBehaviour:
     <heroRewards>k__BackingField: []
   - isShow: 1
     <packID>k__BackingField: 101
-    <PackageName>k__BackingField: 
+    <PackageName>k__BackingField: Sack Golds
     <PackIcon>k__BackingField: {fileID: 0}
     <PurchaseType>k__BackingField: 2
     <PaymentAmount>k__BackingField:
@@ -115,7 +115,7 @@ MonoBehaviour:
     <heroRewards>k__BackingField: []
   - isShow: 1
     <packID>k__BackingField: 102
-    <PackageName>k__BackingField: 
+    <PackageName>k__BackingField: Pile Golds
     <PackIcon>k__BackingField: {fileID: 0}
     <PurchaseType>k__BackingField: 2
     <PaymentAmount>k__BackingField:
@@ -129,80 +129,80 @@ MonoBehaviour:
   mysthicStonePack:
   - isShow: 1
     <packID>k__BackingField: 200
-    <PackageName>k__BackingField: 
+    <PackageName>k__BackingField: Handful Stones
     <PackIcon>k__BackingField: {fileID: 0}
     <PurchaseType>k__BackingField: 2
     <PaymentAmount>k__BackingField:
       type: 0
       value:
         m_Value:
-          coefficient: 0
+          coefficient: 7.99
           exponent: 0
     <rewards>k__BackingField: []
     <heroRewards>k__BackingField: []
   - isShow: 1
     <packID>k__BackingField: 201
-    <PackageName>k__BackingField: 
+    <PackageName>k__BackingField: Sack Stones
     <PackIcon>k__BackingField: {fileID: 0}
     <PurchaseType>k__BackingField: 2
     <PaymentAmount>k__BackingField:
       type: 0
       value:
         m_Value:
-          coefficient: 0
+          coefficient: 17.99
           exponent: 0
     <rewards>k__BackingField: []
     <heroRewards>k__BackingField: []
   - isShow: 1
     <packID>k__BackingField: 202
-    <PackageName>k__BackingField: 
+    <PackageName>k__BackingField: Pile Stones
     <PackIcon>k__BackingField: {fileID: 0}
     <PurchaseType>k__BackingField: 2
     <PaymentAmount>k__BackingField:
       type: 0
       value:
         m_Value:
-          coefficient: 0
+          coefficient: 27.99
           exponent: 0
     <rewards>k__BackingField: []
     <heroRewards>k__BackingField: []
   diamondPack:
   - isShow: 1
     <packID>k__BackingField: 300
-    <PackageName>k__BackingField: 
+    <PackageName>k__BackingField: Handful Diamonds
     <PackIcon>k__BackingField: {fileID: 0}
     <PurchaseType>k__BackingField: 2
     <PaymentAmount>k__BackingField:
       type: 0
       value:
         m_Value:
-          coefficient: 0
+          coefficient: 7.99
           exponent: 0
     <rewards>k__BackingField: []
     <heroRewards>k__BackingField: []
   - isShow: 1
     <packID>k__BackingField: 301
-    <PackageName>k__BackingField: 
+    <PackageName>k__BackingField: Sack Diamonds
     <PackIcon>k__BackingField: {fileID: 0}
     <PurchaseType>k__BackingField: 2
     <PaymentAmount>k__BackingField:
       type: 0
       value:
         m_Value:
-          coefficient: 0
+          coefficient: 17.99
           exponent: 0
     <rewards>k__BackingField: []
     <heroRewards>k__BackingField: []
   - isShow: 1
     <packID>k__BackingField: 302
-    <PackageName>k__BackingField: 
+    <PackageName>k__BackingField: Pile Diamonds
     <PackIcon>k__BackingField: {fileID: 0}
     <PurchaseType>k__BackingField: 2
     <PaymentAmount>k__BackingField:
       type: 0
       value:
         m_Value:
-          coefficient: 0
+          coefficient: 27.99
           exponent: 0
     <rewards>k__BackingField: []
     <heroRewards>k__BackingField: []

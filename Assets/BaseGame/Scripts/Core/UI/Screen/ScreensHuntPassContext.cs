@@ -84,6 +84,8 @@ public class ScreensHuntPassContext
             View.SetActionClaimCommond(ActionClaimCommond);
             View.InitData(Model.huntPassesConfig);
             View.SetActionClaimPremium(ActionClaimPremium);
+
+            ScrollToClaimableSlot();
         }
 
         void ChangeDataHunterPass(CollectionChangedEvent<HuntPassData> element)
@@ -108,6 +110,19 @@ public class ScreensHuntPassContext
             ViewOptions options = new ViewOptions(nameof(ScreensDefault));
             ScreenContainer.Find(ContainerKey.MidleScreens).PushAsync(options);
 
+        }
+        [Button]
+        void ScrollToClaimableSlot()
+        {
+            foreach (SlotBase<HuntPass> slot in View.mainContentHuntPass.slots)
+            {
+                if (slot.slotData.level == HuntPassManager.Instance.huntLevel.Value)
+                {
+                    Debug.Log(slot.slotData.level);
+                    View.mainContentHuntPass.ScrollToSlot(slot);
+                    break;
+                }
+            }
         }
     }
 }

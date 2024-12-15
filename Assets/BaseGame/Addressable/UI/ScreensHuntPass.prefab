@@ -614,6 +614,7 @@ MonoBehaviour:
   slots: []
   currentSlotOnChoose: {fileID: 0}
   totalSlotUsing: 0
+  myScrollRect: {fileID: 6450038123476227650}
 --- !u!1 &3342881171931727333
 GameObject:
   m_ObjectHideFlags: 0

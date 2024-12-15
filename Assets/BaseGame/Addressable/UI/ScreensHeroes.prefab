@@ -352,7 +352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 503, y: -0}
+  m_AnchoredPosition: {x: 503, y: -5}
   m_SizeDelta: {x: 1006, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6267767047383573852
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_text: Not Owned
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -867,7 +867,7 @@ MonoBehaviour:
   m_text: Level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   m_text: Tier
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1470,7 +1470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 503, y: -0}
+  m_AnchoredPosition: {x: 503, y: -160}
   m_SizeDelta: {x: 1006, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8810962628664600599
@@ -1497,7 +1497,7 @@ MonoBehaviour:
     m_Left: 35
     m_Right: 35
     m_Top: 90
-    m_Bottom: 110
+    m_Bottom: 300
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
@@ -2262,7 +2262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1291040910277918927, guid: b6b5ceeb31c383b4ab659dde3a5587fc, type: 3}
       propertyPath: m_fontSize
-      value: 35
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1291040910277918927, guid: b6b5ceeb31c383b4ab659dde3a5587fc, type: 3}
       propertyPath: m_fontSizeBase

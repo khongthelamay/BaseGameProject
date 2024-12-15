@@ -150,7 +150,7 @@ MonoBehaviour:
     <heroRewards>k__BackingField: []
   imgIcon: {fileID: 4831718045701370731}
   btnChoose: {fileID: 1968137981551516271}
-  trsContent: {fileID: 0}
+  trsContent: {fileID: 5795308755932262211}
   animOnSlot: {fileID: 0}
   shopPackData:
     isShow: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
     <rewards>k__BackingField: []
     <heroRewards>k__BackingField: []
   txtPrice: {fileID: 8270843215584722417}
-  txtPackName: {fileID: 0}
+  txtPackName: {fileID: 4775053672405815286}
   shopDealRewards: []
 --- !u!114 &1968137981551516271
 MonoBehaviour:

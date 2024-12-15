@@ -38,24 +38,20 @@ public class SlotHuntPass : SlotBase<HuntPass>
         txtAmountCommond.text = data.commonRewardAmount.ToString();
         txtAmountPremium.text = data.premiumRewardAmount.ToString();
         txtLevel.text = data.level.ToString();
-        objCommondClaimed.SetActive(HuntPassManager.Instance.IsClaimedComond(data.level));
-        objPremiumClaimed.SetActive(HuntPassManager.Instance.IsClaimedPremium(data.level));
-       
-        objCommondLock.SetActive(HuntPassManager.Instance.IsLock(data.level));
 
-        bool isCanClaim = objCommondLock.activeSelf;
-        objCanClaim.SetActive(data.level == HuntPassManager.Instance.huntLevel);
-        imgBGLevel.sprite = !isCanClaim ? sprIcon[1] : sprIcon[0];
+        HuntPassManager huntPassManager = HuntPassManager.Instance;
+        bool isClaimedCommond = huntPassManager.IsClaimedComond(data.level);
+        bool isClaimedPremium = huntPassManager.IsClaimedPremium(data.level);
+        bool isLocked = huntPassManager.IsLock(data.level);
+        bool isPremium = huntPassManager.isPremium;
+        int huntLevel = huntPassManager.huntLevel;
 
-        if (HuntPassManager.Instance.isPremium)
-        {
-           
-            objPremiumLock.SetActive(isCanClaim);
-        }
-        else 
-            objPremiumLock.SetActive(true);
-
-        //HunterPassManager.Instance.IsCanClaim(data.level);
+        objCommondClaimed.SetActive(isClaimedCommond);
+        objPremiumClaimed.SetActive(isClaimedPremium);
+        objCommondLock.SetActive(isLocked);
+        objCanClaim.SetActive(data.level == huntLevel);
+        imgBGLevel.sprite = !isLocked ? sprIcon[1] : sprIcon[0];
+        objPremiumLock.SetActive(!isPremium || isLocked);
     }
 
     public override void OnChoose()
@@ -64,8 +60,7 @@ public class SlotHuntPass : SlotBase<HuntPass>
     }
 
     void ClaimPremiumReward() {
-        if (claimPremium != null)
-            claimPremium(this);
+        claimPremium?.Invoke(this);
     }
 
 }
