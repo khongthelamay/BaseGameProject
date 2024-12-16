@@ -1,4 +1,5 @@
 using MemoryPack;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TW.Reactive.CustomComponent;
@@ -10,7 +11,7 @@ public partial class HuntPassDataSave
 {
     public static HuntPassDataSave Instance => InGameDataManager.Instance.InGameData.huntPassDataSave;
     public ReactiveValue<int> huntPassLevel = new(0);
-    public ReactiveValue<int> huntPoint = new(0);
+    public ReactiveValue<float> huntPoint = new(0);
     public ReactiveList<HuntPassData> huntPassDatasSave = new();
     public ReactiveValue<string> timeOutHuntPass = new("");
 }
@@ -24,6 +25,6 @@ public partial class InGameData
 [MemoryPackable]
 public partial class HuntPassData {
     public int level;
-    public bool isClaimedCommond;
-    public bool isClaimedPremium;
+    public ReactiveValue<bool> isClaimedCommond = new();
+    public ReactiveValue<bool> isClaimedPremium = new();
 }

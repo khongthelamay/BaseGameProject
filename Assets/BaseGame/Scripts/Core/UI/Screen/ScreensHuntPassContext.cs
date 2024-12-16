@@ -26,27 +26,29 @@ public class ScreensHuntPassContext
     {
         [field: Title(nameof(UIModel))]
         [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
-        [field: SerializeField] public List<HuntPass> huntPassesConfig { get; private set; }
-        [field: SerializeField] public ReactiveList<HuntPassData> huntPasses { get; private set; }
+        [field: SerializeField] public List<HuntPass> huntPassesConfig { get;  set; }
+        [field: SerializeField] public HuntPass currentHuntPassConfig { get;  set; }
+        [field: SerializeField] public ReactiveValue<float> huntPoint { get;  set; }
 
 
         public UniTask Initialize(Memory<object> args)
         {
             huntPassesConfig = HuntPassGlobalConfig.Instance.huntPasses;
-            huntPasses = HuntPassManager.Instance.huntPassDataSave;
+            huntPoint = HuntPassManager.Instance.huntPoint;
             return UniTask.CompletedTask;
         }
     }
-    
+
     [HideLabel]
     [Serializable]
     public class UIView : IAView
     {
         [field: Title(nameof(UIView))]
-        [field: SerializeField] public CanvasGroup MainView {get; private set;}  
-        [field: SerializeField] public MainContentHuntPass mainContentHuntPass {get; private set;}  
-        [field: SerializeField] public Button btnClose {get; private set;}  
-        
+        [field: SerializeField] public CanvasGroup MainView { get; private set; }
+        [field: SerializeField] public MainContentHuntPass mainContentHuntPass { get; set; }
+        [field: SerializeField] public ProgressBar levelHuntPass { get;  set; }
+        [field: SerializeField] public Button btnClose { get; set; }
+
         public UniTask Initialize(Memory<object> args)
         {
             return UniTask.CompletedTask;
@@ -63,6 +65,12 @@ public class ScreensHuntPassContext
         {
             mainContentHuntPass.SetActionClaimPremium(claimPremieum);
         }
+
+        public void ChangeHuntPassExp(float exp, HuntPass huntPass) {
+            Debug.Log($"{exp}/{huntPass.expRequire}");
+            levelHuntPass.ChangeProgress(exp/huntPass.expRequire);
+            levelHuntPass.ChangeTextProgress($"{exp}/{huntPass.expRequire}");
+        }
     }
 
     [HideLabel]
@@ -77,20 +85,20 @@ public class ScreensHuntPassContext
             await Model.Initialize(args);
             await View.Initialize(args);
 
-            Model.huntPasses.ObservableList.ObserveChanged().Subscribe(ChangeDataHunterPass).AddTo(View.MainView);
-
             View.btnClose.onClick.AddListener(CloseScreen);
 
             View.SetActionClaimCommond(ActionClaimCommond);
             View.InitData(Model.huntPassesConfig);
             View.SetActionClaimPremium(ActionClaimPremium);
 
+            Model.huntPoint.ReactiveProperty.Subscribe(ChangeExpHuntPass).AddTo(View.MainView);
+
             ScrollToClaimableSlot();
         }
 
-        void ChangeDataHunterPass(CollectionChangedEvent<HuntPassData> element)
-        {
-            Debug.Log(element.NewItem.level);
+        void ChangeExpHuntPass(float exp) {
+            Model.currentHuntPassConfig = HuntPassManager.Instance.currentPassConfig;
+            View.ChangeHuntPassExp(exp, Model.currentHuntPassConfig);
         }
 
         void ActionClaimPremium(SlotBase<HuntPass> slotBase)
@@ -105,6 +113,7 @@ public class ScreensHuntPassContext
 
         void CloseScreen()
         {
+            //View.levelHuntPass.ClearAnimation();
             ScreenContainer.Find(ContainerKey.Screens).Pop(true);
 
             ViewOptions options = new ViewOptions(nameof(ScreensDefault));

@@ -1343,11 +1343,18 @@ MonoBehaviour:
       <SampleValue>k__BackingField:
         m_Value: 0
       <huntPassesConfig>k__BackingField: []
-      <huntPasses>k__BackingField:
-        <Value>k__BackingField: []
+      <currentHuntPassConfig>k__BackingField:
+        level: 0
+        expRequire: 0
+        rType: 0
+        commonRewardAmount: 0
+        premiumRewardAmount: 0
+      <huntPoint>k__BackingField:
+        m_Value: 0
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 885553315266960419}
       <mainContentHuntPass>k__BackingField: {fileID: 3023997389604918954}
+      <levelHuntPass>k__BackingField: {fileID: 9216997974836275051}
       <btnClose>k__BackingField: {fileID: 8186988204978752238}
 --- !u!1 &6324231664897730931
 GameObject:
@@ -2766,3 +2773,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1304705162166431760, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
   m_PrefabInstance: {fileID: 5940199217722452302}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9216997974836275051 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3280460442299403813, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+  m_PrefabInstance: {fileID: 5940199217722452302}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ac3a70f49addf4a84ca107a223d2b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

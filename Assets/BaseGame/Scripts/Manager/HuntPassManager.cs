@@ -13,7 +13,7 @@ using UnityEngine;
 public class HuntPassManager : Singleton<HuntPassManager>
 {
     public ReactiveValue<int> huntLevel;
-    public ReactiveValue<int> huntPoint;
+    public ReactiveValue<float> huntPoint;
     public ReactiveList<HuntPassData> huntPassDataSave = new();
     public List<HuntPass> huntPasses = new();
     public ReactiveValue<bool> isPremium = new();
@@ -29,7 +29,7 @@ public class HuntPassManager : Singleton<HuntPassManager>
         huntPoint = InGameDataManager.Instance.InGameData.huntPassDataSave.huntPoint;
         huntPasses = HuntPassGlobalConfig.Instance.huntPasses;
         huntPassDataSave = InGameDataManager.Instance.InGameData.huntPassDataSave.huntPassDatasSave;
-      
+
         isPremium = InGameDataManager.Instance.InGameData.playerResourceDataSave.premium;
         timeHuntPassOut = InGameDataManager.Instance.InGameData.huntPassDataSave.timeOutHuntPass;
 
@@ -99,7 +99,7 @@ public class HuntPassManager : Singleton<HuntPassManager>
         }
         HuntPassData hunterPass = new();
         hunterPass.level = level;
-        hunterPass.isClaimedCommond = false;
+        hunterPass.isClaimedCommond.Value = false;
         huntPassDataSave.ObservableList.Add(hunterPass);
         InGameDataManager.Instance.SaveData();
     }
@@ -109,10 +109,11 @@ public class HuntPassManager : Singleton<HuntPassManager>
         {
             if (data.level == level)
             {
-                data.isClaimedCommond = true;
+                data.isClaimedCommond.Value = true;
                 HuntPass huntPass = GetHuntPassConfig(level);
                 //if (huntPass != null)
                 //    InGameDataManager.Instance.InGameData.playerResourceDataSave.AddResourceValue(huntPass.rType, huntPass.commonRewardAmount);
+                InGameDataManager.Instance.SaveData();
                 return;
             }
         }
@@ -124,10 +125,11 @@ public class HuntPassManager : Singleton<HuntPassManager>
         {
             if (data.level == level)
             {
-                data.isClaimedPremium = true;
+                data.isClaimedPremium.Value = true;
                 HuntPass huntPass = GetHuntPassConfig(level);
                 //if (huntPass != null)
                 //    InGameDataManager.Instance.InGameData.playerResourceDataSave.AddResourceValue(huntPass.rType, huntPass.premiumRewardAmount);
+                InGameDataManager.Instance.SaveData();
                 return;
             }
         }
@@ -161,4 +163,16 @@ public class HuntPassManager : Singleton<HuntPassManager>
         }
         return true;
     }
+
+    public HuntPassData GetHuntPassDataSave(int level)
+    {
+        foreach (HuntPassData data in huntPassDataSave.ObservableList)
+        {
+            if (data.level == level)
+                return data;
+        }
+        return null;
+    }
+
+    public HuntPass GetCurrentHuntPass() { return currentPassConfig; }
 }

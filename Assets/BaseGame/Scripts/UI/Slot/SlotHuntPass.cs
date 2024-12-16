@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
+using R3;
 
 public class SlotHuntPass : SlotBase<HuntPass>
 {
@@ -21,6 +22,7 @@ public class SlotHuntPass : SlotBase<HuntPass>
     public List<Sprite> sprIcon;
 
     public UnityAction<SlotBase<HuntPass>> claimPremium;
+    public HuntPassData huntPassData = new();
 
     public override void Awake()
     {
@@ -35,6 +37,14 @@ public class SlotHuntPass : SlotBase<HuntPass>
         base.InitData(data);
         // imgIcon.sprite = data.commond reward type
         // imgIcon.sprite = data.premium reward type
+        if (huntPassData.level == 0)
+        {
+            huntPassData = HuntPassManager.Instance.GetHuntPassDataSave(data.level);
+            huntPassData?.isClaimedCommond.ReactiveProperty
+            .CombineLatest(huntPassData.isClaimedPremium.ReactiveProperty, (claimC, claimP) => (claimC, claimP))
+            .Subscribe(ChangeDataSave);
+        }
+
         txtAmountCommond.text = data.commonRewardAmount.ToString();
         txtAmountPremium.text = data.premiumRewardAmount.ToString();
         txtLevel.text = data.level.ToString();
@@ -52,6 +62,11 @@ public class SlotHuntPass : SlotBase<HuntPass>
         objCanClaim.SetActive(data.level == huntLevel);
         imgBGLevel.sprite = !isLocked ? sprIcon[1] : sprIcon[0];
         objPremiumLock.SetActive(!isPremium || isLocked);
+    }
+
+    void ChangeDataSave((bool claimC, bool claimP) Value) {
+        Debug.Log("Claimed: " + Value.claimC + " " + Value.claimP);
+        InitData(slotData);
     }
 
     public override void OnChoose()
