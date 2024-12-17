@@ -595,11 +595,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotData:
-    isShow: 0
-    <packID>k__BackingField: 0
-    <PackageName>k__BackingField: 
-    <PackIcon>k__BackingField: {fileID: 0}
-    <PurchaseType>k__BackingField: 0
     <PaymentAmount>k__BackingField:
       type: 0
       value:
@@ -612,23 +607,7 @@ MonoBehaviour:
   btnChoose: {fileID: 6088276409937866481}
   trsContent: {fileID: 3568468927029943367}
   animOnSlot: {fileID: 0}
-  shopPackData:
-    isShow: 0
-    <packID>k__BackingField: 0
-    <PackageName>k__BackingField: 
-    <PackIcon>k__BackingField: {fileID: 0}
-    <PurchaseType>k__BackingField: 0
-    <PaymentAmount>k__BackingField:
-      type: 0
-      value:
-        m_Value:
-          coefficient: 0
-          exponent: 0
-    <rewards>k__BackingField: []
-    <heroRewards>k__BackingField: []
-  txtPrice: {fileID: 770975058726866224}
-  txtPackName: {fileID: 3799313759759965818}
-  shopDealRewards: []
+  progressBar: {fileID: 5586728356488752939}
 --- !u!114 &6088276409937866481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1100,6 +1079,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+--- !u!114 &5586728356488752939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3280460442299403813, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}
+  m_PrefabInstance: {fileID: 6921613384436097294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ac3a70f49addf4a84ca107a223d2b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8220684355503870238 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1304705162166431760, guid: b45ff4d976a862147b0ee5d374117bef, type: 3}

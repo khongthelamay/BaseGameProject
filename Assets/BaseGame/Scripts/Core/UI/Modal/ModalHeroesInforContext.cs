@@ -11,6 +11,7 @@ using TW.UGUI.Core.Modals;
 using Core;
 using System.Collections.Generic;
 using TW.UGUI.Core.Views;
+using UnityEngine.Events;
 
 [Serializable]
 public class ModalHeroesInforContext 
@@ -54,8 +55,11 @@ public class ModalHeroesInforContext
         [field: SerializeField] public Button btnUpgrade {get; private set;}  
         [field: SerializeField] public GameObject objUpgrade {get; private set;}  
         [field: SerializeField] public GameObject objSummondRecipe {get; private set;}  
-        //[field: SerializeField] public MainContentAbility mainContentHeroAbility { get; private set;}  
+        [field: SerializeField] public MainContentAbility mainContentHeroAbility { get; private set;}  
         [field: SerializeField] public MainContentHeroJob mainContentHeroJob {get; private set;}
+        [field: SerializeField] public RectTransform mainRect {get; private set;}
+        [field: SerializeField] public AbilityContent abilityContent {get; private set;}
+        [field: SerializeField] public Vector2 abilityOffset {get; private set;}
 
         List<Hero.Job> jobs;
 
@@ -64,8 +68,9 @@ public class ModalHeroesInforContext
             return UniTask.CompletedTask;
         }
         public void InitData(HeroConfigData heroData, HeroSave heroDataSave) {
+            Debug.Log("change data");
             heroAnimator.runtimeAnimatorController = heroData.ImageAnimatorController;
-            txtLevel.text = "Lv. " + heroDataSave.level.Value.ToString();
+            txtLevel.text = $"Lv. {heroDataSave.level.Value}";
             txtName.text = heroData.Name;
             txtAtk.text = heroData.BaseAttackDamage.ToString();
             txtSpeed.text = heroData.BaseAttackSpeed.ToString();
@@ -73,9 +78,16 @@ public class ModalHeroesInforContext
             piecesProgress.ChangeTextProgress($"{heroDataSave.piece.Value}/10");
             objUpgrade.SetActive(heroDataSave.piece.Value / 10f == 1f);
             objSummondRecipe.SetActive(heroData.HeroRarity == Hero.Rarity.Mythic);
-            //mainContentHeroAbility.InitData(heroData.HeroAbilities);
+            
+            mainContentHeroAbility.gameObject.SetActive(heroData.HeroAbilities.Count > 0);
+            if (heroData.HeroAbilities.Count > 0)
+                mainContentHeroAbility.InitData(heroData.HeroAbilities);
+            
             jobs = new(heroData.HeroJob);
             mainContentHeroJob.InitData(jobs);
+            btnUpgrade.interactable = HeroManager.Instance.IsCanUpgradeHero(heroData.Name);
+            
+            LayoutRebuilder.ForceRebuildLayoutImmediate(mainRect);
         }
 
         public void AnimOpen()
@@ -90,6 +102,23 @@ public class ModalHeroesInforContext
                 ModalContainer.Find(ContainerKey.Modals).Pop(true);
             });
         }
+        
+        public void SetActionMainAbilityCallBack(UnityAction<SlotBase<Ability>> action)
+        {
+            mainContentHeroAbility.SetActionSlotCallBack(action);
+        }
+
+        public void ShowAbilityInfor(SlotBase<Ability> slotBase)
+        {
+            RectTransform slotRect = slotBase.GetComponent<RectTransform>(); 
+            RectTransform rect = abilityContent.GetComponent<RectTransform>();
+            Vector2 slotAnchoredPosition = slotRect.anchoredPosition + abilityOffset;
+            float sizeRect = mainRect.rect.width/2 - rect.rect.width/2;
+            slotAnchoredPosition.x = Mathf.Clamp(slotAnchoredPosition.x, sizeRect * 2, sizeRect * 4);
+            rect.anchoredPosition = slotAnchoredPosition;
+            abilityContent.gameObject.SetActive(true);
+            abilityContent.InitData(slotBase.slotData);
+        }
     }
 
     [HideLabel]
@@ -103,20 +132,23 @@ public class ModalHeroesInforContext
         {
             await Model.Initialize(args);
             await View.Initialize(args);
-
+            View.SetActionMainAbilityCallBack(ActionAbilityCallBack);
             Model.currentHeroSave.ReactiveProperty
-                .CombineLatest(Model.currentHeroSave.Value.level.ReactiveProperty, (herosave, level)=>(herosave, level))
-                .CombineLatest(Model.currentHeroSave.Value.piece.ReactiveProperty, (herosave, piece) => (herosave, piece))
+                .CombineLatest(Model.currentHeroSave.Value.level.ReactiveProperty, (heroSave, level)=>(herosave: heroSave, level))
+                .CombineLatest(Model.currentHeroSave.Value.piece.ReactiveProperty, (level, piece) => (level.herosave, level.level, piece))
                 .Subscribe(ChangeData)
                 .AddTo(View.MainView);
-            View.btnUpgrade.interactable = HeroManager.Instance.IsCanUpgradeHero(Model.currentHeroSave.Value.heroName);
             View.btnExit.onClick.AddListener(Exit);
             View.btnUpgrade.onClick.AddListener(Upgrade);
 
             View.AnimOpen();
         }
+        
+        void ActionAbilityCallBack(SlotBase<Ability> slotBase) {
+            View.ShowAbilityInfor(slotBase);
+        }
 
-        private void ChangeData(((HeroSave herosave, int level) herosave, int piece) obj)
+        private void ChangeData((HeroSave heroSave, int level, int piece) Value)
         {
             View.InitData(Model.currentHeroChoose, Model.currentHeroSave);
         }

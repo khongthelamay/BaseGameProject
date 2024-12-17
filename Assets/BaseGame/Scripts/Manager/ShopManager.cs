@@ -18,6 +18,10 @@ public class ShopManager : Singleton<ArtifactManager>
 
         return dailyDeals;
     }
+
+    public void BuyPack(PackID packID) {
+        Debug.Log($"Buy Pack: {packID}");
+    }
 }
 
 [System.Serializable]

@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Core;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Modals;
 using TW.UGUI.Core.Views;
@@ -100,5 +101,10 @@ public class HeroManager : Singleton<HeroManager>
             if (hero.Name == heroName) return hero;
         }
         return null;
+    }
+
+    public bool CurrentHeroAbilityIsUnlock(Ability data)
+    {
+        return currentHeroSave.Value.level.Value >= data.LevelUnlock;
     }
 }

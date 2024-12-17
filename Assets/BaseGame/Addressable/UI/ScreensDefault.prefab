@@ -448,7 +448,7 @@ MonoBehaviour:
   m_text: Tiger Vanguard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -926,7 +926,7 @@ MonoBehaviour:
   m_text: 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
-  m_sharedMaterial: {fileID: -1765614798521948056, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1270,6 +1270,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5068402545897527145}
     m_Modifications:
+    - target: {fileID: 1291040910277918927, guid: b6b5ceeb31c383b4ab659dde3a5587fc, type: 3}
+      propertyPath: m_fontSize
+      value: 20.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2144431240944144820, guid: b6b5ceeb31c383b4ab659dde3a5587fc, type: 3}
       propertyPath: m_Name
       value: EnergyResourcePref
@@ -1611,6 +1615,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnCommingsoon
       objectReference: {fileID: 0}
+    - target: {fileID: 5738124685926316718, guid: 1a16098ccd76b204abbda0d3accba12a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1640,6 +1648,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5068402545897527145}
     m_Modifications:
+    - target: {fileID: 1291040910277918927, guid: b6b5ceeb31c383b4ab659dde3a5587fc, type: 3}
+      propertyPath: m_fontSize
+      value: 20.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2144431240944144820, guid: b6b5ceeb31c383b4ab659dde3a5587fc, type: 3}
       propertyPath: m_Name
       value: GemResourcePref (2)
@@ -1769,6 +1781,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5068402545897527145}
     m_Modifications:
+    - target: {fileID: 1291040910277918927, guid: b6b5ceeb31c383b4ab659dde3a5587fc, type: 3}
+      propertyPath: m_fontSize
+      value: 20.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2144431240944144820, guid: b6b5ceeb31c383b4ab659dde3a5587fc, type: 3}
       propertyPath: m_Name
       value: CoinResourcePref (1)
@@ -2002,6 +2018,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnArtifact
       objectReference: {fileID: 0}
+    - target: {fileID: 5738124685926316718, guid: 1a16098ccd76b204abbda0d3accba12a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2131,6 +2151,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnBattle
       objectReference: {fileID: 0}
+    - target: {fileID: 5738124685926316718, guid: 1a16098ccd76b204abbda0d3accba12a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2260,6 +2284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnShop
       objectReference: {fileID: 0}
+    - target: {fileID: 5738124685926316718, guid: 1a16098ccd76b204abbda0d3accba12a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2299,12 +2327,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 643366289665792166, guid: 1a16098ccd76b204abbda0d3accba12a, type: 3}
       propertyPath: sprIcon.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 643366289665792166, guid: 1a16098ccd76b204abbda0d3accba12a, type: 3}
       propertyPath: sprIcon.Array.data[0]
       value: 
       objectReference: {fileID: 21300000, guid: dcffbf543602dac42bbfa2f1a73b4462, type: 3}
+    - target: {fileID: 643366289665792166, guid: 1a16098ccd76b204abbda0d3accba12a, type: 3}
+      propertyPath: sprIcon.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 037f5cc406f433249b4e847bfcb753e4, type: 3}
     - target: {fileID: 4325038496676598063, guid: 1a16098ccd76b204abbda0d3accba12a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2389,6 +2421,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnHero
       objectReference: {fileID: 0}
+    - target: {fileID: 5738124685926316718, guid: 1a16098ccd76b204abbda0d3accba12a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
