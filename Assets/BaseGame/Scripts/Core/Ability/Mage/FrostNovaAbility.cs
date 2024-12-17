@@ -1,14 +1,38 @@
 ﻿using System.Threading;
+using Core.SimplePool;
 using Cysharp.Threading.Tasks;
+using TW.ACacheEverything;
+using TW.Utility.CustomType;
 using UnityEngine;
 
 namespace Core
 {
     [CreateAssetMenu(fileName = "FrostNovaAbility", menuName = "Ability/Mage/FrostNovaAbility")]
-    public class FrostNovaAbility : ActiveAbility
+    public partial class FrostNovaAbility : ActiveAbility, IAbilityTargetAroundEnemy
     {
+        [field: SerializeField] public int FrostNovaRate {get; private set;}
+        [field: SerializeField] public DamageType DamageType {get; private set;}
+        [field: SerializeField] public int DelayFrame {get; private set;}
+        [field: SerializeField] public float DamageScale {get; private set;}
+        [field: SerializeField] public VisualEffect VisualEffect {get; private set;}
+
+        private Transform SpawnPosition {get; set;}
+        public float Radius { get; } = 1f;
+        public Enemy EnemyTarget { get; set; }
+        public Enemy[] Enemies { get; set; } = new Enemy[30];
+        public int[] EnemiesTargetId { get; set; } = new int[30];
+        public int EnemiesCount { get; set; }
+        private Mage OwnerMage { get; set; }
+        public override Ability WithOwnerHero(Hero owner)
+        {
+            OwnerMage = owner as Mage;
+            SpawnPosition = OwnerMage?.ProjectileSpawnPosition;
+
+            return base.WithOwnerHero(owner);
+        }
         public override void OnEnterBattleField()
         {
+            
         }
 
         public override void OnExitBattleField()
@@ -17,12 +41,30 @@ namespace Core
 
         public override bool CanUseAbility()
         {
-            return false;
+            if (Random.Range(0, 100) >= FrostNovaRate) return false;
+            return this.IsFindAnyEnemyTarget();
         }
 
-        public override UniTask UseAbility(TickRate tickRate, CancellationToken ct)
+        public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            return UniTask.CompletedTask;
+            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical) * DamageScale;
+            float attackSpeed = Owner.AttackSpeed;
+
+            for (int i = 0; i < EnemiesCount; i++)
+            {
+                Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal);
+            }
+            Owner.SetFacingPosition(EnemyTarget.Transform.position);
+            Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
+            await DelaySample(DelayFrame, tickRate, ct);
+            VisualEffect.Spawn(EnemyTarget.Transform.position, Quaternion.identity)
+                .WithSpeed(attackSpeed);
+            await DelaySample(3, tickRate, ct);
+            for (int i = 0; i < EnemiesCount; i++)
+            {
+                Enemies[i].TakeDamage(EnemiesTargetId[i], damageDeal, DamageType ,isCritical);
+            }
+            await DelaySample(30 - DelayFrame -3, tickRate, ct);
         }
     }
 }

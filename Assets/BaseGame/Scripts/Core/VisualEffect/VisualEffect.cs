@@ -15,6 +15,10 @@ namespace Core
             
             return this;
         }
+        public virtual VisualEffect WithAxis(int axis)
+        {
+            return this;
+        }
         public virtual VisualEffect OnSpawn()
         {
             SelfDespawn().Forget();

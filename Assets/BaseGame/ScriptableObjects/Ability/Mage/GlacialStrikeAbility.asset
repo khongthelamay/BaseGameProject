@@ -19,3 +19,7 @@ MonoBehaviour:
     them for 1.5s, reducing their movement speed by 50% and reducing their magic
     resistance by 50 for 5s
   <Cooldown>k__BackingField: 10
+  <DamageType>k__BackingField: 1
+  <DelayFrame>k__BackingField: 12
+  <DamageScale>k__BackingField: 1
+  <GlacialStrikeArea>k__BackingField: {fileID: 8764484152433144607, guid: 35a8e19e7f6dc2044a26b651c82c2ab3, type: 3}

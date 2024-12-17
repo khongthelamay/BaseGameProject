@@ -13,7 +13,8 @@ namespace Core.TigerAbility
         [field: SerializeField] public DamageType DamageType { get; private set; } 
         [field: SerializeField] public int DamageScale { get; private set; }
         [field: SerializeField] public VisualEffect VisualEffect { get; private set; }
-        
+
+        public float Radius { get; } = 2f;
         public Enemy EnemyTarget { get; set; }
         public Enemy[] Enemies { get; set; } = new Enemy[30];
         public int[] EnemiesTargetId { get; set; } = new int[30];

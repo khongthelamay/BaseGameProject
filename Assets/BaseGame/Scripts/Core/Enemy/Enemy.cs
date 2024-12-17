@@ -29,8 +29,8 @@ namespace Core
         [field: SerializeField] public int CurrentPoint { get; private set; }
         [field: SerializeField] public ReactiveValue<float> PlaybackSpeed { get; private set; }
         [field: SerializeField] public float Deep { get; private set; }
-
-
+        
+        public int MoveAxis { get; private set; }
         private MotionHandle MovementMotionHandle;
         public bool WillBeDead => FutureHealthPoint <= 0;
         public bool IsDead => CurrentHealthPoint <= 0;
@@ -58,6 +58,8 @@ namespace Core
             Vector3 currentPosition = MovePoint[CurrentPoint].position + Vector3.forward * Deep;
             CurrentPoint = (CurrentPoint + 1) % MovePoint.Length;
             Vector3 targetPosition = MovePoint[CurrentPoint].position + Vector3.forward * Deep;
+            Vector3 moveDirection = (targetPosition - currentPosition).normalized;
+            MoveAxis = Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y) ? -1 : 1;
             float distance = Vector3.Distance(currentPosition, targetPosition);
             float duration = distance / MovementSpeed;
             Transform.localScale = currentPosition.x < targetPosition.x ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
