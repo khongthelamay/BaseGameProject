@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8590130044896966674}
   - component: {fileID: 4405022827370210361}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,6 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90d9ce92d63432e8cf90435ba7c2b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Animator>k__BackingField: {fileID: 4405022827370210361}
+  <Graphic>k__BackingField: {fileID: 8590130044896966674}
+  <Id>k__BackingField: 0
+  <StatusEffectStack>k__BackingField:
+    <StatusEffectList>k__BackingField: []
   <CurrentHealthPoint>k__BackingField:
     coefficient: 1
     exponent: 1
@@ -163,3 +168,5 @@ MonoBehaviour:
   <PlaybackSpeed>k__BackingField:
     m_Value: 0
   <Deep>k__BackingField: 0
+  <PhysicalArmor>k__BackingField: 0
+  <MagicalArmor>k__BackingField: 0

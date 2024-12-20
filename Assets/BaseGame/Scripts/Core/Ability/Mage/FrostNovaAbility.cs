@@ -63,6 +63,7 @@ namespace Core
             for (int i = 0; i < EnemiesCount; i++)
             {
                 Enemies[i].TakeDamage(EnemiesTargetId[i], damageDeal, DamageType ,isCritical);
+                Enemies[i].AddStatusEffect(new IceSlowStatusEffect(50, 3));
             }
             await DelaySample(30 - DelayFrame -3, tickRate, ct);
         }

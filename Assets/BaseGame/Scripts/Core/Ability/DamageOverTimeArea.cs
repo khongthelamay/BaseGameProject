@@ -22,13 +22,18 @@ namespace Core
         public int[] EnemiesTargetId { get; set; } = new int[30];
         public int EnemiesCount { get; set; }
 
-        [field: SerializeField] public float Duration {get; private set;}
+        [field: SerializeField] public float Duration {get; protected set;}
         [field: SerializeField] public float TickRate {get; private set;}
         [field: SerializeField] public BigNumber DamagePerTick {get; private set;}
         [field: SerializeField] public bool IsCritical {get; private set;}
 
-        private CancellationTokenSource CancellationTokenSource {get; set;}
-        
+        protected CancellationTokenSource CancellationTokenSource {get; set;}
+
+        private void OnDestroy()
+        {
+            StopDamageOverTime();
+        }
+
         public virtual DamageOverTimeArea WithAxis(int axis)
         {
             return this;
@@ -61,8 +66,7 @@ namespace Core
                 if (!IsFindAnyEnemyTarget()) continue;
                 for (int i = 0; i < EnemiesCount; i++)
                 {
-                    Enemies[i].WillTakeDamage(EnemiesTargetId[i], DamagePerTick);
-                    Enemies[i].TakeDamage(EnemiesTargetId[i], DamagePerTick, DamageType, IsCritical);
+                    OnDamageOverTimeTick(Enemies[i], EnemiesTargetId[i]);
                 }
                 await UniTask.Delay((int)(TickRate * 1000), cancellationToken: CancellationTokenSource.Token);
                 Duration -= TickRate;
@@ -72,7 +76,12 @@ namespace Core
                 }
             }
         }
-        
+
+        protected virtual void OnDamageOverTimeTick(Enemy enemy, int enemyId)
+        {
+            enemy.WillTakeDamage(enemyId, DamagePerTick);
+            enemy.TakeDamage(enemyId, DamagePerTick, DamageType, IsCritical);
+        }
         
         public DamageOverTimeArea OnSpawn()
         {
@@ -84,7 +93,7 @@ namespace Core
             StopDamageOverTime();
         }
 
-        private bool IsFindAnyEnemyTarget()
+        protected bool IsFindAnyEnemyTarget()
         {
             EnemiesCount = BattleManager.GetEnemyAroundNonAlloc(Transform.position, Radius, Enemies);
             if (EnemiesCount == 0) return false;

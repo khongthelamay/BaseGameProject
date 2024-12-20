@@ -1,4 +1,7 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading;
+using Core.SimplePool;
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using UnityEngine;
 
 namespace Core
@@ -9,10 +12,10 @@ namespace Core
         [field: SerializeField] public Animator Animator {get; private set;}
         [field: SerializeField] public string AnimationName {get; private set;}
 
-        public override UniTask StartDamageOverTime()
+        protected override void OnDamageOverTimeTick(Enemy enemy, int enemyId)
         {
-            Animator.Play(AnimationName);
-            return base.StartDamageOverTime();
+            base.OnDamageOverTimeTick(enemy, enemyId);
+            enemy.AddStatusEffect(new IceSlowStatusEffect(100, TickRate + 0.1f));
         }
 
         public override void StopDamageOverTime()
