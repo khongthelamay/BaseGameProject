@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0024878230154351bf4063d7cdee9841, type: 3}
   m_Name: GlacialStrikeAbility
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: f036741df302c404198f7d9ec81d7bf8, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: db6cc695503ed1f43883372499f1d689, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Glacial Strike
   <Description>k__BackingField: Deals 1000% attack damage to the target, freezing
     them for 1.5s, reducing their movement speed by 50% and reducing their magic
     resistance by 50 for 5s
-  <Cooldown>k__BackingField: 10
+  <Cooldown>k__BackingField: 3
   <DamageType>k__BackingField: 1
   <DelayFrame>k__BackingField: 12
   <DamageScale>k__BackingField: 1
+  <StunDuration>k__BackingField: 1.5
   <GlacialStrikeArea>k__BackingField: {fileID: 8764484152433144607, guid: 35a8e19e7f6dc2044a26b651c82c2ab3, type: 3}

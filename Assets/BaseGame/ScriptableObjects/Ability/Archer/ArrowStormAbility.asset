@@ -19,7 +19,13 @@ MonoBehaviour:
     summon a rain of arrows that deal 1000% attack damage
   <ArrowStormRate>k__BackingField: 20
   <DamageType>k__BackingField: 0
-  <DelayFrame>k__BackingField: 9
+  <DelayFrame>k__BackingField: 12
   <DamageScale>k__BackingField: 10
   <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: 2204e1d69d94e5648a78a3d74a31ab21, type: 3}
-  <VisualEffect>k__BackingField: {fileID: 1269208306258414625, guid: 6dfd646a434a1a14cb52c16fc7b446dc, type: 3}
+  <VisualEffect>k__BackingField: {fileID: 905268929525011096, guid: 6dfd646a434a1a14cb52c16fc7b446dc, type: 3}
+  <Range>k__BackingField:
+    <UsingAxis>k__BackingField: 1
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: {x: 2, y: 1}
+    <Vertical>k__BackingField: {x: 1, y: 2}
+    <NoneAxis>k__BackingField: {x: 0, y: 0}

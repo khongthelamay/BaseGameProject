@@ -44,7 +44,7 @@ namespace Core
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
             await DelaySample(DamageDelayFrame - VisualDelayFrame, tickRate, ct);
-            VisualEffect.Spawn(EnemyTarget.Transform.position, Quaternion.identity);
+            VisualEffect.Spawn(EnemyTarget.Transform.position, Quaternion.identity).Play();
             await DelaySample(VisualDelayFrame, tickRate, ct);
             if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, isCritical)) return;
             await DelaySample(30 - DamageDelayFrame, tickRate, ct);

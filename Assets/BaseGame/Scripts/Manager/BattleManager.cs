@@ -251,6 +251,27 @@ namespace Manager
             }
             return count;
         }
+        public int GetEnemyAroundNonAlloc(Vector3 position, Vector2 range, Enemy[] enemies)
+        {
+            int count = 0;
+            foreach (var e in EnemyList)
+            {
+                if (count >= enemies.Length) break;
+                if (e.WillBeDead) continue;
+                if (e.IsDead) continue;
+                if (IsInRange(position, range, e.Transform.position))
+                {
+                    enemies[count] = e;
+                    count++;
+                }
+            }
+            return count;
+        }
+        private bool IsInRange(Vector3 position, Vector2 range, Vector3 targetPosition)
+        {
+            return Mathf.Abs(position.x - targetPosition.x) <= Mathf.Abs(range.x/2) && 
+                   Mathf.Abs(position.y - targetPosition.y) <= Mathf.Abs(range.y/2);
+        }
         public int GetAlliesAroundNonAlloc(Hero hero, Hero[]  heroes)
         {
             int count = 0;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3309961036848459466}
   - component: {fileID: 302807761893440880}
   m_Layer: 0
-  m_Name: Air
+  m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,8 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5775814996585503590}
-  - component: {fileID: 1160092100160092222}
-  - component: {fileID: 1010798410872354817}
+  - component: {fileID: 4937647121705468183}
   m_Layer: 0
   m_Name: ArcherCastEffect
   m_TagString: Untagged
@@ -118,7 +117,7 @@ Transform:
   - {fileID: 3309961036848459466}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1160092100160092222
+--- !u!114 &4937647121705468183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,30 +126,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 8765647811091025310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2311926aa04bab861730458cfc8dbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 923361170eac4dec9fd0e1c660f9d14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SelfDespawnTime>k__BackingField: 700
-  <Animator>k__BackingField: {fileID: 1010798410872354817}
-  <AnimationName>k__BackingField: ArcherCastEffect
---- !u!95 &1010798410872354817
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8765647811091025310}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c86acf9b959141848b85b2d34d9e440b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  <Speed>k__BackingField: 1
+  <Sample>k__BackingField: 30
+  <UsingAxis>k__BackingField: 0
+  <Axis>k__BackingField: 0
+  <SpriteLayerHorizontal>k__BackingField: []
+  <SpriteLayerVertical>k__BackingField: []
+  <SpriteLayers>k__BackingField:
+  - <SpriteRenderer>k__BackingField: {fileID: 302807761893440880}
+    <SpriteList>k__BackingField:
+    - {fileID: 21300000, guid: e998f33422837324a8289ea59e0575d4, type: 3}
+    - {fileID: 21300000, guid: ba98c01a9bf66354da0d6f6b10a1b770, type: 3}
+    - {fileID: 21300000, guid: b43c6db2c51109b45a5b99bc7da3820e, type: 3}
+    - {fileID: 21300000, guid: 0db099bc32e10dc418a6832d45945e28, type: 3}
+    - {fileID: 21300000, guid: 68daa88bbe2153d4c82e52d4828c32cc, type: 3}
+    - {fileID: 21300000, guid: 626f1bda5ac217b499301447f8c9aa0e, type: 3}
+    - {fileID: 21300000, guid: 7165bca3d3abf70489912868d0b457ef, type: 3}
+    - {fileID: 21300000, guid: 0f8b4d0b76097ac4ca48cbd1e92ff9f7, type: 3}
+    - {fileID: 21300000, guid: db8125ac5379fda49b90bb7b9ba5abee, type: 3}
+    - {fileID: 21300000, guid: 2822c5fde1a38314e937da7bb1c44d23, type: 3}
+    - {fileID: 21300000, guid: 8205a1359d4f9e040a37e6c247831f2f, type: 3}
+    - {fileID: 21300000, guid: 6e52d3c0e36113f49a150272c690fd5e, type: 3}
+    - {fileID: 21300000, guid: a2244a8b1d584dd469ec373f7f7490dd, type: 3}
+    - {fileID: 21300000, guid: 97e5f30937cbafa42ad3a681e2c6fdcd, type: 3}
+    - {fileID: 21300000, guid: 06c2782c256686a4da7258376ee860f1, type: 3}
+    - {fileID: 21300000, guid: b1a6fd7926862ef41801ab8d801b3055, type: 3}
+    - {fileID: 21300000, guid: 87c8e03722523414ebcf999741bec2ba, type: 3}
+    - {fileID: 21300000, guid: 56e0d50145659ab4c8d016764c97916c, type: 3}
+    - {fileID: 21300000, guid: e95898cd4fa2478468a0839542ec0e7e, type: 3}
+    - {fileID: 21300000, guid: 321882306c5119b41b955519c5157928, type: 3}
+    - {fileID: 21300000, guid: befb605b393029c4abb23e584e860bb1, type: 3}

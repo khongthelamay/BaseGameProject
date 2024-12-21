@@ -21,4 +21,4 @@ MonoBehaviour:
   <DamageType>k__BackingField: 0
   <DelayFrame>k__BackingField: 8
   <DamageScale>k__BackingField: 4
-  <VisualEffect>k__BackingField: {fileID: 59243937270460902, guid: 50d4b12e7bbdff849af0966037193296, type: 3}
+  <VisualEffect>k__BackingField: {fileID: 6874774198589771541, guid: 50d4b12e7bbdff849af0966037193296, type: 3}

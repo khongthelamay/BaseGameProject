@@ -21,4 +21,10 @@ MonoBehaviour:
   <DamageType>k__BackingField: 1
   <DelayFrame>k__BackingField: 9
   <DamageScale>k__BackingField: 5
-  <VisualEffect>k__BackingField: {fileID: 973761196660631073, guid: 2dfd8dcee2811844490a3e1b755b74fa, type: 3}
+  <VisualEffect>k__BackingField: {fileID: 6874576067928622848, guid: 1fea8906f2fd69349a990c52af993671, type: 3}
+  <Range>k__BackingField:
+    <UsingAxis>k__BackingField: 0
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: {x: 0, y: 0}
+    <Vertical>k__BackingField: {x: 0, y: 0}
+    <NoneAxis>k__BackingField: {x: 1, y: 1}

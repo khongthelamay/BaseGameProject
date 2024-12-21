@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2274619316628992876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2007600793767181629}
+  - component: {fileID: 1467988527968875773}
+  m_Layer: 0
+  m_Name: Graphic 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2007600793767181629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274619316628992876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7333223340870617970}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1467988527968875773
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274619316628992876}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1046391515
+  m_SortingLayer: 2
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 4, y: 4}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &6857145986686372230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7333223340870617970}
+  - component: {fileID: 1675422713866916995}
+  m_Layer: 0
+  m_Name: SavageBlastEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7333223340870617970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857145986686372230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2007600793767181629}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1675422713866916995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857145986686372230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 923361170eac4dec9fd0e1c660f9d14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Speed>k__BackingField: 1
+  <Sample>k__BackingField: 30
+  <Sprite>k__BackingField:
+    <UsingAxis>k__BackingField: 0
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: []
+    <Vertical>k__BackingField: []
+    <NoneAxis>k__BackingField:
+    - <SpriteRenderer>k__BackingField: {fileID: 1467988527968875773}
+      <SpriteList>k__BackingField:
+      - {fileID: 21300000, guid: 630b3bafa58ccc444b453928c5ab15c0, type: 3}
+      - {fileID: 21300000, guid: b0855843774dd034d9594b6d7e6def81, type: 3}
+      - {fileID: 21300000, guid: b2bb63003a0b9e44ab05c465cbf70c6c, type: 3}
+      - {fileID: 21300000, guid: 06616d8ffe27c7944851ac68f66a5903, type: 3}
+      - {fileID: 21300000, guid: 59d2e7d1e0860e24a966552c718fa78d, type: 3}
+      - {fileID: 21300000, guid: 84b80aee3d203754ba9348f5f37a7842, type: 3}
+      - {fileID: 21300000, guid: be96e518911255c45aeb2800e857d167, type: 3}
+      - {fileID: 21300000, guid: c9dbbe4486a20c14d9c3a9500d819cbd, type: 3}
+      - {fileID: 21300000, guid: 9ae087b5bc9113b428b8447bba318972, type: 3}
+      - {fileID: 21300000, guid: 2974fe76a76b7174082e7f2b910b4aef, type: 3}
+      - {fileID: 21300000, guid: 5f03b87e9dcb9d145a6ed031f866cde9, type: 3}
+      - {fileID: 21300000, guid: 35dcc7bfda351a64680f8e5918507094, type: 3}
+      - {fileID: 21300000, guid: b4f458d6f5950624688a1ca5e3b6b8f9, type: 3}
+      - {fileID: 21300000, guid: fb02aaf277f279d4fa008699461b17a4, type: 3}
+      - {fileID: 21300000, guid: 5a98724cd5ecc8444a8096cc363af21f, type: 3}
+      - {fileID: 21300000, guid: c2f295ed36693b0408da191f63da4e26, type: 3}
+      - {fileID: 21300000, guid: f62f18a9ddd1e4a429fb0403ad3daade, type: 3}
+      - {fileID: 21300000, guid: ac37f2e0b6fa20d4da4f5c4743722bf2, type: 3}

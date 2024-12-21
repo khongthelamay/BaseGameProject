@@ -17,3 +17,7 @@ MonoBehaviour:
   <Name>k__BackingField: Roaring Strength
   <Description>k__BackingField: Attacks that hit the target have 10% chance to increase
     the Attack Damage of all nearby allies by 20% for 3 seconds
+  <RoaringStrengthRate>k__BackingField: 10
+  <DamageType>k__BackingField: 0
+  <DamageDelayFrame>k__BackingField: 13
+  <DamageScale>k__BackingField: 1

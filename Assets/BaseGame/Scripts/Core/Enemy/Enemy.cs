@@ -1,9 +1,11 @@
 ﻿using System;
+using Core.GameStatusEffect;
 using Core.SimplePool;
 using LitMotion;
 using LitMotion.Extensions;
 using Manager;
 using R3;
+using Sirenix.OdinInspector;
 using TW.ACacheEverything;
 using TW.Reactive.CustomComponent;
 using TW.Utility.CustomComponent;
@@ -16,7 +18,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Core
 {
-    public partial class Enemy : ACachedMonoBehaviour, IPoolAble<Enemy>, IAbilityTargetAble, IStatusEffectAble, ISlowAble
+    public partial class Enemy : ACachedMonoBehaviour, IPoolAble<Enemy>, IAbilityTargetAble, IStatusEffectAble, ISlowAble, IStunAble
     {
         private static int EnemyIdCounter { get; set; } = 0;
         private BattleManager BattleManagerCache { get; set; }
@@ -34,7 +36,8 @@ namespace Core
         [field: SerializeField] public float Deep { get; private set; }
         [field: SerializeField] public int PhysicalArmor { get; private set; }
         [field: SerializeField] public int MagicalArmor { get; private set; }
-        public ReactiveValue<float> SlowAmount { get; set; }
+        [field: SerializeField, ReadOnly] public SerializableReactiveProperty<float> SlowAmount { get; set; }
+        [field: SerializeField, ReadOnly] public SerializableReactiveProperty<bool> IsStun { get; set; }
         public int MoveAxis { get; private set; }
         private MotionHandle movementMotionHandle;
         public bool WillBeDead => FutureHealthPoint <= 0;
@@ -42,10 +45,17 @@ namespace Core
 
         private void Awake()
         {
-            SlowAmount = new ReactiveValue<float>(0);
-            SlowAmount.ReactiveProperty.Subscribe(OnSlowAmountChanged).AddTo(this);
+            SlowAmount = new SerializableReactiveProperty<float>(0);
+            SlowAmount.Subscribe(OnSlowAmountChangedCache).AddTo(this);
+            IsStun = new SerializableReactiveProperty<bool>(false);
+            IsStun.Subscribe(OnStunChangedCache).AddTo(this);
         }
-    
+
+        private void OnDestroy()
+        {
+            StatusEffectStack.Stop();
+        }
+
         public Enemy InitStats(BigNumber healthPoint, float movementSpeed)
         {
             CurrentHealthPoint = healthPoint;
@@ -78,7 +88,7 @@ namespace Core
             CurrentPoint = (CurrentPoint + 1) % MovePoint.Length;
             Vector3 targetPosition = MovePoint[CurrentPoint].position + Vector3.forward * Deep;
             Vector3 moveDirection = (targetPosition - currentPosition).normalized;
-            MoveAxis = Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y) ? -1 : 1;
+            MoveAxis = Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y) ? 1 : -1;
             float distance = Vector3.Distance(currentPosition, targetPosition);
             float duration = distance / MovementSpeed;
             Transform.localScale = currentPosition.x < targetPosition.x ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
@@ -88,10 +98,8 @@ namespace Core
                 .BindToPosition(Transform);
             movementMotionHandle.PlaybackSpeed = PlaybackSpeed.Value;
             PlaybackSpeed.ReactiveProperty.Subscribe(OnPlaybackSpeedChangedCache).AddTo(this);
-        
         }
-
-
+        
         [ACacheMethod]
         private void OnPlaybackSpeedChanged(float speed)
         {
@@ -137,7 +145,12 @@ namespace Core
         [ACacheMethod]
         public void OnSlowAmountChanged(float slowAmount)
         {
-            PlaybackSpeed.Value = MovementSpeedMultiplier.GetMovementSpeedMultiplier(slowAmount);
+            PlaybackSpeed.Value = IsStun.Value ? 0 : MovementSpeedMultiplier.GetMovementSpeedMultiplier(slowAmount);
+        }
+        [ACacheMethod]
+        public void OnStunChanged(bool isStun)
+        {
+            PlaybackSpeed.Value = isStun ? 0 : MovementSpeedMultiplier.GetMovementSpeedMultiplier(SlowAmount.Value);
         }
         public Enemy OnSpawn()
         {

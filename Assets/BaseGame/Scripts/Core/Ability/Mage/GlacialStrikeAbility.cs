@@ -12,7 +12,8 @@ namespace Core
         [field: SerializeField] public DamageType DamageType {get; private set;}
         [field: SerializeField] public int DelayFrame {get; private set;}
         [field: SerializeField] public float DamageScale {get; private set;}
-        [field: SerializeField] public DamageOverTimeArea GlacialStrikeArea {get; private set;}
+        [field: SerializeField] public float StunDuration {get; private set;}
+        [field: SerializeField] public GlacialStrikeArea GlacialStrikeArea {get; private set;}
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
         public override void OnEnterBattleField()
@@ -43,11 +44,17 @@ namespace Core
             Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
             GlacialStrikeArea.Spawn(EnemyTarget.Transform.position, Quaternion.identity)
-                .Setup(DamageType, 1f, 5f, 0.2f, damageDeal, isCritical)
-                .WithAxis(EnemyTarget.MoveAxis);
+                .Setup(DamageType, 1.5f, 5f, 0.2f, damageDeal, isCritical)
+                .WithAxis(EnemyTarget.MoveAxis)
+                .As<GlacialStrikeArea>()
+                .WithStunDuration(StunDuration)
+                .StartDamageOverTimeHandle();
             await DelaySample(30 - DelayFrame, tickRate, ct);
         }
 
-
+        public void ChangeStunDuration(float duration)
+        {
+            StunDuration += duration;
+        }
     }
 }

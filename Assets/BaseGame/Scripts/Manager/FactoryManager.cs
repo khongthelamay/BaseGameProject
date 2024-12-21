@@ -33,6 +33,7 @@ namespace Manager
         [field: SerializeField] private VisualEffect FusionEffect {get; set;}
         public void CreateDamageNumber(Vector3 position, BigNumber damage, DamageType damageType, bool isCritical = false)
         {
+            return;
             Color textColor = TextColor[(int)damageType * 2 + (isCritical ? 1 : 0)];
             string damageText = $"{damage.ToStringUI()}{(isCritical ? "!" : "")}";
             int textSize = TextSize[isCritical ? 1 : 0];

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8940918263982302267}
   - component: {fileID: 7488088521384935774}
   m_Layer: 0
-  m_Name: MainGraphic
+  m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1046391515
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,9 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3834835548655234236}
-  - component: {fileID: 712575758300291786}
-  - component: {fileID: 59243937270460902}
-  - component: {fileID: 1869028027757847440}
+  - component: {fileID: 6874774198589771541}
   m_Layer: 0
   m_Name: FeralStrikeEffect
   m_TagString: Untagged
@@ -119,28 +117,7 @@ Transform:
   - {fileID: 8940918263982302267}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &712575758300291786
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9150687194807116962}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b85ec31c3c4ebd54a99886c392e9f5d1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &59243937270460902
+--- !u!114 &6874774198589771541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,21 +126,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 9150687194807116962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2311926aa04bab861730458cfc8dbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 923361170eac4dec9fd0e1c660f9d14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SelfDespawnTime>k__BackingField: 667
-  <Animator>k__BackingField: {fileID: 712575758300291786}
-  <AnimationName>k__BackingField: FeralStrikeEffect
---- !u!210 &1869028027757847440
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9150687194807116962}
-  m_Enabled: 1
-  m_SortingLayerID: 1046391515
-  m_SortingLayer: 2
-  m_SortingOrder: 100
-  m_SortAtRoot: 0
+  <Speed>k__BackingField: 1
+  <Sample>k__BackingField: 30
+  <UsingAxis>k__BackingField: 0
+  <Axis>k__BackingField: 0
+  <SpriteLayerHorizontal>k__BackingField: []
+  <SpriteLayerVertical>k__BackingField: []
+  <SpriteLayers>k__BackingField:
+  - <SpriteRenderer>k__BackingField: {fileID: 7488088521384935774}
+    <SpriteList>k__BackingField:
+    - {fileID: 21300000, guid: 766861ef07d1ae34894f4c1cd6bcb458, type: 3}
+    - {fileID: 21300000, guid: 92932f86986bada4f92f24fb1b0208f5, type: 3}
+    - {fileID: 21300000, guid: f7889539d9d3f1b4a9882198bb1fecb1, type: 3}
+    - {fileID: 21300000, guid: 5c5d3ee6553d22348928c7cc6d7261fc, type: 3}
+    - {fileID: 21300000, guid: ac2cdbd6308b17244a054d0784bc837f, type: 3}
+    - {fileID: 21300000, guid: 297aa9ad107fe5d4b941d10376ed3666, type: 3}
+    - {fileID: 21300000, guid: dcfa34c56509f704fb97a29992b41763, type: 3}
+    - {fileID: 21300000, guid: 6ba4a88c7996a8646b1845ed021299df, type: 3}
+    - {fileID: 21300000, guid: 2852d40f762d59548a062aa982eafe55, type: 3}
+    - {fileID: 21300000, guid: 0081529661d0bb24ba4ae8c9c72a684b, type: 3}
+    - {fileID: 21300000, guid: 72464f4c65c0cb94c9984b85ee093c6b, type: 3}
+    - {fileID: 21300000, guid: 2dc08f12730c6cf4eb5b963aa8e7b992, type: 3}
+    - {fileID: 21300000, guid: 44a3e4fc37c270541ab6db9c7592b51b, type: 3}
+    - {fileID: 21300000, guid: 2181cbe3a8db1e1408d964ac4e215fc3, type: 3}
+    - {fileID: 21300000, guid: 611290dfa790b64438092ded89fd28bf, type: 3}
+    - {fileID: 21300000, guid: 53b4250cb4d44214db4382c926dbd21f, type: 3}
+    - {fileID: 21300000, guid: dbfec697017a1364dbc808612c38271e, type: 3}
+    - {fileID: 21300000, guid: 0d544da6dab26f74fa5f3d0977419181, type: 3}
+    - {fileID: 21300000, guid: e7819e6ea8146684b8840c9219bf0577, type: 3}

@@ -16,7 +16,6 @@ namespace Core.WolfAbility
         [field: SerializeField] public DamageType DamageType {get; private set;}
         [field: SerializeField] public int CriticalRateBonus {get; private set;}
         [field: SerializeField] public int DelayFrame {get; private set;}
-        [field: SerializeField] public VisualEffect VisualEffect {get; private set;}
         private MotionHandle DurationMotionHandle { get; set; }
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
@@ -50,9 +49,6 @@ namespace Core.WolfAbility
             if (!EnemyTarget.WillTakeDamage(EnemyTargetId, damageDeal)) return;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill2Animation(attackSpeed);
-            VisualEffect visualEffect = VisualEffect.Spawn(Owner.Transform.position, Quaternion.identity, Owner.GraphicGroupTransform);
-            visualEffect.WithSpeed(attackSpeed);
-            visualEffect.Transform.localScale = Vector3.one;
             await DelaySample(DelayFrame, tickRate, ct);
             if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, isCritical)) return;
             StartDuration();

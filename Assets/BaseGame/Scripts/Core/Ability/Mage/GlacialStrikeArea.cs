@@ -1,33 +1,59 @@
 ﻿using System.Threading;
+using Core.GameStatusEffect;
 using Core.SimplePool;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using TW.Utility.CustomType;
 using UnityEngine;
 
 namespace Core
 {
     public class GlacialStrikeArea : DamageOverTimeArea
     {
-        private static readonly int Axis = Animator.StringToHash("Axis");
-        [field: SerializeField] public Animator Animator {get; private set;}
-        [field: SerializeField] public string AnimationName {get; private set;}
+        [field: SerializeField] public float StunDuration {get; private set;}
 
-        protected override void OnDamageOverTimeTick(Enemy enemy, int enemyId)
-        {
-            base.OnDamageOverTimeTick(enemy, enemyId);
-            enemy.AddStatusEffect(new IceSlowStatusEffect(100, TickRate + 0.1f));
-        }
+        [field: SerializeField] public SpriteForceDurationVisualEffect GroundEffect {get; private set;}
+        [field: SerializeField] public SpriteForceDurationVisualEffect IceEffect {get; private set;}
 
-        public override void StopDamageOverTime()
-        {
-            base.StopDamageOverTime();
-        }
+        private bool IsFirstTickDamage { get; set; }
+
         
-
-        public override DamageOverTimeArea WithAxis(int axis)
+        public GlacialStrikeArea WithStunDuration(float stunDuration)
         {
-            Animator.SetFloat(Axis, axis);
-            return base.WithAxis(axis);
+            StunDuration = stunDuration;
+            return this;
+        }
+
+        public override void StartDamageOverTimeHandle()
+        {
+            GroundEffect.Spawn(Transform.position, Quaternion.identity, Transform)
+                .WithAxis(Range.Axis)
+                .WithDuration(Duration)
+                .Play();
+            base.StartDamageOverTimeHandle();
+        }
+
+        protected override UniTask StartDamageOverTime()
+        {
+            IsFirstTickDamage = true;
+            return base.StartDamageOverTime();
+        }
+
+        protected override void OnDamageOverTimeTick(Enemy[] enemies, int[] enemiesId)
+        {
+            base.OnDamageOverTimeTick(enemies, enemiesId);
+            for (int i = 0; i < EnemiesCount; i++)
+            {
+                if (enemies[i].Id != enemiesId[i]) continue;
+                enemies[i].AddStatusEffect(new IceSlowStatusEffect(50, TickRate + 0.1f));
+            }
+            if (!IsFirstTickDamage) return;
+            for (int i = 0; i < EnemiesCount; i++)
+            {
+                if (enemies[i].Id != enemiesId[i]) continue;
+                enemies[i].AddStatusEffect(new IceStunStatusEffect(StunDuration, IceEffect));
+            }
+            IsFirstTickDamage = false;
         }
     }
 }

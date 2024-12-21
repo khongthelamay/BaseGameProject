@@ -1,6 +1,9 @@
-﻿using TW.Reactive.CustomComponent;
+﻿using R3;
 
-public interface ISlowAble
+namespace Core.GameStatusEffect
 {
-    public ReactiveValue<float> SlowAmount { get; set; }
+    public interface ISlowAble
+    {
+        public SerializableReactiveProperty<float> SlowAmount { get; set; }
+    }
 }

@@ -9,9 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8967627187220176433}
-  - component: {fileID: 6010404349196228423}
-  - component: {fileID: 6454451967173134728}
-  - component: {fileID: 7613897513242655471}
+  - component: {fileID: 5780247989719270425}
   m_Layer: 0
   m_Name: HowlOfRageEffect
   m_TagString: Untagged
@@ -35,28 +33,7 @@ Transform:
   - {fileID: 5427909063805799566}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6010404349196228423
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3678750298011787881}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e259241eb2da793408ced9b5415f1be1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6454451967173134728
+--- !u!114 &5780247989719270425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,24 +42,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 3678750298011787881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2311926aa04bab861730458cfc8dbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 923361170eac4dec9fd0e1c660f9d14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SelfDespawnTime>k__BackingField: 600
-  <Animator>k__BackingField: {fileID: 6010404349196228423}
-  <AnimationName>k__BackingField: HowlOfRageEffect
---- !u!210 &7613897513242655471
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3678750298011787881}
-  m_Enabled: 1
-  m_SortingLayerID: 1046391515
-  m_SortingLayer: 2
-  m_SortingOrder: 100
-  m_SortAtRoot: 0
+  <Speed>k__BackingField: 1
+  <Sample>k__BackingField: 30
+  <UsingAxis>k__BackingField: 0
+  <Axis>k__BackingField: 0
+  <SpriteLayerHorizontal>k__BackingField: []
+  <SpriteLayerVertical>k__BackingField: []
+  <SpriteLayers>k__BackingField:
+  - <SpriteRenderer>k__BackingField: {fileID: 2107694058687472610}
+    <SpriteList>k__BackingField:
+    - {fileID: 21300000, guid: b00688b6457614d4d90a60aa985db998, type: 3}
+    - {fileID: 21300000, guid: 8f1d654be439a5c43b83d1c561e98360, type: 3}
+    - {fileID: 21300000, guid: c7e9fb712b188444fb8d42905ec4ecd0, type: 3}
+    - {fileID: 21300000, guid: c274ceaf00c904142997e8f45bab54b6, type: 3}
+    - {fileID: 21300000, guid: 2404d891a1ee23f4bb7708e70367df32, type: 3}
+    - {fileID: 21300000, guid: ef847bb3ab764424f8aa3ce8116b818e, type: 3}
+    - {fileID: 21300000, guid: ff069d91ef8729742a8bb39ac7c8907f, type: 3}
+    - {fileID: 21300000, guid: bb8598a9a2300a94e869f0108dedf0a5, type: 3}
+    - {fileID: 21300000, guid: 37b32ef7b2ff4ee4cb33e433693be58c, type: 3}
+    - {fileID: 21300000, guid: bb3b3f826e4be004eb27984955061742, type: 3}
+    - {fileID: 21300000, guid: d0de1f578ef560642ae81f4b09932815, type: 3}
+    - {fileID: 21300000, guid: 9045243c5662474488f80dab5ba5f4d6, type: 3}
+    - {fileID: 21300000, guid: c4ae4f34f03407d40a3d716e0e7c891b, type: 3}
+    - {fileID: 21300000, guid: 4dc8da26d2750c649b2589a664867361, type: 3}
+    - {fileID: 21300000, guid: 23e7051d5f8054c4dac31d4e0e6a9b82, type: 3}
+    - {fileID: 21300000, guid: c323923c7945587498e16e859244c78b, type: 3}
+    - {fileID: 21300000, guid: 401fd10c09056b24dbea3ccdd9ade810, type: 3}
 --- !u!1 &8529193353863495200
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,9 +141,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1046391515
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

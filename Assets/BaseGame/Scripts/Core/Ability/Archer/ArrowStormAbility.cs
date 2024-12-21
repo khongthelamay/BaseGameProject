@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Core
 {
     [CreateAssetMenu(fileName = "ArrowStormAbility", menuName = "Ability/Archer/ArrowStormAbility")]
-    public partial class ArrowStormAbility : ActiveAbility, IAbilityTargetAroundEnemy
+    public partial class ArrowStormAbility : ActiveAbility, IAbilityTargetInRangeEnemy
     {
         [field: SerializeField] public int ArrowStormRate {get; private set;}
         [field: SerializeField] public DamageType DamageType {get; private set;}
@@ -18,10 +18,12 @@ namespace Core
 
         [field: SerializeField] public Projectile Projectile {get; private set;}
         [field: SerializeField] public VisualEffect VisualEffect {get; private set;}
+        [field: SerializeField] public AxisDetection<Vector2> Range {get; set;}
 
         private Transform SpawnPosition {get; set;}
-        public float Radius { get; } = 2f;
+
         public Enemy EnemyTarget { get; set; }
+        public int EnemyTargetId { get; set; }
         public Enemy[] Enemies { get; set; } = new Enemy[30];
         public int[] EnemiesTargetId { get; set; } = new int[30];
         public int EnemiesCount { get; set; }
@@ -61,16 +63,16 @@ namespace Core
             }
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
-            await DelaySample(DelayFrame, tickRate, ct);
             VisualEffect.Spawn(EnemyTarget.Transform.position, Quaternion.identity)
                 .WithSpeed(attackSpeed)
-                .WithAxis(EnemyTarget.MoveAxis > 0 ? -1 : 1);
-            await DelaySample(3, tickRate, ct);
+                .WithAxis(EnemyTarget.MoveAxis)
+                .Play();
+            await DelaySample(DelayFrame, tickRate, ct);
             for (int i = 0; i < EnemiesCount; i++)
             {
                 Enemies[i].TakeDamage(EnemiesTargetId[i], damageDeal, DamageType ,isCritical);
             }
-            await DelaySample(30 - DelayFrame -3, tickRate, ct);
+            await DelaySample(30 - DelayFrame, tickRate, ct);
         }
     }
 }

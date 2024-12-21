@@ -4,6 +4,7 @@ using Core.SimplePool;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Manager;
+using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
 using TW.Utility.CustomType;
 using UnityEngine;
@@ -13,21 +14,22 @@ namespace Core
     public class DamageOverTimeArea : ACachedMonoBehaviour, IPoolAble<DamageOverTimeArea>
     {
         private BattleManager BattleManagerCache { get; set; }
-        public BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
-        public Hero Owner { get; private set; }
+        private BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
         [field: SerializeField] public DamageType DamageType {get; private set;}
-        [field: SerializeField] public float Radius {get; private set;}
 
-        public Enemy[] Enemies { get; set; } = new Enemy[30];
-        public int[] EnemiesTargetId { get; set; } = new int[30];
-        public int EnemiesCount { get; set; }
+        [field: SerializeField] public float Radius {get; private set;}
+        private Enemy[] Enemies { get; set; } = new Enemy[30];
+        private int[] EnemiesTargetId { get; set; } = new int[30];
+        protected int EnemiesCount { get; private set; }
 
         [field: SerializeField] public float Duration {get; protected set;}
         [field: SerializeField] public float TickRate {get; private set;}
         [field: SerializeField] public BigNumber DamagePerTick {get; private set;}
         [field: SerializeField] public bool IsCritical {get; private set;}
+        [field: SerializeField] public AxisDetection<Vector2> Range {get; private set;}
 
-        protected CancellationTokenSource CancellationTokenSource {get; set;}
+
+        private CancellationTokenSource CancellationTokenSource {get; set;}
 
         private void OnDestroy()
         {
@@ -36,9 +38,10 @@ namespace Core
 
         public virtual DamageOverTimeArea WithAxis(int axis)
         {
+            Range.Axis = axis;
             return this;
         }
-        public DamageOverTimeArea Setup(DamageType damageType, float radius, float duration, float tickRate, BigNumber damagePerTick, bool isCritical)
+        public virtual DamageOverTimeArea Setup(DamageType damageType, float radius, float duration, float tickRate, BigNumber damagePerTick, bool isCritical)
         {
             DamageType = damageType;
             Radius = radius;
@@ -46,16 +49,20 @@ namespace Core
             TickRate = tickRate;
             DamagePerTick = damagePerTick;
             IsCritical = isCritical;
-            StartDamageOverTime().Forget();
             return this;
         }
-        public virtual void StopDamageOverTime()
+        public virtual void StartDamageOverTimeHandle()
+        {
+            StartDamageOverTime().Forget();
+        }
+        protected virtual void StopDamageOverTime()
         {
             CancellationTokenSource?.Cancel();
             CancellationTokenSource?.Dispose();
             CancellationTokenSource = null;
         }
-        public virtual async UniTask StartDamageOverTime()
+
+        protected virtual async UniTask StartDamageOverTime()
         {
             StopDamageOverTime();
             CancellationTokenSource = new CancellationTokenSource();
@@ -64,10 +71,7 @@ namespace Core
                                .WithCancellation(CancellationTokenSource.Token))
             {
                 if (!IsFindAnyEnemyTarget()) continue;
-                for (int i = 0; i < EnemiesCount; i++)
-                {
-                    OnDamageOverTimeTick(Enemies[i], EnemiesTargetId[i]);
-                }
+                OnDamageOverTimeTick(Enemies, EnemiesTargetId);
                 await UniTask.Delay((int)(TickRate * 1000), cancellationToken: CancellationTokenSource.Token);
                 Duration -= TickRate;
                 if (Duration <= 0)
@@ -76,26 +80,29 @@ namespace Core
                 }
             }
         }
-
-        protected virtual void OnDamageOverTimeTick(Enemy enemy, int enemyId)
+        protected virtual void OnDamageOverTimeTick(Enemy[] enemies, int[] enemiesId)
         {
-            enemy.WillTakeDamage(enemyId, DamagePerTick);
-            enemy.TakeDamage(enemyId, DamagePerTick, DamageType, IsCritical);
+            for (int i = 0; i < EnemiesCount; i++)
+            {
+                enemies[i].WillTakeDamage(enemiesId[i], DamagePerTick);
+                enemies[i].TakeDamage(enemiesId[i], DamagePerTick, DamageType, IsCritical);
+            }
         }
         
-        public DamageOverTimeArea OnSpawn()
+        public virtual DamageOverTimeArea OnSpawn()
         {
             return this;
         }
 
-        public void OnDespawn()
+        public virtual void OnDespawn()
         {
             StopDamageOverTime();
         }
 
-        protected bool IsFindAnyEnemyTarget()
+        private bool IsFindAnyEnemyTarget()
         {
-            EnemiesCount = BattleManager.GetEnemyAroundNonAlloc(Transform.position, Radius, Enemies);
+            Vector2 currentRange = Range.Current;
+            EnemiesCount = BattleManager.GetEnemyAroundNonAlloc(Transform.position, currentRange, Enemies);
             if (EnemiesCount == 0) return false;
             EnemiesTargetId = new int[EnemiesCount];
             for (int i = 0; i < EnemiesCount; i++)
@@ -103,6 +110,22 @@ namespace Core
                 EnemiesTargetId[i] = Enemies[i].Id;
             }
             return true;
+        }
+        private int GetEnemyInRange(Vector2 range)
+        {
+            return BattleManager.GetEnemyAroundNonAlloc(Transform.position, range, Enemies);
+        }
+
+        public T As<T>() where T : DamageOverTimeArea
+        {
+            return this as T;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Vector2 currentRange = Range.Current;
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireCube(Transform.position, currentRange);
         }
     }
 }

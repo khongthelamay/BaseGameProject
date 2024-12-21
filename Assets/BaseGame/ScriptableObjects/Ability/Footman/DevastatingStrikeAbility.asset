@@ -21,5 +21,5 @@ MonoBehaviour:
   <DamageType>k__BackingField: 0
   <DamageDelayFrame>k__BackingField: 12
   <VisualDelayFrame>k__BackingField: 3
-  <DamageScale>k__BackingField: 50
-  <VisualEffect>k__BackingField: {fileID: 8492937274167069282, guid: 842ea55bf7f24524e9b9f007fdc5a509, type: 3}
+  <DamageScale>k__BackingField: 5
+  <VisualEffect>k__BackingField: {fileID: 1767141239260871325, guid: 842ea55bf7f24524e9b9f007fdc5a509, type: 3}

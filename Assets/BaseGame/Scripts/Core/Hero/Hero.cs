@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core.GameStatusEffect;
 using Core.SimplePool;
 using Manager;
 using Sirenix.OdinInspector;
@@ -19,7 +20,7 @@ using UnityEditor;
 namespace Core
 {
     [SelectionBase]
-    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero>
+    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero>, IStatusEffectAble
     {
         private static Vector3[] VectorFacing { get; set; } = new Vector3[2]
         {
@@ -69,6 +70,7 @@ namespace Core
 
 
         private StateMachine StateMachine { get; set; }
+        private StatusEffectStack StatusEffectStack { get; set; }
         [field: SerializeField] private int BaseAttackDamage { get; set; }
         [field: SerializeField] private float BaseAttackSpeed { get; set; }
         [field: SerializeField] private float BaseAttackRange { get; set; }
@@ -95,8 +97,7 @@ namespace Core
             return attackDamage;
         }
 
-        public float AttackSpeed =>
-            BaseAttackSpeed * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackSpeed).Value / 100);
+        public float AttackSpeed => BaseAttackSpeed * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackSpeed).Value / 100);
 
         public float AttackRange => BaseAttackRange;
         public float CriticalRate => BaseCriticalRate + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalRate).Value;
@@ -120,11 +121,13 @@ namespace Core
         public void OnDestroy()
         {
             StateMachine.Stop();
+            StatusEffectStack.Stop();
         }
 
         public virtual Hero OnSpawn()
         {
             InitStateMachine();
+            InitStatusEffectStack();
             InitStat();
             ResetAbility();
             SetVisible(true);
@@ -136,6 +139,7 @@ namespace Core
         public virtual void OnDespawn()
         {
             StateMachine.Stop();
+            StatusEffectStack.Stop();
             BattleManager.Instance.UnregisterHero(this);
         }
 
@@ -144,6 +148,11 @@ namespace Core
             StateMachine = new StateMachine();
             StateMachine.RegisterState(HeroSleepState);
             StateMachine.Run();
+        }
+        private void InitStatusEffectStack()
+        {
+            StatusEffectStack = new StatusEffectStack(this);
+            StatusEffectStack.Run();
         }
 
         private void InitStat()
@@ -335,6 +344,16 @@ namespace Core
         public void ChangeCriticalRate(int rate)
         {
             BaseCriticalRate += rate;
+        }
+
+        public void AddStatusEffect(StatusEffect statusEffect)
+        {
+            StatusEffectStack.Add(statusEffect);
+        }
+
+        public void RemoveStatusEffect(StatusEffect statusEffect)
+        {
+            StatusEffectStack.Remove(statusEffect);
         }
     }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1971635219064172897}
   - component: {fileID: 2523286312399163252}
   m_Layer: 0
-  m_Name: MainGraphic
+  m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1046391515
+  m_SortingLayer: 2
+  m_SortingOrder: 100
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,9 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9104630515342556560}
-  - component: {fileID: 6157178517638356110}
-  - component: {fileID: 8492937274167069282}
-  - component: {fileID: 5682603515233609971}
+  - component: {fileID: 1767141239260871325}
   m_Layer: 0
   m_Name: DevastatingStrikeEffect
   m_TagString: Untagged
@@ -119,28 +117,7 @@ Transform:
   - {fileID: 1971635219064172897}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6157178517638356110
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6611859241003872983}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0e6dce2d5d05b1c48a5ad58a3f2d161f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8492937274167069282
+--- !u!114 &1767141239260871325
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,21 +126,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6611859241003872983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2311926aa04bab861730458cfc8dbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 923361170eac4dec9fd0e1c660f9d14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SelfDespawnTime>k__BackingField: 367
-  <Animator>k__BackingField: {fileID: 6157178517638356110}
-  <AnimationName>k__BackingField: DevastatingStrikeEffect
---- !u!210 &5682603515233609971
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6611859241003872983}
-  m_Enabled: 1
-  m_SortingLayerID: 1046391515
-  m_SortingLayer: 2
-  m_SortingOrder: 100
-  m_SortAtRoot: 0
+  <Speed>k__BackingField: 1
+  <Sample>k__BackingField: 30
+  <Sprite>k__BackingField:
+    <UsingAxis>k__BackingField: 0
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: []
+    <Vertical>k__BackingField: []
+    <NoneAxis>k__BackingField:
+    - <SpriteRenderer>k__BackingField: {fileID: 2523286312399163252}
+      <SpriteList>k__BackingField:
+      - {fileID: 21300000, guid: fa19e48f2222e1741a0100ce4e3ea691, type: 3}
+      - {fileID: 21300000, guid: 42370bf4710c8db4b8e68358714fb3e9, type: 3}
+      - {fileID: 21300000, guid: ceec7e076847e9a4a85b13091a829624, type: 3}
+      - {fileID: 21300000, guid: 09a56636c2a227b43bb593fbe4472f2f, type: 3}
+      - {fileID: 21300000, guid: 623a690281e04d843b5607df0b6e38f1, type: 3}
+      - {fileID: 21300000, guid: 31a9bc07d6501e6468e7051bb3213fd4, type: 3}
+      - {fileID: 21300000, guid: f12c9903d9f6a534b81bba9138e70c23, type: 3}
+      - {fileID: 21300000, guid: f2540415fd0dc58438885367ebb29e21, type: 3}
+      - {fileID: 21300000, guid: 2d3016523114cc547bb64d3d9ea30584, type: 3}
+      - {fileID: 21300000, guid: a6d29db293b713641853b169bf6a0100, type: 3}
+      - {fileID: 21300000, guid: 83ca9ad1eba22944287b35ed42081258, type: 3}
