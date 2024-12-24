@@ -16,3 +16,4 @@ MonoBehaviour:
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Armor Break
   <Description>k__BackingField: Reduces the armor of all enemies by 50
+  <ArmorReduction>k__BackingField: 50

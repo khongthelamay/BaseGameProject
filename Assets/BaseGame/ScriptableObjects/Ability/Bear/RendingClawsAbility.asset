@@ -16,3 +16,6 @@ MonoBehaviour:
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Rending Claws
   <Description>k__BackingField: Every 3rd attack is guaranteed to be a critical hit
+  <AttackCount>k__BackingField: 0
+  <DamageType>k__BackingField: 0
+  <DelayFrame>k__BackingField: 6

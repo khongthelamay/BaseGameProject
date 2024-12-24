@@ -16,6 +16,7 @@ namespace Manager
 {
     public class FactoryManager : Singleton<FactoryManager>
     {
+        [field: SerializeField] public bool IsHideTextDamage {get; private set;}
         [field: Title("Damage Number")]
         [field: SerializeField] private DamageNumber DamageNumberMesh {get; set;}
         [field: SerializeField] private Color[] TextColor {get; set;}
@@ -33,7 +34,7 @@ namespace Manager
         [field: SerializeField] private VisualEffect FusionEffect {get; set;}
         public void CreateDamageNumber(Vector3 position, BigNumber damage, DamageType damageType, bool isCritical = false)
         {
-            return;
+            if (IsHideTextDamage) return;
             Color textColor = TextColor[(int)damageType * 2 + (isCritical ? 1 : 0)];
             string damageText = $"{damage.ToStringUI()}{(isCritical ? "!" : "")}";
             int textSize = TextSize[isCritical ? 1 : 0];

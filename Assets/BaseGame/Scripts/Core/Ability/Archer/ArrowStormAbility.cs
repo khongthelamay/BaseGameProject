@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Core
 {
     [CreateAssetMenu(fileName = "ArrowStormAbility", menuName = "Ability/Archer/ArrowStormAbility")]
-    public partial class ArrowStormAbility : ActiveAbility, IAbilityTargetInRangeEnemy
+    public partial class ArrowStormAbility : ActiveAbility, IAbilityTargetEnemiesInRange
     {
         [field: SerializeField] public int ArrowStormRate {get; private set;}
         [field: SerializeField] public DamageType DamageType {get; private set;}

@@ -18,3 +18,13 @@ MonoBehaviour:
   <Description>k__BackingField: Unleashes an attack dealing 1000% AOE damage and
     reducing enemy armor by 10 for 3 seconds
   <Cooldown>k__BackingField: 10
+  <DamageType>k__BackingField: 0
+  <DelayFrame1>k__BackingField: 11
+  <DelayFrame2>k__BackingField: 10
+  <DamageScale>k__BackingField: 10
+  <Range>k__BackingField:
+    <UsingAxis>k__BackingField: 0
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: {x: 0, y: 0}
+    <Vertical>k__BackingField: {x: 0, y: 0}
+    <NoneAxis>k__BackingField: {x: 1.5, y: 1.5}

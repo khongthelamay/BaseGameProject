@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Core
 {
     [CreateAssetMenu(fileName = "SavageBlastAbility", menuName = "Ability/Boar/SavageBlastAbility")]
-    public partial class SavageBlastAbility : ActiveCooldownAbility, IAbilityTargetInRangeEnemy
+    public partial class SavageBlastAbility : ActiveCooldownAbility, IAbilityTargetEnemiesInRange
     {
         [field: SerializeField] public DamageType DamageType {get; private set;}
         [field: SerializeField] public int DelayFrame {get; private set;}

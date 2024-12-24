@@ -21,3 +21,11 @@ MonoBehaviour:
   <DamageType>k__BackingField: 0
   <DamageDelayFrame>k__BackingField: 13
   <DamageScale>k__BackingField: 1
+  <AttackDamageBuff>k__BackingField: 20
+  <BuffDuration>k__BackingField: 3
+  <AlliesRange>k__BackingField:
+    <UsingAxis>k__BackingField: 0
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: {x: 0, y: 0}
+    <Vertical>k__BackingField: {x: 0, y: 0}
+    <NoneAxis>k__BackingField: {x: 5, y: 5}

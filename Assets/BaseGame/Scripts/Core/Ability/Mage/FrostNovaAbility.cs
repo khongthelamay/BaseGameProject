@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Core
 {
     [CreateAssetMenu(fileName = "FrostNovaAbility", menuName = "Ability/Mage/FrostNovaAbility")]
-    public partial class FrostNovaAbility : ActiveAbility, IAbilityTargetInRangeEnemy
+    public partial class FrostNovaAbility : ActiveAbility, IAbilityTargetEnemiesInRange
     {
         [field: SerializeField] public int FrostNovaRate {get; private set;}
         [field: SerializeField] public DamageType DamageType {get; private set;}

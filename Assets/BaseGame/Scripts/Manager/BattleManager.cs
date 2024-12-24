@@ -254,14 +254,30 @@ namespace Manager
         public int GetEnemyAroundNonAlloc(Vector3 position, Vector2 range, Enemy[] enemies)
         {
             int count = 0;
-            foreach (var e in EnemyList)
+            foreach (Enemy enemy in EnemyList)
             {
                 if (count >= enemies.Length) break;
-                if (e.WillBeDead) continue;
-                if (e.IsDead) continue;
-                if (IsInRange(position, range, e.Transform.position))
+                if (enemy.WillBeDead) continue;
+                if (enemy.IsDead) continue;
+                if (IsInRange(position, range, enemy.Transform.position))
                 {
-                    enemies[count] = e;
+                    enemies[count] = enemy;
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int GetHeroAroundNonAlloc(Vector3 position, Vector2 range, Hero[] heroes)
+        {
+            int count = 0;
+            foreach (Hero hero in HeroList)
+            {
+                if (count >= heroes.Length) break;
+                if (hero == null) continue;
+                if (!hero.IsInBattleState()) continue;
+                if (IsInRange(position, range, hero.Transform.position))
+                {
+                    heroes[count] = hero;
                     count++;
                 }
             }

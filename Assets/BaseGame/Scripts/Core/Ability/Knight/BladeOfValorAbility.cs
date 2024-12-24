@@ -1,28 +1,48 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
+using TW.Utility.CustomType;
 using UnityEngine;
 
 namespace Core
 {
     [CreateAssetMenu(fileName = "BladeOfValorAbility", menuName = "Ability/Knight/BladeOfValorAbility")]
-    public class BladeOfValorAbility : ActiveCooldownAbility
+    public class BladeOfValorAbility : ActiveCooldownAbility, IAbilityTargetAnEnemy
     {
+        [field: SerializeField] public DamageType DamageType {get; private set;}
+        [field: SerializeField] public int DamageDelayFrame {get; private set;}
+        [field: SerializeField] public float DamageScale {get; private set;}
+        public Enemy EnemyTarget { get; set; }
+        public int EnemyTargetId { get; set; }
+        
         public override void OnEnterBattleField()
         {
+            StartCooldownHandle();
         }
 
         public override void OnExitBattleField()
         {
+            StopCooldownHandle();
         }
 
         public override bool CanUseAbility()
         {
-            return false;
+            if (IsOnCooldown) return false;
+            return this.IsFindAnyEnemyTarget();
         }
 
-        public override UniTask UseAbility(TickRate tickRate, CancellationToken ct)
+        public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            return UniTask.CompletedTask;
+            ResetCooldown();
+            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical) * DamageScale;
+            float attackSpeed = Owner.AttackSpeed;
+            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, damageDeal)) return;
+            Owner.SetFacingPosition(EnemyTarget.Transform.position);
+            Owner.HeroAnim.PlaySkill2Animation(attackSpeed);
+            await DelaySample(DamageDelayFrame, tickRate, ct);
+            if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, isCritical)) return;
+            await DelaySample(30 - DamageDelayFrame, tickRate, ct);
         }
+
+
     }
 }

@@ -17,4 +17,10 @@ MonoBehaviour:
   <Name>k__BackingField: Judgment Strike
   <Description>k__BackingField: Attacks that hit the target have a 20% chance to
     deal 1000% attack damage in AOE and reduce the affected enemy's armor by 100
-    for 3 seconds
+    for 5 seconds
+  <JudgmentStrikeRate>k__BackingField: 20
+  <DamageType>k__BackingField: 0
+  <DamageDelayFrame>k__BackingField: 10
+  <DamageScale>k__BackingField: 10
+  <ArmorReduce>k__BackingField: 100
+  <ArmorReduceDuration>k__BackingField: 5

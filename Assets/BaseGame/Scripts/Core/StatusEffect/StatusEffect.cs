@@ -9,8 +9,12 @@ namespace Core.GameStatusEffect
     {
         public enum Type
         {
-            Slow,
-            Stun,
+            Slow = 0,
+            Stun = 1,
+            
+            PhysicalArmorChange = 2,
+            
+            AttackDamageChange = 100,
         }
 
         [field: SerializeField] public Type StatusEffectType { get; private set; }

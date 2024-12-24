@@ -18,7 +18,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Core
 {
-    public partial class Enemy : ACachedMonoBehaviour, IPoolAble<Enemy>, IAbilityTargetAble, IStatusEffectAble, ISlowAble, IStunAble
+    public partial class Enemy : ACachedMonoBehaviour, IPoolAble<Enemy>, IAbilityTargetAble, IStatusEffectAble, ISlowAble, IStunAble, IPhysicalArmorChangeAble
     {
         private static int EnemyIdCounter { get; set; } = 0;
         private BattleManager BattleManagerCache { get; set; }
@@ -38,6 +38,8 @@ namespace Core
         [field: SerializeField] public int MagicalArmor { get; private set; }
         [field: SerializeField, ReadOnly] public SerializableReactiveProperty<float> SlowAmount { get; set; }
         [field: SerializeField, ReadOnly] public SerializableReactiveProperty<bool> IsStun { get; set; }
+        [field: SerializeField, ReadOnly] public int PhysicalArmorChange { get; set; }
+        [field: SerializeField, ReadOnly] public int MagicalArmorChange { get; set; }
         public int MoveAxis { get; private set; }
         private MotionHandle movementMotionHandle;
         public bool WillBeDead => FutureHealthPoint <= 0;
@@ -134,10 +136,10 @@ namespace Core
             {
                 case DamageType.Physical:
                     float physicalArmorReduction = BattleManager.GetGlobalBuff(GlobalBuff.Type.PhysicalArmorReduction).Value;
-                    return DamageMultiplier.GetDamageMultiplier(PhysicalArmor - (int)physicalArmorReduction);
+                    return DamageMultiplier.GetDamageMultiplier(PhysicalArmor - (int)physicalArmorReduction + PhysicalArmorChange);
                 case DamageType.Magical:
                     float magicalArmorReduction = BattleManager.GetGlobalBuff(GlobalBuff.Type.MagicArmorReduction).Value;
-                    return DamageMultiplier.GetDamageMultiplier(MagicalArmor - (int)magicalArmorReduction);
+                    return DamageMultiplier.GetDamageMultiplier(MagicalArmor - (int)magicalArmorReduction + MagicalArmorChange);
                 default:
                     return 1;
             }
@@ -185,6 +187,8 @@ namespace Core
         {
             Graphic.color = color;
         }
+
+
     }
     
     public static class TransformExtension

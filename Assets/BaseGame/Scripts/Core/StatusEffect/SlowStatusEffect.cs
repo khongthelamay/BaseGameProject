@@ -6,10 +6,10 @@ namespace Core.GameStatusEffect
 
     public class SlowStatusEffect : StatusEffect
     {
-        [field: SerializeField] public float SlowAmount { get; private set; }
+        [field: SerializeField] public int SlowAmount { get; private set; }
         [field: SerializeField] public float Duration { get; private set; }
 
-        public SlowStatusEffect(float slowAmount, float duration) : base(Type.Slow, true)
+        public SlowStatusEffect(int slowAmount, float duration) : base(Type.Slow, true)
         {
             SlowAmount = slowAmount;
             Duration = duration;

@@ -17,4 +17,7 @@ MonoBehaviour:
   <Name>k__BackingField: Blade of Valor
   <Description>k__BackingField: Strikes enemies within range, dealing 3000% Attack
     damage
-  <Cooldown>k__BackingField: 0
+  <Cooldown>k__BackingField: 10
+  <DamageType>k__BackingField: 0
+  <DamageDelayFrame>k__BackingField: 14
+  <DamageScale>k__BackingField: 30
