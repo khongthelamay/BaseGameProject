@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using Core.GameStatusEffect;
 using Core.SimplePool;
 using Cysharp.Threading.Tasks;
 using LitMotion;
@@ -15,24 +16,23 @@ namespace Core.WolfAbility
         [field: SerializeField] public int HowlOfRageRate {get; private set;}
         [field: SerializeField] public DamageType DamageType {get; private set;}
         [field: SerializeField] public int CriticalRateBonus {get; private set;}
+        [field: SerializeField] public float CriticalRateBonusDuration {get; private set;}
         [field: SerializeField] public int DelayFrame {get; private set;}
-        private MotionHandle DurationMotionHandle { get; set; }
+        [field: SerializeField] public VisualEffect VisualEffect {get; private set;}
+
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
+        public BigNumber FinalDamage { get; set; }
+
         public override void OnEnterBattleField()
         {
-            DurationMotionHandle.TryCancel();
+            
         }
 
         public override void OnExitBattleField()
         {
-            if (DurationMotionHandle.IsActive())
-            {
-                Owner.ChangeCriticalRate(-CriticalRateBonus);
-            }
-            DurationMotionHandle.TryCancel();
+            
         }
-
         public override bool CanUseAbility()
         {
             if (Random.Range(0, 100) >= HowlOfRageRate) return false;
@@ -41,39 +41,22 @@ namespace Core.WolfAbility
 
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-
-            
-            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical);
+            BigNumber attackDamage = Owner.AttackDamage(out bool isCritical);
             float attackSpeed = Owner.AttackSpeed;
             
-            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, damageDeal)) return;
+            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, attackDamage, DamageType, out BigNumber finalDamage)) return;
+            FinalDamage = finalDamage;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill2Animation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
-            if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, isCritical)) return;
-            StartDuration();
+            if (!EnemyTarget.TakeDamage(EnemyTargetId, FinalDamage, DamageType, isCritical)) return;
+            VisualEffect.Spawn(EnemyTarget.Transform.position, Quaternion.identity, EnemyTarget.Transform)
+                .WithLocalScale(1)
+                .Play();
+            Owner.AddStatusEffect(new CriticalChanceChangeEffect(CriticalRateBonus, CriticalRateBonusDuration));
             await DelaySample(30 - DelayFrame, tickRate, ct);
         }
-        public void StartDuration()
-        {
-            if (!DurationMotionHandle.IsActive())
-            {
-                Owner.ChangeCriticalRate(CriticalRateBonus);
-            }
-            else
-            {
-                DurationMotionHandle.Cancel();
-            }
 
-            DurationMotionHandle = LMotion.Create(0, 1, 3)
-                .WithOnComplete(OnEndDurationCache)
-                .RunWithoutBinding();
-        }
-        [ACacheMethod]
-        private void OnEndDuration()
-        {
-            Owner.ChangeCriticalRate(-CriticalRateBonus);
-        }
 
 
     }

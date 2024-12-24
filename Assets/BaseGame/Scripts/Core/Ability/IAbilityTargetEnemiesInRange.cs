@@ -1,4 +1,5 @@
 ﻿using Manager;
+using TW.Utility.CustomType;
 using UnityEngine;
 
 namespace Core
@@ -12,6 +13,7 @@ namespace Core
         public int EnemyTargetId { get; set; }
         public Enemy[] Enemies { get; set; }
         public int[] EnemiesTargetId { get; set; }
+        public BigNumber[] FinalDamage { get; set; }
         public int EnemiesCount { get; set; }
     }
     

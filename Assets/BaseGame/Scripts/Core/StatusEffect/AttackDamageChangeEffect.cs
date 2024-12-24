@@ -5,21 +5,21 @@ namespace Core.GameStatusEffect
     [System.Serializable]
     public class AttackDamageChangeEffect : StatusEffect
     {
-        [field: SerializeField] public float AttackDamageBuff { get; private set; }
+        [field: SerializeField] public float AttackDamageChange { get; private set; }
         [field: SerializeField] public float Duration { get; private set; }
 
-        public AttackDamageChangeEffect(float attackDamageBuff, float duration) : base(Type.AttackDamageChange, true)
+        public AttackDamageChangeEffect(float attackDamageChange, float duration) : base(Type.AttackDamageChange, true)
         {
-            AttackDamageBuff = attackDamageBuff;
+            AttackDamageChange = attackDamageChange;
             Duration = duration;
         }
 
         public override void OnAdd(IStatusEffectAble statusEffectAble)
         {
             base.OnAdd(statusEffectAble);
-            if (statusEffectAble is IAttackDamageChangeAble attackDamageBuffAble)
+            if (statusEffectAble is IAttackDamageChangeAble attackDamageChangeAble)
             {
-                attackDamageBuffAble.AttackDamageChange += AttackDamageBuff;
+                attackDamageChangeAble.AttackDamageChange += AttackDamageChange;
             }
         }
 
@@ -38,7 +38,7 @@ namespace Core.GameStatusEffect
             base.OnRemove(statusEffectAble);
             if (statusEffectAble is IAttackDamageChangeAble attackDamageBuffAble)
             {
-                attackDamageBuffAble.AttackDamageChange -= AttackDamageBuff;
+                attackDamageBuffAble.AttackDamageChange -= AttackDamageChange;
             }
         }
     }

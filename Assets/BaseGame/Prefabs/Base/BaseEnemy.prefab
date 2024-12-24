@@ -154,14 +154,12 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 4405022827370210361}
   <Graphic>k__BackingField: {fileID: 8590130044896966674}
   <Id>k__BackingField: 0
-  <StatusEffectStack>k__BackingField:
-    <StatusEffectList>k__BackingField: []
   <CurrentHealthPoint>k__BackingField:
-    coefficient: 1
-    exponent: 1
+    coefficient: 500
+    exponent: 0
   <FutureHealthPoint>k__BackingField:
-    coefficient: 1
-    exponent: 1
+    coefficient: 500
+    exponent: 0
   <MovementSpeed>k__BackingField: 1.5
   <MovePoint>k__BackingField: []
   <CurrentPoint>k__BackingField: 0
@@ -170,3 +168,9 @@ MonoBehaviour:
   <Deep>k__BackingField: 0
   <PhysicalArmor>k__BackingField: 0
   <MagicalArmor>k__BackingField: 0
+  <SlowAmount>k__BackingField:
+    value: 0
+  <IsStun>k__BackingField:
+    value: 0
+  <PhysicalArmorChange>k__BackingField: 0
+  <MagicalArmorChange>k__BackingField: 0

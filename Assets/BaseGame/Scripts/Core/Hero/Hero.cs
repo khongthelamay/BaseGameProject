@@ -20,7 +20,7 @@ using UnityEditor;
 namespace Core
 {
     [SelectionBase]
-    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero>, IStatusEffectAble, IAttackDamageChangeAble
+    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero>, IStatusEffectAble, IAttackDamageChangeAble, ICriticalChanceChangeAble
     {
 
         private static int HeroIdCounter { get; set; } = 0;
@@ -72,13 +72,14 @@ namespace Core
 
 
         private StateMachine StateMachine { get; set; }
-        private StatusEffectStack StatusEffectStack { get; set; }
+        [field: SerializeField] private StatusEffectStack StatusEffectStack { get; set; }
         [field: SerializeField] private int BaseAttackDamage { get; set; }
         [field: SerializeField] private float BaseAttackSpeed { get; set; }
         [field: SerializeField] private float BaseAttackRange { get; set; }
         [ShowInInspector, ReadOnly] private int BaseCriticalRate { get; set; } = 0;
         [ShowInInspector, ReadOnly] private int BaseCriticalDamage { get; set; } = 150;
-        [ShowInInspector] public float AttackDamageChange { get; set; }
+        [ShowInInspector, ReadOnly] public float AttackDamageChange { get; set; }
+        [ShowInInspector, ReadOnly] public float CriticalChanceChange { get; set; }
         public Rarity HeroRarity => HeroConfigData.HeroRarity;
         
         public BigNumber AttackDamageMultiplier()
@@ -107,7 +108,7 @@ namespace Core
         public float AttackSpeed => BaseAttackSpeed * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackSpeed).Value / 100);
 
         public float AttackRange => BaseAttackRange;
-        public float CriticalRate => BaseCriticalRate + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalRate).Value;
+        public float CriticalRate => BaseCriticalRate + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalRate).Value + CriticalChanceChange;
 
         public float CriticalDamage =>
             BaseCriticalDamage + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalDamage).Value;
@@ -128,6 +129,7 @@ namespace Core
         public void OnDestroy()
         {
             StateMachine.Stop();
+            StatusEffectStack.Clear();
             StatusEffectStack.Stop();
         }
 
@@ -147,6 +149,7 @@ namespace Core
         public virtual void OnDespawn()
         {
             StateMachine.Stop();
+            StatusEffectStack.Clear();
             StatusEffectStack.Stop();
             BattleManager.Instance.UnregisterHero(this);
         }
@@ -357,11 +360,6 @@ namespace Core
             return countCooldownAbility > 0;
         }
 
-        public void ChangeCriticalRate(int rate)
-        {
-            BaseCriticalRate += rate;
-        }
-
         public void AddStatusEffect(StatusEffect statusEffect)
         {
             StatusEffectStack.Add(statusEffect);
@@ -371,6 +369,7 @@ namespace Core
         {
             StatusEffectStack.Remove(statusEffect);
         }
+
 
 
     }

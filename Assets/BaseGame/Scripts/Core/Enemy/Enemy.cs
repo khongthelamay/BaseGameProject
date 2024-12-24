@@ -55,6 +55,7 @@ namespace Core
 
         private void OnDestroy()
         {
+            StatusEffectStack.Clear();  
             StatusEffectStack.Stop();
         }
 
@@ -109,19 +110,20 @@ namespace Core
             movementMotionHandle.PlaybackSpeed = speed;
             Animator.speed = speed;
         }
-        public bool WillTakeDamage(int id, BigNumber attackDamage)
+        public bool WillTakeDamage(int id, BigNumber attackDamage, DamageType damageType, out BigNumber finalDamage)
         {
+            finalDamage = 0;
             if (id != Id) return false;
             if (WillBeDead) return false;
+            finalDamage = attackDamage * GetArmorMultiplier(damageType);
             FutureHealthPoint -= attackDamage;
             return true;
         }
         
-        public bool TakeDamage(int id, BigNumber attackDamage, DamageType damageType, bool isCritical)
+        public bool TakeDamage(int id, BigNumber finalDamage, DamageType damageType, bool isCritical)
         {
             if (id != Id) return false;
             if (IsDead) return false;
-            BigNumber finalDamage = attackDamage * GetArmorMultiplier(damageType);
             FactoryManager.Instance.CreateDamageNumber(Transform.position, finalDamage, damageType, isCritical);
             CurrentHealthPoint -= finalDamage;
             if (CurrentHealthPoint <= 0)
@@ -169,6 +171,7 @@ namespace Core
         public void OnDespawn()
         {
             movementMotionHandle.TryCancel();
+            StatusEffectStack.Clear();
             StatusEffectStack.Stop();
             BattleManager.UnregisterEnemy(this);
         }

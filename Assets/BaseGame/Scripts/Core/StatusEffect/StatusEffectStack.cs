@@ -36,7 +36,16 @@ namespace Core.GameStatusEffect
             IsRunning = true;
             Execute().Forget();
         }
-
+        public void Clear()
+        {
+            PendingStatusEffect.Clear();
+            PendingRemoveStatusEffect.Clear();
+            foreach (StatusEffect statusEffect in StatusEffectList)
+            {
+                statusEffect.OnRemove(Owner);
+            }
+            StatusEffectList.Clear();
+        }
         public void Stop()
         {
             if (!IsRunning) return;

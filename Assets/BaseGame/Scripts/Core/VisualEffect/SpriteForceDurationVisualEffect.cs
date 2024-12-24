@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using System.Threading;
+using Core;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -33,6 +34,7 @@ public class SpriteForceDurationVisualEffect : VisualEffect
     [field: SerializeField] public float Speed { get; private set; } = 1;
     [field: SerializeField] public int Sample { get; private set; } = 30;
     [field: SerializeField] public AxisDetection<SpriteLayer[]> Sprite {get; private set;}
+    private CancellationTokenSource CancellationTokenSource { get; set; }
     public override VisualEffect WithDuration(float duration)
     {
         Duration = duration;
@@ -56,14 +58,28 @@ public class SpriteForceDurationVisualEffect : VisualEffect
         base.OnDespawn();
     }
 
+
     public override VisualEffect Play()
     {
         StartUpdateSprite().Forget();
         return base.Play();
     }
 
+    public override VisualEffect Stop()
+    {
+        CancellationTokenSource?.Cancel();
+        CancellationTokenSource?.Dispose();
+        CancellationTokenSource = null;
+        return base.Stop();
+    }
+
     private async UniTask StartUpdateSprite()
     {
+        CancellationTokenSource?.Cancel();
+        CancellationTokenSource?.Dispose();
+        CancellationTokenSource = null;
+        CancellationTokenSource = new CancellationTokenSource();
+        
         SpriteLayer[] currentSpriteLayers = Sprite.Current;
         
         int waitTime = (int)(1000 / Speed / Sample);
@@ -76,12 +92,12 @@ public class SpriteForceDurationVisualEffect : VisualEffect
             {
                 spriteLayer.UpdateStartSprite(i);
             }
-            await UniTask.Delay(waitTime, cancellationToken: this.GetCancellationTokenOnDestroy());
+            await UniTask.Delay(waitTime, cancellationToken: CancellationTokenSource.Token);
         }
 
         if (holdDuration > 0)
         {
-            await UniTask.Delay(holdDuration, cancellationToken: this.GetCancellationTokenOnDestroy());
+            await UniTask.Delay(holdDuration, cancellationToken: CancellationTokenSource.Token);
         }
         
         for (int i = 0; i < endSpriteCount; i++)
@@ -90,7 +106,7 @@ public class SpriteForceDurationVisualEffect : VisualEffect
             {
                 spriteLayer.UpdateEndSprite(i);
             }
-            await UniTask.Delay(waitTime, cancellationToken: this.GetCancellationTokenOnDestroy());
+            await UniTask.Delay(waitTime, cancellationToken: CancellationTokenSource.Token);
         }
         OnDespawn();
     }

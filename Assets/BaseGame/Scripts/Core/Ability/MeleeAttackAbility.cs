@@ -9,13 +9,14 @@ namespace Core
     {
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical);
+            BigNumber attackDamage = Owner.AttackDamage(out bool isCritical);
             float attackSpeed = Owner.AttackSpeed;
-            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, damageDeal)) return;
+            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, attackDamage, DamageType, out BigNumber finalDamage)) return;
+            FinalDamage = finalDamage;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
-            if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, isCritical)) return;
+            if (!EnemyTarget.TakeDamage(EnemyTargetId, FinalDamage, DamageType, isCritical)) return;
             OnAttackComplete();
             await DelaySample(30 - DelayFrame, tickRate, ct);
         }

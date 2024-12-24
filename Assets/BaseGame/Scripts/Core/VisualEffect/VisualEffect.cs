@@ -13,6 +13,10 @@ namespace Core
         {
             return this;
         }
+        public virtual VisualEffect Stop()
+        {
+            return this;
+        }
         public virtual VisualEffect WithDuration(float duration)
         {
             return this;

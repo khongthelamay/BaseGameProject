@@ -47,30 +47,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 1
   <Sample>k__BackingField: 30
-  <UsingAxis>k__BackingField: 0
-  <Axis>k__BackingField: 0
-  <SpriteLayerHorizontal>k__BackingField: []
-  <SpriteLayerVertical>k__BackingField: []
-  <SpriteLayers>k__BackingField:
-  - <SpriteRenderer>k__BackingField: {fileID: 2107694058687472610}
-    <SpriteList>k__BackingField:
-    - {fileID: 21300000, guid: b00688b6457614d4d90a60aa985db998, type: 3}
-    - {fileID: 21300000, guid: 8f1d654be439a5c43b83d1c561e98360, type: 3}
-    - {fileID: 21300000, guid: c7e9fb712b188444fb8d42905ec4ecd0, type: 3}
-    - {fileID: 21300000, guid: c274ceaf00c904142997e8f45bab54b6, type: 3}
-    - {fileID: 21300000, guid: 2404d891a1ee23f4bb7708e70367df32, type: 3}
-    - {fileID: 21300000, guid: ef847bb3ab764424f8aa3ce8116b818e, type: 3}
-    - {fileID: 21300000, guid: ff069d91ef8729742a8bb39ac7c8907f, type: 3}
-    - {fileID: 21300000, guid: bb8598a9a2300a94e869f0108dedf0a5, type: 3}
-    - {fileID: 21300000, guid: 37b32ef7b2ff4ee4cb33e433693be58c, type: 3}
-    - {fileID: 21300000, guid: bb3b3f826e4be004eb27984955061742, type: 3}
-    - {fileID: 21300000, guid: d0de1f578ef560642ae81f4b09932815, type: 3}
-    - {fileID: 21300000, guid: 9045243c5662474488f80dab5ba5f4d6, type: 3}
-    - {fileID: 21300000, guid: c4ae4f34f03407d40a3d716e0e7c891b, type: 3}
-    - {fileID: 21300000, guid: 4dc8da26d2750c649b2589a664867361, type: 3}
-    - {fileID: 21300000, guid: 23e7051d5f8054c4dac31d4e0e6a9b82, type: 3}
-    - {fileID: 21300000, guid: c323923c7945587498e16e859244c78b, type: 3}
-    - {fileID: 21300000, guid: 401fd10c09056b24dbea3ccdd9ade810, type: 3}
+  <Sprite>k__BackingField:
+    <UsingAxis>k__BackingField: 0
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: []
+    <Vertical>k__BackingField: []
+    <NoneAxis>k__BackingField:
+    - <SpriteRenderer>k__BackingField: {fileID: 2107694058687472610}
+      <SpriteList>k__BackingField:
+      - {fileID: 21300000, guid: 16ef2f75c80f9454a9d9a4b556a24332, type: 3}
+      - {fileID: 21300000, guid: 138628149efd78d4b8794bed8c9d72aa, type: 3}
+      - {fileID: 21300000, guid: 8cd35f80711fd9140a555014b3d29437, type: 3}
+      - {fileID: 21300000, guid: 99103287a4788aa4296c1f143cae9837, type: 3}
+      - {fileID: 21300000, guid: f871e518fb03e83438302e5d5abdbf28, type: 3}
 --- !u!1 &8529193353863495200
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +86,7 @@ Transform:
   m_GameObject: {fileID: 8529193353863495200}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []

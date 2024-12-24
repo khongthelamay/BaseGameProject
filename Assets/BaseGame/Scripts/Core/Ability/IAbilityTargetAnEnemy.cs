@@ -1,4 +1,5 @@
 ﻿using Manager;
+using TW.Utility.CustomType;
 
 namespace Core
 {
@@ -8,6 +9,7 @@ namespace Core
         public BattleManager BattleManager { get; }
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
+        public BigNumber FinalDamage { get; set; }
 
     }
 

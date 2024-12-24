@@ -7,7 +7,7 @@ namespace Core.GameStatusEffect
     public class IceStunStatusEffect : StunStatusEffect
     {
         [field: SerializeField] public VisualEffect StunEffect {get; private set;}
-
+        private VisualEffect SpawnEffect { get; set; }
         public IceStunStatusEffect(float duration, VisualEffect stunEffect) : base(duration)
         {
             StunEffect = stunEffect;
@@ -18,10 +18,18 @@ namespace Core.GameStatusEffect
             base.OnAdd(statusEffectAble);
             if (statusEffectAble is Enemy enemy)
             {
-                StunEffect.Spawn(enemy.transform.position, Quaternion.identity, enemy.transform)
+                SpawnEffect = StunEffect.Spawn(enemy.transform.position, Quaternion.identity, enemy.transform)
                     .WithLocalScale(1)
                     .Play();
             }
+        }
+
+        public override void OnRemove(IStatusEffectAble statusEffectAble)
+        {
+            base.OnRemove(statusEffectAble);
+            if (!SpawnEffect.IsActive()) return;
+            SpawnEffect.Stop();
+            SpawnEffect.Despawn();
         }
     }
 }

@@ -20,11 +20,12 @@ namespace Core
         [field: SerializeField] public float Radius {get; private set;}
         private Enemy[] Enemies { get; set; } = new Enemy[30];
         private int[] EnemiesTargetId { get; set; } = new int[30];
+        private BigNumber[] FinalDamage { get; set; } = new BigNumber[30];
         protected int EnemiesCount { get; private set; }
 
         [field: SerializeField] public float Duration {get; protected set;}
-        [field: SerializeField] public float TickRate {get; private set;}
-        [field: SerializeField] public BigNumber DamagePerTick {get; private set;}
+        [field: SerializeField] public float Interval {get; private set;}
+        [field: SerializeField] public BigNumber DamagePerInterval {get; private set;}
         [field: SerializeField] public bool IsCritical {get; private set;}
         [field: SerializeField] public AxisDetection<Vector2> Range {get; private set;}
 
@@ -41,13 +42,13 @@ namespace Core
             Range.Axis = axis;
             return this;
         }
-        public virtual DamageOverTimeArea Setup(DamageType damageType, float radius, float duration, float tickRate, BigNumber damagePerTick, bool isCritical)
+        public virtual DamageOverTimeArea Setup(DamageType damageType, float radius, float duration, float interval, BigNumber damagePerInterval, bool isCritical)
         {
             DamageType = damageType;
             Radius = radius;
             Duration = duration;
-            TickRate = tickRate;
-            DamagePerTick = damagePerTick;
+            Interval = interval;
+            DamagePerInterval = damagePerInterval;
             IsCritical = isCritical;
             return this;
         }
@@ -70,22 +71,25 @@ namespace Core
             await foreach (AsyncUnit _ in UniTaskAsyncEnumerable.EveryUpdate()
                                .WithCancellation(CancellationTokenSource.Token))
             {
-                if (!IsFindAnyEnemyTarget()) continue;
-                OnDamageOverTimeTick(Enemies, EnemiesTargetId);
-                await UniTask.Delay((int)(TickRate * 1000), cancellationToken: CancellationTokenSource.Token);
-                Duration -= TickRate;
+                if (IsFindAnyEnemyTarget())
+                {
+                    OnDamageOverTimeInterval(Enemies, EnemiesTargetId);
+                }
+                await UniTask.Delay((int)(Interval * 1000), cancellationToken: CancellationTokenSource.Token);
+                Duration -= Interval;
                 if (Duration <= 0)
                 {
                     this.Despawn();
                 }
             }
         }
-        protected virtual void OnDamageOverTimeTick(Enemy[] enemies, int[] enemiesId)
+        protected virtual void OnDamageOverTimeInterval(Enemy[] enemies, int[] enemiesId)
         {
             for (int i = 0; i < EnemiesCount; i++)
             {
-                enemies[i].WillTakeDamage(enemiesId[i], DamagePerTick);
-                enemies[i].TakeDamage(enemiesId[i], DamagePerTick, DamageType, IsCritical);
+                enemies[i].WillTakeDamage(enemiesId[i], DamagePerInterval, DamageType, out BigNumber finalDamage);
+                FinalDamage[i] = finalDamage;
+                enemies[i].TakeDamage(enemiesId[i], FinalDamage[i], DamageType, IsCritical);
             }
         }
         

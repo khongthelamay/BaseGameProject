@@ -26,6 +26,7 @@ namespace Core
         public int EnemyTargetId { get; set; }
         public Enemy[] Enemies { get; set; } = new Enemy[30];
         public int[] EnemiesTargetId { get; set; } = new int[30];
+        public BigNumber[] FinalDamage { get; set; }
         public int EnemiesCount { get; set; }
         private Archer OwnerArcher { get; set; }
 
@@ -59,7 +60,8 @@ namespace Core
 
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal);
+                Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal, DamageType, out BigNumber finalDamage);
+                FinalDamage[i] = finalDamage;
             }
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
@@ -70,7 +72,7 @@ namespace Core
             await DelaySample(DelayFrame, tickRate, ct);
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].TakeDamage(EnemiesTargetId[i], damageDeal, DamageType ,isCritical);
+                Enemies[i].TakeDamage(EnemiesTargetId[i], FinalDamage[i], DamageType ,isCritical);
             }
             await DelaySample(30 - DelayFrame, tickRate, ct);
         }

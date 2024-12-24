@@ -14,6 +14,7 @@ namespace Core
         
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
+        public BigNumber FinalDamage { get; set; }
         public Bear OwnerBear { get; private set; }
         public override Ability WithOwnerHero(Hero owner)
         {
@@ -37,13 +38,14 @@ namespace Core
 
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
-            BigNumber damageDeal = Owner.CriticalAttackDamage();
+            BigNumber attackDamage = Owner.CriticalAttackDamage();
             float attackSpeed = Owner.AttackSpeed;
-            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, damageDeal)) return;
+            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, attackDamage, DamageType, out BigNumber finalDamage)) return;
+            FinalDamage = finalDamage;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
-            if (!EnemyTarget.TakeDamage(EnemyTargetId, damageDeal, DamageType, true)) return;
+            if (!EnemyTarget.TakeDamage(EnemyTargetId, FinalDamage, DamageType, true)) return;
             await DelaySample(30 - DelayFrame, tickRate, ct);
             AttackCount -= 3;
         }

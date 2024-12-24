@@ -39,13 +39,13 @@ namespace Core
             return base.StartDamageOverTime();
         }
 
-        protected override void OnDamageOverTimeTick(Enemy[] enemies, int[] enemiesId)
+        protected override void OnDamageOverTimeInterval(Enemy[] enemies, int[] enemiesId)
         {
-            base.OnDamageOverTimeTick(enemies, enemiesId);
+            base.OnDamageOverTimeInterval(enemies, enemiesId);
             for (int i = 0; i < EnemiesCount; i++)
             {
                 if (enemies[i].Id != enemiesId[i]) continue;
-                enemies[i].AddStatusEffect(new IceSlowStatusEffect(50, TickRate + 0.1f));
+                enemies[i].AddStatusEffect(new IceSlowStatusEffect(50, Interval + 0.1f));
             }
             if (!IsFirstTickDamage) return;
             for (int i = 0; i < EnemiesCount; i++)

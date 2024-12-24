@@ -8,16 +8,18 @@ using Quaternion = UnityEngine.Quaternion;
 namespace Core.TigerAbility
 {
     [CreateAssetMenu(fileName = "SavageRoarAbility", menuName = "Ability/Tiger/SavageRoarAbility")]
-    public class SavageRoarAbility : ActiveCooldownAbility, IAbilityTargetAroundEnemy
+    public class SavageRoarAbility : ActiveCooldownAbility, IAbilityTargetEnemiesInRange
     {
         [field: SerializeField] public DamageType DamageType { get; private set; } 
         [field: SerializeField] public int DamageScale { get; private set; }
         [field: SerializeField] public VisualEffect VisualEffect { get; private set; }
-
-        public float Radius { get; } = 2f;
+        
+        public AxisDetection<Vector2> Range { get; set; }
         public Enemy EnemyTarget { get; set; }
+        public int EnemyTargetId { get; set; }
         public Enemy[] Enemies { get; set; } = new Enemy[30];
         public int[] EnemiesTargetId { get; set; } = new int[30];
+        public BigNumber[] FinalDamage { get; set; }
         public int EnemiesCount { get; set; }
         public Tiger OwnerTiger { get; set; }
 
@@ -52,7 +54,8 @@ namespace Core.TigerAbility
             
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal);
+                Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal, DamageType, out BigNumber finalDamage);
+                FinalDamage[i] = finalDamage;
             }
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill1Animation(attackSpeed);

@@ -18,6 +18,7 @@ namespace Core
         public int EnemyTargetId { get; set; }
         public Enemy[] Enemies { get; set; } = new Enemy[30];
         public int[] EnemiesTargetId { get; set; } = new int[30];
+        public BigNumber[] FinalDamage { get; set; }
         public int EnemiesCount { get; set; }
         
         public override void OnEnterBattleField()
@@ -44,19 +45,20 @@ namespace Core
 
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal * 2);
+                Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal * 2, DamageType, out BigNumber finalDamage);
+                FinalDamage[i] = finalDamage;
             }
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill2Animation(attackSpeed);
             await DelaySample(DelayFrame1, tickRate, ct);
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].TakeDamage(EnemiesTargetId[i], damageDeal, DamageType ,isCritical);
+                Enemies[i].TakeDamage(EnemiesTargetId[i], FinalDamage[i]/2, DamageType ,isCritical);
             }
             await DelaySample(DelayFrame2, tickRate, ct);
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].TakeDamage(EnemiesTargetId[i], damageDeal, DamageType ,isCritical);
+                Enemies[i].TakeDamage(EnemiesTargetId[i], FinalDamage[i]/2, DamageType ,isCritical);
             }
             await DelaySample(30 - DelayFrame1 - DelayFrame2, tickRate, ct);
         }

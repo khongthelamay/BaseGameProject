@@ -22,6 +22,7 @@ namespace Core
         public int EnemyTargetId { get; set; }
         public Enemy[] Enemies { get; set; } = new Enemy[30];
         public int[] EnemiesTargetId { get; set; } = new int[30];
+        public BigNumber[] FinalDamage { get; set; } = new BigNumber[30];
         public int EnemiesCount { get; set; }
         private Boar OwnerBoar { get; set; }
 
@@ -52,7 +53,7 @@ namespace Core
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
             ResetCooldown();
-            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical) * DamageScale;
+            BigNumber attackDamage = Owner.AttackDamage(out bool isCritical) * DamageScale;
             float attackSpeed = Owner.AttackSpeed;
             
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
@@ -60,7 +61,7 @@ namespace Core
 
             await DelaySample(DelayFrame, tickRate, ct);
             Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
-                .Setup(Owner, EnemyTarget, EnemyTargetId, damageDeal, DamageType, isCritical)
+                .Setup(Owner, EnemyTarget, EnemyTargetId, attackDamage, DamageType, isCritical)
                 .WithComplete(OnProjectileMoveCompleteCache);
             await DelaySample(30 - DelayFrame, tickRate, ct);
         }
@@ -79,11 +80,12 @@ namespace Core
             
             for (int i = 0; i < enemiesCount; i++)
             {
-                enemies[i].WillTakeDamage(enemiesTargetId[i], damage);
+                enemies[i].WillTakeDamage(enemiesTargetId[i], damage, DamageType, out BigNumber finalDamage);
+                FinalDamage[i] = finalDamage;
             }
-            for (int i = 0; i < EnemiesCount; i++)
+            for (int i = 0; i < enemiesCount; i++)
             {
-                enemies[i].TakeDamage(enemiesTargetId[i], damage, DamageType ,isCritical);
+                enemies[i].TakeDamage(enemiesTargetId[i], FinalDamage[i], DamageType ,isCritical);
             }
             
         }

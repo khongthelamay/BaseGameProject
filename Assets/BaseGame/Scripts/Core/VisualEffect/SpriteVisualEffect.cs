@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading;
 using Core;
 using Core.SimplePool;
 using Cysharp.Threading.Tasks;
@@ -28,10 +29,19 @@ public class SpriteVisualEffect : VisualEffect
     [field: SerializeField] public float Speed {get; private set;} = 1;
     [field: SerializeField] public int Sample { get; private set; } = 30;
     [field: SerializeField] public AxisDetection<SpriteLayer[]> Sprite {get; private set;}
+    private CancellationTokenSource CancellationTokenSource { get; set; }
     public override VisualEffect Play()
     {
         StartUpdateSprite().Forget();
         return base.Play();
+    }
+
+    public override VisualEffect Stop()
+    {
+        CancellationTokenSource?.Cancel();
+        CancellationTokenSource?.Dispose();
+        CancellationTokenSource = null;
+        return base.Stop();
     }
 
     public override void OnDespawn()
@@ -54,6 +64,11 @@ public class SpriteVisualEffect : VisualEffect
 
     private async UniTask StartUpdateSprite()
     {
+        CancellationTokenSource?.Cancel();
+        CancellationTokenSource?.Dispose();
+        CancellationTokenSource = null;
+        CancellationTokenSource = new CancellationTokenSource();
+        
         SpriteLayer[] currentSpriteLayers = Sprite.Current;
         int waitTime = (int)(1000 / Speed / Sample);
         int spriteCount = GetSpriteCount(currentSpriteLayers);
@@ -63,7 +78,7 @@ public class SpriteVisualEffect : VisualEffect
             {
                 spriteLayer.UpdateSprite(i);
             }
-            await UniTask.Delay(waitTime, cancellationToken: this.GetCancellationTokenOnDestroy());
+            await UniTask.Delay(waitTime, cancellationToken: CancellationTokenSource.Token);
         }
         this.Despawn();
     }

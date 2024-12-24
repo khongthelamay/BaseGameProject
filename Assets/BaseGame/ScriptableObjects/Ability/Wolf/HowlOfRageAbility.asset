@@ -20,5 +20,6 @@ MonoBehaviour:
   <HowlOfRageRate>k__BackingField: 10
   <DamageType>k__BackingField: 0
   <CriticalRateBonus>k__BackingField: 30
+  <CriticalRateBonusDuration>k__BackingField: 3
   <DelayFrame>k__BackingField: 8
   <VisualEffect>k__BackingField: {fileID: 5780247989719270425, guid: d96420a1e5a6a7843bb31adfe7ecee2e, type: 3}
