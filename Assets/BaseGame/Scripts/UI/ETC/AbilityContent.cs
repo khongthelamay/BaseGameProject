@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public class AbilityContent : MonoBehaviour
 {
@@ -29,9 +31,71 @@ public class AbilityContent : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+
+        string originalText = ability.Description;
+        string des = ChangeNumberColor(originalText);
+        
         txtAbilityName.text = ability.Name;
-        txtAbilityDescription.text = ability.Description;
+        txtAbilityDescription.text = des;
         currentAbility = ability;
         AnimShow();
+    }
+    
+    private string ChangeNumberColor(string input)
+    {
+
+        return System.Text.RegularExpressions.Regex.Replace(input, @"(\S*\d+\S*\s*times|\S*\d+\S*\s*seconds|\S*\d+\S*)", match =>
+        {
+            if (match.Value.Contains("seconds"))
+            {
+                return $"<color=#653225>{match.Value}</color>";
+            }
+            return $"<color=#34f16b>{match.Value}</color>";
+        });
+    }
+
+    private void Update()
+    {
+        #if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
+        {
+            DetectClickedObject();
+        }
+        #endif
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                DetectClickedObject();
+            }
+        }
+    }
+    
+    private void DetectClickedObject()
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        
+#if UNITY_EDITOR
+        pointerEventData.position = Input.mousePosition;
+#endif
+        
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            pointerEventData.position = Input.GetTouch(0).position;
+        }
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+        
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject == this.gameObject)
+                return;
+        }
+
+        currentAbility = null;
+        gameObject.SetActive(false);
     }
 }
