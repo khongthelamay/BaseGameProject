@@ -61,7 +61,7 @@ public class ModalArtifactInforContext
 
         public void InitData(ArtifactDataConfig artifactDataConfig, ArtifactInfor artifactInfor) {
 
-            txtName.text = artifactDataConfig.strName;
+            // txtName.text = artifactDataConfig.strName;
             txtDes.text = artifactDataConfig.strDes;
             txtFunDes.text = artifactDataConfig.strFunDes;
             txtLevel.text = $"Lv. {artifactInfor.Level.Value}";

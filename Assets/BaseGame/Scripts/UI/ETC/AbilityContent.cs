@@ -5,6 +5,7 @@ using Core;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class AbilityContent : MonoBehaviour
@@ -15,12 +16,23 @@ public class AbilityContent : MonoBehaviour
     private Sequence mySequence;
     private Ability currentAbility;
     
+    UnityAction<bool> actionCallback;
+
+    public void SetActionCallBack(UnityAction<bool> action)
+    {
+        this.actionCallback = action;
+    }
+
     void AnimShow()
     {
         if (mySequence != null)
             mySequence.Kill();
         mySequence = DOTween.Sequence();
         mySequence.Append(transform.DOScale(1f, .15f).From(.5f).SetEase(Ease.OutBack));
+        mySequence.OnComplete(() =>
+        {
+            actionCallback(true);
+        });
     }
 
     public void InitData(Ability ability)
@@ -43,15 +55,7 @@ public class AbilityContent : MonoBehaviour
     
     private string ChangeNumberColor(string input)
     {
-
-        return System.Text.RegularExpressions.Regex.Replace(input, @"(\S*\d+\S*\s*times|\S*\d+\S*\s*seconds|\S*\d+\S*)", match =>
-        {
-            if (match.Value.Contains("seconds"))
-            {
-                return $"<color=#653225>{match.Value}</color>";
-            }
-            return $"<color=#34f16b>{match.Value}</color>";
-        });
+        return System.Text.RegularExpressions.Regex.Replace(input, @"(\S*\d+\S*\s*times|\S*\d+\S*)", match => $"<color=#34f16b>{match.Value}</color>");
     }
 
     private void Update()
@@ -80,7 +84,6 @@ public class AbilityContent : MonoBehaviour
         pointerEventData.position = Input.mousePosition;
 #endif
         
-
         if (Application.platform == RuntimePlatform.Android)
         {
             pointerEventData.position = Input.GetTouch(0).position;
@@ -96,6 +99,13 @@ public class AbilityContent : MonoBehaviour
         }
 
         currentAbility = null;
+        actionCallback(false);
         gameObject.SetActive(false);
+    }
+
+    public void ClearAnimation()
+    {
+        if (mySequence != null)
+            mySequence.Kill();
     }
 }

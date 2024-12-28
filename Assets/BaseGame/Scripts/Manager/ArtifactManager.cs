@@ -27,22 +27,22 @@ public class ArtifactManager : Singleton<ArtifactManager>
 
     void ChangeCurrentArtifactChoose(ArtifactDataConfig artifactDataConfig)
     {
-        if (artifactDataConfig == null || artifactDataConfig.artifactType == ArtifactType.None)
+        if (artifactDataConfig == null || artifactDataConfig.id == -1)
             return;
-        currentArtifactTemp = GetArtifactInfo(currentArtifactOnChoose.Value.artifactType);
+        currentArtifactTemp = GetArtifactInfo(currentArtifactOnChoose.Value.id);
         ViewOptions options = new ViewOptions(nameof(ModalArtifactInfor));
         ModalContainer.Find(ContainerKey.Modals).Push(options);
     }
 
-    ReactiveValue<ArtifactInfor> GetArtifactInfo(ArtifactType artifactType) {
+    ReactiveValue<ArtifactInfor> GetArtifactInfo(int id) {
 
         for (int i = 0; i < ArtifactInfos.Count; i++)
         {
-            if (ArtifactInfos[i].Value.Id == (int)artifactType)
+            if (ArtifactInfos[i].Value.Id == id)
                 return ArtifactInfos[i];
         }
         ArtifactInfor artifactInfor = new();
-        artifactInfor.Id.Value = (int) artifactType;
+        artifactInfor.Id.Value = id;
         artifactInfor.Level.Value = 0;
         artifactInfor.PiecesAmount.Value = 0;
 
@@ -55,7 +55,7 @@ public class ArtifactManager : Singleton<ArtifactManager>
     }
 
     public void UpgradeLevelArtifact() {
-        currentArtifactTemp = GetArtifactInfo(currentArtifactOnChoose.Value.artifactType);
+        currentArtifactTemp = GetArtifactInfo(currentArtifactOnChoose.Value.id);
 
         currentArtifactTemp.Value.PiecesAmount.Value -= currentArtifactOnChoose.Value.piecesRequire[currentArtifactTemp.Value.Level.Value];
         currentArtifactTemp.Value.Level.Value++;
@@ -67,8 +67,8 @@ public class ArtifactManager : Singleton<ArtifactManager>
     }
 
     [Button]
-    public void AddPieceArtifact(ArtifactType artifactType, int amount) {
-        currentArtifactTemp = GetArtifactInfo(artifactType);
+    public void AddPieceArtifact(int id, int amount) {
+        currentArtifactTemp = GetArtifactInfo(id);
         if (currentArtifactTemp.Value.Level.Value == 0)
             currentArtifactTemp.Value.Level.Value = 1;
         currentArtifactTemp.Value.PiecesAmount.Value += amount;
@@ -76,8 +76,8 @@ public class ArtifactManager : Singleton<ArtifactManager>
     }
 
 
-    public ArtifactDataConfig GetArtifactDataConfig(ArtifactType artifactType) {
-        return ArtifactGlobalConfig.Instance.GetArtifactDataConfig(artifactType);
+    public ArtifactDataConfig GetArtifactDataConfig(int id) {
+        return ArtifactGlobalConfig.Instance.GetArtifactDataConfig(id);
     }
 
     public void IsCanUpgradeArtifact() { }

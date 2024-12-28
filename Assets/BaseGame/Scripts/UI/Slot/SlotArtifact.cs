@@ -16,8 +16,8 @@ public class SlotArtifact : SlotBase <ArtifactDataConfig>
     public override void InitData(ArtifactDataConfig data)
     {
         base.InitData(data);
-        artifactInfor = InGameDataManager.Instance.InGameData.ArtifactData.GetArtifactInfor(data.artifactType);
-        txtName.text = data.strName;
+        artifactInfor = InGameDataManager.Instance.InGameData.ArtifactData.GetArtifactInfor(data.id);
+        //txtName.text = data.strName;
         
 
         isHaveThatArtifact = artifactInfor == null;

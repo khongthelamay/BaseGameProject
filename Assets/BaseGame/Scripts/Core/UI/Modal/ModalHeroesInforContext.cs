@@ -10,7 +10,6 @@ using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
 using Core;
 using System.Collections.Generic;
-using TW.UGUI.Core.Views;
 using UnityEngine.Events;
 
 [Serializable]
@@ -60,6 +59,7 @@ public class ModalHeroesInforContext
         [field: SerializeField] public RectTransform mainRect {get; private set;}
         [field: SerializeField] public AbilityContent abilityContent {get; private set;}
         [field: SerializeField] public Vector2 abilityOffset {get; private set;}
+        [field: SerializeField] public RectTransform narrow {get; private set;}
 
         List<Hero.Job> jobs;
 
@@ -113,6 +113,9 @@ public class ModalHeroesInforContext
             RectTransform slotRect = slotBase.GetComponent<RectTransform>(); 
             RectTransform rect = abilityContent.GetComponent<RectTransform>();
             Vector2 slotAnchoredPosition = slotRect.anchoredPosition + abilityOffset;
+            Vector2 narrowPosition = slotAnchoredPosition;
+            narrowPosition.y = 0;
+            narrow.anchoredPosition = narrowPosition;
             float sizeRect = mainRect.rect.width/2 - rect.rect.width/2;
             slotAnchoredPosition.x = Mathf.Clamp(slotAnchoredPosition.x, sizeRect * 2, sizeRect * 4);
             rect.anchoredPosition = slotAnchoredPosition;
@@ -140,10 +143,16 @@ public class ModalHeroesInforContext
                 .AddTo(View.MainView);
             View.btnExit.onClick.AddListener(Exit);
             View.btnUpgrade.onClick.AddListener(Upgrade);
-
+            View.abilityContent.SetActionCallBack(DisAbleArrow);
+            DisAbleArrow(false);
             View.AnimOpen();
         }
-        
+
+        public void DisAbleArrow(bool active)
+        {
+            View.narrow.gameObject.SetActive(active);
+        }
+
         void ActionAbilityCallBack(SlotBase<Ability> slotBase) {
             View.ShowAbilityInfor(slotBase);
         }
@@ -165,6 +174,7 @@ public class ModalHeroesInforContext
         UniTask IModalLifecycleEvent.Cleanup(Memory<object> args)
         {
             View.piecesProgress.ClearAnimation();
+            View.abilityContent.ClearAnimation();
             return UniTask.CompletedTask;
         }
     }

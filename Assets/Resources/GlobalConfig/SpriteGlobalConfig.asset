@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpriteGlobalConfig
   m_EditorClassIdentifier: 
   sprFramesRarity:
-  - {fileID: 21300000, guid: 379513dd2d51cad40a1c3a86e0d25ce8, type: 3}
-  - {fileID: 21300000, guid: b64a0d8fedbc48a429ec898fb4ef3c29, type: 3}
-  - {fileID: 21300000, guid: 93c161968394e784c88de68e62f49675, type: 3}
-  - {fileID: 21300000, guid: 6cc740f47d622d445bc169d623edabb8, type: 3}
-  - {fileID: 21300000, guid: 145ce6139fad5ca44ae38fac5f6d67a7, type: 3}
+  - {fileID: 21300000, guid: 0af63bd98753f1741a24f79d3dbd983a, type: 3}
+  - {fileID: 21300000, guid: 20d830a3717956941b96336e94ff4731, type: 3}
+  - {fileID: 21300000, guid: 855f13abdf1f2bb4e81bb22a57802df1, type: 3}
+  - {fileID: 21300000, guid: 04c5b19fde8edbc46bfdf9d860049d45, type: 3}
+  - {fileID: 21300000, guid: 0b1b3e0822303f84ebcb9e8561bdf404, type: 3}

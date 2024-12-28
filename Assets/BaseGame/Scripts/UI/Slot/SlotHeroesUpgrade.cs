@@ -8,7 +8,7 @@ public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
     [Header("========= Slot Heroes Upgrade =========")]
     public Animator animator;
     public Image imgBG;
-    public Image imgSubBG;
+    //public Image imgSubBG;
     public ProgressBar pieceProgress;
     public TextMeshProUGUI txtName;
     public TextMeshProUGUI txtRequire;
@@ -28,7 +28,7 @@ public class SlotHeroesUpgrade : SlotBase<HeroConfigData>
         base.InitData(data);
         animator.runtimeAnimatorController = data.ImageAnimatorController;
         imgBG.sprite = SpriteGlobalConfig.Instance.GetFrameSprite(data.HeroRarity);
-        imgSubBG.sprite = imgBG.sprite;
+        //imgSubBG.sprite = imgBG.sprite;
         txtName.text = data.Name;
 
         objUnLock.SetActive(true);

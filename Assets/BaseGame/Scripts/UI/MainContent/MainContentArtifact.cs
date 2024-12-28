@@ -16,7 +16,7 @@ public class MainContentArtifact : MainContent<ArtifactDataConfig>
             slotTemp.InitData(listData[i]);
             slotTemp.SetActionChooseCallBack(ActionSlotCallBack);
 
-            if (InGameDataManager.Instance.InGameData.ArtifactData.IsHaveThatArtiFact(listData[i].artifactType))
+            if (InGameDataManager.Instance.InGameData.ArtifactData.IsHaveThatArtiFact(listData[i].id))
                 slotTemp.transform.SetParent(trsContentParents);
             else 
                 slotTemp.transform.SetParent(trsDeactiveContentParent);
@@ -36,7 +36,7 @@ public class MainContentArtifact : MainContent<ArtifactDataConfig>
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            if (slots[i].slotData.artifactType == (ArtifactType)artifactID)
+            if (slots[i].slotData.id == artifactID)
             {
                 slots[i].ReloadData();
                 return;

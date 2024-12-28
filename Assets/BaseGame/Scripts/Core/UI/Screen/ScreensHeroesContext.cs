@@ -51,8 +51,8 @@ public class ScreensHeroesContext
         [field: SerializeField] public CanvasGroup MainView { get; private set; }
         [field: SerializeField] public MainContentHeroes mainContentHeroes { get; private set; }
         [field: SerializeField] public UIResource resourceMythicPieces { get; private set; }
-        [field: SerializeField] public Button btnGuardian { get; private set; }
-        [field: SerializeField] public Button btnMythic { get; private set; }
+       // [field: SerializeField] public Button btnGuardian { get; private set; }
+       // [field: SerializeField] public Button btnMythic { get; private set; }
         [field: SerializeField] public Button btnTier { get; private set; }
         [field: SerializeField] public Button btnLevel { get; private set; }
 
@@ -116,8 +116,8 @@ public class ScreensHeroesContext
             View.mainContentHeroes.SetActionSlotCallBack(ActionSlotHeroCallBack);
             View.InitData();
 
-            View.btnGuardian.onClick.AddListener(SelectGuardian);
-            View.btnMythic.onClick.AddListener(SelectMythic);
+            //View.btnGuardian.onClick.AddListener(SelectGuardian);
+            //View.btnMythic.onClick.AddListener(SelectMythic);
             View.btnTier.onClick.AddListener(FilterTier);
             View.btnLevel.onClick.AddListener(FilterLevel);
 
@@ -134,15 +134,15 @@ public class ScreensHeroesContext
             View.FilterTier();
         }
 
-        private void SelectMythic()
-        {
-            View.SelectMythic();
-        }
-
-        private void SelectGuardian()
-        {
-            View.SelectGuardian();
-        }
+        // private void SelectMythic()
+        // {
+        //     View.SelectMythic();
+        // }
+        //
+        // private void SelectGuardian()
+        // {
+        //     View.SelectGuardian();
+        // }
 
         private void ChangeData((HeroSave heroData, int heroLevel, int heroPieces) data)
         {
