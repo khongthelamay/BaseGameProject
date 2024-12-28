@@ -5,8 +5,16 @@ using UnityEngine;
 namespace Core
 {
     [CreateAssetMenu(fileName = "ElectricPrecisionAbility", menuName = "Ability/ThunderLizard/ElectricPrecisionAbility")]
-    public class ElectricPrecisionAbility : ActiveAbility
+    public class ElectricPrecisionAbility : PassiveAbility
     {
+        [field: SerializeField] public int AttackCount {get; private set;}
+        private ThunderLizard OwnerThunderLizard { get; set; }
+        public override Ability WithOwnerHero(Hero owner)
+        {
+            OwnerThunderLizard = owner as ThunderLizard;
+            return base.WithOwnerHero(owner);
+        }
+
         public override void OnEnterBattleField()
         {
         }
@@ -15,14 +23,18 @@ namespace Core
         {
         }
 
-        public override bool CanUseAbility()
+        public override Ability ResetAbility()
         {
-            return false;
+            AttackCount = 0;
+            return base.ResetAbility();
         }
 
-        public override UniTask UseAbility(TickRate tickRate, CancellationToken ct)
+        public void AddAttackCount()
         {
-            return UniTask.CompletedTask;
+            AttackCount++;
+            if (AttackCount < 2) return;
+            AttackCount -= 2;
+            OwnerThunderLizard.ForceCriticalCount++;
         }
     }
 }

@@ -6,16 +6,10 @@ using UnityEngine;
 namespace Core
 {
     [CreateAssetMenu(fileName = "RendingClawsAbility", menuName = "Ability/Bear/RendingClawsAbility")]
-    public class RendingClawsAbility : ActiveAbility, IAbilityTargetAnEnemy
+    public class RendingClawsAbility : PassiveAbility
     {
         [field: SerializeField] public int AttackCount {get; private set;}
-        [field: SerializeField] public DamageType DamageType {get; private set;}
-        [field: SerializeField] public int DelayFrame {get; private set;}
-        
-        public Enemy EnemyTarget { get; set; }
-        public int EnemyTargetId { get; set; }
-        public BigNumber FinalDamage { get; set; }
-        public Bear OwnerBear { get; private set; }
+        private Bear OwnerBear { get; set; }
         public override Ability WithOwnerHero(Hero owner)
         {
             OwnerBear = owner as Bear;
@@ -30,28 +24,18 @@ namespace Core
         {
         }
 
-        public override bool CanUseAbility()
+        public override Ability ResetAbility()
         {
-            if (AttackCount < 3) return false;
-            return this.IsFindAnyEnemyTarget();
+            AttackCount = 0;
+            return base.ResetAbility();
         }
 
-        public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
-        {
-            BigNumber attackDamage = Owner.CriticalAttackDamage();
-            float attackSpeed = Owner.AttackSpeed;
-            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, attackDamage, DamageType, out BigNumber finalDamage)) return;
-            FinalDamage = finalDamage;
-            Owner.SetFacingPosition(EnemyTarget.Transform.position);
-            Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
-            await DelaySample(DelayFrame, tickRate, ct);
-            if (!EnemyTarget.TakeDamage(EnemyTargetId, FinalDamage, DamageType, true)) return;
-            await DelaySample(30 - DelayFrame, tickRate, ct);
-            AttackCount -= 3;
-        }
         public void AddAttackCount()
         {
             AttackCount++;
+            if (AttackCount < 2) return;
+            AttackCount -= 2;
+            OwnerBear.ForceCriticalCount++;
         }
 
 

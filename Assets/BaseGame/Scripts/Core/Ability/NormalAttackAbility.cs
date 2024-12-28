@@ -13,7 +13,6 @@ namespace Core
         [field: SerializeField] public int DelayFrame {get; set;}
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
-        public BigNumber FinalDamage { get; set; }
 
         public override bool CanUseAbility()
         {

@@ -20,7 +20,6 @@ namespace Core
         [field: SerializeField] public float Radius {get; private set;}
         private Enemy[] Enemies { get; set; } = new Enemy[30];
         private int[] EnemiesTargetId { get; set; } = new int[30];
-        private BigNumber[] FinalDamage { get; set; } = new BigNumber[30];
         protected int EnemiesCount { get; private set; }
 
         [field: SerializeField] public float Duration {get; protected set;}
@@ -87,9 +86,7 @@ namespace Core
         {
             for (int i = 0; i < EnemiesCount; i++)
             {
-                enemies[i].WillTakeDamage(enemiesId[i], DamagePerInterval, DamageType, out BigNumber finalDamage);
-                FinalDamage[i] = finalDamage;
-                enemies[i].TakeDamage(enemiesId[i], FinalDamage[i], DamageType, IsCritical);
+                enemies[i].TakeDamage(enemiesId[i], DamagePerInterval, DamageType, IsCritical);
             }
         }
         

@@ -17,3 +17,5 @@ MonoBehaviour:
   <Name>k__BackingField: Storm Surge
   <Description>k__BackingField: Each Critical Hit increases your Attack Damage by
     2%
+  <AttackDamageIncrease>k__BackingField: 2
+  <StackCount>k__BackingField: 0

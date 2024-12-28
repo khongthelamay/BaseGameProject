@@ -225,7 +225,6 @@ namespace Manager
             enemy = null;
             foreach (var e in EnemyList)
             {
-                if (e.WillBeDead) continue;
                 if (e.IsDead) continue;
                 if ((hero.Transform.position - e.Transform.position).sqrMagnitude <= hero.AttackRange * hero.AttackRange)
                 {
@@ -241,7 +240,6 @@ namespace Manager
             foreach (var e in EnemyList)
             {
                 if (count >= enemies.Length) break;
-                if (e.WillBeDead) continue;
                 if (e.IsDead) continue;
                 if ((position - e.Transform.position).sqrMagnitude <= radius * radius)
                 {
@@ -257,7 +255,6 @@ namespace Manager
             foreach (Enemy enemy in EnemyList)
             {
                 if (count >= enemies.Length) break;
-                if (enemy.WillBeDead) continue;
                 if (enemy.IsDead) continue;
                 if (IsInRange(position, range, enemy.Transform.position))
                 {

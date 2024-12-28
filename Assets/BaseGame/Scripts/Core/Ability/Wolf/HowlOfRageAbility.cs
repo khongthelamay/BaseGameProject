@@ -22,7 +22,6 @@ namespace Core.WolfAbility
 
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
-        public BigNumber FinalDamage { get; set; }
 
         public override void OnEnterBattleField()
         {
@@ -44,12 +43,10 @@ namespace Core.WolfAbility
             BigNumber attackDamage = Owner.AttackDamage(out bool isCritical);
             float attackSpeed = Owner.AttackSpeed;
             
-            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, attackDamage, DamageType, out BigNumber finalDamage)) return;
-            FinalDamage = finalDamage;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill2Animation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
-            if (!EnemyTarget.TakeDamage(EnemyTargetId, FinalDamage, DamageType, isCritical)) return;
+            if (!EnemyTarget.TakeDamage(EnemyTargetId, attackDamage, DamageType, isCritical)) return;
             VisualEffect.Spawn(EnemyTarget.Transform.position, Quaternion.identity, EnemyTarget.Transform)
                 .WithLocalScale(1)
                 .Play();

@@ -20,10 +20,11 @@ using UnityEditor;
 namespace Core
 {
     [SelectionBase]
-    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero>, IStatusEffectAble, IAttackDamageChangeAble, ICriticalChanceChangeAble
+    public partial class Hero : ACachedMonoBehaviour, IAbilityTargetAble, IPoolAble<Hero>, IStatusEffectAble,
+        IAttackDamageChangeAble, ICriticalChanceChangeAble, ICriticalDamageChangeAble
     {
-
         private static int HeroIdCounter { get; set; } = 0;
+
         private static Vector3[] VectorFacing { get; set; } = new Vector3[2]
         {
             new Vector3(1, 1, 1),
@@ -49,12 +50,14 @@ namespace Core
             Melee = 1,
             Range = 2,
         }
+
         private BattleManager BattleManagerCache { get; set; }
         protected BattleManager BattleManager => BattleManagerCache ??= BattleManager.Instance;
         private FactoryManager FactoryManagerCache { get; set; }
         protected FactoryManager FactoryManager => FactoryManagerCache ??= FactoryManager.Instance;
 
-        [field: SerializeField] public int Id {get; private set;}
+        [field: SerializeField] public int Id { get; private set; }
+
         [field: Title(nameof(Hero))]
         [field: SerializeField]
         public HeroConfigData HeroConfigData { get; set; }
@@ -80,20 +83,33 @@ namespace Core
         [ShowInInspector, ReadOnly] private int BaseCriticalDamage { get; set; } = 150;
         [ShowInInspector, ReadOnly] public float AttackDamageChange { get; set; }
         [ShowInInspector, ReadOnly] public float CriticalChanceChange { get; set; }
+        [ShowInInspector, ReadOnly] public int ForceCriticalCount { get; set; }
+        [ShowInInspector, ReadOnly] public float CriticalDamageChange { get; set; }
         public Rarity HeroRarity => HeroConfigData.HeroRarity;
-        
+
         public BigNumber AttackDamageMultiplier()
         {
             int rarityUpgrade = BattleManager.GetHeroRarityUpgrade(HeroRarity);
-            float globalBuff = 1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value / 100 + AttackDamageChange / 100;
+            float globalBuff = 1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackDamage).Value / 100 +
+                               AttackDamageChange / 100;
             return rarityUpgrade * globalBuff;
         }
 
         public BigNumber AttackDamage(out bool isCritical)
         {
-            isCritical = Random.Range(0, 100) < CriticalRate;
+            if (ForceCriticalCount > 0)
+            {
+                ForceCriticalCount--;
+                isCritical = true;
+            }
+            else
+            {
+                isCritical = Random.Range(0, 100) < CriticalRate;
+            }
+
             return isCritical ? CriticalAttackDamage() : NonCriticalAttackDamage();
         }
+
         public BigNumber NonCriticalAttackDamage()
         {
             BigNumber attackDamage = BaseAttackDamage * AttackDamageMultiplier();
@@ -105,10 +121,14 @@ namespace Core
             return NonCriticalAttackDamage() * (CriticalDamage / 100f);
         }
 
-        public float AttackSpeed => BaseAttackSpeed * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackSpeed).Value / 100);
+        public float AttackSpeed =>
+            BaseAttackSpeed * (1 + BattleManager.GetGlobalBuff(GlobalBuff.Type.AttackSpeed).Value / 100);
 
         public float AttackRange => BaseAttackRange;
-        public float CriticalRate => BaseCriticalRate + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalRate).Value + CriticalChanceChange;
+
+        public float CriticalRate => BaseCriticalRate +
+                                     BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalRate).Value +
+                                     CriticalChanceChange;
 
         public float CriticalDamage =>
             BaseCriticalDamage + BattleManager.GetGlobalBuff(GlobalBuff.Type.CriticalDamage).Value;
@@ -162,12 +182,14 @@ namespace Core
                 HeroIdCounter = 0;
             }
         }
+
         private void InitStateMachine()
         {
             StateMachine = new StateMachine();
             StateMachine.RegisterState(HeroSleepState);
             StateMachine.Run();
         }
+
         private void InitStatusEffectStack()
         {
             StatusEffectStack = new StatusEffectStack(this);
@@ -369,9 +391,6 @@ namespace Core
         {
             StatusEffectStack.Remove(statusEffect);
         }
-
-
-
     }
 
 #if UNITY_EDITOR

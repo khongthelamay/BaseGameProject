@@ -28,7 +28,6 @@ namespace Core
         [field: SerializeField] public int Id {get; private set;}
         [field: SerializeField] public StatusEffectStack StatusEffectStack {get; private set;}
         [field: SerializeField] public BigNumber CurrentHealthPoint { get; private set; }
-        [field: SerializeField] public BigNumber FutureHealthPoint { get; private set; }
         [field: SerializeField] private float MovementSpeed { get; set; }
         [field: SerializeField] public Transform[] MovePoint { get; private set; }
         [field: SerializeField] public int CurrentPoint { get; private set; }
@@ -42,7 +41,6 @@ namespace Core
         [field: SerializeField, ReadOnly] public int MagicalArmorChange { get; set; }
         public int MoveAxis { get; private set; }
         private MotionHandle movementMotionHandle;
-        public bool WillBeDead => FutureHealthPoint <= 0;
         public bool IsDead => CurrentHealthPoint <= 0;
 
         private void Awake()
@@ -62,7 +60,6 @@ namespace Core
         public Enemy InitStats(BigNumber healthPoint, float movementSpeed)
         {
             CurrentHealthPoint = healthPoint;
-            FutureHealthPoint = healthPoint;
             MovementSpeed = movementSpeed;
             SlowAmount.Value = 0;
             
@@ -110,20 +107,12 @@ namespace Core
             movementMotionHandle.PlaybackSpeed = speed;
             Animator.speed = speed;
         }
-        public bool WillTakeDamage(int id, BigNumber attackDamage, DamageType damageType, out BigNumber finalDamage)
-        {
-            finalDamage = 0;
-            if (id != Id) return false;
-            if (WillBeDead) return false;
-            finalDamage = attackDamage * GetArmorMultiplier(damageType);
-            FutureHealthPoint -= attackDamage;
-            return true;
-        }
         
-        public bool TakeDamage(int id, BigNumber finalDamage, DamageType damageType, bool isCritical)
+        public bool TakeDamage(int id, BigNumber attackDamage, DamageType damageType, bool isCritical)
         {
             if (id != Id) return false;
             if (IsDead) return false;
+            BigNumber finalDamage = attackDamage * GetArmorMultiplier(damageType);
             FactoryManager.Instance.CreateDamageNumber(Transform.position, finalDamage, damageType, isCritical);
             CurrentHealthPoint -= finalDamage;
             if (CurrentHealthPoint <= 0)

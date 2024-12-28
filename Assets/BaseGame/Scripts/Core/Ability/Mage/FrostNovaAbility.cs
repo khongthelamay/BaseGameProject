@@ -23,7 +23,6 @@ namespace Core
         public int EnemyTargetId { get; set; }
         public Enemy[] Enemies { get; set; } = new Enemy[30];
         public int[] EnemiesTargetId { get; set; } = new int[30];
-        public BigNumber[] FinalDamage { get; set; } = new BigNumber[30];
         public int EnemiesCount { get; set; }
         private Mage OwnerMage { get; set; }
         public override Ability WithOwnerHero(Hero owner)
@@ -52,12 +51,6 @@ namespace Core
         {
             BigNumber attackDamage = Owner.AttackDamage(out bool isCritical) * DamageScale;
             float attackSpeed = Owner.AttackSpeed;
-
-            for (int i = 0; i < EnemiesCount; i++)
-            {
-                Enemies[i].WillTakeDamage(EnemiesTargetId[i], attackDamage, DamageType, out BigNumber finalDamage);
-                FinalDamage[i] = finalDamage;
-            }
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
@@ -65,7 +58,7 @@ namespace Core
             await DelaySample(3, tickRate, ct);
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].TakeDamage(EnemiesTargetId[i], FinalDamage[i], DamageType ,isCritical);
+                Enemies[i].TakeDamage(EnemiesTargetId[i], attackDamage, DamageType ,isCritical);
                 Enemies[i].AddStatusEffect(new IceSlowStatusEffect(50, 3));
             }
             await DelaySample(30 - DelayFrame -3, tickRate, ct);

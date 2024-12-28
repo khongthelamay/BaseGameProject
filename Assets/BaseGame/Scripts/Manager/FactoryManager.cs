@@ -45,12 +45,12 @@ namespace Manager
         
         public void CreateSpawnEffect(Vector3 position)
         {
-            SpawnEffect.Spawn(position, Quaternion.identity);
+            SpawnEffect.Spawn(position, Quaternion.identity).Play();
         }
         
         public async UniTask CreateFusionEffect(Vector3 position, CancellationToken ct)
         {
-            FusionEffect.Spawn(position, Quaternion.identity);
+            FusionEffect.Spawn(position, Quaternion.identity).Play();
             await DelaySample(3, ct);
         }
         public void CreateUpgradeEffect(Vector3 position, Hero.Rarity rarity)
@@ -64,7 +64,7 @@ namespace Manager
                 Hero.Rarity.Mythic => UpgradeLegendaryMythicEffect,
                 _ => null
             };
-            upgradeEffect.Spawn(position, Quaternion.identity);
+            upgradeEffect.Spawn(position, Quaternion.identity).Play();
         }
         
         private UniTask DelaySample(int sample, CancellationToken ct)

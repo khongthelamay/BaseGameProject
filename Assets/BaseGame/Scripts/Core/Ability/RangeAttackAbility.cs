@@ -18,13 +18,11 @@ namespace Core
             BigNumber attackDamage = Owner.AttackDamage(out bool isCritical);
             float attackSpeed = Owner.AttackSpeed;
 
-            if (!EnemyTarget.WillTakeDamage(EnemyTargetId,attackDamage, DamageType, out BigNumber finalDamage)) return;
-            FinalDamage = finalDamage;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlayAttackAnimation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
             Projectile.Spawn(SpawnPosition.position, Quaternion.identity)
-                .Setup(Owner, EnemyTarget, EnemyTargetId, FinalDamage, DamageType, isCritical)
+                .Setup(Owner, EnemyTarget, EnemyTargetId, attackDamage, DamageType, isCritical)
                 .WithComplete(OnProjectileMoveCompleteCache);
             OnAttackComplete();
             await DelaySample(30 - DelayFrame, tickRate, ct);

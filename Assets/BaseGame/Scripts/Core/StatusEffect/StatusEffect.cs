@@ -17,6 +17,7 @@ namespace Core.GameStatusEffect
             AttackDamageChange = 100,
             AttackSpeedChange = 101,
             CriticalChanceChange = 102,
+            CriticalDamageChange = 103,
         }
 
         [field: SerializeField] public Type StatusEffectType { get; private set; }

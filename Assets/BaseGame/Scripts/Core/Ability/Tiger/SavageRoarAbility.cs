@@ -19,7 +19,6 @@ namespace Core.TigerAbility
         public int EnemyTargetId { get; set; }
         public Enemy[] Enemies { get; set; } = new Enemy[30];
         public int[] EnemiesTargetId { get; set; } = new int[30];
-        public BigNumber[] FinalDamage { get; set; }
         public int EnemiesCount { get; set; }
         public Tiger OwnerTiger { get; set; }
 
@@ -49,14 +48,9 @@ namespace Core.TigerAbility
         public override async UniTask UseAbility(TickRate tickRate, CancellationToken ct)
         {
             ResetCooldown();
-            BigNumber damageDeal = Owner.AttackDamage(out bool isCritical) * DamageScale;
+            BigNumber attackDamage = Owner.AttackDamage(out bool isCritical) * DamageScale;
             float attackSpeed = Owner.AttackSpeed;
             
-            for (int i = 0; i < EnemiesCount; i++)
-            {
-                Enemies[i].WillTakeDamage(EnemiesTargetId[i], damageDeal, DamageType, out BigNumber finalDamage);
-                FinalDamage[i] = finalDamage;
-            }
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
             OwnerTiger.ChangeFuryPoint(1);
@@ -66,7 +60,7 @@ namespace Core.TigerAbility
             await DelaySample(2, tickRate, ct);
             for (int i = 0; i < EnemiesCount; i++)
             {
-                Enemies[i].TakeDamage(EnemiesTargetId[i], damageDeal, DamageType ,isCritical);
+                Enemies[i].TakeDamage(EnemiesTargetId[i], attackDamage, DamageType ,isCritical);
             }
             await DelaySample(11, tickRate, ct);
 

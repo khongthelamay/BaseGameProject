@@ -22,7 +22,6 @@ namespace Core
         public int EnemyTargetId { get; set; }
         public Enemy[] Enemies { get; set; } = new Enemy[30];
         public int[] EnemiesTargetId { get; set; } = new int[30];
-        public BigNumber[] FinalDamage { get; set; } = new BigNumber[30];
         public int EnemiesCount { get; set; }
         private Boar OwnerBoar { get; set; }
 
@@ -66,7 +65,7 @@ namespace Core
             await DelaySample(30 - DelayFrame, tickRate, ct);
         }
         [ACacheMethod("TW.Utility.CustomType")]
-        private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, int targetEnemyId, BigNumber damage, DamageType damageType, bool isCritical)
+        private void OnProjectileMoveComplete(Hero ownerHero, Enemy targetEnemy, int targetEnemyId, BigNumber attackDamage, DamageType damageType, bool isCritical)
         {
             VisualEffect.Spawn(targetEnemy.Transform.position, Quaternion.identity).Play();
             Enemy[] enemies = new Enemy[30];
@@ -77,15 +76,9 @@ namespace Core
             {
                 enemiesTargetId[i] = enemies[i].Id;
             }
-            
             for (int i = 0; i < enemiesCount; i++)
             {
-                enemies[i].WillTakeDamage(enemiesTargetId[i], damage, DamageType, out BigNumber finalDamage);
-                FinalDamage[i] = finalDamage;
-            }
-            for (int i = 0; i < enemiesCount; i++)
-            {
-                enemies[i].TakeDamage(enemiesTargetId[i], FinalDamage[i], DamageType ,isCritical);
+                enemies[i].TakeDamage(enemiesTargetId[i], attackDamage, DamageType ,isCritical);
             }
             
         }

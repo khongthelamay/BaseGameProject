@@ -16,7 +16,6 @@ namespace Core
         [field: SerializeField] public GlacialStrikeArea GlacialStrikeArea {get; private set;}
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
-        public BigNumber FinalDamage { get; set; }
 
         public override void OnEnterBattleField()
         {
@@ -41,13 +40,11 @@ namespace Core
             BigNumber attackDamage = Owner.AttackDamage(out bool isCritical) * DamageScale;
             float attackSpeed = Owner.AttackSpeed;
 
-            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, attackDamage, DamageType, out BigNumber finalDamage)) return;
-            FinalDamage = finalDamage;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
             await DelaySample(DelayFrame, tickRate, ct);
             GlacialStrikeArea.Spawn(EnemyTarget.Transform.position, Quaternion.identity)
-                .Setup(DamageType, 1.5f, 5f, 0.2f, FinalDamage, isCritical)
+                .Setup(DamageType, 1.5f, 5f, 0.2f, attackDamage, isCritical)
                 .WithAxis(EnemyTarget.MoveAxis)
                 .As<GlacialStrikeArea>()
                 .WithStunDuration(StunDuration)

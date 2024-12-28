@@ -21,7 +21,6 @@ namespace Core
         public int HeroesCount { get; set; }
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
-        public BigNumber FinalDamage { get; set; }
 
         public override void OnEnterBattleField()
         {
@@ -42,12 +41,10 @@ namespace Core
             BigNumber attackDamage = Owner.AttackDamage(out bool isCritical) * DamageScale;
             float attackSpeed = Owner.AttackSpeed;
             
-            if (!EnemyTarget.WillTakeDamage(EnemyTargetId, attackDamage, DamageType, out BigNumber finalDamage)) return;
-            FinalDamage = finalDamage;
             Owner.SetFacingPosition(EnemyTarget.Transform.position);
             Owner.HeroAnim.PlaySkill1Animation(attackSpeed);
             await DelaySample(DamageDelayFrame, tickRate, ct);
-            if (!EnemyTarget.TakeDamage(EnemyTargetId, FinalDamage, DamageType, isCritical)) return;
+            if (!EnemyTarget.TakeDamage(EnemyTargetId, attackDamage, DamageType, isCritical)) return;
             OnAttackComplete();
             await DelaySample(30 - DamageDelayFrame, tickRate, ct);
         }
