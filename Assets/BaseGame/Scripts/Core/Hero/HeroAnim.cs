@@ -16,6 +16,7 @@ namespace Core
         private static readonly string Attack = "Attack";
         private static readonly string Skill1 = "Skill1";
         private static readonly string Skill2 = "Skill2";
+        private static readonly string Skill3 = "Skill3";
         private static readonly int TickRate = Animator.StringToHash("TickRate");
 
         [field: SerializeField] public Animator Animator { get; private set; }
@@ -43,7 +44,11 @@ namespace Core
             PlayAnimation(Skill2, speed);
             return this;
         }
-
+        public HeroAnim PlaySkill3Animation(float speed)
+        {
+            PlayAnimation(Skill3, speed);
+            return this;
+        }
         private void PlayAnimation(string animationName, float speed)
         {
             if (Animator.runtimeAnimatorController == null) return;

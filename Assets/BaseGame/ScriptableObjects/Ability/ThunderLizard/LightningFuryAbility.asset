@@ -18,3 +18,13 @@ MonoBehaviour:
   <Description>k__BackingField: Strikes with a powerful bolt of lightning, dealing
     3000% damage
   <Cooldown>k__BackingField: 10
+  <DamageType>k__BackingField: 0
+  <DelayFrame>k__BackingField: 12
+  <DamageScale>k__BackingField: 30
+  <VisualEffect>k__BackingField: {fileID: 8043145482988431226, guid: fb3e7b300d399ab4dbb1f3d67d6358b3, type: 3}
+  <Range>k__BackingField:
+    <UsingAxis>k__BackingField: 0
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: {x: 0, y: 0}
+    <Vertical>k__BackingField: {x: 0, y: 0}
+    <NoneAxis>k__BackingField: {x: 1.5, y: 1.5}

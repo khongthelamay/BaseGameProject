@@ -33,7 +33,7 @@ namespace Core
         {
             AttackCount++;
             if (AttackCount < 2) return;
-            AttackCount -= 2;
+            AttackCount -= 3;
             OwnerThunderLizard.ForceCriticalCount++;
         }
     }

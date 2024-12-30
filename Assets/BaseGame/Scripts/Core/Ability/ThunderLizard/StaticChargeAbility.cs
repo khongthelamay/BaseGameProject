@@ -13,7 +13,7 @@ namespace Core
         [field: SerializeField] public DamageType DamageType {get; private set;}
         [field: SerializeField] public int DelayFrame {get; private set;}
         [field: SerializeField] public float DamageScale {get; private set;}
-        [field: SerializeField] public float CriticalDamageBuff {get; private set;}
+        [field: SerializeField] public int CriticalDamageBuff {get; private set;}
         [field: SerializeField] public float CriticalDamageBuffDuration {get; private set;}
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
@@ -42,6 +42,7 @@ namespace Core
 
             await DelaySample(DelayFrame, tickRate, ct);
             if (!EnemyTarget.TakeDamage(EnemyTargetId, attackDamage, DamageType, isCritical)) return;
+            Owner.AddStatusEffect(new CriticalDamageChangeEffect(CriticalDamageBuff, CriticalDamageBuffDuration));
             await DelaySample(30 - DelayFrame, tickRate, ct);
         }
     }

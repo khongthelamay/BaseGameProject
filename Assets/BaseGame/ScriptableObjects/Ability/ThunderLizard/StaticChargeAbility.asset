@@ -17,9 +17,9 @@ MonoBehaviour:
   <Name>k__BackingField: Static Charge
   <Description>k__BackingField: Attacks that hit the target have 5% chance gain +30%
     Crit Damage for 5 seconds.
-  <StaticChargeRate>k__BackingField: 0
+  <StaticChargeRate>k__BackingField: 5
   <DamageType>k__BackingField: 0
-  <DelayFrame>k__BackingField: 0
-  <DamageScale>k__BackingField: 0
-  <CriticalDamageBuff>k__BackingField: 0
-  <CriticalDamageBuffDuration>k__BackingField: 0
+  <DelayFrame>k__BackingField: 11
+  <DamageScale>k__BackingField: 1
+  <CriticalDamageBuff>k__BackingField: 30
+  <CriticalDamageBuffDuration>k__BackingField: 5
