@@ -13,7 +13,7 @@ public class ArtifactManager : Singleton<ArtifactManager>
 
     public ReactiveValue<ArtifactInfor> currentArtifactTemp = new();
 
-    public ReactiveValue<ArtifactDataConfig> currentArtifactOnChoose = new();
+    public ReactiveValue<ArtifactDataConfig> currentArtifactOnChoose { get; set; } = new();
 
     private void Start()
     {
@@ -41,29 +41,39 @@ public class ArtifactManager : Singleton<ArtifactManager>
             if (ArtifactInfos[i].Value.Id == id)
                 return ArtifactInfos[i];
         }
-        ArtifactInfor artifactInfor = new();
-        artifactInfor.Id.Value = id;
-        artifactInfor.Level.Value = 0;
-        artifactInfor.PiecesAmount.Value = 0;
+        ArtifactInfor info = new();
+        info.Id.Value = id;
+        info.Level.Value = 0;
+        info.PiecesAmount.Value = 0;
 
-        ReactiveValue<ArtifactInfor> newArtifactInfor = new ReactiveValue<ArtifactInfor>(artifactInfor);
+        ReactiveValue<ArtifactInfor> newArtifactInfo = new ReactiveValue<ArtifactInfor>(info);
 
-        ArtifactInfos.Add(newArtifactInfor);
+        ArtifactInfos.Add(newArtifactInfo);
 
-        return newArtifactInfor;
+        return newArtifactInfo;
 
     }
 
     public void UpgradeLevelArtifact() {
         currentArtifactTemp = GetArtifactInfo(currentArtifactOnChoose.Value.id);
 
-        currentArtifactTemp.Value.PiecesAmount.Value -= currentArtifactOnChoose.Value.piecesRequire[currentArtifactTemp.Value.Level.Value];
+        currentArtifactTemp.Value.PiecesAmount.Value -= GetPiecesRequire(currentArtifactTemp.Value.Level.Value);
         currentArtifactTemp.Value.Level.Value++;
 
         //consume coin
         //consume pieces
         //save data
         InGameDataManager.Instance.SaveData();
+    }
+
+    public int GetPiecesRequire(int level)
+    {
+        return ArtifactGlobalConfig.Instance.piecesRequire[level];
+    }
+    
+    public float GetPriceUpgrade(int level)
+    {
+        return ArtifactGlobalConfig.Instance.priceUpgrade[level];
     }
 
     [Button]
@@ -80,9 +90,13 @@ public class ArtifactManager : Singleton<ArtifactManager>
         return ArtifactGlobalConfig.Instance.GetArtifactDataConfig(id);
     }
 
-    public void IsCanUpgradeArtifact() { }
+    public bool IsCanUpgradeArtifact()
+    {
+        return false;
+    }
 
-    public void ChangeCurrentArtifactInfor(ArtifactDataConfig artifactDataConfig) {
+    public void ChangeCurrentArtifactInfo(ArtifactDataConfig artifactDataConfig) {
+        Debug.Log("Change artifact info");
         currentArtifactOnChoose.Value = null;
         currentArtifactOnChoose.Value = artifactDataConfig;
     }

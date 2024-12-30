@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using Cysharp.Threading.Tasks;
 using TW.UGUI.MVPPattern;
 using UnityEngine;
@@ -8,6 +9,7 @@ using TW.Reactive.CustomComponent;
 using TMPro;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
+using TW.Utility.CustomType;
 
 [Serializable]
 public class ModalArtifactInforContext 
@@ -59,19 +61,21 @@ public class ModalArtifactInforContext
             return UniTask.CompletedTask;
         }
 
-        public void InitData(ArtifactDataConfig artifactDataConfig, ArtifactInfor artifactInfor) {
+        public void InitData(ArtifactDataConfig artifactDataConfig, ArtifactInfor artifactInfo) {
 
             // txtName.text = artifactDataConfig.strName;
+            int level = artifactInfo.Level.Value;
+            
             txtDes.text = artifactDataConfig.strDes;
             txtFunDes.text = artifactDataConfig.strFunDes;
-            txtLevel.text = $"Lv. {artifactInfor.Level.Value}";
+            txtLevel.text = $"Lv. {level}";
             
 
-            if (artifactInfor.Level.Value >= artifactDataConfig.piecesRequire.Count)
+            if (level >= ArtifactGlobalConfig.Instance.piecesRequire.Count)
             {
                 piecesProgress.ChangeProgress(1);
-                if (artifactInfor.PiecesAmount.Value > 0)
-                    piecesProgress.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}");
+                if (artifactInfo.PiecesAmount.Value > 0)
+                    piecesProgress.ChangeTextProgress($"{artifactInfo.PiecesAmount.Value}");
                 else
                     piecesProgress.ChangeTextProgress("MAX");
                 btnUpgrade.interactable = false;
@@ -79,10 +83,10 @@ public class ModalArtifactInforContext
             }
             else
             {
-                piecesProgress.ChangeProgress((float)artifactInfor.PiecesAmount.Value / (float)artifactDataConfig.piecesRequire[artifactInfor.Level.Value]);
-                piecesProgress.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}/{artifactDataConfig.piecesRequire[artifactInfor.Level.Value]}");
-                btnUpgrade.interactable = artifactInfor.PiecesAmount.Value >= artifactDataConfig.piecesRequire[artifactInfor.Level.Value];
-                txtUpgradeRequire.text = artifactDataConfig.priceUpgrade[artifactInfor.Level.Value].ToStringUI();
+                piecesProgress.ChangeProgress((float)artifactInfo.PiecesAmount.Value / (float)ArtifactManager.Instance.GetPiecesRequire(level));
+                piecesProgress.ChangeTextProgress($"{artifactInfo.PiecesAmount.Value}/{ArtifactManager.Instance.GetPiecesRequire(level)}");
+                btnUpgrade.interactable = ArtifactManager.Instance.IsCanUpgradeArtifact();
+                txtUpgradeRequire.text = ((BigNumber)ArtifactManager.Instance.GetPriceUpgrade(level)).ToStringUIFloor();
             }
 
             

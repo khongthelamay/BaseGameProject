@@ -16,147 +16,117 @@ MonoBehaviour:
   - id: 1
     strDes: Attack
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 10
     increaseValue: 1
   - id: 2
     strDes: AttackSpeed
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 10
     increaseValue: 1
   - id: 3
     strDes: Stun duration
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 10
     increaseValue: 1
   - id: 4
     strDes: Boss Damage
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 10
     increaseValue: 1
   - id: 5
     strDes: Skill Damage
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 10
     increaseValue: 1
   - id: 6
     strDes: Reduce enemy Move Speed
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 5
     increaseValue: 1
   - id: 7
     strDes: Reduce DEF
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 5
     increaseValue: 1
   - id: 8
     strDes: Physical DMG
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 5
     increaseValue: 1
   - id: 9
     strDes: Magic DMG
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 5
     increaseValue: 1
   - id: 10
     strDes: Gain coins at wave start
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 50
     increaseValue: 10
   - id: 11
     strDes: 'Increase monster cap '
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 5
     increaseValue: 0.5
   - id: 12
     strDes: Gain coins per wave
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 5
     increaseValue: 0.5
   - id: 13
     strDes: Increase DMG to stunning enemy
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 10
     increaseValue: 1
   - id: 14
     strDes: Gain coin per kill
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 0.2
     increaseValue: 0.02
   - id: 15
     strDes: Increase skill activion chance
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 1
     increaseValue: 0.1
   - id: 16
     strDes: Crit Chance
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 2
     increaseValue: 0.2
   - id: 17
     strDes: Reduce skill cooldown
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 10
     increaseValue: 1
   - id: 18
     strDes: Has chance to gain 1 coin on CRIT hit
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 3
     increaseValue: 0.3
   - id: 19
     strDes: Increase the held coins each wave
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 5
     increaseValue: 0.5
   - id: 20
     strDes: Increase the Attack by held coins
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 0.7
     increaseValue: 0.07
   - id: 21
     strDes: Increase max unit cap
     strFunDes: 
-    priceUpgrade: []
-    piecesRequire: 
     baseValue: 5
     increaseValue: 0.5
+  priceUpgrade:
+  - 100
+  - 200
+  - 300
+  - 400
+  - 500
+  - 600
+  - 700
+  - 800
+  - 900
+  - 1000
+  piecesRequire: 020000000400000006000000080000000a0000000c0000000e000000100000001200000014000000

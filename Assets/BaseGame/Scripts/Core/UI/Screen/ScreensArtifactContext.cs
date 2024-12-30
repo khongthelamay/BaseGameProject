@@ -93,7 +93,7 @@ public class ScreensArtifactContext
         }
 
         void ActionCallBackArtifactSlot(SlotBase<ArtifactDataConfig> slotArtifact) {
-            ArtifactManager.Instance.ChangeCurrentArtifactInfor(slotArtifact.slotData);
+            ArtifactManager.Instance.ChangeCurrentArtifactInfo(slotArtifact.slotData);
         }
     }
 }

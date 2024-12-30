@@ -10,7 +10,8 @@ using TW.Utility.Extension;
 public class ArtifactGlobalConfig : GlobalConfig<ArtifactGlobalConfig>
 {
     public List<ArtifactDataConfig> artifactDataConfigs = new();
-//1-HkinUwSW4A4SkuiLGtl0Tm8771jFPVZB5ZpLs5pxz4
+    public List<float> priceUpgrade = new();
+    public List<int> piecesRequire = new();
     public ArtifactDataConfig GetArtifactDataConfig(int id)
     {
         return artifactDataConfigs.Find(e => e.id == id);
@@ -30,8 +31,25 @@ public class ArtifactGlobalConfig : GlobalConfig<ArtifactGlobalConfig>
     async void FetchAchievement()
     {
         requestedData = await ABakingSheet.GetCsv(linkSheetId, "Artifact");
+        
         artifactDataConfigs.Clear();
+        
+        priceUpgrade.Clear();
+        
+        piecesRequire.Clear();
+        
+        for (int i = 1; i < 11; i++)
+        {
+            priceUpgrade.Add(100 * i);
+        }
+
+        for (int i = 1; i < 11; i++)
+        {
+            piecesRequire.Add(i * 2);
+        }
+        
         List<Dictionary<string, string>> data = ACsvReader.ReadDataFromString(requestedData);
+        
         for (int i = 0; i < data.Count; i++)
         {
             int id = int.Parse((data[i]["ID"]));
@@ -43,8 +61,6 @@ public class ArtifactGlobalConfig : GlobalConfig<ArtifactGlobalConfig>
             ArtifactDataConfig newArtifactDataConfig = new();
             newArtifactDataConfig.id = id;
             newArtifactDataConfig.strDes = des;
-            newArtifactDataConfig.priceUpgrade = new();
-            newArtifactDataConfig.piecesRequire = new();
             newArtifactDataConfig.baseValue = baseValue;
             newArtifactDataConfig.increaseValue = increaseValue;
             artifactDataConfigs.Add(newArtifactDataConfig);
@@ -59,8 +75,6 @@ public class ArtifactDataConfig
     public int id;
     public string strDes;
     public string strFunDes;
-    public List<BigNumber> priceUpgrade = new();
-    public List<int> piecesRequire = new();
     public float baseValue;
     public float increaseValue;
 }

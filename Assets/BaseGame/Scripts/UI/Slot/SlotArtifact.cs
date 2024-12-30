@@ -12,27 +12,28 @@ public class SlotArtifact : SlotBase <ArtifactDataConfig>
     [SerializeField] TextMeshProUGUI txtLevel;
     [SerializeField] ProgressBar progressBar;
     public bool isHaveThatArtifact;
-    ArtifactInfor artifactInfor;
+    ArtifactInfor artifactInfo;
     public override void InitData(ArtifactDataConfig data)
     {
         base.InitData(data);
-        artifactInfor = InGameDataManager.Instance.InGameData.ArtifactData.GetArtifactInfor(data.id);
+        artifactInfo = InGameDataManager.Instance.InGameData.ArtifactData.GetArtifactInfor(data.id);
         //txtName.text = data.strName;
         
 
-        isHaveThatArtifact = artifactInfor == null;
+        isHaveThatArtifact = artifactInfo == null;
         if (isHaveThatArtifact) {
-            artifactInfor = new();
-            artifactInfor.Level = new(0);
-            artifactInfor.PiecesAmount = new(0);
+            artifactInfo = new();
+            artifactInfo.Level = new(0);
+            artifactInfo.PiecesAmount = new(0);
         }
 
-        txtLevel.text = $"Lv. {artifactInfor.Level.Value}";
+        int level = artifactInfo.Level.Value;
+        txtLevel.text = $"Lv. {level}";
 
-        if (artifactInfor.Level.Value < data.piecesRequire.Count)
+        if (artifactInfo.Level.Value < ArtifactGlobalConfig.Instance.piecesRequire.Count)
         {
-            progressBar.ChangeTextProgress($"{artifactInfor.PiecesAmount.Value}/{data.piecesRequire[artifactInfor.Level]}");
-            progressBar.ChangeProgress((float)artifactInfor.PiecesAmount.Value / (float)data.piecesRequire[artifactInfor.Level]);
+            progressBar.ChangeTextProgress($"{artifactInfo.PiecesAmount.Value}/{ArtifactManager.Instance.GetPiecesRequire(level)}");
+            progressBar.ChangeProgress((float)artifactInfo.PiecesAmount.Value / (float)ArtifactManager.Instance.GetPiecesRequire(level));
         }
         else {
             progressBar.ChangeTextProgress("MAX");
