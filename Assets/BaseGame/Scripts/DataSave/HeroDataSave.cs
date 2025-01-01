@@ -9,7 +9,6 @@ public partial class HeroDataSave
 {
     public static HeroDataSave Instance => InGameDataManager.Instance.InGameData.heroDataSave;
     [field: SerializeField] public List<ReactiveValue<HeroSave>> heroSaves { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<int> totalMysthicUpgradePieces { get; set; } = new(0);
 }
 public partial class InGameData
 {

@@ -11,6 +11,7 @@ using TW.UGUI.Core.Views;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using ObservableCollections;
+using TMPro;
 
 [Serializable]
 public class ScreensHuntPassContext 
@@ -29,12 +30,13 @@ public class ScreensHuntPassContext
         [field: SerializeField] public List<HuntPass> huntPassesConfig { get;  set; }
         [field: SerializeField] public HuntPass currentHuntPassConfig { get;  set; }
         [field: SerializeField] public ReactiveValue<float> huntPoint { get;  set; }
-
+        public ReactiveValue<int> huntLevel;
 
         public UniTask Initialize(Memory<object> args)
         {
             huntPassesConfig = HuntPassGlobalConfig.Instance.huntPasses;
             huntPoint = HuntPassManager.Instance.huntPoint;
+            huntLevel = HuntPassManager.Instance.huntLevel;
             return UniTask.CompletedTask;
         }
     }
@@ -48,7 +50,12 @@ public class ScreensHuntPassContext
         [field: SerializeField] public MainContentHuntPass mainContentHuntPass { get; set; }
         [field: SerializeField] public ProgressBar levelHuntPass { get;  set; }
         [field: SerializeField] public Button btnClose { get; set; }
-
+        
+        public TextMeshProUGUI txtCurrentLevel;
+        public TextMeshProUGUI txtNextLevel;
+        
+        public GameObject objNextLevel;
+        
         public UniTask Initialize(Memory<object> args)
         {
             return UniTask.CompletedTask;
@@ -71,6 +78,14 @@ public class ScreensHuntPassContext
             levelHuntPass.ChangeProgress(exp/huntPass.expRequire);
             levelHuntPass.ChangeTextProgress($"{exp}/{huntPass.expRequire}");
         }
+
+        public void ChangeTextLevel(int level)
+        {
+            txtCurrentLevel.text = level.ToString();
+            bool isMaxLevel = level >= HuntPassManager.Instance.huntPasses.Count;
+            objNextLevel.SetActive(!isMaxLevel);
+            txtNextLevel.text = !isMaxLevel? (level + 1).ToString() : "";
+        }
     }
 
     [HideLabel]
@@ -92,8 +107,13 @@ public class ScreensHuntPassContext
             View.SetActionClaimPremium(ActionClaimPremium);
 
             Model.huntPoint.ReactiveProperty.Subscribe(ChangeExpHuntPass).AddTo(View.MainView);
+            Model.huntLevel.ReactiveProperty.Subscribe(ChangeTextLevel).AddTo(View.MainView);
 
             ScrollToClaimableSlot();
+        }
+        
+        void ChangeTextLevel(int level) {
+            View.ChangeTextLevel(level);
         }
 
         void ChangeExpHuntPass(float exp) {

@@ -509,7 +509,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0bb3268a94091f543a52103eed931631, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08e8498cc1d55a54d84e7a1ca1a809bc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1351,11 +1351,16 @@ MonoBehaviour:
         premiumRewardAmount: 0
       <huntPoint>k__BackingField:
         m_Value: 0
+      huntLevel:
+        m_Value: 0
     <View>k__BackingField:
       <MainView>k__BackingField: {fileID: 885553315266960419}
       <mainContentHuntPass>k__BackingField: {fileID: 3023997389604918954}
       <levelHuntPass>k__BackingField: {fileID: 9216997974836275051}
       <btnClose>k__BackingField: {fileID: 8186988204978752238}
+      txtCurrentLevel: {fileID: 124980025535335532}
+      txtNextLevel: {fileID: 7255316023099986265}
+      objNextLevel: {fileID: 6889574402304790948}
 --- !u!1 &6324231664897730931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,14 +1632,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.34901962, g: 0.24705884, b: 0.20000002, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 725da82e530c1e946b430944d2a28705, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 94e344b9be0bbc54cb3832c3b29c4aec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2227,16 +2232,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.34901962, g: 0.24705884, b: 0.20000002, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 725da82e530c1e946b430944d2a28705, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 94e344b9be0bbc54cb3832c3b29c4aec, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
