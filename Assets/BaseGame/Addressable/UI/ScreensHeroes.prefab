@@ -625,6 +625,8 @@ GameObject:
   - component: {fileID: 2430943371918726722}
   - component: {fileID: 3928123826448132961}
   - component: {fileID: 4950008773550263284}
+  - component: {fileID: 3608291353821237966}
+  - component: {fileID: 6661224471048818212}
   m_Layer: 5
   m_Name: ScreensHeroes
   m_TagString: Untagged
@@ -690,10 +692,18 @@ MonoBehaviour:
   <Identifier>k__BackingField: 
   _renderingOrder: 0
   _animationContainer:
-    _pushEnterAnimations: []
+    _pushEnterAnimations:
+    - _partnerScreenIdentifierRegex: 
+      _assetType: 0
+      _animationBehaviour: {fileID: 3608291353821237966}
+      _animationObject: {fileID: 0}
     _pushExitAnimations: []
     _popEnterAnimations: []
-    _popExitAnimations: []
+    _popExitAnimations:
+    - _partnerScreenIdentifierRegex: 
+      _assetType: 0
+      _animationBehaviour: {fileID: 6661224471048818212}
+      _animationObject: {fileID: 0}
   <UIPresenter>k__BackingField:
     <Model>k__BackingField:
       <SampleValue>k__BackingField:
@@ -719,6 +729,32 @@ MonoBehaviour:
       <resourceMythicPieces>k__BackingField: {fileID: 6776914357628927032}
       <btnTier>k__BackingField: {fileID: 7897098840293681291}
       <btnLevel>k__BackingField: {fileID: 5539151088163666046}
+--- !u!114 &3608291353821237966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4967553936198210403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9600a3fffe6754985e3611568f0a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 3928123826448132961}
+--- !u!114 &6661224471048818212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4967553936198210403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2541ca452b84c6429bc9eebaf8ddc26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 3928123826448132961}
 --- !u!1 &5241806258874777967
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,8 +822,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0335e55aa504184c8fadc3cf9aaf7f2, type: 2}
-  m_sharedMaterial: {fileID: -7841110934816479318, guid: d0335e55aa504184c8fadc3cf9aaf7f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1286,8 +1322,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tier
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0335e55aa504184c8fadc3cf9aaf7f2, type: 2}
-  m_sharedMaterial: {fileID: -7841110934816479318, guid: d0335e55aa504184c8fadc3cf9aaf7f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
+  m_sharedMaterial: {fileID: -7841110934816479318, guid: ae51acff684f6d745841e4e4b293d004, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

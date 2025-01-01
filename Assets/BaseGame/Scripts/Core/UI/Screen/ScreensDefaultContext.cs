@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using TW.UGUI.Core.Screens;
 using TW.UGUI.Core.Views;
 using TMPro;
+using TW.UGUI.Shared;
 
 [Serializable]
 public class ScreensDefaultContext 
@@ -57,7 +58,6 @@ public class ScreensDefaultContext
         [field: SerializeField] public UIResource coinResource;
         [field: SerializeField] public UIResource energyResource;
         [field: SerializeField] public UIResource gemResource;
-
         public UniTask Initialize(Memory<object> args)
         {
             for (int i = 0; i < tabs.Count; i++)
@@ -81,13 +81,13 @@ public class ScreensDefaultContext
             txtLevel.text = level.ToString();
         }
 
-        public void OnChooseTab(SlotTabMainMenu tabChoose)
+        public async void OnChooseTab(SlotTabMainMenu tabChoose)
         {
             if (currentTab != tabChoose)
             {
                 if (currentTab != null)
                     if (currentTab.tabType != TabType.TabCommingsoon)
-                        ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+                       await ScreenContainer.Find(ContainerKey.Screens).PopAsync(true);
 
                 currentTab = tabChoose;
                 currentTab.SelectMode();
@@ -118,26 +118,25 @@ public class ScreensDefaultContext
             }
         }
 
-        void TabShop()
+        async void TabShop()
         {
             ViewOptions options = new ViewOptions(nameof(ScreensShop));
-            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+            await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
         }
-        void TabHeroes()
+        async void TabHeroes()
         {
             ViewOptions options = new ViewOptions(nameof(ScreensHeroes));
-            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+            await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
         }
-        void TabBattle()
+        async void TabBattle()
         {
-            Debug.Log("Open tab battle");
             ViewOptions options = new ViewOptions(nameof(ScreensBattle));
-            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+            await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
         }
-        void TabArtifact()
+        async void TabArtifact()
         {
             ViewOptions options = new ViewOptions(nameof(ScreensArtifact));
-            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+            await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
         }
         void TabCommingSoon()
         {

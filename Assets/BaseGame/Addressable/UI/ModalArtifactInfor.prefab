@@ -390,12 +390,11 @@ MonoBehaviour:
         m_Value: 0
       artifactConfig:
         m_Value:
-          artifactType: 0
-          strName: 
+          id: 0
           strDes: 
           strFunDes: 
-          priceUpgrade: []
-          piecesRequire: 
+          baseValue: 0
+          increaseValue: 0
       artifactInfor:
         m_Value:
           <Id>k__BackingField:

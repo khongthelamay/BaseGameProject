@@ -27,7 +27,6 @@ public class GrowthLevelManager : Singleton<GrowthLevelManager>
     }
 
     public GrowthDataConfig GetGrowGlobalConfig(int level) {
-        Debug.Log($"Get grow level {level}");
         foreach (GrowthDataConfig config in growthDataConfigs) {
             if (config.level == level) return config;
         }

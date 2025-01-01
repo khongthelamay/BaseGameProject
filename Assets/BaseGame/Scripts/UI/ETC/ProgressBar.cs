@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 public class ProgressBar : MonoBehaviour
 {
+    
     [SerializeField] bool isLight = true;
     [SerializeField] TextMeshProUGUI txtProgress;
     [SerializeField] RectTransform rectFill;

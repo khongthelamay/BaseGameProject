@@ -1439,8 +1439,8 @@ MonoBehaviour:
         m_Value: 0
       <recruitRecipe>k__BackingField:
         m_Value:
-          v: 0
-          m: 0
+          coefficient: 0
+          exponent: 0
       currentRewardMoveDone: 0
       lastRecruitAmount: 0
     <View>k__BackingField:
