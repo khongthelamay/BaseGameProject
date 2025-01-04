@@ -33,11 +33,9 @@ public class SlotArtifact : SlotBase <ArtifactDataConfig>
         if (artifactInfo.Level.Value < ArtifactGlobalConfig.Instance.piecesRequire.Count)
         {
             progressBar.ChangeTextProgress($"{artifactInfo.PiecesAmount.Value}/{ArtifactManager.Instance.GetPiecesRequire(level)}");
-            progressBar.ChangeProgress((float)artifactInfo.PiecesAmount.Value / (float)ArtifactManager.Instance.GetPiecesRequire(level));
         }
         else {
             progressBar.ChangeTextProgress("MAX");
-            progressBar.ChangeProgress(1f);
         }
     }
 
@@ -46,6 +44,11 @@ public class SlotArtifact : SlotBase <ArtifactDataConfig>
         if (mySequence != null) mySequence.Kill();
         mySequence = DOTween.Sequence();
         mySequence = UIAnimation.AnimSlotPopUp(trsContent);
+        mySequence.OnComplete(() =>
+        {
+            progressBar.ChangeProgress((float)artifactInfo.PiecesAmount.Value /
+                                       (float)ArtifactManager.Instance.GetPiecesRequire(artifactInfo.Level.Value));
+        });
     }
 
     public override void ReloadData()

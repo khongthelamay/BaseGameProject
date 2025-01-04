@@ -10,11 +10,11 @@ using UnityEngine;
 
 public class HeroManager : Singleton<HeroManager>
 {
-    [field: SerializeField] public List<ReactiveValue<HeroSave>> heroSaves { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<HeroConfigData> currentHeroChoose { get; set; } = new();
-    [field: SerializeField] public ReactiveValue<HeroSave> currentHeroSave { get; set; } = new();
-    [field: SerializeField] public List<HeroConfigData> heroList { get; private set; }
-    [field: SerializeField] public ReactiveValue<BigNumber> summonRecipe { get; private set; } = new(0);
+    [field: SerializeField] public List<ReactiveValue<HeroSave>> HeroSaves { get; set; } = new();
+    [field: SerializeField] public ReactiveValue<HeroConfigData> CurrentHeroChoose { get; set; } = new();
+    [field: SerializeField] public ReactiveValue<HeroSave> CurrentHeroSave { get; set; } = new();
+    [field: SerializeField] public List<HeroConfigData> HeroList { get; private set; }
+    [field: SerializeField] public ReactiveValue<BigNumber> SummonRecipe { get; private set; } = new(0);
 
     private void Start()
     {
@@ -22,41 +22,68 @@ public class HeroManager : Singleton<HeroManager>
     }
 
     void LoadData() {
-        heroSaves = InGameDataManager.Instance.InGameData.heroDataSave.heroSaves;
-        heroList = HeroPoolGlobalConfig.Instance.HeroConfigDataList;
+        HeroSaves = InGameDataManager.Instance.InGameData.heroDataSave.heroSaves;
+        HeroList = HeroPoolGlobalConfig.Instance.HeroConfigDataList;
         //summonRecipe = InGameDataManager.Instance.InGameData.playerResourceDataSave.GetResourceValue(ResourceType.SummonRecipe);
+
+        if (HeroSaves.Count == 0)
+            InitHeroFirstData();
+    }
+
+    void InitHeroFirstData()
+    {
+        foreach (HeroConfigData heroConfig in HeroList)
+        {
+            if (heroConfig.HeroRarity != Hero.Rarity.Mythic)
+            {
+                AddHero(heroConfig.Name, 1);
+            }
+        }
+    }
+
+    ReactiveValue<HeroSave> AddHero(string heroName, int levelInit = 0)
+    {
+        HeroSave hero = new();
+        hero.heroName = heroName;
+        hero.level = new(levelInit);
+        hero.piece = new(0);
+        ReactiveValue<HeroSave> heroSave = new();
+        heroSave.Value = hero;
+
+        HeroSaves.Add(heroSave);
+        return heroSave;
     }
 
     public bool IsHaveHero(string heroName)
     {
-        for (int i = 0; i < heroSaves.Count; i++)
+        for (int i = 0; i < HeroSaves.Count; i++)
         {
-            if (heroSaves[i].Value.heroName == heroName)
+            if (HeroSaves[i].Value.heroName == heroName)
             {
-                return heroSaves[i].Value.level.Value > 0;
+                return HeroSaves[i].Value.level.Value > 0;
             }
         }
         return false;
     }
     public void ChooseHero(HeroConfigData heroConfigData) {
-        currentHeroChoose.Value = heroConfigData;
-        currentHeroSave.Value = GetHeroSaveData(heroConfigData.Name);
+        CurrentHeroChoose.Value = heroConfigData;
+        CurrentHeroSave.Value = GetHeroSaveData(heroConfigData.Name);
         ViewOptions options = new ViewOptions(nameof(ModalHeroInfor));
         ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
     }
 
 
     public void UpgradeHero() {
-        currentHeroSave.Value.UpgradeHero(10);
+        CurrentHeroSave.Value.UpgradeHero(10);
         InGameDataManager.Instance.SaveData();
     }
 
     [Button]
     public void AddPieces(string heroName, int amount){
-        for (int i = 0; i < heroSaves.Count; i++)
+        for (int i = 0; i < HeroSaves.Count; i++)
         {
-            if (heroSaves[i].Value.heroName == heroName) {
-                heroSaves[i].Value.piece.Value += amount;
+            if (HeroSaves[i].Value.heroName == heroName) {
+                HeroSaves[i].Value.piece.Value += amount;
                 InGameDataManager.Instance.SaveData();
                 break;
             }   
@@ -65,28 +92,19 @@ public class HeroManager : Singleton<HeroManager>
 
     public HeroSave GetHeroSaveData(string heroName)
     {
-        for (int i = 0; i < heroSaves.Count; i++)
+        for (int i = 0; i < HeroSaves.Count; i++)
         {
-            if (heroSaves[i].Value.heroName == heroName)
-                return heroSaves[i].Value;
+            if (HeroSaves[i].Value.heroName == heroName)
+                return HeroSaves[i].Value;
         }
-        HeroSave hero = new();
-        hero.heroName = heroName;
-        hero.level = new(0);
-        hero.piece = new(0);
-        ReactiveValue<HeroSave> heroSave = new();
-        heroSave.Value = hero;
-
-        heroSaves.Add(heroSave);
-
-        return hero;
+        return AddHero(heroName);
     }
 
     public bool IsCanUpgradeHero(string heroName) {
-        for (int i = 0; i < heroSaves.Count; i++)
+        for (int i = 0; i < HeroSaves.Count; i++)
         {
-            if (heroSaves[i].Value.heroName == heroName)
-                return IsEnoughPieces(heroName, heroSaves[i].Value.piece.Value, heroSaves[i].Value.level.Value);
+            if (HeroSaves[i].Value.heroName == heroName)
+                return IsEnoughPieces(heroName, HeroSaves[i].Value.piece.Value, HeroSaves[i].Value.level.Value);
         }
         return false;
     }
@@ -96,7 +114,7 @@ public class HeroManager : Singleton<HeroManager>
     }
 
     public HeroConfigData GetHeroConfigData(string heroName) {
-        foreach (HeroConfigData hero in heroList)
+        foreach (HeroConfigData hero in HeroList)
         {
             if (hero.Name == heroName) return hero;
         }
@@ -105,6 +123,6 @@ public class HeroManager : Singleton<HeroManager>
 
     public bool CurrentHeroAbilityIsUnlock(Ability data)
     {
-        return currentHeroSave.Value.level.Value >= data.LevelUnlock;
+        return CurrentHeroSave.Value.level.Value >= data.LevelUnlock;
     }
 }

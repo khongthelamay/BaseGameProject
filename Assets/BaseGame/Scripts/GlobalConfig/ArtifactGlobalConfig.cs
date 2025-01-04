@@ -4,6 +4,7 @@ using TW.Utility.CustomType;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using TW.Utility.Extension;
+using UnityEditor;
 
 [CreateAssetMenu(fileName = "ArtifactGlobalConfig", menuName = "GlobalConfigs/ArtifactGlobalConfig")]
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
@@ -26,28 +27,13 @@ public class ArtifactGlobalConfig : GlobalConfig<ArtifactGlobalConfig>
     {
         if (string.IsNullOrEmpty(linkSheetId)) return;
         FetchAchievement();
+        FetchAchievementCost();
     }
     
     async void FetchAchievement()
     {
         requestedData = await ABakingSheet.GetCsv(linkSheetId, "Artifact");
-        
         artifactDataConfigs.Clear();
-        
-        priceUpgrade.Clear();
-        
-        piecesRequire.Clear();
-        
-        for (int i = 1; i < 11; i++)
-        {
-            priceUpgrade.Add(100 * i);
-        }
-
-        for (int i = 1; i < 11; i++)
-        {
-            piecesRequire.Add(i * 2);
-        }
-        
         List<Dictionary<string, string>> data = ACsvReader.ReadDataFromString(requestedData);
         
         for (int i = 0; i < data.Count; i++)
@@ -65,6 +51,23 @@ public class ArtifactGlobalConfig : GlobalConfig<ArtifactGlobalConfig>
             newArtifactDataConfig.increaseValue = increaseValue;
             artifactDataConfigs.Add(newArtifactDataConfig);
         }
+    }
+
+    async void FetchAchievementCost()
+    {
+        requestedData = await ABakingSheet.GetCsv(linkSheetId, "ArtifactCost");
+        priceUpgrade.Clear();
+        piecesRequire.Clear();
+        List<Dictionary<string, string>> costData = ACsvReader.ReadDataFromString(requestedData);
+        for (int i = 0; i < costData.Count; i++)
+        {
+            float price = float.Parse(costData[i]["Gold"]);
+            int pieces = int.Parse(costData[i]["Piece"]);
+            priceUpgrade.Add(price);
+            piecesRequire.Add(pieces);
+        }   
+        AssetDatabase.Refresh();
+        AssetDatabase.SaveAssets();
     }
 #endif
 }

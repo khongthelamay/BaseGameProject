@@ -31,10 +31,10 @@ public class ScreensHeroesContext
         [field: SerializeField] public HeroConfigData heroDataConfig { get; set; }
         public UniTask Initialize(Memory<object> args)
         {
-            heroSaves = HeroManager.Instance.heroSaves;
-            currentHeroSave = HeroManager.Instance.currentHeroSave;
-            currentHeroConfig = HeroManager.Instance.currentHeroChoose;
-            summonRecipe = HeroManager.Instance.summonRecipe;
+            heroSaves = HeroManager.Instance.HeroSaves;
+            currentHeroSave = HeroManager.Instance.CurrentHeroSave;
+            currentHeroConfig = HeroManager.Instance.CurrentHeroChoose;
+            summonRecipe = HeroManager.Instance.SummonRecipe;
             return UniTask.CompletedTask;
         }
 

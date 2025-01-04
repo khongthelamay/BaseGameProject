@@ -280,14 +280,12 @@ public class QuestManager : Singleton<QuestManager>
     public void CheckShowNoticeQuest() {
         if (CheckQuestDone())
         {
-            Debug.Log("Is have quest done");
             ScreensBattleContext.Events.ShowNoticeQuest?.Invoke(true);
             return;
         }
 
         if (IsHaveStreakCanClaim())
         {
-            Debug.Log("Is have streak done");
             ScreensBattleContext.Events.ShowNoticeQuest?.Invoke(true);
             return;
         }

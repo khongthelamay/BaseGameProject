@@ -56,7 +56,7 @@ public class SlotAchievement : SlotBase<AchievementDataConfig>
         txtDes.text = string.Format(data.strDes, data.require);
         txtProgress.text = $"{(BigNumber)achievementSave.currentProgress.Value} / {(BigNumber)data.require}";
 
-        progressBar.ChangeProgress((float)achievementSave.currentProgress.Value / (float)data.require);
+        
 
         btnChoose.interactable = AchievementManager.Instance.IsCanClaim(achievementSave);
 
@@ -89,6 +89,10 @@ public class SlotAchievement : SlotBase<AchievementDataConfig>
         myMask.enabled = true;
 
         mySequence.Append(UIAnimation.AnimSlotVerticalOpen(myLayout, heightDefault, () => { myMask.enabled = false; }));
+        mySequence.OnComplete(() =>
+        {
+            progressBar.ChangeProgress(achievementSave.currentProgress.Value / slotData.require);
+        });
     }
 
     public override void AnimDone()

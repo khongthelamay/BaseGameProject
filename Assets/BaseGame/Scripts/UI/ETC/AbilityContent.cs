@@ -12,6 +12,8 @@ public class AbilityContent : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI txtAbilityName;
     [SerializeField] TextMeshProUGUI txtAbilityDescription;
+    [SerializeField] GameObject objLevelUnlock;
+    [SerializeField] TextMeshProUGUI txtLevelUnlock;
 
     private Sequence mySequence;
     private Ability currentAbility;
@@ -46,8 +48,12 @@ public class AbilityContent : MonoBehaviour
 
         string originalText = ability.Description;
         string des = ChangeNumberColor(originalText);
+        des = $"<style=OLDS>{des}";
+        txtAbilityName.text = ability.Name;// + (HeroManager.Instance.CurrentHeroAbilityIsUnlock(ability) ? "":$"(Lv.{ability.LevelUnlock})");
+        bool isUnlock = HeroManager.Instance.CurrentHeroAbilityIsUnlock(ability);
         
-        txtAbilityName.text = ability.Name;
+        objLevelUnlock.SetActive(!isUnlock);
+        txtLevelUnlock.text = $"Lv.{ability.LevelUnlock}";
         txtAbilityDescription.text = des;
         currentAbility = ability;
         AnimShow();
@@ -55,7 +61,7 @@ public class AbilityContent : MonoBehaviour
     
     private string ChangeNumberColor(string input)
     {
-        return System.Text.RegularExpressions.Regex.Replace(input, @"(\S*\d+\S*\s*times|\S*\d+\S*)", match => $"<color=#34f16b>{match.Value}</color>");
+        return System.Text.RegularExpressions.Regex.Replace(input, @"(\S*\d+\S*\s*times|\S*\d+\S*)", match => $"<color=#E27234>{match.Value}</color>");
     }
 
     private void Update()
