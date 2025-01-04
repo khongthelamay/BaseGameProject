@@ -372,7 +372,7 @@ namespace Core
             int countCooldownAbility = 0;
             foreach (Ability ability in Abilities)
             {
-                if (ability is ActiveCooldownAbility activeCooldownAbility)
+                if (ability is CooldownAbility activeCooldownAbility)
                 {
                     activeCooldownAbility.ReduceCooldown(rate);
                     countCooldownAbility++;

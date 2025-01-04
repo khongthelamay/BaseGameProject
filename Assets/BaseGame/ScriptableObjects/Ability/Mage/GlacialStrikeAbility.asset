@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0024878230154351bf4063d7cdee9841, type: 3}
   m_Name: GlacialStrikeAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 18
   <Icon>k__BackingField: {fileID: 21300000, guid: db6cc695503ed1f43883372499f1d689, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Glacial Strike

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a3d37a26af488484c7a1752fd55215, type: 3}
   m_Name: BearNormalAttackAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 0}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: 

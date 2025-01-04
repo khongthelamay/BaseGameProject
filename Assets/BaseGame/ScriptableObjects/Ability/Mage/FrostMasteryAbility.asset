@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d74b88833842bd9c2f1d89d20aa2b9, type: 3}
   m_Name: FrostMasteryAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 8
   <Icon>k__BackingField: {fileID: 21300000, guid: f036741df302c404198f7d9ec81d7bf8, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Frost Mastery

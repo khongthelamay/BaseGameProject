@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe772de20e2a44d09886f90f9463a38b, type: 3}
   m_Name: EarthShatterAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 18
   <Icon>k__BackingField: {fileID: 21300000, guid: 5bab41b997e291749897d25f55015b5f, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Earth Shatter

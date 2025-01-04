@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42939a940914c18a4b3b82a7470ccb7, type: 3}
   m_Name: SavageBlastAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 18
   <Icon>k__BackingField: {fileID: 21300000, guid: 5dd88b1d5e309e944870b0fa383093b5, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Savage Blast

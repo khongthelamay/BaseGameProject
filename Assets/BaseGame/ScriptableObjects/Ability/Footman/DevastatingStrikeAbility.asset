@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42f963241d14752817cd8e585e4bd6d, type: 3}
   m_Name: DevastatingStrikeAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 4
   <Icon>k__BackingField: {fileID: 21300000, guid: 81bae38d24404f844aa9edd6eac2c90d, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: DevastatingStrike
   <Description>k__BackingField: Attacks that hit the target have a 10% chance of
     dealing 500% attack damage
-  <DevastatingStrikeRate>k__BackingField: 10
+  <TriggerRate>k__BackingField: 10
   <DamageType>k__BackingField: 0
   <DamageDelayFrame>k__BackingField: 12
   <VisualDelayFrame>k__BackingField: 3

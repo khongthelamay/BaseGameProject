@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b54507bd1f4de09de657e717449a68, type: 3}
   m_Name: MageNormalAttack
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 0}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: 

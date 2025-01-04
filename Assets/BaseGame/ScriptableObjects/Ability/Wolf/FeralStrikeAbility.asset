@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59cbbe82c70a4fe4966e79647bce70ca, type: 3}
   m_Name: FeralStrikeAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 4
   <Icon>k__BackingField: {fileID: 21300000, guid: 5dfe3b8ed756efc4bb311c57a68331ab, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Feral Strike
   <Description>k__BackingField: Attacks that hit the target have a 10% chance of
     dealing 400% attack damage
-  <FeralStrikeRate>k__BackingField: 10
+  <TriggerRate>k__BackingField: 10
   <DamageType>k__BackingField: 0
   <DelayFrame>k__BackingField: 8
   <DamageScale>k__BackingField: 4
-  <VisualEffect>k__BackingField: {fileID: 6874774198589771541, guid: 50d4b12e7bbdff849af0966037193296, type: 3}

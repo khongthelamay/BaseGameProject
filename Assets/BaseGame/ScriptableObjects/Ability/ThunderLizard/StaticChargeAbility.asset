@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51446ac9e9b147d59ebfc94120786f6c, type: 3}
   m_Name: StaticChargeAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 4
   <Icon>k__BackingField: {fileID: 21300000, guid: fcff615f1dc083c4b8686e3abda19079, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Static Charge
   <Description>k__BackingField: Attacks that hit the target have 5% chance gain +30%
     Crit Damage for 5 seconds.
-  <StaticChargeRate>k__BackingField: 5
+  <TriggerRate>k__BackingField: 5
   <DamageType>k__BackingField: 0
   <DelayFrame>k__BackingField: 11
   <DamageScale>k__BackingField: 1

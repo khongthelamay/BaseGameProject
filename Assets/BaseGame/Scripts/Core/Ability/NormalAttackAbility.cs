@@ -13,6 +13,11 @@ namespace Core
         [field: SerializeField] public int DelayFrame {get; set;}
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
+        protected override void SetupGroup()
+        {
+            base.SetupGroup();
+            AbilityGroup |= Group.NormalAttack;
+        }
 
         public override bool CanUseAbility()
         {

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374164353d6e4d529b0047a1b9c5020f, type: 3}
   m_Name: LightningFuryAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 18
   <Icon>k__BackingField: {fileID: 21300000, guid: 744d832796c91274382d2e16acfe86ed, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Lightning Fury

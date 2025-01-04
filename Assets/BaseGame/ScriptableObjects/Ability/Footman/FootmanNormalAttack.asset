@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c77667d2a68476f8543a2f1d27bd4bb, type: 3}
   m_Name: FootmanNormalAttack
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 0}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: 

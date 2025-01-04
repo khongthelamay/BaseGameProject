@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26883cfee8a4a5c91b8e909cfa5b13b, type: 3}
   m_Name: PiercingShotAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 4
   <Icon>k__BackingField: {fileID: 21300000, guid: ab7c3b03871f1304fb61bad6a62bd58b, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Piercing Shot
   <Description>k__BackingField: Attacks that hit the target have 10% chance of dealing
     900% Attack Damage
-  <PiercingShotRate>k__BackingField: 20
+  <TriggerRate>k__BackingField: 10
   <DamageType>k__BackingField: 0
   <DelayFrame>k__BackingField: 16
   <DamageScale>k__BackingField: 9

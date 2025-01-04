@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a81d58fbb8f4f9ca4f5eccaa80fb05e, type: 3}
   m_Name: ArchmageNormalAttack
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 0}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: 

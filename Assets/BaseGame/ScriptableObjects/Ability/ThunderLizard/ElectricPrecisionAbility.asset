@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da55eda704c42b28ebb7a234468e51a, type: 3}
   m_Name: ElectricPrecisionAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 8
   <Icon>k__BackingField: {fileID: 21300000, guid: b365725ffba726f42890cf4e6d11870f, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Electric Precision

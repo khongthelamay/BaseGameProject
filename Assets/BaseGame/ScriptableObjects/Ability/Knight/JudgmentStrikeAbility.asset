@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a8f3ccdae5432aa845b9613925bd2f, type: 3}
   m_Name: JudgmentStrikeAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 4
   <Icon>k__BackingField: {fileID: 21300000, guid: 498d7e1a828aeec40bcbc8ad59924093, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Judgment Strike
   <Description>k__BackingField: Attacks that hit the target have a 20% chance to
     deal 1000% attack damage in AOE and reduce the affected enemy's armor by 100
     for 5 seconds
-  <JudgmentStrikeRate>k__BackingField: 20
+  <TriggerRate>k__BackingField: 20
   <DamageType>k__BackingField: 0
   <DamageDelayFrame>k__BackingField: 10
   <DamageScale>k__BackingField: 10

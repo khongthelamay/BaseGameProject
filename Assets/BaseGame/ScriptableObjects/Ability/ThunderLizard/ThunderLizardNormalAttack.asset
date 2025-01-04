@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de03b603edffc6f45833e4fe096e1f38, type: 3}
   m_Name: ThunderLizardNormalAttack
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 0}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: 

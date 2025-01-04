@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 436dc4eced974236842155bf8fe9f519, type: 3}
   m_Name: ArrowStormAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 4
   <Icon>k__BackingField: {fileID: 21300000, guid: 670d249a284cc1f4284e7dfbf38d79e1, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Arrow Strom
   <Description>k__BackingField: Attacks that hit the target have a 20% chance to
     summon a rain of arrows that deal 1000% attack damage
-  <ArrowStormRate>k__BackingField: 20
+  <TriggerRate>k__BackingField: 20
   <DamageType>k__BackingField: 0
   <DelayFrame>k__BackingField: 12
   <DamageScale>k__BackingField: 10
-  <Projectile>k__BackingField: {fileID: 6453086906235805925, guid: 2204e1d69d94e5648a78a3d74a31ab21, type: 3}
   <VisualEffect>k__BackingField: {fileID: 905268929525011096, guid: 6dfd646a434a1a14cb52c16fc7b446dc, type: 3}
   <Range>k__BackingField:
     <UsingAxis>k__BackingField: 1

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12138938001474f8ad6a8e032f94be7, type: 3}
   m_Name: BladeOfValorAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 18
   <Icon>k__BackingField: {fileID: 21300000, guid: 017cd2d6442dd75429f6757a9a174065, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Blade of Valor
