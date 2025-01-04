@@ -12,21 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc323b84b86e9f4b95343614b0c45eb, type: 3}
   m_Name: BaseHeroGenerateGlobalConfig
   m_EditorClassIdentifier: 
-  <SheetHeroStatDataList>k__BackingField: []
-  <HeroStatDataList>k__BackingField: []
-  <HeroPrefabList>k__BackingField: []
-  <BaseHero>k__BackingField: {fileID: 899073806387762782, guid: 0d4112a616dec1e40932d772c0c41f0a, type: 3}
-  <BaseProjectile>k__BackingField: {fileID: 4670623762309924594, guid: 89aea41ff06b3f04f95a389c4e1c4d61, type: 3}
-  <GraphicArray>k__BackingField: []
-  <RarityArray>k__BackingField:
-  - {fileID: 21300000, guid: f47d6e3567ee4dd4985636bfd5ced958, type: 3}
-  - {fileID: 21300000, guid: 66e55a5680c557d4aa65813987cfa992, type: 3}
-  - {fileID: 21300000, guid: 59885b3bcedbe6548b4bbddcef185051, type: 3}
-  - {fileID: 21300000, guid: 6ea869f9f4902fb449bf3d7ef7e65002, type: 3}
-  - {fileID: 21300000, guid: 1c531a2a29325ce4b8cc3dd814c8dc65, type: 3}
   <RarityColorArray>k__BackingField:
-  - {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 0.78431374}
-  - {r: 0.15294118, g: 0.68235296, b: 0.3764706, a: 0.78431374}
-  - {r: 0.14117648, g: 0.44313726, b: 0.6392157, a: 0.78431374}
+  - {r: 0.2860773, g: 0.6037736, b: 0.1509434, a: 0.78431374}
+  - {r: 0.13550194, g: 0.5642858, b: 0.8207547, a: 0.78431374}
   - {r: 0.49019608, g: 0.23529412, b: 0.59607846, a: 0.78431374}
-  - {r: 0.827451, g: 0.32941177, b: 0, a: 0.78431374}
+  - {r: 0.8962264, g: 0.7736913, b: 0.114142045, a: 0.78431374}

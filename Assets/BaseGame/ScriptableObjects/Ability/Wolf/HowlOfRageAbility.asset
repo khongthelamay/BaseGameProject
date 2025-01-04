@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129b92c79989431180bbb3a0fc1a4ab7, type: 3}
   m_Name: HowlOfRageAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 4
   <Icon>k__BackingField: {fileID: 21300000, guid: a14b89f94f6492a449a3e005faa22c5c, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: How Of Rage
   <Description>k__BackingField: Attacks that hit the target have a 10% chance to
     increase critical rate by 30% for 3 seconds (cannot be stacked)
-  <HowlOfRageRate>k__BackingField: 10
+  <TriggerRate>k__BackingField: 10
   <DamageType>k__BackingField: 0
   <CriticalRateBonus>k__BackingField: 30
+  <CriticalRateBonusDuration>k__BackingField: 3
   <DelayFrame>k__BackingField: 8
+  <VisualEffect>k__BackingField: {fileID: 5780247989719270425, guid: d96420a1e5a6a7843bb31adfe7ecee2e, type: 3}

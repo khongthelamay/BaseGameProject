@@ -12,8 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2d3a26a6c04497ae890b5a026f9997, type: 3}
   m_Name: RoaringStrengthAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 4
   <Icon>k__BackingField: {fileID: 21300000, guid: 7ce45291ca7f7d644b3c8d25586f3fca, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Roaring Strength
   <Description>k__BackingField: Attacks that hit the target have 10% chance to increase
     the Attack Damage of all nearby allies by 20% for 3 seconds
+  <TriggerRate>k__BackingField: 0
+  <DamageType>k__BackingField: 0
+  <DamageDelayFrame>k__BackingField: 13
+  <DamageScale>k__BackingField: 1
+  <AttackDamageBuff>k__BackingField: 20
+  <BuffDuration>k__BackingField: 3
+  <AlliesRange>k__BackingField:
+    <UsingAxis>k__BackingField: 0
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: {x: 0, y: 0}
+    <Vertical>k__BackingField: {x: 0, y: 0}
+    <NoneAxis>k__BackingField: {x: 5, y: 5}

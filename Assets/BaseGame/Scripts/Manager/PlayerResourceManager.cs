@@ -137,7 +137,7 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
     }
 
     [Button]
-    public void ComsumeEnery(BigNumber amount) {
+    public void ConsumeEnergy(BigNumber amount) {
         Resource resource = GetResource(ResourceType.Energy);
 
         resource.Consume(amount);

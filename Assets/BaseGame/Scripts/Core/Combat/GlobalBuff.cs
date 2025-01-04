@@ -11,8 +11,8 @@ namespace Core
             AttackSpeed,
             CriticalRate,
             CriticalDamage,
-            ArmorReduction,
-            MagicResistanceReduction,
+            PhysicalArmorReduction,
+            MagicArmorReduction,
         }
         
         [field: SerializeField] public Type BuffType { get; private set; }

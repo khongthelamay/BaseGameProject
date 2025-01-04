@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 using TW.Reactive.CustomComponent;
 using TW.UGUI.Core.Screens;
 using Manager;
+using TW.UGUI.Core.Activities;
 using TW.UGUI.Core.Views;
 using UnityEngine.UI;
 using TW.UGUI.Core.Modals;
@@ -104,10 +105,13 @@ public class ScreensBattleContext
 
         void Match() {
             ScreenContainer.Find(ContainerKey.Screens).Pop(true);
-
-            ViewOptions options = new ViewOptions(nameof(ScreensMatch));
-            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+            ViewOptions screenOptions = new ViewOptions(nameof(ScreensMatch));
+            
+            ScreenContainer.Find(ContainerKey.Screens).PushAsync(screenOptions);
             ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
+            
+            ViewOptions actionOptions = new ViewOptions(nameof(ActivityHeroInfo));
+            ActivityContainer.Find(ContainerKey.Activities).Show(actionOptions);
             BattleManager.Instance.StartNewMatch();
         }
 

@@ -12,9 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe772de20e2a44d09886f90f9463a38b, type: 3}
   m_Name: EarthShatterAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 18
   <Icon>k__BackingField: {fileID: 21300000, guid: 5bab41b997e291749897d25f55015b5f, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Earth Shatter
   <Description>k__BackingField: Unleashes an attack dealing 1000% AOE damage and
     reducing enemy armor by 10 for 3 seconds
   <Cooldown>k__BackingField: 10
+  <DamageType>k__BackingField: 0
+  <DelayFrame1>k__BackingField: 11
+  <DelayFrame2>k__BackingField: 10
+  <DamageScale>k__BackingField: 10
+  <Range>k__BackingField:
+    <UsingAxis>k__BackingField: 0
+    <Axis>k__BackingField: 0
+    <Horizontal>k__BackingField: {x: 0, y: 0}
+    <Vertical>k__BackingField: {x: 0, y: 0}
+    <NoneAxis>k__BackingField: {x: 1.5, y: 1.5}

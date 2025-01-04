@@ -7,6 +7,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using R3.Triggers;
 using Sirenix.OdinInspector;
+using TW.Reactive.CustomComponent;
 using TW.Utility.DesignPattern;
 using UnityEngine;
 
@@ -14,21 +15,34 @@ namespace Manager
 {
     public partial class BattleManager : Singleton<BattleManager>
     {
+        private FactoryManager FactoryManagerCache { get; set; }
+        private FactoryManager FactoryManager => FactoryManagerCache ??= FactoryManager.Instance;
         [field: SerializeField] public Map CurrentMap { get; private set; }
         [field: SerializeField] public TickRate TickRate {get; private set;}
+        [field: SerializeField] public int MaxHeroInField {get; private set;}
+        [field: SerializeField] public GameResource CoinResource {get; private set;}
+        [field: SerializeField] public GameResource StoneResource {get; private set;}
+
+        [field: SerializeField] public ReactiveValue<int> CommonRareLevel {get; private set;}
+        [field: SerializeField] public ReactiveValue<int> EpicLevel {get; private set;}
+        [field: SerializeField] public ReactiveValue<int> LegendaryMythicLevel {get; private set;}
+        [field: SerializeField] public ReactiveValue<int> ShopLevel {get; private set;}
+
         [field: SerializeField] public WaitSlot[] WaitSlotArray {get; private set;}
+        
         private Dictionary<GlobalBuff.Type, GlobalBuff> GlobalBuffDictionary { get; set; } = new();
+        
         private List<Enemy> EnemyList { get; set; } = new();
         private List<Hero> HeroList { get; set; } = new();
-        [ShowInInspector]
-        private List<GlobalBuff> GlobalBuffList => GlobalBuffDictionary.Values.ToList();
-    
+        [ShowInInspector] private List<GlobalBuff> GlobalBuffList => GlobalBuffDictionary.Values.ToList();
+        
         private void Start()
         {
 #if !UNITY_EDITOR
             Application.targetFrameRate = 60;
 #endif
             InitGlobalBuff();
+            InitResource();
             this.UpdateAsObservable()
                 .Where(_ => Input.GetKeyDown(KeyCode.C))
                 .Subscribe(_ => ReRollWaitSlot());
@@ -41,6 +55,11 @@ namespace Manager
                 GlobalBuffDictionary.Add(type, new GlobalBuff(type, 0));
             }
         }
+        private void InitResource()
+        {
+            CoinResource = new GameResource(GameResource.Type.CoinInMatch, 0);
+            StoneResource = new GameResource(GameResource.Type.StoneInMatch, 0);
+        }
         private void ClearAllGlobalBuff()
         {
             foreach (var globalBuff in GlobalBuffDictionary.Values)
@@ -48,11 +67,21 @@ namespace Manager
                 globalBuff.ChangeValue(0);
             }
         }
-        
+        private void ClearUpgradeBuff()
+        {
+            CommonRareLevel.Value = 1;
+            EpicLevel.Value = 1;
+            LegendaryMythicLevel.Value = 1;
+            ShopLevel.Value = 1;
+            
+            CoinResource.Amount = 100000;
+            StoneResource.Amount = 100000;
+        }
         
         public void StartNewMatch()
         {
             ClearAllGlobalBuff();
+            ClearUpgradeBuff();
             CurrentMap.StartMap().Forget();
             ReRollWaitSlot();
         }
@@ -88,17 +117,6 @@ namespace Manager
             EnemyList.Remove(enemy);
             return enemy;
         }
-        public void RemoveEnemy(Enemy enemy)
-        {
-            if (!EnemyList.Contains(enemy)) return;
-            EnemyList.Remove(enemy);
-        }
-
-        public void AddEnemy(Enemy enemy)
-        {
-            if (EnemyList.Contains(enemy)) return;
-            EnemyList.Add(enemy);
-        }
 
         public bool TryAddNewHero(Hero hero)
         {
@@ -110,7 +128,6 @@ namespace Manager
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -131,7 +148,6 @@ namespace Manager
             if (fieldSlot.TryGetHero(out Hero selectHero) && selectHero.HeroConfigData.HeroRarity.IsMaxRarity()) return false;
             return HasSame2HeroInOtherFieldSlot(fieldSlot);
         }
-
         public async UniTask FusionHeroInFieldSlot(FieldSlot fieldSlot)
         {
             if (!fieldSlot.TryGetHero(out Hero selectHero)) return;
@@ -168,9 +184,7 @@ namespace Manager
                 return sameHeroList.All(hero => hero == null);
             }
         }
-
-
-        public bool HasSame2HeroInOtherFieldSlot(FieldSlot fieldSlot)
+        private bool HasSame2HeroInOtherFieldSlot(FieldSlot fieldSlot)
         {
             if (!fieldSlot.TryGetHero(out Hero hero)) return false;
             int count = 0;
@@ -184,8 +198,7 @@ namespace Manager
 
             return count == 2;
         }
-
-        public bool TryGetSameHeroInFieldSlot(FieldSlot fieldSlot, out List<FieldSlot> sameHeroFieldSlotList)
+        private bool TryGetSameHeroInFieldSlot(FieldSlot fieldSlot, out List<FieldSlot> sameHeroFieldSlotList)
         {
             sameHeroFieldSlotList = new List<FieldSlot>();
             if (!fieldSlot.TryGetHero(out Hero hero)) return false;
@@ -203,7 +216,6 @@ namespace Manager
 
             return sameHeroFieldSlotList.Count == 2;
         }
-
         private bool IsFieldSlotHasSameHeroData(FieldSlot fieldSlot, Hero hero)
         {
             return fieldSlot.TryGetHero(out Hero otherHero) && otherHero.HeroConfigData == hero.HeroConfigData;
@@ -213,7 +225,6 @@ namespace Manager
             enemy = null;
             foreach (var e in EnemyList)
             {
-                if (e.WillBeDead) continue;
                 if (e.IsDead) continue;
                 if ((hero.Transform.position - e.Transform.position).sqrMagnitude <= hero.AttackRange * hero.AttackRange)
                 {
@@ -229,7 +240,6 @@ namespace Manager
             foreach (var e in EnemyList)
             {
                 if (count >= enemies.Length) break;
-                if (e.WillBeDead) continue;
                 if (e.IsDead) continue;
                 if ((position - e.Transform.position).sqrMagnitude <= radius * radius)
                 {
@@ -238,6 +248,42 @@ namespace Manager
                 }
             }
             return count;
+        }
+        public int GetEnemyAroundNonAlloc(Vector3 position, Vector2 range, Enemy[] enemies)
+        {
+            int count = 0;
+            foreach (Enemy enemy in EnemyList)
+            {
+                if (count >= enemies.Length) break;
+                if (enemy.IsDead) continue;
+                if (IsInRange(position, range, enemy.Transform.position))
+                {
+                    enemies[count] = enemy;
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int GetHeroAroundNonAlloc(Vector3 position, Vector2 range, Hero[] heroes)
+        {
+            int count = 0;
+            foreach (Hero hero in HeroList)
+            {
+                if (count >= heroes.Length) break;
+                if (hero == null) continue;
+                if (!hero.IsInBattleState()) continue;
+                if (IsInRange(position, range, hero.Transform.position))
+                {
+                    heroes[count] = hero;
+                    count++;
+                }
+            }
+            return count;
+        }
+        private bool IsInRange(Vector3 position, Vector2 range, Vector3 targetPosition)
+        {
+            return Mathf.Abs(position.x - targetPosition.x) <= Mathf.Abs(range.x/2) && 
+                   Mathf.Abs(position.y - targetPosition.y) <= Mathf.Abs(range.y/2);
         }
         public int GetAlliesAroundNonAlloc(Hero hero, Hero[]  heroes)
         {
@@ -260,6 +306,68 @@ namespace Manager
         public void ChangeGlobalBuff(GlobalBuff.Type type, float value)
         {
             GlobalBuffDictionary[type].ChangeValue(value);
+        }
+        public int GetFieldSlotHasSameHeroData(FieldSlot fieldSlot, FieldSlot[] fieldSlots, Hero[] heroes)
+        {
+            int count = 0;
+            foreach (FieldSlot slot in CurrentMap.FieldSlotArray)
+            {
+                if (count == fieldSlots.Length) break;
+                if (slot == fieldSlot) continue;
+                if (slot.TryGetHero(out Hero hero) && hero.HeroConfigData == fieldSlot.Hero.HeroConfigData)
+                {
+                    fieldSlots[count] = slot;
+                    heroes[count] = hero;
+                    count++;
+                }
+            }
+            return count;
+        }
+        public void UpgradeCommonRareLevel()
+        {
+            CommonRareLevel.Value++;
+            foreach (Hero hero in HeroList)
+            {
+                if(!hero.IsInBattleState()) continue;
+                if (hero.HeroRarity != Hero.Rarity.Common && hero.HeroRarity != Hero.Rarity.Rare) continue;
+                FactoryManager.CreateUpgradeEffect(hero.Transform.position, hero.HeroRarity);
+            }
+        }
+        public void UpgradeEpicLevel()
+        {
+            EpicLevel.Value++;
+            foreach (Hero hero in HeroList)
+            {
+                if(!hero.IsInBattleState()) continue;
+                if (hero.HeroRarity != Hero.Rarity.Epic) continue;
+                FactoryManager.CreateUpgradeEffect(hero.Transform.position, hero.HeroRarity);
+            }
+        }
+        public void UpgradeLegendaryMythicLevel()
+        {
+            LegendaryMythicLevel.Value++;
+            foreach (Hero hero in HeroList)
+            {
+                if(!hero.IsInBattleState()) continue;
+                if (hero.HeroRarity != Hero.Rarity.Legendary && hero.HeroRarity != Hero.Rarity.Mythic) continue;
+                FactoryManager.CreateUpgradeEffect(hero.Transform.position, hero.HeroRarity);
+            }
+        }
+        public void UpgradeShopLevel()
+        {
+            ShopLevel.Value++;
+        }
+        public int GetHeroRarityUpgrade(Hero.Rarity rarity)
+        {
+            return rarity switch
+            {
+                Hero.Rarity.Common => CommonRareLevel.Value,
+                Hero.Rarity.Rare => CommonRareLevel.Value,
+                Hero.Rarity.Epic => EpicLevel.Value,
+                Hero.Rarity.Legendary => LegendaryMythicLevel.Value,
+                Hero.Rarity.Mythic => LegendaryMythicLevel.Value,
+                _ => 0
+            };
         }
     }
 }

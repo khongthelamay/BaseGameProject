@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2035c54f049f4b5a9ec065d59a449289, type: 3}
   m_Name: ArmorShredAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 8
   <Icon>k__BackingField: {fileID: 21300000, guid: 7f06f8d3dd3dcf84694ecdc0bb47a808, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Armor Shred
   <Description>k__BackingField: Reduces the armor of all enemies by 15
+  <ArmorReduction>k__BackingField: 15

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public partial class Wolf : Hero
+    public class Wolf : Hero
     {
         
     }

@@ -26,6 +26,3 @@ MonoBehaviour:
   <HeroGameObjectPrefab>k__BackingField: {fileID: 833816250345312829, guid: 818259fd1cd5989418a4d3ca57249f41, type: 3}
   <HeroPrefab>k__BackingField: {fileID: 2581990304215201561, guid: 818259fd1cd5989418a4d3ca57249f41, type: 3}
   <HeroAbilities>k__BackingField: []
-  references:
-    version: 2
-    RefIds: []

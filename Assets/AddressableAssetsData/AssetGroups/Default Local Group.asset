@@ -72,6 +72,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 561d77562fad4b74f9f01ab66ad892d3
+    m_Address: ActivityHeroInfo
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14aac5ea06442564eb29ded507e50e77
+    m_Address: ActivityUpgradeInMatch
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 32c21ea75503fc74db3fedbc82881964, type: 2}
   m_SchemaSet:

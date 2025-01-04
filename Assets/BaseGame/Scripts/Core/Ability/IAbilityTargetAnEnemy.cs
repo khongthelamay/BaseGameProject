@@ -1,4 +1,5 @@
 ﻿using Manager;
+using TW.Utility.CustomType;
 
 namespace Core
 {
@@ -8,7 +9,6 @@ namespace Core
         public BattleManager BattleManager { get; }
         public Enemy EnemyTarget { get; set; }
         public int EnemyTargetId { get; set; }
-
     }
 
     public static class AbilityTargetAnEnemyExtenstion
@@ -23,7 +23,7 @@ namespace Core
         
         public static bool IsTargetStillAlive(this IAbilityTargetAnEnemy abilityTargetAnEnemy)
         {
-            return abilityTargetAnEnemy.EnemyTarget != null && abilityTargetAnEnemy.EnemyTarget.Id == abilityTargetAnEnemy.EnemyTargetId && !abilityTargetAnEnemy.EnemyTarget.IsDead && !abilityTargetAnEnemy.EnemyTarget.WillBeDead ;
+            return abilityTargetAnEnemy.EnemyTarget != null && abilityTargetAnEnemy.EnemyTarget.Id == abilityTargetAnEnemy.EnemyTargetId && !abilityTargetAnEnemy.EnemyTarget.IsDead;
         }
         
         public static bool TryFindNewTarget(this IAbilityTargetAnEnemy abilityTargetAnEnemy)

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b9627423c34db3a2b21b35b76bfca8, type: 3}
   m_Name: RendingClawsAbility
   m_EditorClassIdentifier: 
+  <AbilityGroup>k__BackingField: 8
   <Icon>k__BackingField: {fileID: 21300000, guid: 6ab6b4f8898e9c049addb2a1e621cfab, type: 3}
   <LevelUnlock>k__BackingField: 0
   <Name>k__BackingField: Rending Claws
   <Description>k__BackingField: Every 3rd attack is guaranteed to be a critical hit
+  <AttackCount>k__BackingField: 0

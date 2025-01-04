@@ -2,18 +2,41 @@
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using TW.Utility.CustomComponent;
+using TW.Utility.Extension;
 using UnityEngine;
 
 namespace Core
 {
     public class VisualEffect : ACachedMonoBehaviour, IPoolAble<VisualEffect>
     {
-        [field: SerializeField, SuffixLabel("millisecond ", true)]
-        public int SelfDespawnTime { get; private set; }
-
+        public virtual VisualEffect Play()
+        {
+            return this;
+        }
+        public virtual VisualEffect Stop()
+        {
+            return this;
+        }
+        public virtual VisualEffect WithDuration(float duration)
+        {
+            return this;
+        }
+        public virtual VisualEffect WithLocalScale(float scale)
+        {
+            Transform.localScale = Vector3.one * scale;
+            return this;
+        }
+        public virtual VisualEffect WithSpeed(float speed)
+        {
+            
+            return this;
+        }
+        public virtual VisualEffect WithAxis(int axis)
+        {
+            return this;
+        }
         public virtual VisualEffect OnSpawn()
         {
-            SelfDespawn().Forget();
             return this;
         }
 
@@ -22,10 +45,6 @@ namespace Core
 
         }
 
-        private async UniTask SelfDespawn()
-        {
-            await UniTask.Delay(SelfDespawnTime, cancellationToken: this.GetCancellationTokenOnDestroy());
-            this.Despawn();
-        }
+
     }
 }

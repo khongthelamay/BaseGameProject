@@ -35,10 +35,9 @@ public class Map : ACachedMonoBehaviour
                 Enemy enemy = enemyPrefab
                     .Spawn(MovePoints[0].position, Quaternion.identity)
                     .SetupMovePoint(MovePoints)
-                    .InitStats(100000, 1.5f);
+                    .InitStats(3000, 1.5f);
                 
                 enemy.StartMoveToNextPoint();
-                BattleManager.AddEnemy(enemy);
                 
                 await UniTask.Delay(spawnInterval, cancellationToken: this.GetCancellationTokenOnDestroy());
             }

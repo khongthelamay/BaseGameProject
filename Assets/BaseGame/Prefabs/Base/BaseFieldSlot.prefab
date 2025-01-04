@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5124689400302679813
 Transform:
   m_ObjectHideFlags: 0
@@ -4960,7 +4960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f385b00fffee43d687520025f05fd092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DefaultSize>k__BackingField: {x: 0.62, y: 0.62}
   <RowId>k__BackingField: 0
   <ColumnId>k__BackingField: 0
   <UpgradeMark>k__BackingField: {fileID: 4697043280283819558}
@@ -5025,7 +5024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2522332360006730984
 Transform:
   m_ObjectHideFlags: 0

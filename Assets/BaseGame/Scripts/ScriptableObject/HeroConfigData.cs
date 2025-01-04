@@ -55,16 +55,15 @@ public class HeroConfigData : ScriptableObject
 
     [field: SerializeField] public RuntimeAnimatorController AnimatorController { get; set; }
     [field: SerializeField] public RuntimeAnimatorController ImageAnimatorController { get; set; }
-    [field: SerializeField] public GameObject HeroGameObjectPrefab {get; private set;}
-    [field: SerializeField] public Hero HeroPrefab {get; private set;}
+    [field: SerializeField] public GameObject HeroGameObjectPrefab { get; private set; }
+    [field: SerializeField] public Hero HeroPrefab { get; private set; }
     [field: SerializeField, InlineEditor] public List<Ability> HeroAbilities { get; private set; }
-    
+
 
 #if UNITY_EDITOR
     [Button]
     private async UniTask UpdateData()
     {
-        Animator a = new GameObject().AddComponent<Animator>();
         string sheetId = "1-HkinUwSW4A4SkuiLGtl0Tm8771jFPVZB5ZpLs5pxz4";
         EditorUtility.SetDirty(this);
         string result = await ABakingSheet.GetCsv(sheetId, "UnitAbility");
@@ -74,35 +73,44 @@ public class HeroConfigData : ScriptableObject
             //         d => d.Key,
             //         d => d.Value.Replace(" ", "")))
             .ToList();
+        try
+        {
+            Dictionary<string, string> data = csvData.Find(x => x["Name"] == Name);
+            GenerateHeroSprite(data);
+            GenerateBaseStat(data);
+            GenerateHeroJob(data);
+            GenerateHeroClass(data);
 
-        Dictionary<string, string> data = csvData.Find(x => x["Name"] == Name);
-        GenerateHeroSprite(data);
-        GenerateBaseStat(data);
-        GenerateHeroJob(data);
-        GenerateHeroClass(data);
-        
-        
-        // generate sprite animation
-        GenerateIdleAnimData(data);
-        GenerateAttackAnimData(data);
-        GenerateSkillAnimData(data);
-        GenerateAnimatorData(data);
-        
-        // generate image animation
-        GenerateIdleImageAnimData(data);
-        GenerateImageAnimatorData(data);
-        
-        GenerateHeroGameObjectPrefab(data);
-        AddUniqueHeroScript();
-        
-        GenerateHeroPrefab(data);
-        
+
+            // generate sprite animation
+            GenerateIdleAnimData(data);
+            GenerateAttackAnimData(data);
+            GenerateSkill1AnimData(data);
+            GenerateSkill2AnimData(data);
+            GenerateSkill3AnimData(data);
+            GenerateAnimatorData(data);
+
+            // generate image animation
+            GenerateIdleImageAnimData(data);
+            GenerateImageAnimatorData(data);
+            GenerateRunImageAnimData(data);
+
+            GenerateHeroGameObjectPrefab(data);
+            AddUniqueHeroScript();
+
+            GenerateHeroPrefab(data);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
+
+
         string newName = $"{Name}.asset";
         string assetPath = AssetDatabase.GetAssetPath(this);
         AssetDatabase.RenameAsset(assetPath, newName);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        
     }
 
     private void GenerateHeroGameObjectPrefab(Dictionary<string, string> data)
@@ -126,7 +134,6 @@ public class HeroConfigData : ScriptableObject
         {
             GenerateNewGameObjectPrefab(data);
         }
-        
     }
 
     private void GenerateNewGameObjectPrefab(Dictionary<string, string> data)
@@ -137,16 +144,16 @@ public class HeroConfigData : ScriptableObject
             Hero heroPrefab = AssetDatabase.LoadAssetAtPath<Hero>(
                 AssetDatabase.GUIDToAssetPath(
                     AssetDatabase.FindAssets("t:Prefab BaseHero")[0]));
-                
+
             Hero hero = Instantiate(heroPrefab);
             hero.name = $"{Name}";
 
             PrefabUtility.SaveAsPrefabAsset(hero.gameObject, $"Assets/BaseGame/Prefabs/Hero/{Name}.prefab");
-                
-                
+
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            
+
             HeroGameObjectPrefab = AssetDatabase.FindAssets($"t:Prefab {Name}",
                     new string[] { "Assets/BaseGame/Prefabs/Hero" })
                 .Select(AssetDatabase.GUIDToAssetPath)
@@ -161,6 +168,7 @@ public class HeroConfigData : ScriptableObject
             Debug.LogError(e);
         }
     }
+
     private void GenerateHeroPrefab(Dictionary<string, string> data)
     {
         try
@@ -175,24 +183,26 @@ public class HeroConfigData : ScriptableObject
             Debug.LogError(e);
         }
     }
+
     private void AddUniqueHeroScript()
     {
         try
-        { 
+        {
             EditorUtility.SetDirty(this);
             string assetPath = AssetDatabase.GetAssetPath(HeroGameObjectPrefab);
-            using PrefabUtility.EditPrefabContentsScope editorScope = new PrefabUtility.EditPrefabContentsScope(assetPath);
-                
-            Hero[] heroes = editorScope.prefabContentsRoot.GetComponents<Hero>(); 
+            using PrefabUtility.EditPrefabContentsScope editorScope =
+                new PrefabUtility.EditPrefabContentsScope(assetPath);
+
+            Hero[] heroes = editorScope.prefabContentsRoot.GetComponents<Hero>();
             string typeName = $"Core.{Name.Replace(" ", "")}";
             Type type = Type.GetType(typeName);
-            
+
             foreach (Hero hero in heroes)
             {
                 if (hero.GetType() == type) continue;
                 DestroyImmediate(hero);
             }
-                
+
 
             if (type == null)
             {
@@ -205,7 +215,7 @@ public class HeroConfigData : ScriptableObject
 
     }}
 }}";
-                
+
                 System.IO.File.WriteAllText(scriptPath, code);
                 AssetDatabase.ImportAsset(scriptPath);
                 AssetDatabase.SaveAssets();
@@ -228,7 +238,6 @@ public class HeroConfigData : ScriptableObject
                 AssetDatabase.Refresh();
                 Debug.Log("Add script success.");
             }
-         
         }
         catch (Exception e)
         {
@@ -242,7 +251,8 @@ public class HeroConfigData : ScriptableObject
         {
             EditorUtility.SetDirty(this);
             HeroSprite = AssetDatabase.LoadAssetAtPath<Sprite>(
-                AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets($"t:Sprite {Name}-Idle", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0]));
+                AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets($"t:Sprite {Name}-Idle",
+                    new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" })[0]));
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
@@ -250,8 +260,8 @@ public class HeroConfigData : ScriptableObject
         {
             Debug.LogError(e);
         }
-
     }
+
     private void GenerateBaseStat(Dictionary<string, string> data)
     {
         try
@@ -262,7 +272,7 @@ public class HeroConfigData : ScriptableObject
             BaseAttackSpeed = float.Parse(data["AttackSpeed"]);
             BaseAttackRange = float.Parse(data["AttackRange"]);
             UpgradePercentage = float.Parse(data["UpgradePercentage"]);
-            
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
@@ -271,7 +281,6 @@ public class HeroConfigData : ScriptableObject
             Console.WriteLine(e);
             throw;
         }
-        
     }
 
     private void GenerateHeroJob(Dictionary<string, string> data)
@@ -284,10 +293,12 @@ public class HeroConfigData : ScriptableObject
             {
                 jobList.Add(mainRace);
             }
+
             if (Enum.TryParse<Hero.Job>(data["SubRace1"], out var subRace1))
             {
                 jobList.Add(subRace1);
             }
+
             if (Enum.TryParse<Hero.Job>(data["SubRace2"], out var subRace2))
             {
                 jobList.Add(subRace2);
@@ -302,7 +313,6 @@ public class HeroConfigData : ScriptableObject
             Console.WriteLine(e);
             throw;
         }
-
     }
 
     private void GenerateHeroClass(Dictionary<string, string> data)
@@ -326,7 +336,8 @@ public class HeroConfigData : ScriptableObject
         AnimationClip idleAnim;
         try
         {
-            string animIdleGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Idle-Animation", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0];
+            string animIdleGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Idle-Animation",
+                new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" })[0];
             idleAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animIdleGuid));
         }
         catch (Exception e)
@@ -334,7 +345,8 @@ public class HeroConfigData : ScriptableObject
             idleAnim = null;
         }
 
-        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Idle", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"});
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Idle",
+            new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" });
         List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
             .ToList();
@@ -387,12 +399,14 @@ public class HeroConfigData : ScriptableObject
         AnimationUtility.SetAnimationClipSettings(idleAnim, clipSettings);
     }
 
+
     private void GenerateAttackAnimData(Dictionary<string, string> data)
     {
         AnimationClip attackAnim;
         try
         {
-            string animAttackGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Attack-Animation", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0];
+            string animAttackGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Attack-Animation",
+                new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" })[0];
             attackAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animAttackGuid));
         }
         catch (Exception e)
@@ -400,7 +414,8 @@ public class HeroConfigData : ScriptableObject
             attackAnim = null;
         }
 
-        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Attack", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"});
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Attack",
+            new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" });
         List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
             .ToList();
@@ -448,12 +463,13 @@ public class HeroConfigData : ScriptableObject
             $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Attack-Animation.anim");
     }
 
-    private void GenerateSkillAnimData(Dictionary<string, string> data)
+    private void GenerateSkill1AnimData(Dictionary<string, string> data)
     {
         AnimationClip skillAnim;
         try
         {
-            string animSkillGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Skill-Animation", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0];
+            string animSkillGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Skill1-Animation",
+                new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" })[0];
             skillAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animSkillGuid));
         }
         catch (Exception e)
@@ -461,7 +477,8 @@ public class HeroConfigData : ScriptableObject
             skillAnim = null;
         }
 
-        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Skill", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"});
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Skill1",
+            new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" });
         List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
             .ToList();
@@ -470,7 +487,7 @@ public class HeroConfigData : ScriptableObject
             if (spriteAnim.Length == 0) return;
             skillAnim = new AnimationClip
             {
-                name = $"{data["Name"]}-Skill-Animation",
+                name = $"{data["Name"]}-Skill1-Animation",
                 frameRate = 30
             };
             if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
@@ -479,7 +496,7 @@ public class HeroConfigData : ScriptableObject
             }
 
             AssetDatabase.CreateAsset(skillAnim,
-                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill-Animation.anim");
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill1-Animation.anim");
             AssetDatabase.SaveAssets();
         }
         else
@@ -506,7 +523,133 @@ public class HeroConfigData : ScriptableObject
         AnimationUtility.SetObjectReferenceCurve(skillAnim, curveBinding, keyFrames);
 
         skillAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(
-            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill-Animation.anim");
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill1-Animation.anim");
+    }
+
+    private void GenerateSkill2AnimData(Dictionary<string, string> data)
+    {
+        AnimationClip skillAnim;
+        try
+        {
+            string animSkillGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Skill2-Animation",
+                new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" })[0];
+            skillAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animSkillGuid));
+        }
+        catch (Exception e)
+        {
+            skillAnim = null;
+        }
+
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Skill2",
+            new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" });
+        List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
+            .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
+            .ToList();
+        if (skillAnim == null)
+        {
+            if (spriteAnim.Length == 0) return;
+            skillAnim = new AnimationClip
+            {
+                name = $"{data["Name"]}-Skill2-Animation",
+                frameRate = 30
+            };
+            if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
+            {
+                AssetDatabase.CreateFolder("Assets/BaseGame/Animations/Hero", data["Name"]);
+            }
+
+            AssetDatabase.CreateAsset(skillAnim,
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill2-Animation.anim");
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            skillAnim.ClearCurves();
+        }
+
+        EditorCurveBinding curveBinding = new EditorCurveBinding
+        {
+            type = typeof(SpriteRenderer),
+            path = "",
+            propertyName = "m_Sprite"
+        };
+        ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[spriteList.Count];
+        for (int i = 0; i < spriteList.Count; i++)
+        {
+            keyFrames[i] = new ObjectReferenceKeyframe
+            {
+                time = i / skillAnim.frameRate,
+                value = spriteList[i]
+            };
+        }
+
+        AnimationUtility.SetObjectReferenceCurve(skillAnim, curveBinding, keyFrames);
+
+        skillAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill2-Animation.anim");
+    }
+
+    private void GenerateSkill3AnimData(Dictionary<string, string> data)
+    {
+        AnimationClip skillAnim;
+        try
+        {
+            string animSkillGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Skill3-Animation",
+                new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" })[0];
+            skillAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animSkillGuid));
+        }
+        catch (Exception e)
+        {
+            skillAnim = null;
+        }
+
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Skill3",
+            new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" });
+        List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
+            .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
+            .ToList();
+        if (skillAnim == null)
+        {
+            if (spriteAnim.Length == 0) return;
+            skillAnim = new AnimationClip
+            {
+                name = $"{data["Name"]}-Skill3-Animation",
+                frameRate = 30
+            };
+            if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
+            {
+                AssetDatabase.CreateFolder("Assets/BaseGame/Animations/Hero", data["Name"]);
+            }
+
+            AssetDatabase.CreateAsset(skillAnim,
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill3-Animation.anim");
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            skillAnim.ClearCurves();
+        }
+
+        EditorCurveBinding curveBinding = new EditorCurveBinding
+        {
+            type = typeof(SpriteRenderer),
+            path = "",
+            propertyName = "m_Sprite"
+        };
+        ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[spriteList.Count];
+        for (int i = 0; i < spriteList.Count; i++)
+        {
+            keyFrames[i] = new ObjectReferenceKeyframe
+            {
+                time = i / skillAnim.frameRate,
+                value = spriteList[i]
+            };
+        }
+
+        AnimationUtility.SetObjectReferenceCurve(skillAnim, curveBinding, keyFrames);
+
+        skillAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill3-Animation.anim");
     }
 
     private void GenerateAnimatorData(Dictionary<string, string> data)
@@ -515,7 +658,8 @@ public class HeroConfigData : ScriptableObject
         try
         {
             string animControllerGuid = AssetDatabase.FindAssets(
-                $"t:AnimatorController {data["Name"]}-AnimatorController", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0];
+                $"t:AnimatorController {data["Name"]}-AnimatorController",
+                new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" })[0];
             animatorController =
                 AssetDatabase.LoadAssetAtPath<AnimatorController>(AssetDatabase.GUIDToAssetPath(animControllerGuid));
         }
@@ -571,12 +715,44 @@ public class HeroConfigData : ScriptableObject
         // attackToIdle;
 
 
-        AnimationClip skillClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
-            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill-Animation.anim");
-        if (skillClip != null)
+        AnimationClip skill1Clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill1-Animation.anim");
+        if (skill1Clip != null)
         {
-            AnimatorState skillState = stateMachine.AddState("Skill");
-            skillState.motion = skillClip;
+            AnimatorState skillState = stateMachine.AddState("Skill1");
+            skillState.motion = skill1Clip;
+            skillState.speedParameterActive = true;
+            skillState.speedParameter = "TickRate";
+            AnimatorStateTransition skillToIdle = skillState.AddTransition(idleState);
+            skillToIdle.hasExitTime = true;
+            skillToIdle.exitTime = 1;
+            skillToIdle.hasFixedDuration = false;
+            skillToIdle.duration = 0;
+            skillToIdle.offset = 0;
+        }
+
+        AnimationClip skill2Clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill2-Animation.anim");
+        if (skill2Clip != null)
+        {
+            AnimatorState skillState = stateMachine.AddState("Skill2");
+            skillState.motion = skill2Clip;
+            skillState.speedParameterActive = true;
+            skillState.speedParameter = "TickRate";
+            AnimatorStateTransition skillToIdle = skillState.AddTransition(idleState);
+            skillToIdle.hasExitTime = true;
+            skillToIdle.exitTime = 1;
+            skillToIdle.hasFixedDuration = false;
+            skillToIdle.duration = 0;
+            skillToIdle.offset = 0;
+        }
+        
+        AnimationClip skill3Clip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Skill3-Animation.anim");
+        if (skill3Clip != null)
+        {
+            AnimatorState skillState = stateMachine.AddState("Skill3");
+            skillState.motion = skill3Clip;
             skillState.speedParameterActive = true;
             skillState.speedParameter = "TickRate";
             AnimatorStateTransition skillToIdle = skillState.AddTransition(idleState);
@@ -593,7 +769,8 @@ public class HeroConfigData : ScriptableObject
         AnimationClip idleAnim;
         try
         {
-            string animIdleGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Idle-Image-Animation", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"})[0];
+            string animIdleGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Idle-Image-Animation",
+                new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" })[0];
             idleAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animIdleGuid));
         }
         catch (Exception e)
@@ -601,7 +778,8 @@ public class HeroConfigData : ScriptableObject
             idleAnim = null;
         }
 
-        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Idle", new []{$"Assets/BaseGame/Animations/Hero/{data["Name"]}"});
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Idle",
+            new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" });
         List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
             .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
             .ToList();
@@ -654,6 +832,74 @@ public class HeroConfigData : ScriptableObject
         AnimationUtility.SetAnimationClipSettings(idleAnim, clipSettings);
     }
 
+    private void GenerateRunImageAnimData(Dictionary<string, string> data)
+    {
+        AnimationClip runAnim;
+        try
+        {
+            string animIdleGuid = AssetDatabase.FindAssets($"t:AnimationClip {data["Name"]}-Run-Image-Animation",
+                new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" })[0];
+            runAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(AssetDatabase.GUIDToAssetPath(animIdleGuid));
+        }
+        catch (Exception e)
+        {
+            runAnim = null;
+        }
+
+        string[] spriteAnim = AssetDatabase.FindAssets($"t:Sprite {data["Name"]}-Run",
+            new[] { $"Assets/BaseGame/Animations/Hero/{data["Name"]}" });
+        List<Sprite> spriteList = spriteAnim.Select(AssetDatabase.GUIDToAssetPath)
+            .Select(AssetDatabase.LoadAssetAtPath<Sprite>)
+            .ToList();
+        if (runAnim == null)
+        {
+            if (spriteAnim.Length == 0) return;
+            runAnim = new AnimationClip
+            {
+                name = $"{data["Name"]}-Run-Image-Animation",
+                frameRate = 30
+            };
+            if (!AssetDatabase.IsValidFolder($"Assets/BaseGame/Animations/Hero/{data["Name"]}"))
+            {
+                AssetDatabase.CreateFolder("Assets/BaseGame/Animations/Hero", data["Name"]);
+            }
+
+            AssetDatabase.CreateAsset(runAnim,
+                $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Run-Image-Animation.anim");
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            runAnim.ClearCurves();
+        }
+
+
+        EditorCurveBinding curveBinding = new EditorCurveBinding
+        {
+            type = typeof(Image),
+            path = "",
+            propertyName = "m_Sprite"
+        };
+        ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[spriteList.Count];
+        for (int i = 0; i < spriteList.Count; i++)
+        {
+            keyFrames[i] = new ObjectReferenceKeyframe
+            {
+                time = i / runAnim.frameRate,
+                value = spriteList[i]
+            };
+        }
+
+        AnimationUtility.SetObjectReferenceCurve(runAnim, curveBinding, keyFrames);
+
+        runAnim = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Run-Image-Animation.anim");
+        // set loop animation
+        AnimationClipSettings clipSettings = AnimationUtility.GetAnimationClipSettings(runAnim);
+        clipSettings.loopTime = true;
+        AnimationUtility.SetAnimationClipSettings(runAnim, clipSettings);
+    }
+
     private void GenerateImageAnimatorData(Dictionary<string, string> data)
     {
         AnimatorController animatorController;
@@ -697,6 +943,11 @@ public class HeroConfigData : ScriptableObject
             $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Idle-Image-Animation.anim");
         AnimatorState idleState = stateMachine.AddState("Idle");
         idleState.motion = idleClip;
+
+        AnimationClip runClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+            $"Assets/BaseGame/Animations/Hero/{data["Name"]}/{data["Name"]}-Run-Image-Animation.anim");
+        AnimatorState runState = stateMachine.AddState("Run");
+        runState.motion = runClip;
     }
 #endif
 }

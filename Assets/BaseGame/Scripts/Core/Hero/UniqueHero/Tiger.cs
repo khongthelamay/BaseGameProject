@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public partial class Tiger : Hero
+    public class Tiger : Hero
     {
         [field: SerializeField] public ReactiveValue<int> FuryPoint {get; set;} = new(0);
         protected override void InitAbility()

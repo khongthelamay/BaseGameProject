@@ -10,18 +10,6 @@ namespace Core.SimplePool
         
 
     }
-    public class NewBehaviourScript : MonoBehaviour, IPoolAble<NewBehaviourScript>
-    {
-        public NewBehaviourScript OnSpawn()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void OnDespawn()
-        {
-            throw new System.NotImplementedException();
-        }
-    }
     public static class PoolAbleExtension
     {
         public static T Spawn<T>(this IPoolAble<T> poolAble) where T : Component
@@ -57,14 +45,10 @@ namespace Core.SimplePool
             poolAble.OnDespawn();
             TW.Utility.DesignPattern.SimplePool.DeSpawn(((T)poolAble).gameObject);
         }
-    }
 
-    public class SimplePool : MonoBehaviour
-    {
-        private void Start()
+        public static bool IsActive<T>(this IPoolAble<T> poolAble) where T : Component
         {
-            NewBehaviourScript newBehaviourScript = new NewBehaviourScript();
-            newBehaviourScript.Spawn();
+            return ((T)poolAble).gameObject.activeSelf;
         }
     }
 }

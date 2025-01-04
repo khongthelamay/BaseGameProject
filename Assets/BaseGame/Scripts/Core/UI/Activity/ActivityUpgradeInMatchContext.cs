@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Manager;
 using TW.UGUI.MVPPattern;
 using UnityEngine;
 using R3;
@@ -13,7 +14,7 @@ public class ActivityUpgradeInMatchContext
 {
     public static class Events
     {
-        public static Subject<Unit> SampleEvent { get; set; } = new();
+        
     }
     
     [HideLabel]
@@ -21,12 +22,13 @@ public class ActivityUpgradeInMatchContext
     public class UIModel : IAModel
     {
         [field: Title(nameof(UIModel))]
-        [field: SerializeField] public ReactiveValue<int> SampleValue { get; private set; }
-        [field: SerializeField] public ReactiveValue<Resource> coinResource { get; private set; }
-        [field: SerializeField] public ReactiveValue<Resource> epicStoneResource { get; private set; }
+        [field: SerializeField] public GameResource CoinResource { get; private set; }
+        [field: SerializeField] public GameResource StoneResource { get; private set; }
 
         public UniTask Initialize(Memory<object> args)
         {
+            CoinResource = BattleManager.Instance.CoinResource;
+            StoneResource = BattleManager.Instance.StoneResource;
             return UniTask.CompletedTask;
         }
     }

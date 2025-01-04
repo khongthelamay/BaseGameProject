@@ -6,6 +6,7 @@ namespace Core
     {
         public Hero Owner { get; }
         public BattleManager BattleManager { get; }
+        public float Radius { get; }
         public Enemy EnemyTarget { get; set; }
         public Enemy[] Enemies { get; set; }
         public int[] EnemiesTargetId { get; set; }
@@ -18,7 +19,10 @@ namespace Core
         {
             if (!abilityTargetAroundEnemy.BattleManager.TryGetEnemyInAttackRange(abilityTargetAroundEnemy.Owner, out Enemy target)) return false;
             abilityTargetAroundEnemy.EnemyTarget = target;
-            abilityTargetAroundEnemy.EnemiesCount = abilityTargetAroundEnemy.BattleManager.GetEnemyAroundNonAlloc(abilityTargetAroundEnemy.EnemyTarget.Transform.position, 2, abilityTargetAroundEnemy.Enemies);
+            abilityTargetAroundEnemy.EnemiesCount = abilityTargetAroundEnemy.BattleManager.GetEnemyAroundNonAlloc(
+                abilityTargetAroundEnemy.EnemyTarget.Transform.position, 
+                abilityTargetAroundEnemy.Radius, 
+                abilityTargetAroundEnemy.Enemies);
             abilityTargetAroundEnemy.EnemiesTargetId = new int[abilityTargetAroundEnemy.EnemiesCount];
             for (int i = 0; i < abilityTargetAroundEnemy.EnemiesCount; i++)
             {
