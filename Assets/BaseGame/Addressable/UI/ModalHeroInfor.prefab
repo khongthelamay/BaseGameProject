@@ -834,6 +834,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtAbilityName: {fileID: 631261373442881133}
   txtAbilityDescription: {fileID: 1209268815594841182}
+  objLevelUnlock: {fileID: 1047704355771742133}
+  txtLevelUnlock: {fileID: 2033379195393014294}
 --- !u!1 &2041408850761417923
 GameObject:
   m_ObjectHideFlags: 0

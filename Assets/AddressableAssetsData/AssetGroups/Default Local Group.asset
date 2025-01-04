@@ -82,6 +82,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7dfacf844c168242a3fccea77572031
+    m_Address: ScreensHuntPass
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62b6c4b0f3ac93842b689ad7771a659d
+    m_Address: ScreensItemReward
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb0d1557920d0ff4b8bb4ba17148ff9b
+    m_Address: ScreensShop
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 32c21ea75503fc74db3fedbc82881964, type: 2}
   m_SchemaSet:

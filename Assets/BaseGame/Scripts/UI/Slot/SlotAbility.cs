@@ -12,6 +12,8 @@ public class SlotAbility : SlotBase<Ability>
     [SerializeField] List<Sprite> sprBg = new();
     public override void InitData(Ability data)
     {
+        if (!data)
+            return;
         if (data is NormalAttackAbility)
         {
             gameObject.SetActive(false);
