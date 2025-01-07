@@ -83,9 +83,15 @@ public class ModalArtifactInforContext
             }
             else
             {
-                piecesProgress.ChangeProgress((float)artifactInfo.PiecesAmount.Value / (float)ArtifactManager.Instance.GetPiecesRequire(level));
-                piecesProgress.ChangeTextProgress($"{artifactInfo.PiecesAmount.Value}/{ArtifactManager.Instance.GetPiecesRequire(level)}");
-                btnUpgrade.interactable = ArtifactManager.Instance.IsCanUpgradeArtifact();
+                float piecesRequire = ArtifactManager.Instance.GetPiecesRequire(level);
+                float currentPieceAmount = artifactInfo.PiecesAmount.Value;
+                float goldRequire = ArtifactManager.Instance.GetPriceUpgrade(level);
+                
+                bool isCanUpgrade = currentPieceAmount >= piecesRequire && PlayerResourceManager.Instance.IsEnoughResource(ResourceType.Coin, goldRequire);
+                
+                piecesProgress.ChangeProgress(currentPieceAmount/ piecesRequire);
+                piecesProgress.ChangeTextProgress($"{currentPieceAmount}/{piecesRequire}");
+                btnUpgrade.interactable = isCanUpgrade;
                 txtUpgradeRequire.text = ((BigNumber)ArtifactManager.Instance.GetPriceUpgrade(level)).ToStringUIFloor();
             }
 

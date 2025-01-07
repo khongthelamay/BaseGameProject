@@ -11,21 +11,11 @@ public class SlotArtifact : SlotBase <ArtifactDataConfig>
     [SerializeField] TextMeshProUGUI txtName;
     [SerializeField] TextMeshProUGUI txtLevel;
     [SerializeField] ProgressBar progressBar;
-    public bool isHaveThatArtifact;
     ArtifactInfor artifactInfo;
     public override void InitData(ArtifactDataConfig data)
     {
         base.InitData(data);
         artifactInfo = InGameDataManager.Instance.InGameData.ArtifactData.GetArtifactInfor(data.id);
-        //txtName.text = data.strName;
-        
-
-        isHaveThatArtifact = artifactInfo == null;
-        if (isHaveThatArtifact) {
-            artifactInfo = new();
-            artifactInfo.Level = new(0);
-            artifactInfo.PiecesAmount = new(0);
-        }
 
         int level = artifactInfo.Level.Value;
         txtLevel.text = $"Lv. {level}";

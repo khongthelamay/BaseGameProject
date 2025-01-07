@@ -169,4 +169,9 @@ public class PlayerResourceManager : Singleton<PlayerResourceManager>
         ChangeResource(rType, 0);
         return resources[^1];
     }
+
+    public bool IsEnoughResource(ResourceType rType, BigNumber amount, float addition = 0.001f) {
+        Resource resource = GetResource(rType);
+        return resource.value.Value + addition >= amount;
+    }
 }

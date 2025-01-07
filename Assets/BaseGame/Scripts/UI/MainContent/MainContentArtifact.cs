@@ -36,9 +36,15 @@ public class MainContentArtifact : MainContent<ArtifactDataConfig>
     {
         for (int i = 0; i < slots.Count; i++)
         {
+            if (!slots[i].gameObject.activeSelf || slots[i].slotData == null)
+                continue;
             if (slots[i].slotData.id == artifactID)
             {
                 slots[i].ReloadData();
+                if (InGameDataManager.Instance.InGameData.ArtifactData.IsHaveThatArtiFact(slots[i].slotData.id))
+                    slots[i].transform.SetParent(trsContentParents);
+                else 
+                    slots[i].transform.SetParent(trsDeactiveContentParent);
                 return;
             }
         }

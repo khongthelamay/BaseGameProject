@@ -16,7 +16,8 @@ public enum ResourceType {
 }
 
 [System.Serializable]
-public class Resource
+[MemoryPackable]
+public partial class Resource
 {
     public ResourceType type;
     public ReactiveValue<BigNumber> value = new(0);

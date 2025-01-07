@@ -90,38 +90,41 @@ public class ScreensBattleContext
             QuestManager.Instance.CheckShowNoticeQuest();
         }
 
-        void ShowScreenHuntPass() {
-            ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+        async void ShowScreenHuntPass() {
+            await ScreenContainer.Find(ContainerKey.Screens).PopAsync(true);
+            
             ViewOptions options = new ViewOptions(nameof(ScreensHuntPass));
-            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
-            ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
+            await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+            
+            await ScreenContainer.Find(ContainerKey.MidleScreens).PopAsync(true);
         }
 
-        void ShowModalQuest()
+        async void ShowModalQuest()
         {
             ViewOptions options = new ViewOptions(nameof(ModalQuest));
-            ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
+            await ModalContainer.Find(ContainerKey.Modals).PushAsync(options);
         }
 
-        void Match() {
-            ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+        async void Match() {
+            await ScreenContainer.Find(ContainerKey.Screens).PopAsync(true);
+            
             ViewOptions screenOptions = new ViewOptions(nameof(ScreensMatch));
             
-            ScreenContainer.Find(ContainerKey.Screens).PushAsync(screenOptions);
-            ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
+            await ScreenContainer.Find(ContainerKey.Screens).PushAsync(screenOptions);
+            await ScreenContainer.Find(ContainerKey.MidleScreens).PopAsync(true);
             
             ViewOptions actionOptions = new ViewOptions(nameof(ActivityHeroInfo));
-            ActivityContainer.Find(ContainerKey.Activities).Show(actionOptions);
+            await ActivityContainer.Find(ContainerKey.Activities).ShowAsync(actionOptions);
             BattleManager.Instance.StartNewMatch();
         }
 
-        void Recruit() {
-            ScreenContainer.Find(ContainerKey.Screens).Pop(true);
+        async void Recruit() {
+            await ScreenContainer.Find(ContainerKey.Screens).PopAsync(true);
 
             ViewOptions options = new ViewOptions(nameof(ScreensRecruit));
-            ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
+            await ScreenContainer.Find(ContainerKey.Screens).PushAsync(options);
 
-            ScreenContainer.Find(ContainerKey.MidleScreens).Pop(true);
+            await ScreenContainer.Find(ContainerKey.MidleScreens).PopAsync(true);
         }
 
         void ShowNoticeQuestDone(bool active) {

@@ -53,14 +53,15 @@ public class ModalHeroesInforContext
         [field: SerializeField] public Button BtnExit {get; private set;}  
         [field: SerializeField] public Button BtnUpgrade {get; private set;}  
         [field: SerializeField] public GameObject ObjUpgrade {get; private set;}  
-        [field: SerializeField] public GameObject ObjSummondRecipe {get; private set;}  
+        [field: SerializeField] public GameObject ObjSummonRecipe {get; private set;}  
+        [field: SerializeField] public Image ImgUpgradeType {get; private set;}  
         [field: SerializeField] public MainContentAbility MainContentHeroAbility { get; private set;}  
         [field: SerializeField] public MainContentHeroJob MainContentHeroJob {get; private set;}
         [field: SerializeField] public RectTransform MainRect {get; private set;}
         [field: SerializeField] public AbilityContent AbilityContent {get; private set;}
         [field: SerializeField] public Vector2 AbilityOffset {get; private set;}
         [field: SerializeField] public RectTransform Narrow {get; private set;}
-
+        [field: SerializeField] public List<Sprite> SprUpgradeType { get; private set; }
         List<Hero.Job> jobs;
 
         public UniTask Initialize(Memory<object> args)
@@ -77,7 +78,9 @@ public class ModalHeroesInforContext
             PiecesProgress.ChangeProgress(heroDataSave.piece.Value/10f);
             PiecesProgress.ChangeTextProgress($"{heroDataSave.piece.Value}/10");
             ObjUpgrade.SetActive(heroDataSave.piece.Value / 10f == 1f);
-            ObjSummondRecipe.SetActive(heroData.HeroRarity == Hero.Rarity.Mythic);
+            bool isMythic = heroData.HeroRarity == Hero.Rarity.Mythic;
+            ObjSummonRecipe.SetActive(isMythic);
+            ImgUpgradeType.sprite = isMythic? SprUpgradeType[0] : SprUpgradeType[1];
             
             MainContentHeroAbility.gameObject.SetActive(heroData.HeroAbilities.Count > 0);
             if (heroData.HeroAbilities.Count > 0)

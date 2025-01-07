@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.Utilities;
 using System.Collections.Generic;
+using MemoryPack;
 
 [CreateAssetMenu(fileName = "ShopGlobalConfig", menuName = "GlobalConfigs/ShopGlobalConfig")]
 [GlobalConfig("Assets/Resources/GlobalConfig/")]
@@ -109,7 +110,8 @@ public class ShopPackData
 }
 
 [System.Serializable]
-public class HeroReward {
+[MemoryPackable]
+public partial class HeroReward {
     public string heroID;
     public int amount;
 }

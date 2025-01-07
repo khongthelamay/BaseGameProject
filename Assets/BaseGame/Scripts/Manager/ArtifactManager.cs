@@ -22,6 +22,14 @@ public class ArtifactManager : Singleton<ArtifactManager>
 
     void LoadData() {
         ArtifactInfos = InGameDataManager.Instance.InGameData.ArtifactData.ArtifactInfos;
+        if (ArtifactInfos.Count == 0)
+        {
+            List<ArtifactDataConfig> artifactGlobalConfigs = ArtifactGlobalConfig.Instance.artifactDataConfigs;
+            for (int i = 0; i < artifactGlobalConfigs.Count; i++)
+            {
+                GetArtifactInfo(artifactGlobalConfigs[i].id);
+            }
+        }
         currentArtifactOnChoose.ReactiveProperty.Subscribe(ChangeCurrentArtifactChoose).AddTo(this);
     }
 
@@ -41,6 +49,7 @@ public class ArtifactManager : Singleton<ArtifactManager>
             if (ArtifactInfos[i].Value.Id == id)
                 return ArtifactInfos[i];
         }
+        
         ArtifactInfor info = new();
         info.Id.Value = id;
         info.Level.Value = 0;
@@ -55,6 +64,8 @@ public class ArtifactManager : Singleton<ArtifactManager>
     }
 
     public void UpgradeLevelArtifact() {
+        PlayerResourceManager.Instance.ChangeResource(ResourceType.Coin,-GetPriceUpgrade(currentArtifactTemp.Value.Level.Value));
+
         currentArtifactTemp = GetArtifactInfo(currentArtifactOnChoose.Value.id);
 
         currentArtifactTemp.Value.PiecesAmount.Value -= GetPiecesRequire(currentArtifactTemp.Value.Level.Value);
@@ -90,7 +101,7 @@ public class ArtifactManager : Singleton<ArtifactManager>
         return ArtifactGlobalConfig.Instance.GetArtifactDataConfig(id);
     }
 
-    public bool IsCanUpgradeArtifact()
+    public bool IsCanUpgradeArtifact(ArtifactDataConfig artifactDataConfig, ArtifactInfor artifactInfo)
     {
         return false;
     }
